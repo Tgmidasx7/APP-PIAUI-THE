@@ -20,9 +20,11 @@
   function buildHudMarkup(mode = 'tab') {
     const isStandalone = mode === 'standalone';
     const headingTag = isStandalone ? 'h1' : 'h2';
+    const inSubdir = typeof window !== 'undefined' && window.location && /\/teresina(\/|$)/.test(window.location.pathname || '');
+    const dedicatedHref = inSubdir ? '../eyeofgod/' : 'eyeofgod/';
     const topNavAction = isStandalone
       ? '<a class="eog-btn eog-link-btn" href="../">← PAINEL PRINCIPAL</a>'
-      : '<a class="eog-btn eog-link-btn" href="eyeofgod/">↗ TELA DEDICADA</a>';
+      : `<a class="eog-btn eog-link-btn" href="${dedicatedHref}">↗ TELA DEDICADA</a>`;
 
     return `
       <div class="eog-hud-shell" id="eog-hud-shell">
@@ -1226,7 +1228,7 @@
       switch (main) {
         case 'help':
           printTerminal(
-            'COMANDOS: help, target <nome>, lockdown, standdown, thermal, nvg, lidar, optical, neural, sar, scan, radar, intercept, status, clear | DADOS: pib, pop, fiscal, edu, escolas <zona|nome|inep>, premios, swot, geo [the|pi], mun <nome>, graph <id>, anomalies, weather, macro, commodities, govbr',
+            'COMANDOS: help, target <nome>, lockdown, standdown, thermal, nvg, lidar, optical, neural, sar, scan, radar, intercept, status, clear | DADOS: pib, pop, fiscal, edu, escolas <zona|nome|inep>, premios, seguranca, edtech, swot, geo [the|pi], mun <nome>, graph <id>, anomalies, weather, macro, commodities, govbr',
             'success'
           );
           break;
@@ -1376,6 +1378,29 @@
           }
           printTerminal('PREMIAÇÕES EDUCACIONAIS VERIFICADAS DO PIAUÍ:', 'success');
           awards.forEach(a => printTerminal(`[${a.badge}] ${a.title} — ${a.scope}`, 'sys'));
+          break;
+        }
+        case 'seguranca': {
+          const sec = ontology && ontology.publicSecurity;
+          if (!sec) {
+            printTerminal('Módulo de Segurança Pública indisponível.', 'error');
+            break;
+          }
+          printTerminal('SEGURANÇA PÚBLICA PI & TERESINA (SSP-PI / DataSSP):', 'success');
+          sec.highlightsPI.forEach(h => printTerminal(`${h.label}: ${h.value} (${h.delta})`, 'sys'));
+          sec.teresinaSeries.slice(0, 4).forEach(r => {
+            printTerminal(`THE Jan–Mai · ${r.metric}: ${r.y2022} (2022) → ${r.y2026} (2026) [${r.dropVs2022Pct}%]`, 'sys');
+          });
+          break;
+        }
+        case 'edtech': {
+          const ed = ontology && ontology.edtechEcosystem;
+          if (!ed) {
+            printTerminal('Módulo EdTech indisponível.', 'error');
+            break;
+          }
+          printTerminal('ECOSSISTEMA EDTECH & IA PIAUÍ (UNESCO / SEDUC / INVESTE PI):', 'success');
+          ed.initiatives.forEach(i => printTerminal(`[${i.badge}] ${i.title} — ${i.scope} (${i.impactScore}/100)`, 'sys'));
           break;
         }
         case 'swot':

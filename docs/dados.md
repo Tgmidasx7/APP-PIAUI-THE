@@ -25,5 +25,9 @@ A seleção inicial de `assets/news.js` reúne 50 publicações com links, datas
 
 No módulo **Educacional**, os dados quantitativos por escola (27 unidades catalogadas com código INEP em `assets/ontology.js`, divididas por zonas de Teresina e polos do interior) seguem estritamente divulgações anuais/bienais do **Censo Escolar INEP (2024–2026)** e do **IDEB 2023**, sem geração artificial de contagens ao vivo. Já a camada dinâmica em tempo real consulta notícias da **SEDUC-PI (RSS)**, **Agência IBGE Educação**, o snapshot OSINT (`data/piaui-live.json`) e o monitoramento climático escolar (Open-Meteo).
 
+Nos módulos **Segurança Pública** e **EdTech & IA**, os indicadores consolidam séries oficiais da **SSP-PI / DataSSP (2022–2026)**, **CellGuard**, **Pacto pela Ordem**, **Piauí IA (UNESCO)**, **PIT**, **Seduckathon** e **ZPE Parnaíba**, com coleta complementar de notícias via feed RSS oficial da **SSP-PI** em `scripts/sync_osint.mjs`.
+
+A edição paralela **Teresina Capital (`/teresina/`)** utiliza os dados municipais auditados de `PIAUI_ONTOLOGY.teresinaCapital` (**IBGE Censo 2022 por subdistrito e favelas urbanas**, **SICONFI `id_ente=2211001`**, **LOA 2025**, **Novo Caged 2025**, **SUS municipal** e as **24 escolas reais da capital**).
+
 A aba **SPIA Piauí** utiliza 30 vídeos públicos identificados pelo local verdadeiro, e o painel **Eye of God** integra mapa GIS real (WGS84), grafo ontológico e telemetria Gov-BR com câmeras e biometria ilustrativas sem acesso a sistemas policiais.
 

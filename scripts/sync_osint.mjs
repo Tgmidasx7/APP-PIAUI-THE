@@ -56,9 +56,14 @@ function decodeXmlEntities(text) {
 }
 
 const EDU_KEYWORDS_RE = /\b(educa[çc][aã]o|escola[rs]?|ceti|semec|seduc|ideb|enem|saeb|obmep|tme[²2]|alfabetiz\w*|professor\w*|estudant\w*|aluno\w*|ifpi|uespi|ufpi|seduckathon|tempo integral|ensino m[ée]dio|ensino fundamental|censo escolar|merenda|matr[íi]cula[s]?)\b/i;
+const SEC_KEYWORDS_RE = /\b(seguran[çc]a|ssp|cellguard|recuperafone|cvli|homic[íi]dio[s]?|roubo[s]?|furto[s]?|pol[íi]cia|delegacia|feminic[íi]dio|pacto pela ordem|pm-?pi|bprone|etipi.*celular)\b/i;
+const EDTECH_KEYWORDS_RE = /\b(edtech|intelig[êe]ncia artificial|soberania|seduckathon|canal educa[çc][aã]o|zpe.*data\s*center|startup[s]?|rob[óo]tica|pit\b.*ia)\b/i;
 
 function classifyNewsCategory(title, defaultCategory = 'Atualidades') {
-  return EDU_KEYWORDS_RE.test(title) ? 'Educação' : defaultCategory;
+  if (EDTECH_KEYWORDS_RE.test(title)) return 'EdTech';
+  if (SEC_KEYWORDS_RE.test(title)) return 'Segurança';
+  if (EDU_KEYWORDS_RE.test(title)) return 'Educação';
+  return defaultCategory;
 }
 
 function parseRssItems(xml, sourceName, expectedHost, defaultCategory = 'Atualidades') {
@@ -265,6 +270,7 @@ async function main() {
 
   const rssTargets = [
     { name: 'SEDUC-PI', url: 'https://www.seduc.pi.gov.br/feed/', host: 'www.seduc.pi.gov.br', defaultCategory: 'Educação' },
+    { name: 'SSP-PI', url: 'https://www.ssp.pi.gov.br/feed/', host: 'www.ssp.pi.gov.br', defaultCategory: 'Segurança' },
     { name: 'g1 Piauí', url: 'https://g1.globo.com/rss/g1/pi/piaui/', host: 'g1.globo.com', defaultCategory: 'Atualidades' },
     { name: 'Governo do Piauí', url: 'https://www.pi.gov.br/feed/', host: 'www.pi.gov.br', defaultCategory: 'Atualidades' }
   ];

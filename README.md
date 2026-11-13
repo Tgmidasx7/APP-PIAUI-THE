@@ -2,7 +2,7 @@
 
 Painel analítico de indicadores sobre o estado do Piauí e sua capital, Teresina, com ontologia estruturada, auditoria metodológica, simulador fiscal LRF, mapa GIS real (WGS84), integração direta com APIs públicas brasileiras em tempo real (IBGE, Banco Central SGS, Tesouro SICONFI, Open-Meteo) e módulo visual C4ISR (*Eye of God*).
 
-**Site público:** [tgmidasx7.github.io/APP-PIAUI-THE/](https://tgmidasx7.github.io/APP-PIAUI-THE/) · **Modo dedicado Eye of God:** [`/eyeofgod/`](eyeofgod/)
+**Site público:** [tgmidasx7.github.io/APP-PIAUI-THE/](https://tgmidasx7.github.io/APP-PIAUI-THE/) · **Edição Paralela Teresina Capital:** [`/teresina/`](teresina/) · **Modo dedicado Eye of God:** [`/eyeofgod/`](eyeofgod/)
 
 **Relatório de entendimento:** [docs/relatorio-entendimento.md](docs/relatorio-entendimento.md)
 
@@ -14,15 +14,18 @@ Painel analítico de indicadores sobre o estado do Piauí e sua capital, Teresin
 | --- | --- |
 | Sala de Situação Gov-BR (`#govLiveBar`) | Telemetria em tempo real via IBGE Localidades (224 municípios), Projeção BR, Banco Central SGS (Selic, IPCA, USD/BRL), Tesouro SICONFI e clima/UV de Teresina (Open-Meteo) |
 | Visão Geral + Auditoria | Indicadores corrigidos, gráficos Chart.js e **Detector de Anomalias & Divergências** (`assets/ontology.js`) |
-| Geográfica + Explorador | Território, relevo, clima, MATOPIBA/Cerrados (Sudoeste) e **Explorador Territorial** para filtrar os 16 polos georreferenciados e os 224 municípios do Piauí |
-| Demográfica | Censo 2022 vs Estimativas 2025 com distinção explícita entre taxa intercensitária (+0,26% a.a.) e variação recente (+1,14% a.a.) |
-| Geopolítica & Corredores | Resumo em linguagem simples, 4 corredores geoeconômicos (Litoral/H₂V, MATOPIBA, Teresina e Semiárido), gráfico comparativo e matriz de choques × economia |
-| Econômica, Commodities & LRF | PIB setorial, série fiscal homogênea (2025), **Petróleo (Brent/WTI), Soja, Milho, Ouro, IC-Br (BCB)** com conversão em R$/saca, termômetro interativo de impacto, cruzamentos econômicos e **Simulador What-If LRF (2025–2030)** |
-| Educacional & Escolas | **Censo Escolar 2024–2026** (829.549 matr. totais / 698.725 públicas PI / 126.719 Teresina), **explorador de 27 escolas reais** com código INEP por zonas de Teresina (Centro, Norte, Leste, Sul, Sudeste) e polos do interior, **6 premiações verificadas** (`Prêmio MEC EPT`, `Selo Ouro CNCA`, `OBMEP`, `TME²`, `Seduckathon`), simulador Tempo Integral × EPT, clima escolar ao vivo e notícias educacionais (**SEDUC-PI RSS** + **IBGE Educação**) |
-| Desenvolvimento Humano | Evolução estadual do IDH (2000–2021) separada metodologicamente do marco de IDHM de Teresina (2010) |
-| SWOT | Forças, fraquezas, oportunidades e ameaças |
+| Geográfica + Explorador | Território, relevo, clima, os **12 Territórios de Desenvolvimento**, **Energia Renovável (3º no Brasil / ANEEL)**, MATOPIBA e **Explorador Territorial** dos 224 municípios |
+| Demográfica | Censo 2022 vs Estimativas 2025, **pirâmide/estrutura etária (IBGE 2022)**, urbanização (69,6%) e ranking das **12 maiores cidades piauienses** |
+| Geopolítica & Corredores | Resumo em linguagem simples, 4 corredores geoeconômicos (Litoral/H₂V/ZPE, MATOPIBA, Teresina e Semiárido), gráfico comparativo e matriz de choques × economia |
+| Econômica, Commodities & LRF | PIB setorial, **Novo Caged 2025 (+21.022 vagas PI / +9.646 Teresina)**, **Petróleo (Brent/WTI), Soja, Milho, Ouro, IC-Br (BCB)** com conversão em R$/saca, cruzamentos e **Simulador What-If LRF (2025–2030)** |
+| Educacional & Escolas | **Censo Escolar 2024–2026** (829.549 matr. totais / 698.725 públicas PI / 126.719 Teresina), **explorador de 27 escolas reais** com código INEP, **6 premiações verificadas**, simulador Tempo Integral × EPT e notícias ao vivo (**SEDUC-PI RSS** + **IBGE Educação**) |
+| Segurança Pública (SSP-PI) | Série histórica **DataSSP / SSP-PI (2022–2026)** em Teresina e Piauí (-52,17% CVLI, -74,15% roubo celulares), menor índice de homicídios em 14 anos, **CellGuard (>11 mil celulares recuperados)** e **Pacto pela Ordem** |
+| EdTech & Ecossistema IA | **Piauí IA (Prêmio Global UNESCO)**, **PIT Teresina (78 egressos em Graduação IA)**, **Canal Educação**, **Seduckathon**, **SoberanIA / ZPE Parnaíba** e simulador de conversão de talentos digitais |
+| Desenvolvimento Humano | Evolução estadual do IDH (2000–2021), **ranking municipal de IDHM (PNUD/IPEA/FJP)** com Renda/Longevidade/Educação dos principais polos |
+| SWOT & Matriz Cruzada | Forças, fraquezas, oportunidades, ameaças e **Matriz Estratégica Cruzada (SO, WO, ST, WT — 2025–2030)** |
+| Edição Paralela Teresina (`/teresina/`) | Painel municipal completo (**IBGE 2211001**) espelhando as **14 abas** com **5 subdistritos urbanos (Sul, Leste, Norte, Sudeste, Centro)**, **170 favelas/comunidades (IBGE 2022)**, **LOA 2025 (R$ 5,668 bi) & SICONFI 2211001**, **24 escolas da capital**, **Segurança THE**, **Saúde SUS** e simulador fiscal municipal |
 | SPIA | Catálogo de 30 vídeos públicos e laboratório demonstrativo para Teresina |
-| Eye of God (`#eye-of-god` & `/eyeofgod/`) | Componente compartilhado (`mountEyeOfGod`) com GIS real de Teresina (Rios Parnaíba/Poti) e Piauí (16 polos), grafo de ontologia interativo, 6 modos de câmera em Canvas, sensores Gov-BR e CLI unificada (`pib`, `pop`, `fiscal`, `edu`, `escolas`, `premios`, `geo pi`, `mun`, `graph`, `govbr`, `anomalies`, `weather`, `macro`, `commodities`) |
+| Eye of God (`#eye-of-god` & `/eyeofgod/`) | Componente compartilhado (`mountEyeOfGod`) com GIS real de Teresina e Piauí (16 polos), grafo de ontologia interativo, 6 modos de câmera em Canvas, sensores Gov-BR e CLI unificada (`pib`, `pop`, `fiscal`, `edu`, `escolas`, `premios`, `seguranca`, `edtech`, `geo pi`, `mun`, `graph`, `govbr`, `anomalies`, `weather`, `macro`, `commodities`) |
 | Terminal & OSINT | Snapshot automático (`data/piaui-live.json` via `scripts/sync_osint.mjs`), IBGE Notícias, feeds RSS e curadoria local de 50 notícias |
 | Fontes & método | Portais institucionais, checklist de governança e exportação em CSV e **Dossiê JSON completo** |
 
@@ -72,19 +75,21 @@ Veja [publicação e manutenção](docs/publicacao.md) para o fluxo de atualiza�
 ## Estrutura do repositório
 
 ```text
-index.html                         Página principal (12 abas), CSP/Referrer-Policy e gráficos Chart.js
+index.html                         Página principal (14 abas, 19 gráficos Chart.js), CSP/Referrer-Policy
+teresina/index.html                Edição paralela Teresina Capital (14 abas, 11 gráficos, IBGE/SICONFI 2211001)
 eyeofgod/index.html                Rota dedicada para o Eye of God (usa componente compartilhado)
-assets/ontology.js                 Fonte única estruturada (indicadores, anomalias, GIS WGS84 e grafo)
-assets/realtime-gov.js             Cliente ao vivo Gov-BR (IBGE, BCB SGS, SICONFI, Open-Meteo e snapshot)
-assets/dashboard.js                Navegação, busca, favoritos, exportação CSV/JSON, simulador LRF e notícias
+assets/ontology.js                 Fonte única estruturada (Piauí + Teresina Capital, Segurança, EdTech, 27 escolas)
+assets/realtime-gov.js             Cliente ao vivo Gov-BR (IBGE, BCB SGS, SICONFI PI & THE 2211001, Open-Meteo e snapshot)
+assets/dashboard.js                Controlador do painel estadual (navegação, busca, favoritos, simuladores, gráficos)
+assets/teresina-app.js             Controlador da edição paralela Teresina Capital (14 abas, 11 gráficos, LRF municipal)
 assets/eye-of-god.js               Componente compartilhado Eye of God (GIS, grafo clicável, CLI e HUD)
-assets/eye-of-god.css / enhancements.css Estilos escopados da v2 e Sala de Situação Gov-BR
+assets/teresina-base.css / eye-of-god.css / enhancements.css Estilos escopados da v2, Capital e Sala Gov-BR
 assets/news.js / cameras.js        Curadoria local de notícias e catálogo de telas públicas
 data/piaui-live.json               Snapshot OSINT atualizado periodicamente via GitHub Actions
-scripts/sync_osint.mjs             Coletor zero-backend Node 22 para APIs públicas e RSS direto
+scripts/sync_osint.mjs             Coletor zero-backend Node 22 para APIs públicas e RSS direto (SEDUC-PI, SSP-PI)
 .github/workflows/osint-sync.yml   Workflow agendado (a cada 6h) para atualizar data/piaui-live.json
 .github/workflows/checks.yml       Verificações automáticas (Python unittest + Node JSDOM)
-tests/                             8 testes estruturais (Python) + 15 testes de interação/v2 (JSDOM)
+tests/                             9 testes estruturais (Python) + 17 testes de interação/v2/Teresina (JSDOM)
 ```
 
 ## Como contribuir

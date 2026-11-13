@@ -142,6 +142,36 @@ class SiteTests(unittest.TestCase):
         self.assertTrue((ROOT / "assets" / "realtime-gov.js").is_file())
         self.assertTrue((ROOT / "scripts" / "sync_osint.mjs").is_file())
 
+    def test_teresina_parallel_edition(self):
+        the_path = ROOT / "teresina" / "index.html"
+        self.assertTrue(the_path.is_file(), "Página /teresina/index.html ausente")
+        the = PageParser()
+        the.feed(the_path.read_text(encoding="utf-8"))
+        the.close()
+        self.assertTrue(the.has_doctype)
+        self.assertEqual(the.lang, "pt-BR")
+        self.assertTrue(the.viewport)
+        self.assertTrue(the.csp)
+        self.assertTrue(the.referrer)
+        duplicates = [key for key, count in collections.Counter(the.ids).items() if count > 1]
+        self.assertEqual(duplicates, [])
+        self.assertEqual(len(the.tabs), 14, "Teresina Capital deve espelhar todas as 14 abas")
+        for tab in the.tabs:
+            with self.subTest(teresina_tab=tab):
+                self.assertIn("tab-" + tab, the.ids)
+        self.assertIn("../assets/vendor/chart.umd.js", the.script_sources)
+        self.assertIn("../assets/teresina-app.js", the.script_sources)
+        for src in the.script_sources:
+            self.assertFalse(src.startswith(("http:", "https:")), f"Script externo em /teresina/: {src}")
+            resolved = (the_path.parent / src).resolve()
+            self.assertTrue(resolved.is_file(), f"Script ausente em /teresina/: {src}")
+        app_js = (ROOT / "assets" / "teresina-app.js").read_text(encoding="utf-8")
+        the_charts = re.findall(r"createTheChart\s*\(\s*['\"]([^'\"]+)['\"]", app_js)
+        self.assertEqual(len(the_charts), 11)
+        for cid in the_charts:
+            with self.subTest(teresina_chart=cid):
+                self.assertIn(cid, the.canvases)
+
 
 if __name__ == "__main__":
     unittest.main()

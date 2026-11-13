@@ -709,10 +709,15 @@ body {
         SALA DE SITUAÇÃO v2.0 • PIAUÍ &amp; TERESINA
       </div>
       <h1 class="hero-title">PIAUÍ & TERESINA</h1>
-      <p class="hero-subtitle">GEOPOLÍTICA • ECONOMIA • EDUCAÇÃO • TELEMETRIA GOV-BR</p>
+      <p class="hero-subtitle">GEOPOLÍTICA • ECONOMIA • EDUCAÇÃO • SEGURANÇA • EDTECH • GOV-BR</p>
       <p class="hero-desc">
-        Plataforma analítica com ontologia estruturada, auditoria metodológica, simulador fiscal LRF, GIS de Teresina/Piauí e sincronização direta com APIs públicas brasileiras (IBGE, Banco Central, SICONFI e clima ao vivo).
+        Plataforma analítica completa do Estado do Piauí com ontologia estruturada, auditoria metodológica, simuladores interativos, dados de Segurança Pública (SSP-PI), ecossistema EdTech/IA e telemetria Gov-BR em tempo real.
       </p>
+      <div class="edition-switcher" role="navigation" aria-label="Versões do painel">
+        <span class="edition-pill active" aria-current="page">🗺️ Versão Estadual (Piauí · 14 abas)</span>
+        <a class="edition-pill link" href="teresina/">🏙️ Versão Paralela: Teresina Capital (Completa) ↗</a>
+        <a class="edition-pill link" href="eyeofgod/">👁️ Modo Eye of God ↗</a>
+      </div>
       <div class="live-clock-bar">
         <div class="clock-item">
           <div class="label">Data</div>
@@ -792,6 +797,8 @@ body {
       <button type="button" class="tab-btn" data-tab="geo-pol" id="btn-geo-pol" role="tab" aria-controls="tab-geo-pol" aria-selected="false" tabindex="-1">🏛️ Geopolítica</button>
       <button type="button" class="tab-btn" data-tab="eco" id="btn-eco" role="tab" aria-controls="tab-eco" aria-selected="false" tabindex="-1">📊 Econômica</button>
       <button type="button" class="tab-btn" data-tab="edu" id="btn-edu" role="tab" aria-controls="tab-edu" aria-selected="false" tabindex="-1">🎓 Educacional</button>
+      <button type="button" class="tab-btn" data-tab="seguranca" id="btn-seguranca" role="tab" aria-controls="tab-seguranca" aria-selected="false" tabindex="-1">🛡️ Segurança PI</button>
+      <button type="button" class="tab-btn" data-tab="edtech" id="btn-edtech" role="tab" aria-controls="tab-edtech" aria-selected="false" tabindex="-1">🚀 EdTech & IA</button>
       <button type="button" class="tab-btn" data-tab="idh" id="btn-idh" role="tab" aria-controls="tab-idh" aria-selected="false" tabindex="-1">📈 Desenv. Humano</button>
       <button type="button" class="tab-btn" data-tab="swot" id="btn-swot" role="tab" aria-controls="tab-swot" aria-selected="false" tabindex="-1">⚔️ SWOT</button>
       <button type="button" class="tab-btn" data-tab="spia" id="btn-spia" role="tab" aria-controls="tab-spia" aria-selected="false" tabindex="-1">◉ SPIA Piauí</button>
@@ -886,6 +893,39 @@ body {
           <span class="tool-index">FONTE: assets/ontology.js</span>
         </div>
         <div id="analyticsAnomalies" class="anomaly-grid"></div>
+      </section>
+
+      <!-- Síntese Multissetorial Piauí x Nordeste x Brasil -->
+      <section class="v2-module" style="margin-top:1.25rem;" aria-label="Síntese comparativa multissetorial">
+        <div class="v2-head">
+          <div>
+            <h3>🧭 Raio-X Multissetorial &amp; Comparativo Piauí × Nordeste × Brasil</h3>
+            <p class="v2-sub">Consolidação de trabalho formal (Novo Caged 2025), transição energética (ANEEL), segurança pública (SSP-PI) e EdTech (SEDUC-PI).</p>
+          </div>
+          <a class="tool-button" href="teresina/">🏙️ Abrir Painel Paralelo Teresina →</a>
+        </div>
+        <div class="edu-stat-strip">
+          <div class="edu-stat-box">
+            <span>Emprego Formal (Novo Caged 2025)</span>
+            <strong>+21.022 vagas (+5,81%)</strong>
+            <small>3º maior crescimento do Brasil (atrás de AP e PB); Teresina criou +9.646 postos.</small>
+          </div>
+          <div class="edu-stat-box">
+            <span>Matriz Renovável (ANEEL)</span>
+            <strong>3º do Brasil em Renováveis</strong>
+            <small>3,5 GW eólicos + 1,46 GW solares em operação (&gt;95% matriz elétrica limpa).</small>
+          </div>
+          <div class="edu-stat-box">
+            <span>Segurança Pública (SSP-PI)</span>
+            <strong>-52,17% CVLI em Teresina</strong>
+            <small>Mar/2026 teve 34 homicídios no PI (menor em 14 anos); +11 mil celulares no CellGuard.</small>
+          </div>
+          <div class="edu-stat-box">
+            <span>EdTech &amp; IA Escolar (UNESCO)</span>
+            <strong>120.000+ jovens em IA</strong>
+            <small>1º território das Américas com IA obrigatória na educação básica + PIT e Seduckathon.</small>
+          </div>
+        </div>
       </section>
     </div>
 
@@ -1033,6 +1073,28 @@ body {
           </div>
         </div>
 
+        <section class="v2-module" aria-label="12 Territórios de Desenvolvimento e Matriz Renovável">
+          <div class="v2-head">
+            <div>
+              <h3>🗺️ Os 12 Territórios de Desenvolvimento do Piauí (LC 87/2007 · LC 6.967/2017)</h3>
+              <p class="v2-sub">Unidades oficiais de planejamento regional dividindo os 224 municípios entre Litoral, Meio-Norte, Semiárido e Cerrados (MATOPIBA).</p>
+            </div>
+            <span class="v2-badge" data-state="online">TD1 – TD12</span>
+          </div>
+          <div id="geoTerritoriesGrid" class="mun-grid"></div>
+        </section>
+
+        <section class="v2-module" aria-label="Potência Renovável ANEEL por Município">
+          <div class="v2-head">
+            <div>
+              <h3>⚡ Complexos Eólicos &amp; Solares em Operação e Expansão (ANEEL)</h3>
+              <p class="v2-sub">Piauí ocupa o 3º lugar nacional em renováveis: 3,5 GW eólicos (+746 MW em construção) e 1,46 GW solar (+867 MW em obras; +13,1 GW previstos).</p>
+            </div>
+            <span class="v2-badge" data-state="online">3º BRASIL RENOVÁVEIS</span>
+          </div>
+          <div id="geoEnergyGrid" class="edu-awards-grid"></div>
+        </section>
+
         <section id="municipalityExplorer" class="mun-explorer" aria-label="Explorador dos municípios do Piauí">
           <div class="mun-head">
             <div>
@@ -1105,16 +1167,16 @@ body {
               <span class="data-value warn">12,99 hab/km² (2022) · 13,44 (2025)</span>
             </div>
             <div class="data-row">
-              <span class="data-label">Urbanização</span>
-              <span class="data-value info">Elevada</span>
+              <span class="data-label">Urbanização (Censo 2022)</span>
+              <span class="data-value info">69,44% urbana (2,27 mi) · 30,56% rural</span>
             </div>
             <div class="data-row">
-              <span class="data-label">Interiorização</span>
-              <span class="data-value danger">Fraca</span>
+              <span class="data-label">Idade Mediana &amp; Envelhecimento</span>
+              <span class="data-value warn">34 anos · Índice 51,1 (8º país em 65+)</span>
             </div>
             <div class="data-row">
-              <span class="data-label">Crescimento vs Brasil</span>
-              <span class="data-value warn">8º menor nacional</span>
+              <span class="data-label">Razão de Sexo (IBGE 2022)</span>
+              <span class="data-value">95,8 homens / 100 mulheres (51,1% F)</span>
             </div>
           </div>
 
@@ -1167,19 +1229,51 @@ body {
           </div>
         </div>
 
-        <div class="chart-container">
-          <h3>👥 Evolução Populacional Estimada</h3>
-          <div class="chart-wrapper">
-            <canvas id="chartPopulacao"></canvas>
+        <div class="charts-grid">
+          <div class="chart-container">
+            <h3>👥 Evolução Populacional (Censos 1991–2025)</h3>
+            <div class="chart-wrapper">
+              <canvas id="chartPopulacao"></canvas>
+            </div>
+          </div>
+
+          <div class="chart-container">
+            <h3>📊 Distribuição da População por Concentração</h3>
+            <div class="chart-wrapper">
+              <canvas id="chartConcentracao"></canvas>
+            </div>
           </div>
         </div>
 
-        <div class="chart-container">
-          <h3>📊 Distribuição da População por Concentração</h3>
+        <div class="chart-container" style="margin-top:1.25rem;">
+          <h3>🧬 Estrutura Etária do Piauí (IBGE Censo 2022 — Grandes Faixas)</h3>
           <div class="chart-wrapper">
-            <canvas id="chartConcentracao"></canvas>
+            <canvas id="chartDemoPiramide"></canvas>
           </div>
         </div>
+
+        <section class="v2-module" style="margin-top:1.25rem;" aria-label="Maiores cidades e transição demográfica">
+          <div class="v2-head">
+            <div>
+              <h3>🏙️ Maiores Municípios &amp; Dinâmica de Envelhecimento (IBGE Censo 2022)</h3>
+              <p class="v2-sub">A população com 65+ anos saltou de 3,7% (1980) para 10,7% (2022) no Piauí — 8º maior índice do Brasil — enquanto polos do Cerrado lideram o crescimento percentual.</p>
+            </div>
+            <span class="v2-badge" data-state="online">CENSO IBGE 2022</span>
+          </div>
+          <div class="lrf-sim-table-wrap">
+            <table class="lrf-sim-table">
+              <thead>
+                <tr>
+                  <th scope="col">Município</th>
+                  <th scope="col">População (Censo 2022)</th>
+                  <th scope="col">Crescimento 2010–2022</th>
+                  <th scope="col">Leitura Territorial</th>
+                </tr>
+              </thead>
+              <tbody id="demoCitiesBody"></tbody>
+            </table>
+          </div>
+        </section>
       </div>
     </div>
 
@@ -1665,6 +1759,45 @@ body {
             </table>
           </div>
         </section>
+
+        <section class="v2-module" style="margin-top:1.4rem;" aria-label="Mercado de Trabalho Formal Novo Caged 2025">
+          <div class="v2-head">
+            <div>
+              <h3>💼 Mercado de Trabalho Formal (Novo Caged 2025 — MTE / Seplan-PI)</h3>
+              <p class="v2-sub">O Piauí gerou <strong>+21.022 novos empregos com carteira assinada</strong> em 2025 (167.430 admissões vs 146.408 desligamentos), registrando o <strong>3º maior crescimento percentual do Brasil (+5,81%)</strong>.</p>
+            </div>
+            <span class="v2-badge" data-state="online">3º BRASIL · +5,81%</span>
+          </div>
+          <div class="edu-stat-strip">
+            <div class="edu-stat-box">
+              <span>Saldo Formal PI (2025)</span>
+              <strong>+21.022 postos</strong>
+              <small>Todos os 5 grandes grupos positivos: Serviços +9.537 · Comércio +4.393 · Construção +3.840.</small>
+            </div>
+            <div class="edu-stat-box">
+              <span>Líder Capital: Teresina</span>
+              <strong>+9.646 vagas (45,9% PI)</strong>
+              <small>Estoque formal de 234,7 mil vínculos celetistas (367,3 mil ocupados totais IBGE 2023).</small>
+            </div>
+            <div class="edu-stat-box">
+              <span>Destaques Interior (2025)</span>
+              <strong>Picos +1.619 · PHB +1.103</strong>
+              <small>Seguidos por Piripiri (+1.067) e São Raimundo Nonato (+691); Parnaíba abriu 7.936 empresas (2023–26).</small>
+            </div>
+            <div class="edu-stat-box">
+              <span>Interiorização Industrial</span>
+              <strong>Parques Empresariais 2025</strong>
+              <small>Implantação de Parques Empresariais em Piripiri, Floriano e Picos (Investe Piauí / SDE).</small>
+            </div>
+          </div>
+        </section>
+
+        <div class="chart-container" style="margin-top:1.25rem;">
+          <h3>💼 Novo Caged 2025: Saldo de Empregos Formais por Setor no Piauí</h3>
+          <div class="chart-wrapper">
+            <canvas id="chartEcoCaged"></canvas>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -1980,6 +2113,195 @@ body {
       </div>
     </div>
 
+    <!-- TAB: SEGURANÇA PÚBLICA (PIAUÍ & TERESINA) -->
+    <div class="tab-content" id="tab-seguranca" role="tabpanel" aria-labelledby="btn-seguranca" tabindex="0">
+      <div class="data-section">
+        <div class="section-header">
+          <div class="section-icon">🛡️</div>
+          <div>
+            <div class="section-title">Segurança Pública do Piauí &amp; Teresina (SSP-PI · Pacto pela Ordem)</div>
+            <div class="section-subtitle">Indicadores criminais DataSSP 2022–2026, recuperação via CellGuard e integração operacional</div>
+          </div>
+        </div>
+
+        <div class="plain-summary-banner">
+          <span class="plain-badge">DATA-SSP · PACTO PELA ORDEM</span>
+          <div>
+            <strong>Tendência de queda estrutural na criminalidade violenta e patrimonial:</strong> Em março/2026, o Piauí atingiu o <strong>menor número mensal de homicídios em 14 anos</strong> (34 ocorrências na série desde 2012) e derrubou o roubo de celulares em <strong>-80%</strong> no estado. Em Teresina (jan–mai/2026 vs 2022), os CVLIs recuaram <strong>-52,17%</strong>, roubos com arma de fogo caíram <strong>-74,85%</strong> e a receptação despencou <strong>-86,75%</strong> com o <strong>CellGuard</strong> (+11 mil aparelhos recuperados), mantendo baixa letalidade policial.
+          </div>
+        </div>
+
+        <div class="kpi-grid">
+          <div class="kpi-card">
+            <div class="kpi-icon">🛡️</div>
+            <div class="kpi-label">Homicídios PI (Mar/2026)</div>
+            <div class="kpi-value" style="color:var(--green);">34</div>
+            <div class="kpi-sub">Menor índice mensal em 14 anos (série desde 2012)</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-icon">📉</div>
+            <div class="kpi-label">CVLI Teresina (Jan–Mai/26)</div>
+            <div class="kpi-value" style="color:var(--green);">55</div>
+            <div class="kpi-sub">Vs 115 (2022) e 89 (2025)</div>
+            <div class="kpi-change up">▼ -52,17% vs 2022</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-icon">📱</div>
+            <div class="kpi-label">Roubo Celulares (THE)</div>
+            <div class="kpi-value" style="color:var(--green);">-74,15%</div>
+            <div class="kpi-sub">1.200 (2026) vs 4.643 (2022) · -80% PI mar/26</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-icon">🔍</div>
+            <div class="kpi-label">CellGuard / Etipi</div>
+            <div class="kpi-value">11.000+</div>
+            <div class="kpi-sub">Celulares recuperados e devolvidos · Receptação -86,75%</div>
+          </div>
+        </div>
+
+        <div class="edu-stat-strip" id="segurancaHighlights"></div>
+
+        <section class="v2-module" aria-label="Série comparativa criminal em Teresina">
+          <div class="v2-head">
+            <div>
+              <h3>📊 Balanço Criminal em Teresina — Janeiro a Maio (2022 × 2025 × 2026 · SSP-PI)</h3>
+              <p class="v2-sub">Números absolutos consolidados pela Secretaria de Segurança Pública do Piauí (DataSSP) no recorte comparável jan–mai.</p>
+            </div>
+            <span class="v2-badge" data-state="online">SSP-PI · DATASSP</span>
+          </div>
+          <div class="lrf-sim-table-wrap">
+            <table class="lrf-sim-table">
+              <thead>
+                <tr>
+                  <th scope="col">Indicador Criminal (Teresina · Jan–Mai)</th>
+                  <th scope="col">2022</th>
+                  <th scope="col">2025</th>
+                  <th scope="col">2026</th>
+                  <th scope="col">Variação vs 2022</th>
+                  <th scope="col">Variação vs 2025</th>
+                </tr>
+              </thead>
+              <tbody id="segurancaTableBody"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="v2-module" aria-label="Pilares operacionais da segurança pública">
+          <div class="v2-head">
+            <div>
+              <h3>🏛️ Arquitetura de Inteligência &amp; Tecnologia na Segurança Estadual</h3>
+              <p class="v2-sub">Eixos que explicam a redução simultânea de crimes letais, roubos e receptação sem aumento de letalidade policial.</p>
+            </div>
+          </div>
+          <div class="cross-grid" id="segurancaPillarsGrid"></div>
+        </section>
+
+        <div class="chart-container" style="margin-bottom:1.25rem;">
+          <h3>🛡️ Evolução da Redução Criminal em Teresina (Jan–Mai · 2022 vs 2025 vs 2026)</h3>
+          <div class="chart-wrapper">
+            <canvas id="chartSegurancaQueda"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB: EDTECH & INOVAÇÃO -->
+    <div class="tab-content" id="tab-edtech" role="tabpanel" aria-labelledby="btn-edtech" tabindex="0">
+      <div class="data-section">
+        <div class="section-header">
+          <div class="section-icon">🚀</div>
+          <div>
+            <div class="section-title">EdTech, Inteligência Artificial &amp; Soberania Digital (Piauí)</div>
+            <div class="section-subtitle">Prêmio UNESCO, Piauí IA nas escolas, PIT, Canal Educação, Seduckathon, SoberanIA e ZPE Tech</div>
+          </div>
+        </div>
+
+        <div class="plain-summary-banner">
+          <span class="plain-badge">PRÊMIO UNESCO · AMÉRICAS</span>
+          <div>
+            <strong>Do ensino médio à infraestrutura de IA soberana:</strong> O Piauí foi o <strong>1º território das Américas</strong> a incluir Inteligência Artificial como disciplina obrigatória da rede pública (<strong>+120 mil estudantes</strong>, Prêmio UNESCO), conectando escolas ao <strong>Piauí Instituto de Tecnologia (PIT — 78 egressos SEDUC aprovados em IA em 2026)</strong>, ao <strong>Seduckathon</strong> (9 mil inscritos, 130 jovens em intercâmbio global), à <strong>ZPE Parnaíba</strong> e ao programa nacional <strong>SoberanIA</strong>.
+          </div>
+        </div>
+
+        <div class="kpi-grid">
+          <div class="kpi-card">
+            <div class="kpi-icon">🤖</div>
+            <div class="kpi-label">Alunos em IA Curricular</div>
+            <div class="kpi-value" style="color:var(--green);">120.000+</div>
+            <div class="kpi-sub">9º ano EF à 3ª série EM · Prêmio UNESCO</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-icon">👩‍🏫</div>
+            <div class="kpi-label">Docentes Formados em IA</div>
+            <div class="kpi-value">800+</div>
+            <div class="kpi-sub">Carga 60h via Canal Educação (Unipampa/UFRGS/IFFar)</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-icon">🎓</div>
+            <div class="kpi-label">Aprovados PIT em IA (2026)</div>
+            <div class="kpi-value" style="color:var(--cyan);">78</div>
+            <div class="kpi-sub">Egressos da rede pública em Bach./Tecnólogo IA</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-icon">🌐</div>
+            <div class="kpi-label">Seduckathon 2025</div>
+            <div class="kpi-value">9.000+</div>
+            <div class="kpi-sub">130 alunos + 26 prof. em intercâmbio (6 países)</div>
+          </div>
+        </div>
+
+        <section class="v2-module" aria-label="Iniciativas estruturantes EdTech Piauí">
+          <div class="v2-head">
+            <div>
+              <h3>💡 Ecossistema EdTech, Formação Digital &amp; Startups</h3>
+              <p class="v2-sub">Programas integrados entre SEDUC-PI, Investe Piauí, PIT, Etipi e universidades federais/estaduais.</p>
+            </div>
+            <span class="v2-badge" data-state="online">6 PILARES ATIVOS</span>
+          </div>
+          <div class="edu-awards-grid" id="edtechCardsGrid"></div>
+        </section>
+
+        <section class="v2-module" aria-label="Simulador de Impacto EdTech e Qualificação em TI">
+          <div class="v2-head">
+            <div>
+              <h3>🧮 Simulador de Escala EdTech: Jovens Formados em IA &amp; Conversão para TI</h3>
+              <p class="v2-sub">Estima o pipeline de talentos digitais entre o ensino básico (120 mil estudantes em IA), cursos técnicos EPT e ensino superior (PIT/UFPI/UESPI/IFPI).</p>
+            </div>
+            <span class="v2-badge" id="edtechSimBadge" data-risk="ok">PIPELINE ATIVO</span>
+          </div>
+          <div class="lrf-sliders">
+            <label>
+              <span>Base de Estudantes com IA Curricular &amp; EPT Tech: <strong id="edtechSimBaseVal">120.000</strong></span>
+              <input type="range" id="edtechSimBase" min="40000" max="180000" step="5000" value="120000">
+            </label>
+            <label>
+              <span>Taxa de Transição para Carreira/Superior Tech (%): <strong id="edtechSimRateVal">12%</strong></span>
+              <input type="range" id="edtechSimRate" min="4" max="30" step="1" value="12">
+            </label>
+          </div>
+          <div class="impact-calc-outputs">
+            <div>
+              <span>Potencial Anual de Talentos Tech (PI)</span>
+              <strong id="edtechSimTalents">14.400 jovens</strong>
+              <small>Soma de egressos aptos para desenvolvimento, dados, IA e automação.</small>
+            </div>
+            <div>
+              <span>Impacto em Produtividade Local</span>
+              <strong id="edtechSimImpact">Hub ZPE / Teresina</strong>
+              <small id="edtechSimText">Alimenta startups na ZPE Parnaíba, Piauí Gov Tech, PIT e empresas de software em Teresina.</small>
+            </div>
+          </div>
+        </section>
+
+        <div class="chart-container" style="margin-top:1.25rem;">
+          <h3>🚀 Maturidade &amp; Alcance dos 6 Pilares EdTech e Inovação do Piauí (0–100)</h3>
+          <div class="chart-wrapper">
+            <canvas id="chartEdtechPilares"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- TAB: IDH -->
     <div class="tab-content" id="tab-idh" role="tabpanel" aria-labelledby="btn-idh" tabindex="0">
       <div class="data-section">
@@ -2064,12 +2386,46 @@ body {
           </div>
         </div>
 
-        <div class="chart-container">
-          <h3>📈 Evolução do IDH (2000-2021)</h3>
-          <div class="chart-wrapper">
-            <canvas id="chartIDH2"></canvas>
+        <div class="charts-grid">
+          <div class="chart-container">
+            <h3>📈 Evolução do IDH (2000-2021)</h3>
+            <div class="chart-wrapper">
+              <canvas id="chartIDH2"></canvas>
+            </div>
+          </div>
+          <div class="chart-container">
+            <h3>🏆 IDHM por Dimensão nos Polos do Piauí (PNUD/IPEA)</h3>
+            <div class="chart-wrapper">
+              <canvas id="chartIdhmMunicipios"></canvas>
+            </div>
           </div>
         </div>
+
+        <section class="v2-module" style="margin-top:1.25rem;" aria-label="Ranking IDHM municípios e infraestrutura social">
+          <div class="v2-head">
+            <div>
+              <h3>🏅 Maiores Índices de Desenvolvimento Humano Municipal (IDHM — PNUD/FJP) &amp; Saneamento</h3>
+              <p class="v2-sub">Apenas Teresina (0,751) e Floriano (0,700) atingem a faixa de Desenvolvimento Humano Alto; Picos (0,698), Parnaíba (0,687), Bom Jesus (0,668) e São Raimundo Nonato (0,661) lideram a faixa Média.</p>
+            </div>
+            <span class="v2-badge" data-state="online">PNUD · IBGE</span>
+          </div>
+          <div class="lrf-sim-table-wrap">
+            <table class="lrf-sim-table">
+              <thead>
+                <tr>
+                  <th scope="col">Pos.</th>
+                  <th scope="col">Município</th>
+                  <th scope="col">IDHM Geral</th>
+                  <th scope="col">IDHM Renda</th>
+                  <th scope="col">IDHM Longevidade</th>
+                  <th scope="col">IDHM Educação</th>
+                  <th scope="col">Faixa</th>
+                </tr>
+              </thead>
+              <tbody id="idhTopBody"></tbody>
+            </table>
+          </div>
+        </section>
       </div>
     </div>
 
@@ -2142,6 +2498,17 @@ body {
             <button type="button" class="tool-button" data-open-tab="eye-of-god">👁️ Abrir Mapa GIS &amp; Ontologia →</button>
           </div>
         </div>
+
+        <section class="v2-module" style="margin-top:1.25rem;" aria-label="Matriz estratégica cruzada SO WO ST WT">
+          <div class="v2-head">
+            <div>
+              <h3>🎯 Matriz Estratégica Cruzada (SO · WO · ST · WT — Horizonte 2025–2030)</h3>
+              <p class="v2-sub">Como converter forças e oportunidades em políticas de entrega contínua e reduzir fragilidades estruturais.</p>
+            </div>
+            <a class="tool-button" href="teresina/">🏙️ Ver SWOT Teresina Capital →</a>
+          </div>
+          <div class="cross-grid" id="swotCrossList"></div>
+        </section>
       </div>
     </div>
 
@@ -2887,6 +3254,161 @@ function initCharts() {
           bodyColor: '#e0e0e0'
         }
       }
+    }
+  });
+
+  // DOUGHNUT/BAR: Estrutura Etária PI (IBGE Censo 2022)
+  createChart(document.getElementById('chartDemoPiramide'), {
+    type: 'bar',
+    data: {
+      labels: ['0 a 14 anos (681,9 mil)', '15 a 64 anos (2.240,5 mil)', '65+ anos (348,8 mil)'],
+      datasets: [{
+        label: 'Participação na população PI (%)',
+        data: [20.85, 68.49, 10.66],
+        backgroundColor: ['rgba(0,240,255,0.65)', 'rgba(0,255,65,0.65)', 'rgba(255,215,0,0.7)'],
+        borderColor: ['#00f0ff', '#00ff41', '#ffd700'],
+        borderWidth: 1,
+        borderRadius: 6
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+        y: { beginAtZero: true, max: 80, grid: { color: 'rgba(255,255,255,0.05)' } },
+        x: { grid: { color: 'rgba(255,255,255,0.05)' } }
+      },
+      plugins: { legend: { display: false } }
+    }
+  });
+
+  // BAR: Novo Caged 2025 Piauí — Saldo de Vagas Formais por Setor
+  createChart(document.getElementById('chartEcoCaged'), {
+    type: 'bar',
+    data: {
+      labels: ['Serviços', 'Comércio', 'Construção', 'Indústria', 'Agropecuária'],
+      datasets: [{
+        label: 'Saldo líquido de empregos formais (2025)',
+        data: [9537, 4393, 3840, 2502, 755],
+        backgroundColor: 'rgba(0,255,65,0.6)',
+        borderColor: '#00ff41',
+        borderWidth: 1,
+        borderRadius: 5
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+        y: { beginAtZero: true, grid: { color: 'rgba(255,255,255,0.05)' } },
+        x: { grid: { color: 'rgba(255,255,255,0.05)' } }
+      },
+      plugins: { legend: { position: 'top' } }
+    }
+  });
+
+  // BAR: Segurança Pública Teresina (Jan-Mai: 2022 vs 2025 vs 2026)
+  createChart(document.getElementById('chartSegurancaQueda'), {
+    type: 'bar',
+    data: {
+      labels: ['CVLI', 'Homicídios Dolosos', 'Roubo Geral (÷100)', 'Roubo Celulares (÷100)', 'Roubo Arma de Fogo (÷100)'],
+      datasets: [
+        {
+          label: 'Jan–Mai 2022',
+          data: [115, 108, 66.9, 46.4, 46.0],
+          backgroundColor: 'rgba(255,59,48,0.55)',
+          borderColor: '#ff3b30',
+          borderWidth: 1
+        },
+        {
+          label: 'Jan–Mai 2025',
+          data: [89, 84, 38.0, 25.3, 24.8],
+          backgroundColor: 'rgba(255,215,0,0.6)',
+          borderColor: '#ffd700',
+          borderWidth: 1
+        },
+        {
+          label: 'Jan–Mai 2026',
+          data: [55, 54, 22.4, 12.0, 11.6],
+          backgroundColor: 'rgba(0,255,65,0.65)',
+          borderColor: '#00ff41',
+          borderWidth: 1
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+        y: { beginAtZero: true, grid: { color: 'rgba(255,255,255,0.05)' } },
+        x: { grid: { color: 'rgba(255,255,255,0.05)' } }
+      },
+      plugins: { legend: { position: 'top' } }
+    }
+  });
+
+  // BAR: Ecossistema EdTech & IA Piauí (0-100)
+  createChart(document.getElementById('chartEdtechPilares'), {
+    type: 'bar',
+    data: {
+      labels: ['Piauí IA (UNESCO)', 'Seduckathon', 'Canal Educação', 'SoberanIA & ZPE', 'PIT Superior IA', 'Escola Tech Capital'],
+      datasets: [{
+        label: 'Índice de Maturidade & Escala (0–100)',
+        data: [98, 95, 94, 90, 88, 86],
+        backgroundColor: 'rgba(0,240,255,0.6)',
+        borderColor: '#00f0ff',
+        borderWidth: 1,
+        borderRadius: 5
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+        y: { beginAtZero: true, max: 100, grid: { color: 'rgba(255,255,255,0.05)' } },
+        x: { grid: { color: 'rgba(255,255,255,0.05)' } }
+      },
+      plugins: { legend: { position: 'top' } }
+    }
+  });
+
+  // BAR: IDHM por Dimensão nos Polos do Piauí (PNUD/IPEA)
+  createChart(document.getElementById('chartIdhmMunicipios'), {
+    type: 'bar',
+    data: {
+      labels: ['Teresina (0,751)', 'Floriano (0,700)', 'Picos (0,698)', 'Parnaíba (0,687)'],
+      datasets: [
+        {
+          label: 'IDHM Renda',
+          data: [0.731, 0.676, 0.684, 0.658],
+          backgroundColor: 'rgba(0,240,255,0.6)',
+          borderColor: '#00f0ff',
+          borderWidth: 1
+        },
+        {
+          label: 'IDHM Longevidade',
+          data: [0.820, 0.802, 0.800, 0.816],
+          backgroundColor: 'rgba(0,255,65,0.6)',
+          borderColor: '#00ff41',
+          borderWidth: 1
+        },
+        {
+          label: 'IDHM Educação',
+          data: [0.707, 0.633, 0.621, 0.604],
+          backgroundColor: 'rgba(255,215,0,0.65)',
+          borderColor: '#ffd700',
+          borderWidth: 1
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+        y: { min: 0.5, max: 0.9, grid: { color: 'rgba(255,255,255,0.05)' } },
+        x: { grid: { color: 'rgba(255,255,255,0.05)' } }
+      },
+      plugins: { legend: { position: 'top' } }
     }
   });
 }

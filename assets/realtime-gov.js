@@ -37,6 +37,12 @@
       periodo: null,
       itens: 0
     },
+    siconfiTeresina: {
+      status: 'local',
+      exercicio: null,
+      periodo: null,
+      itens: 0
+    },
     commodities: {
       status: 'local',
       generatedAt: null,
@@ -101,6 +107,7 @@
       bcb: { ...state.bcb },
       ibge: { ...state.ibge },
       siconfi: { ...state.siconfi },
+      siconfiTeresina: { ...state.siconfiTeresina },
       commodities: {
         ...state.commodities,
         icbr: { ...state.commodities.icbr },
@@ -182,7 +189,8 @@
     if (typeof window.location !== 'object' || !/^https?:$/.test(window.location.protocol)) {
       return false;
     }
-    const base = window.location.pathname.includes('/eyeofgod') ? '../data/piaui-live.json' : 'data/piaui-live.json';
+    const isSubpage = /\/(eyeofgod|teresina)(\/|$)/.test(window.location.pathname || '');
+    const base = isSubpage ? '../data/piaui-live.json' : 'data/piaui-live.json';
     try {
       const snap = await fetchJsonSafe(base, 5000);
       if (snap && snap.sources) {
@@ -324,15 +332,22 @@
         }
       }),
 
-      // 4. Tesouro Nacional SICONFI (Estado do Piauí - id_ente=22)
-      fetchJsonSafe(
-        'https://apidatalake.tesouro.gov.br/ords/siconfi/tt/rgf?an_exercicio=2025&in_periodicidade=Q&nr_periodo=3&co_tipo_demonstrativo=RGF&no_anexo=RGF-Anexo%2001&co_esfera=E&co_poder=E&id_ente=22',
-        7000
-      ).then(data => {
-        if (data && Array.isArray(data.items) && data.items.length) {
-          state.siconfi = { status: 'ok', exercicio: 2025, periodo: 3, itens: data.items.length };
-          okCount++;
+      // 4. Tesouro Nacional SICONFI (Estado do Piauí id_ente=22 + Prefeitura de Teresina id_ente=2211001)
+      Promise.allSettled([
+        fetchJsonSafe('https://apidatalake.tesouro.gov.br/ords/siconfi/tt/rgf?an_exercicio=2025&in_periodicidade=Q&nr_periodo=3&co_tipo_demonstrativo=RGF&no_anexo=RGF-Anexo%2001&co_esfera=E&co_poder=E&id_ente=22', 7000),
+        fetchJsonSafe('https://apidatalake.tesouro.gov.br/ords/siconfi/tt/rgf?an_exercicio=2025&in_periodicidade=Q&nr_periodo=3&co_tipo_demonstrativo=RGF&no_anexo=RGF-Anexo%2001&co_esfera=M&co_poder=E&id_ente=2211001', 7000)
+      ]).then(results => {
+        const [piRes, theRes] = results;
+        let sicOk = false;
+        if (piRes.status === 'fulfilled' && piRes.value && Array.isArray(piRes.value.items) && piRes.value.items.length) {
+          state.siconfi = { status: 'ok', exercicio: 2025, periodo: 3, itens: piRes.value.items.length };
+          sicOk = true;
         }
+        if (theRes.status === 'fulfilled' && theRes.value && Array.isArray(theRes.value.items) && theRes.value.items.length) {
+          state.siconfiTeresina = { status: 'ok', exercicio: 2025, periodo: 3, itens: theRes.value.items.length };
+          sicOk = true;
+        }
+        if (sicOk) okCount++;
       }),
 
       // 5. Índice de Commodities Brasil (BCB SGS IC-Br 27574–27577) + Câmbio AwesomeAPI fallback

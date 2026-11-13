@@ -1004,5 +1004,289 @@ window.PIAUI_ONTOLOGY = {
       url: 'https://qedu.org.br/cidade/2211001-teresina',
       source: 'QEdu / INEP Teresina'
     }
-  ]
+  ],
+  territories12: [
+    { id: 'TD1', name: 'Planície Litorânea', pole: 'Parnaíba / Luís Correia', macro: 'Litoral / Norte', focus: 'ZPE Parnaíba, Porto Luís Correia, H₂ verde, turismo Delta e carcinicultura' },
+    { id: 'TD2', name: 'Cocais', pole: 'Piripiri / Esperantina / Batalha', macro: 'Meio-Norte', focus: 'Parque Empresarial Piripiri, comércio, agricultura familiar e extrativismo' },
+    { id: 'TD3', name: 'Carnaubais', pole: 'Campo Maior / Castelo do Piauí', macro: 'Centro-Norte', focus: 'Cera de carnaúba, pecuária, turismo geológico (Castelo) e serviços' },
+    { id: 'TD4', name: 'Entre Rios', pole: 'Teresina / Altos / União / José de Freitas', macro: 'Metropolitana', focus: 'Capital política e econômica (serviços 71,7% PIB, saúde, educação, TI)' },
+    { id: 'TD5', name: 'Vale do Sambito', pole: 'Valença do Piauí / Elesbão Veloso', macro: 'Centro-Norte', focus: 'Agricultura familiar, comércio regional e eixo rodoviário BR-316' },
+    { id: 'TD6', name: 'Vale do Rio Guaribas', pole: 'Picos / Sussuapara', macro: 'Centro-Sul', focus: 'Segundo maior entroncamento comercial, Parque Empresarial Picos e apicultura' },
+    { id: 'TD7', name: 'Chapada Vale do Rio Itaim', pole: 'Jaicós / Simões / Marcolândia', macro: 'Semiárido Leste', focus: 'Grandes complexos de geração eólica (Simões 375 MW, Marcolândia 206 MW)' },
+    { id: 'TD8', name: 'Vale do Canindé', pole: 'Oeiras / Simplício Mendes', macro: 'Centro-Sul', focus: 'Primeira capital histórica, patrimônio cultural e geração solar (João Costa)' },
+    { id: 'TD9', name: 'Serra da Capivara', pole: 'São Raimundo Nonato / Dom Inocêncio', macro: 'Semiárido Sul', focus: 'Patrimônio UNESCO, aeroporto regional e parque eólico Dom Inocêncio (877 MW)' },
+    { id: 'TD10', name: 'Vale dos Rios Piauí e Itaueiras', pole: 'Floriano / Guadalupe / Ribeira do PI', macro: 'Sul-Centro', focus: 'Polo médico/educacional (IDHM 0,700), Usina Boa Esperança e solar Ribeira (210 MW)' },
+    { id: 'TD11', name: 'Tabuleiros do Alto Parnaíba', pole: 'Uruçuí / Baixa Grande do Ribeiro', macro: 'Cerrados / MATOPIBA', focus: 'Liderança estadual em soja/milho, esmagamento e logística de grãos' },
+    { id: 'TD12', name: 'Chapada das Mangabeiras', pole: 'Bom Jesus / Corrente / São Gonçalo', macro: 'Extremo Sul / Cerrados', focus: 'Fronteira agrícola MATOPIBA (+27% pop. Bom Jesus) e complexo solar São Gonçalo (790 MW)' }
+  ],
+  energyRenewables: {
+    nationalRank: '3º lugar nacional em produção de energias renováveis (ANEEL)',
+    matrizEletricaLimpaPct: 95,
+    windOperationalGw: 3.5,
+    windBuildingMw: 746.1,
+    windForecastGw: 2.5,
+    solarOperationalGw: 1.46,
+    solarBuildingMw: 867.22,
+    solarForecastGw: 13.14,
+    solarTeresinaRank: '4ª cidade do Brasil em energia solar distribuída residencial',
+    highlights: [
+      { place: 'Dom Inocêncio', type: 'Eólica', capacity: '877,85 MW em operação' },
+      { place: 'Lagoa do Barro do Piauí', type: 'Eólica', capacity: '671,70 MW em operação' },
+      { place: 'Caldeirão Grande do Piauí', type: 'Eólica + Solar', capacity: '473,4 MW eólica + 213,1 MW solar' },
+      { place: 'São Gonçalo do Gurguéia', type: 'Solar', capacity: '790,37 MW (maior complexo solar da América do Sul)' },
+      { place: 'Simões & Curral Novo', type: 'Eólica', capacity: '375,1 MW + 338,1 MW em operação' },
+      { place: 'Parnaguá & Brasileira', type: 'Solar (em construção)', capacity: '657,2 MW + 210,0 MW em obras' }
+    ]
+  },
+  demographicsBreakdown: {
+    censusSeriesPI: [
+      { year: 1991, pop: 2582137 },
+      { year: 2000, pop: 2843278 },
+      { year: 2010, pop: 3119097 },
+      { year: 2022, pop: 3271199 },
+      { year: 2025, pop: 3384547 }
+    ],
+    ageGroupsPI2022: [
+      { group: '0 a 14 anos', count: 681934, pct: 20.85 },
+      { group: '15 a 64 anos', count: 2240511, pct: 68.49 },
+      { group: '65 anos ou mais', count: 348754, pct: 10.66 }
+    ],
+    genderPI2022: { female: 1670597, femalePct: 51.1, male: 1600602, malePct: 48.9, sexRatio: 95.8 },
+    urbanRuralPI2022: { urban: 2271384, urbanPct: 69.44, rural: 999815, ruralPct: 30.56 },
+    agingPI2022: { medianAge: 34, agingIndex: 51.1, share65Plus1980: 3.7, share65Plus2010: 7.5, share65Plus2022: 10.7, nationalRank65Plus: '8º mais envelhecido do Brasil' },
+    topCities2022: [
+      { name: 'Teresina', pop2022: 866300, growthPct: 6 },
+      { name: 'Parnaíba', pop2022: 162159, growthPct: 11 },
+      { name: 'Picos', pop2022: 83090, growthPct: 12 },
+      { name: 'Piripiri', pop2022: 65450, growthPct: 6 },
+      { name: 'Floriano', pop2022: 62036, growthPct: 8 },
+      { name: 'Barras', pop2022: 47938, growthPct: 7 },
+      { name: 'Altos', pop2022: 47416, growthPct: 22 },
+      { name: 'União', pop2022: 46119, growthPct: 8 },
+      { name: 'Campo Maior', pop2022: 45793, growthPct: 1 },
+      { name: 'José de Freitas', pop2022: 42559, growthPct: 15 },
+      { name: 'São Raimundo Nonato', pop2022: 38934, growthPct: 20 },
+      { name: 'Bom Jesus', pop2022: 28799, growthPct: 27 }
+    ]
+  },
+  caged2025: {
+    piauiNetJobs: 21022,
+    admissions: 167430,
+    dismissals: 146408,
+    growthPct: 5.81,
+    nationalRankGrowth: '3º maior crescimento percentual do Brasil em 2025 (atrás de AP e PB)',
+    stockPI: 368971,
+    stockTeresina: 234700,
+    bySector: [
+      { sector: 'Serviços', net: 9537 },
+      { sector: 'Comércio', net: 4393 },
+      { sector: 'Construção', net: 3840 },
+      { sector: 'Indústria', net: 2502 },
+      { sector: 'Agropecuária', net: 755 }
+    ],
+    topCitiesNet: [
+      { city: 'Teresina', net: 9646 },
+      { city: 'Picos', net: 1619 },
+      { city: 'Parnaíba', net: 1103 },
+      { city: 'Piripiri', net: 1067 },
+      { city: 'São Raimundo Nonato', net: 691 }
+    ]
+  },
+  idhMunicipalTop: [
+    { rank: 1, name: 'Teresina', idhm: 0.751, income: 0.731, longevity: 0.820, education: 0.707, tier: 'Alto' },
+    { rank: 2, name: 'Floriano', idhm: 0.700, income: 0.676, longevity: 0.802, education: 0.633, tier: 'Alto' },
+    { rank: 3, name: 'Picos', idhm: 0.698, income: 0.684, longevity: 0.800, education: 0.621, tier: 'Médio' },
+    { rank: 4, name: 'Parnaíba', idhm: 0.687, income: 0.658, longevity: 0.816, education: 0.604, tier: 'Médio' },
+    { rank: 5, name: 'Bom Jesus', idhm: 0.668, income: null, longevity: null, education: null, tier: 'Médio' },
+    { rank: 6, name: 'São Raimundo Nonato', idhm: 0.661, income: null, longevity: null, education: null, tier: 'Médio' }
+  ],
+  publicSecurity: {
+    sourceSummary: 'SSP-PI / DataSSP · Programa Pacto pela Ordem · CellGuard (Etipi)',
+    periodNote: 'Comparativo oficial jan–mai/2026 vs 2022 e 2025 em Teresina + mar/abr 2026 no Piauí.',
+    highlightsPI: [
+      { label: 'Homicídios no PI (mar/2026)', value: '34 registros', delta: 'Menor patamar mensal em 14 anos (série desde 2012)' },
+      { label: 'Feminicídios (jan–abr/2026)', value: '5 casos vs 21 ant.', delta: '-75% no 1º trimestre (15 dias seguidos sem registro em abr/26)' },
+      { label: 'CellGuard / Etipi', value: '+11.000 recuperados', delta: 'Rastreamento automático IMEI + WhatsApp devolvendo aparelhos às vítimas' },
+      { label: 'Roubo de celulares (mar/2026 PI)', value: '-80% vs 2022', delta: 'Rompimento da cadeia de receptação com integração operacional' }
+    ],
+    teresinaSeries: [
+      { metric: 'CVLI (Crimes Violentos Letais Intencionais)', y2022: 115, y2025: 89, y2026: 55, dropVs2022Pct: -52.17, dropVs2025Pct: -38.20 },
+      { metric: 'Homicídios Dolosos', y2022: 108, y2025: 84, y2026: 54, dropVs2022Pct: -50.00, dropVs2025Pct: -35.71 },
+      { metric: 'Roubo Geral', y2022: 6688, y2025: 3798, y2026: 2240, dropVs2022Pct: -66.51, dropVs2025Pct: -41.02 },
+      { metric: 'Roubo de Celulares', y2022: 4643, y2025: 2526, y2026: 1200, dropVs2022Pct: -74.15, dropVs2025Pct: -52.49 },
+      { metric: 'Roubo com Arma de Fogo', y2022: 4604, y2025: 2481, y2026: 1158, dropVs2022Pct: -74.85, dropVs2025Pct: -53.33 },
+      { metric: 'Receptação de Celulares', y2022: null, y2025: 415, y2026: 55, dropVs2022Pct: null, dropVs2025Pct: -86.75 }
+    ],
+    pillars: [
+      {
+        id: 'pacto-ordem',
+        tag: 'GOVERNANÇA',
+        title: 'Pacto pela Ordem & Integração Justiça/MP',
+        detail: 'Aumento de efetivo, operações integradas entre PM-PI, Polícia Civil, Poder Judiciário e Ministério Público para acelerar prisões e conter a reincidência criminal.'
+      },
+      {
+        id: 'cellguard',
+        tag: 'GOVTECH SSP + ETIPI',
+        title: 'CellGuard — Recuperação Inteligente de Celulares',
+        detail: 'Plataforma da SSP-PI com a Etipi que cruza IMEI com operadoras e dispara intimações automáticas via WhatsApp, já recuperando mais de 11 mil celulares e derrubando a receptação em -86,75%.'
+      },
+      {
+        id: 'letalidade-controle',
+        tag: 'DIREITOS & EFICIÊNCIA',
+        title: 'Redução Criminal com Baixa Letalidade Policial',
+        detail: 'Piauí combina recuo contínuo de CVLI e roubos mantendo uma das menores taxas de letalidade decorrente de intervenção policial no Brasil.'
+      },
+      {
+        id: 'spia-inteligencia',
+        tag: 'MONITORAMENTO URBANO',
+        title: 'DataSSP, Cercamento Eletrônico & Videomonitoramento',
+        detail: 'Análise estatística contínua (DataSSP) direcionando policiamento por mancha criminal nas zonas de Teresina e divisas estaduais.'
+      }
+    ]
+  },
+  edtechEcosystem: {
+    headlineMetrics: [
+      { label: 'Estudantes em IA Curricular', value: '120.000+', sub: '1º território das Américas (Prêmio UNESCO)' },
+      { label: 'Professores Capacitados em IA', value: '800+', sub: 'Formação 60h (Unipampa / IFFar / UFRGS)' },
+      { label: 'Aprovados PIT em IA (2026)', value: '78 egressos', sub: 'Bacharelado & Tecnólogo em IA vindos da rede estadual' },
+      { label: 'Inscritos Seduckathon 2025', value: '9.000+', sub: '130 alunos + 26 prof. em intercâmbio em 6 países' }
+    ],
+    initiatives: [
+      {
+        id: 'piaui-ia-unesco',
+        badge: 'PRÊMIO UNESCO · AMÉRICAS',
+        title: 'Programa Piauí Inteligência Artificial nas Escolas',
+        scope: '9º ano EF ao 3º ano EM (Rede Estadual)',
+        impactScore: 98,
+        detail: 'Primeiro território das Américas a tornar a disciplina de IA obrigatória na educação básica, premiado pela UNESCO. Mais de 120 mil alunos atendidos e 800 docentes capacitados via SEDUC-PI com Unipampa, IFFar e UFRGS.'
+      },
+      {
+        id: 'pit-ia-superior',
+        badge: 'ENSINO SUPERIOR TECH',
+        title: 'Piauí Instituto de Tecnologia (PIT) — Graduações em IA',
+        scope: 'Teresina / Ecossistema Estadual',
+        impactScore: 88,
+        detail: 'Conectando o ensino médio técnico e a disciplina de IA ao ensino superior tecnológico: 78 estudantes egressos da SEDUC aprovados em 2026 para Bacharelado e Tecnólogo em Inteligência Artificial.'
+      },
+      {
+        id: 'canal-educacao',
+        badge: '224 MUNICÍPIOS · IA PEDAGÓGICA',
+        title: 'Canal Educação & Correção de Redação por IA',
+        scope: 'Todo o Estado (Rural e Urbano)',
+        impactScore: 94,
+        detail: 'Mediação tecnológica em todos os 224 municípios piauienses combinada com planos individuais de estudo, correção automatizada de redações para o ENEM, plataforma de leitura e ensino de inglês.'
+      },
+      {
+        id: 'seduckathon-intercambio',
+        badge: 'MAIOR HACKATHON ESCOLAR',
+        title: 'Seduckathon & Jogos Inclusivos (ex.: DeltaEdu)',
+        scope: 'EUA, Coreia do Sul, Alemanha, China, Portugal, Singapura',
+        impactScore: 95,
+        detail: 'Mais de 9 mil jovens inscritos e 175 finalistas desenvolvendo softwares e robótica para desafios reais das escolas (como o DeltaEdu, criado no CETI Liceu Parnaibano para alunos com dislexia e discalculia).'
+      },
+      {
+        id: 'soberania-zpe',
+        badge: 'INFRAESTRUTURA SOBERANA',
+        title: 'SoberanIA & Condomínio de Data Centers Verdes (ZPE)',
+        scope: 'Teresina & Parnaíba (Investe Piauí / MCTI)',
+        impactScore: 90,
+        detail: 'Parcerias para nuvem soberana de IA (SoberanIA), 11 startups de tecnologia já operando na ZPE Parnaíba, 34 startups na missão Web Summit Lisboa e projeto de Data Center Verde ancorado em energia limpa >95%.'
+      },
+      {
+        id: 'escola-tecnologia-the',
+        badge: 'CAPACITAÇÃO CAPITAL',
+        title: 'Nova Escola de Tecnologia em Teresina & Robótica',
+        scope: 'Teresina · ~3.000 jovens beneficiados',
+        impactScore: 86,
+        detail: 'Laboratórios de programação, jogos digitais, robótica e realidade aumentada implantados nos CETIs de tempo integral mais polo de formação digital em Teresina.'
+      }
+    ]
+  },
+  swotCrossMatrix: [
+    { strategy: 'SO · Estratégia Ofensiva (Forças × Oportunidades)', action: 'Usar a energia limpa (>95%, 3º do país) + 100% Tempo Integral/IA escolar para ancorar H₂ Verde, Data Centers na ZPE e polos de TI na capital.' },
+    { strategy: 'WO · Estratégia de Reforço (Fraquezas × Oportunidades)', action: 'Concluir a Transnordestina e ampliar esgotamento sanitário (39% em Teresina) com PPPs para evitar estrangulamento logístico do MATOPIBA e da capital.' },
+    { strategy: 'ST · Estratégia Defensiva (Forças × Ameaças)', action: 'Sustentar a folga fiscal na LRF (56,1% RCL) e segurança pública baseada em inteligência (CellGuard / DataSSP) para blindar investimentos diante de juros altos.' },
+    { strategy: 'WT · Contingência Estrutural (Fraquezas × Ameaças)', action: 'Mitigar seca no semiárido e dependência de transferências com irrigação, reservação hídrica e geração de empregos formais (+21 mil CAGED/ano).' }
+  ],
+  teresinaCapital: {
+    overview: {
+      name: 'Teresina',
+      ibgeCode: '2211001',
+      founded: '16/08/1852',
+      pop2022: 866300,
+      pop2025: 905692,
+      popShareStatePct: 26.76,
+      density2022: 622.66,
+      totalAreaKm2: 1391.29,
+      urbanAreaKm2: 172.26,
+      pib2023Bi: 28.2,
+      pibPerCapita2023: 33994.07,
+      idhm2010: 0.751,
+      idhmComponents: { income: 0.731, longevity: 0.820, education: 0.707 },
+      formalWorkersIBGE2023: 367319,
+      cagedStock2025: 234700,
+      cagedNet2025: 9646,
+      susUnits: 181,
+      infantMortality2023: 14.71,
+      sewerNetworkPct2022: 39.0,
+      streetTreesPct2022: 58.16
+    },
+    budget: {
+      receitaBruta2024Siconfi: 5396868035.81,
+      despesaEmpenhada2024Siconfi: 5396776250.15,
+      transferenciasCorrentesPct2024: 65.99,
+      loa2025Total: 5668376000,
+      receitasCorrentes2025: 5575865000,
+      impostosProprios2025: 1020049000,
+      transferencias2025: 3535519000,
+      minEducacaoPct: 25,
+      minSaudePct: 15,
+      seriesReceitasCorrentes: [
+        { year: 2021, valueBi: 3.508 },
+        { year: 2022, valueBi: 4.066 },
+        { year: 2023, valueBi: 4.440 },
+        { year: 2024, valueBi: 4.878 },
+        { year: 2025, valueBi: 5.245 }
+      ]
+    },
+    zonesUrban2022: [
+      { zone: 'Sul', pop2022: 195228, growth2010_22: 16.01, neighborhoods: 32, favelasPop: 47523, highlight: 'Maior subdistrito urbano e maior crescimento da capital (Promorar, Parque Piauí, Morada Nova, Vila Irmã Dulce).' },
+      { zone: 'Leste', pop2022: 192168, growth2010_22: 14.75, neighborhoods: 27, favelasPop: 56583, highlight: 'Alta renda no eixo Jóquei/Ininga/Fátima ao lado de 44 comunidades urbanas e polo universitário UFPI/UESPI.' },
+      { zone: 'Norte', pop2022: 189523, growth2010_22: 6.02, neighborhoods: 23, favelasPop: 55830, highlight: 'Concentração populacional na Santa Maria da Codipi, Mocambinho, Parque Brasil e berço histórico do Poti Velho.' },
+      { zone: 'Sudeste', pop2022: 134752, growth2010_22: 0.47, neighborhoods: 20, favelasPop: 24685, highlight: 'Grande Dirceu e Itararé (bairro mais populoso com 37,4 mil hab.); forte comércio e expansão do Metrô/VLT.' },
+      { zone: 'Centro', pop2022: 95857, growth2010_22: -19.40, neighborhoods: 18, favelasPop: 11812, highlight: 'Centro histórico, polo médico (HUT/hospitais), comércio tradicional e serviços, com perda residencial de 23 mil hab. na década.' }
+    ],
+    mobilityAndInfra: [
+      { title: 'Metrô / VLT de Teresina', metric: 'R$ 600 milhões', detail: 'Modernização e nova estação na Zona Sudeste com licitação de novos Veículos Leves sobre Trilhos (VLTs) para horários de pico.' },
+      { title: 'Sistema Inthegra', metric: '8 terminais previstos', detail: 'Integração tronco-alimentadora conectando Zona Sudeste, Sul, Norte e Leste por corredores exclusivos e linhas diametrais.' },
+      { title: 'Saneamento (Águas de Teresina)', metric: '39% esgoto (2022) em expansão', detail: 'Receita direta anual de R$ 532,8M (DF 2025) sustentando investimentos de universalização do esgotamento sanitário e redução de perdas.' },
+      { title: 'Arborização Urbana ("Cidade Verde")', metric: '58,16% das vias', detail: 'Censo 2022 IBGE aponta 58,16% das faces de quadra arborizadas e 172,26 km² de mancha urbana contínua entre os rios Parnaíba e Poti.' }
+    ],
+    swotTeresina: {
+      strengths: [
+        'Maior polo de Serviços (71,7% PIB estadual), Saúde de alta complexidade (HUT + rede privada) e Ensino Superior do Meio-Norte.',
+        'Selo Ouro em Alfabetização (ICA 80,58%), IDEB Municipal 6,4 (AI) / 5,8 (AF) e 24 unidades de referência no catálogo INEP.',
+        'Recuo forte da criminalidade (jan–mai/2026): -52,17% CVLI, -74,15% roubo de celulares e -86,75% receptação.',
+        'Liderança em empregos formais (+9.646 vagas CAGED 2025 · 234,7 mil estoque) e 4ª cidade do Brasil em energia solar residencial.'
+      ],
+      weaknesses: [
+        'Cobertura de esgotamento sanitário ainda em 39% (IBGE 2022), exigindo aceleração das metas de saneamento.',
+        'Esvaziamento residencial do Centro (-23.066 habitantes entre 2010 e 2022) com subaproveitamento de imóveis urbanos.',
+        '198.189 moradores em 170 favelas/comunidades urbanas (22,87% da cidade) e 26,7 mil pessoas historicamente em áreas de risco.',
+        'Dependência de transferências correntes (65,99% da receita realizada em 2024) e gargalos históricos no transporte coletivo.'
+      ],
+      opportunities: [
+        'Consolidação como Hub EdTech & IA com o Piauí Instituto de Tecnologia (PIT), SoberanIA e eventos nacionais como o Neon.',
+        'Conclusão da modernização do Metrô/VLT (R$ 600 mi) integrando Grande Dirceu ao Centro em tempo competitivo.',
+        'Reabilitação habitacional e tecnológica do Centro Histórico associada a moradia, economia criativa e segurança via SPIA.',
+        'Integração metropolitana estruturada com Timon (MA) e municípios do TD4 Entre Rios.'
+      ],
+      threats: [
+        'Ondas de calor extremo e baixa umidade no B-R-O Bró elevando estresse térmico urbano e demanda por saúde/energia.',
+        'Subfinanciamento ou atrasos em repasses vinculados de Saúde (HUT/FMS) frente à demanda de todo o Meio-Norte.',
+        'Concorrência fiscal e migração de talentos qualificados caso a renda média local não acompanhe hubs do Sudeste/Sul.',
+        'Pressão sobre micro e pequenas empresas por custo de crédito com Selic elevada.'
+      ]
+    }
+  }
 };

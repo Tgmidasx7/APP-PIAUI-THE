@@ -286,5 +286,152 @@ window.PIAUI_ONTOLOGY = {
       ['SEDUC', 'GINI', 'mobilidade social'],
       ['FISCAL', 'SEDUC', '24,75% RCL']
     ]
-  }
+  },
+  // Metadados de Commodities, Petróleo e Índices IC-Br relevantes ao Piauí
+  commoditiesMeta: [
+    {
+      id: 'brent',
+      symbol: 'BZ=F',
+      name: 'Petróleo Brent',
+      unit: 'USD/barril',
+      category: 'Energia & Logística',
+      piauiLink: 'Pressiona diesel e frete rodoviário: mais de 90% das cargas do MATOPIBA e abastecimento de Teresina dependem de rodovias.'
+    },
+    {
+      id: 'wti',
+      symbol: 'CL=F',
+      name: 'Petróleo WTI',
+      unit: 'USD/barril',
+      category: 'Energia & Combustíveis',
+      piauiLink: 'Referência norte-americana que acompanha ciclos globais de refino, fertilizantes nitrogenados e custos de transporte.'
+    },
+    {
+      id: 'soja',
+      symbol: 'ZS=F',
+      name: 'Soja (CBOT)',
+      unit: 'USc/bushel',
+      category: 'Agronegócio (MATOPIBA)',
+      piauiLink: 'Principal produto agroexportador do Sudoeste piauiense (Uruçuí, Bom Jesus, Baixa Grande do Ribeiro); 1 saca 60 kg ≈ 2,2046 bushels.'
+    },
+    {
+      id: 'milho',
+      symbol: 'ZC=F',
+      name: 'Milho (CBOT)',
+      unit: 'USc/bushel',
+      category: 'Agronegócio & Proteína',
+      piauiLink: 'Cultura de 2ª safra nos Cerrados e base de custo para avicultura/suinocultura no estado; 1 saca 60 kg ≈ 2,3621 bushels.'
+    },
+    {
+      id: 'ouro',
+      symbol: 'GC=F',
+      name: 'Ouro (Spot/Futuro)',
+      unit: 'USD/onça troy',
+      category: 'Reserva & Mineração',
+      piauiLink: 'Termômetro global de aversão ao risco e juros; dialoga com o potencial mineral do estado (níquel, ferro, diamante e fósforo).'
+    },
+    {
+      id: 'gas_natural',
+      symbol: 'NG=F',
+      name: 'Gás Natural',
+      unit: 'USD/MMBtu',
+      category: 'Energia & Transição',
+      piauiLink: 'Competitividade da matriz elétrica limpa do Piauí (>95% eólica/solar) frente a térmicas fósseis e custos de amônia/H₂ verde.'
+    }
+  ],
+  economicCrossings: [
+    {
+      id: 'cross-divida-selic',
+      tag: 'FISCAL × JUROS',
+      title: 'Dívida de R$ 10,93 bi (+30,65%) frente à Selic e folga da LRF',
+      plainText: 'Embora a DCL represente 56,1% da RCL de 2025 (61% na referência anterior) — bem abaixo do teto de 200% —, juros altos encarecem novos empréstimos. A proteção vem da despesa de pessoal enxuta (38,77% vs teto 49%), preservando espaço para obras.'
+    },
+    {
+      id: 'cross-pib-desigualdade',
+      tag: 'CRESCIMENTO × RENDA',
+      title: 'PIB +4,2% real, mas PIB/capita ainda é o 3º menor do Brasil',
+      plainText: 'Metade dos piauienses (50,1%) vive em apenas 14 municípios e Teresina tem renda por pessoa 37,4% maior que a média estadual. Sem agroindústria e serviços no interior, o crescimento da soja e da energia nem sempre vira salário local.'
+    },
+    {
+      id: 'cross-petroleo-soja',
+      tag: 'PETRÓLEO × SOJA × DÓLAR',
+      title: 'Câmbio e soja impulsionam o Sudoeste; diesel limita a margem',
+      plainText: 'Dólar alto + soja firme aumentam a receita em reais dos produtores de Bom Jesus e Uruçuí. Porém, sem ferrovia plena até o porto, petróleo caro encarece o diesel dos caminhões e corrói parte do lucro na estrada.'
+    },
+    {
+      id: 'cross-educacao-produtividade',
+      tag: 'EDUCAÇÃO × FUTURO',
+      title: 'IDEB EM 4,5 (4º do Brasil) buscando conexão com emprego técnico',
+      plainText: 'O Piauí investe 24,75% da RCL em Educação e lidera o Nordeste com 100% de tempo integral no Ensino Médio. O salto seguinte é transformar essa base em técnicos para TI (Teresina), H₂ verde (Litoral) e Agro 4.0 (Cerrados).'
+    }
+  ],
+  geoCorridors: [
+    {
+      id: 'eixo-litoral',
+      name: 'Litoral Norte (Parnaíba & Luís Correia)',
+      focus: 'Porto, ZPE Parnaíba & Hidrogênio Verde',
+      status: 'Em implantação estratégica',
+      potentialScore: 92,
+      infraScore: 48,
+      summary: 'Menor litoral do Brasil (66 km), mas posição atlântica privilegiada para exportar energia renovável convertida em H₂ verde e receber insumos pela ZPE.'
+    },
+    {
+      id: 'eixo-matopiba',
+      name: 'Sudoeste MATOPIBA (Uruçuí & Bom Jesus)',
+      focus: 'Soja, Milho, Algodão & Transnordestina',
+      status: 'Forte expansão exportadora',
+      potentialScore: 95,
+      infraScore: 56,
+      summary: 'Motor agroexportador (18% do PIB crescendo +5,1% a.a.). A ligação ferroviária via Eliseu Martins é decisiva para reduzir a dependência do frete a diesel.'
+    },
+    {
+      id: 'eixo-teresina',
+      name: 'Grande Teresina (Entre Rios + Timon-MA)',
+      focus: 'Serviços (71,7% PIB), Saúde, Educação & TI',
+      status: 'Polo consolidado',
+      potentialScore: 84,
+      infraScore: 78,
+      summary: 'Concentra 26,8% da população e gera PIB per capita R$ 33.994 (+37,4% vs estado). Atua como capital regional médica e universitária do Meio-Norte.'
+    },
+    {
+      id: 'eixo-semiarido',
+      name: 'Semiárido Central & Sul (Picos, Lagoa do Barro, S.R. Nonato)',
+      focus: 'Eólica, Solar, Minérios & Turismo Científico',
+      status: 'Alta geração, baixa retenção industrial',
+      potentialScore: 86,
+      infraScore: 52,
+      summary: 'Gera matriz elétrica >95% limpa e abriga reservas minerais e a Serra da Capivara; o desafio geopolítico é reter indústrias locais e segurança hídrica.'
+    }
+  ],
+  geoCrossMatrix: [
+    {
+      shock: 'Alta do Petróleo / Diesel (+15%)',
+      channel: 'Frete rodoviário & Transporte urbano',
+      effect: 'Encarece o escoamento de soja/milho até portos vizinhos e pressiona preços de alimentos em Teresina.',
+      buffer: 'Conclusão do ramal da Transnordestina e expansão da frota/matriz elétrica limpa.'
+    },
+    {
+      shock: 'Alta da Soja + Dólar acima de R$ 5,50',
+      channel: 'Balança comercial & Renda no MATOPIBA',
+      effect: 'Aumenta receita em reais no Sudoeste e faturamento de insumos, máquinas e serviços ligados ao agro.',
+      buffer: 'Necessidade de agroindustrialização local (esmagamento/etanol) para espalhar empregos.'
+    },
+    {
+      shock: 'Selic elevada por período prolongado',
+      channel: 'Custo da DCL (R$ 10,93 bi) & Crédito MPEs',
+      effect: 'Aumenta serviço da dívida estadual (+30,65% em 2025) e trava capital de giro das 185 mil empresas (88,7% micro).',
+      buffer: 'Folga na LRF de pessoal (38,77% vs 49%) e captação via PPPs/bancos de desenvolvimento.'
+    },
+    {
+      shock: 'Avanço de H₂ Verde & Data Centers na ZPE',
+      channel: 'Energia limpa (>95%) + Porto Luís Correia',
+      effect: 'Converte excedente eólico/solar do interior em exportação industrial de alto valor no litoral.',
+      buffer: 'Mão de obra formada pela rede estadual (IDEB EM 4,5) e oferta de ensino técnico.'
+    },
+    {
+      shock: 'Oscilação de chuvas / Seca no Semiárido',
+      channel: 'Agricultura familiar & Segurança hídrica',
+      effect: 'Reduz produtividade fora das áreas irrigadas e aumenta pressão sobre ~650 mil famílias em programas sociais.',
+      buffer: 'Obras de adutoras/irrigação, reservação hídrica e geração solar descentralizada.'
+    }
+  ]
 };

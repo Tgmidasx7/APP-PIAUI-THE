@@ -96,6 +96,7 @@ async function main() {
       ibge: { ...previous.sources.ibge },
       bcb: { ...previous.sources.bcb },
       siconfi: { ...previous.sources.siconfi },
+      commodities: previous.sources.commodities ? { ...previous.sources.commodities } : { status: 'awaiting_live_sync', icbr: {}, quotes: {} },
       weather: { ...previous.sources.weather }
     },
     news: []
@@ -161,7 +162,60 @@ async function main() {
     snapshot.sources.weather.teresina.status = `fallback (${err.message})`;
   }
 
-  // 4. Tesouro Nacional SICONFI RGF (Estado do Piauí - id_ente=22)
+  // 4. Commodities (BCB IC-Br + Yahoo Finance Petróleo/Soja/Milho/Ouro/Gás)
+  try {
+    const [icbrTot, icbrAgro, icbrMet, icbrEner] = await Promise.allSettled([
+      fetchJson('https://api.bcb.gov.br/dados/serie/bcdata.sgs.27574/dados/ultimos/1?formato=json'),
+      fetchJson('https://api.bcb.gov.br/dados/serie/bcdata.sgs.27575/dados/ultimos/1?formato=json'),
+      fetchJson('https://api.bcb.gov.br/dados/serie/bcdata.sgs.27576/dados/ultimos/1?formato=json'),
+      fetchJson('https://api.bcb.gov.br/dados/serie/bcdata.sgs.27577/dados/ultimos/1?formato=json')
+    ]);
+    const icbr = {
+      total: icbrTot.status === 'fulfilled' ? icbrTot.value?.[0] || null : null,
+      agro: icbrAgro.status === 'fulfilled' ? icbrAgro.value?.[0] || null : null,
+      metal: icbrMet.status === 'fulfilled' ? icbrMet.value?.[0] || null : null,
+      energia: icbrEner.status === 'fulfilled' ? icbrEner.value?.[0] || null : null
+    };
+    const symbols = [
+      { id: 'brent', ticker: 'BZ=F', unit: 'USD/barril' },
+      { id: 'wti', ticker: 'CL=F', unit: 'USD/barril' },
+      { id: 'soja', ticker: 'ZS=F', unit: 'USc/bushel' },
+      { id: 'milho', ticker: 'ZC=F', unit: 'USc/bushel' },
+      { id: 'ouro', ticker: 'GC=F', unit: 'USD/oz' },
+      { id: 'gas_natural', ticker: 'NG=F', unit: 'USD/MMBtu' }
+    ];
+    const quotes = {};
+    await Promise.allSettled(symbols.map(async item => {
+      try {
+        const yData = await fetchJson(`https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(item.ticker)}?range=5d&interval=1d`);
+        const meta = yData?.chart?.result?.[0]?.meta;
+        const price = meta?.regularMarketPrice;
+        const prev = meta?.chartPreviousClose;
+        if (typeof price === 'number' && Number.isFinite(price)) {
+          const changePct = typeof prev === 'number' && prev > 0 ? Number((((price - prev) / prev) * 100).toFixed(2)) : null;
+          quotes[item.id] = {
+            symbol: item.ticker,
+            price: Number(price.toFixed(2)),
+            unit: item.unit,
+            changePct,
+            currency: meta?.currency || 'USD',
+            marketTime: meta?.regularMarketTime ? new Date(meta.regularMarketTime * 1000).toISOString() : new Date().toISOString()
+          };
+        }
+      } catch (_) {}
+    }));
+    const hasQuotes = Object.keys(quotes).length > 0;
+    const hasIcbr = Object.values(icbr).some(Boolean);
+    snapshot.sources.commodities = {
+      status: hasQuotes || hasIcbr ? 'ok' : 'fallback',
+      icbr,
+      quotes: hasQuotes ? quotes : (previous.sources.commodities?.quotes || {})
+    };
+  } catch (err) {
+    snapshot.sources.commodities.status = `fallback (${err.message})`;
+  }
+
+  // 5. Tesouro Nacional SICONFI RGF (Estado do Piauí - id_ente=22)
   try {
     const siconfi = await fetchJson(
       'https://apidatalake.tesouro.gov.br/ords/siconfi/tt/rgf?an_exercicio=2025&in_periodicidade=Q&nr_periodo=3&co_tipo_demonstrativo=RGF&no_anexo=RGF-Anexo%2001&co_esfera=E&co_poder=E&id_ente=22',

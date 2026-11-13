@@ -16,13 +16,13 @@ Painel analítico de indicadores sobre o estado do Piauí e sua capital, Teresin
 | Visão Geral + Auditoria | Indicadores corrigidos, gráficos Chart.js e **Detector de Anomalias & Divergências** (`assets/ontology.js`) |
 | Geográfica + Explorador | Território, relevo, clima, MATOPIBA/Cerrados (Sudoeste) e **Explorador Territorial** para filtrar os 16 polos georreferenciados e os 224 municípios do Piauí |
 | Demográfica | Censo 2022 vs Estimativas 2025 com distinção explícita entre taxa intercensitária (+0,26% a.a.) e variação recente (+1,14% a.a.) |
-| Geopolítica | Papel regional, infraestrutura, energia renovável, H₂ verde e desafios |
-| Econômica + Simulador LRF | PIB setorial, série fiscal homogênea (2025) e **Simulador What-If LRF (2025–2030)** para DCL/RCL |
+| Geopolítica & Corredores | Resumo em linguagem simples, 4 corredores geoeconômicos (Litoral/H₂V, MATOPIBA, Teresina e Semiárido), gráfico comparativo e matriz de choques × economia |
+| Econômica, Commodities & LRF | PIB setorial, série fiscal homogênea (2025), **Petróleo (Brent/WTI), Soja, Milho, Ouro, IC-Br (BCB)** com conversão em R$/saca, termômetro interativo de impacto, cruzamentos econômicos e **Simulador What-If LRF (2025–2030)** |
 | Educacional | Indicadores **IDEB** (Anos Iniciais, Anos Finais e Ensino Médio), SEDUC-PI e SEMEC-Teresina |
 | Desenvolvimento Humano | Evolução estadual do IDH (2000–2021) separada metodologicamente do marco de IDHM de Teresina (2010) |
 | SWOT | Forças, fraquezas, oportunidades e ameaças |
 | SPIA | Catálogo de 30 vídeos públicos e laboratório demonstrativo para Teresina |
-| Eye of God (`#eye-of-god` & `/eyeofgod/`) | Componente compartilhado (`mountEyeOfGod`) com GIS real de Teresina (Rios Parnaíba/Poti) e Piauí (16 polos), grafo de ontologia interativo, 6 modos de câmera em Canvas, sensores Gov-BR e CLI unificada (`pib`, `pop`, `fiscal`, `edu`, `geo pi`, `mun`, `graph`, `govbr`, `anomalies`) |
+| Eye of God (`#eye-of-god` & `/eyeofgod/`) | Componente compartilhado (`mountEyeOfGod`) com GIS real de Teresina (Rios Parnaíba/Poti) e Piauí (16 polos), grafo de ontologia interativo, 6 modos de câmera em Canvas, sensores Gov-BR e CLI unificada (`pib`, `pop`, `fiscal`, `edu`, `geo pi`, `mun`, `graph`, `govbr`, `anomalies`, `weather`, `macro`, `commodities`) |
 | Terminal & OSINT | Snapshot automático (`data/piaui-live.json` via `scripts/sync_osint.mjs`), IBGE Notícias, feeds RSS e curadoria local de 50 notícias |
 | Fontes & método | Portais institucionais, checklist de governança e exportação em CSV e **Dossiê JSON completo** |
 

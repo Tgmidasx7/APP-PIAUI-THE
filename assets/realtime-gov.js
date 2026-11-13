@@ -37,6 +37,12 @@
       periodo: null,
       itens: 0
     },
+    commodities: {
+      status: 'local',
+      generatedAt: null,
+      icbr: { total: null, agro: null, metal: null, energia: null },
+      quotes: {}
+    },
     snapshotNews: []
   };
 
@@ -89,7 +95,12 @@
       weather: { ...state.weather, teresina: { ...state.weather.teresina } },
       bcb: { ...state.bcb },
       ibge: { ...state.ibge },
-      siconfi: { ...state.siconfi }
+      siconfi: { ...state.siconfi },
+      commodities: {
+        ...state.commodities,
+        icbr: { ...state.commodities.icbr },
+        quotes: { ...state.commodities.quotes }
+      }
     };
   }
 
@@ -176,6 +187,15 @@
         }
         if (snap.sources.siconfi && snap.sources.siconfi.status === 'ok') {
           state.siconfi = { ...state.siconfi, ...snap.sources.siconfi };
+        }
+        if (snap.sources.commodities) {
+          state.commodities = {
+            ...state.commodities,
+            ...snap.sources.commodities,
+            generatedAt: snap.generatedAt || null,
+            icbr: { ...state.commodities.icbr, ...(snap.sources.commodities.icbr || {}) },
+            quotes: { ...state.commodities.quotes, ...(snap.sources.commodities.quotes || {}) }
+          };
         }
         if (Array.isArray(snap.news)) {
           state.snapshotNews = snap.news;
@@ -295,6 +315,37 @@
         if (data && Array.isArray(data.items) && data.items.length) {
           state.siconfi = { status: 'ok', exercicio: 2025, periodo: 3, itens: data.items.length };
           okCount++;
+        }
+      }),
+
+      // 5. Índice de Commodities Brasil (BCB SGS IC-Br 27574–27577) + Câmbio AwesomeAPI fallback
+      Promise.allSettled([
+        fetchJsonSafe('https://api.bcb.gov.br/dados/serie/bcdata.sgs.27574/dados/ultimos/1?formato=json'),
+        fetchJsonSafe('https://api.bcb.gov.br/dados/serie/bcdata.sgs.27575/dados/ultimos/1?formato=json'),
+        fetchJsonSafe('https://api.bcb.gov.br/dados/serie/bcdata.sgs.27576/dados/ultimos/1?formato=json'),
+        fetchJsonSafe('https://api.bcb.gov.br/dados/serie/bcdata.sgs.27577/dados/ultimos/1?formato=json'),
+        fetchJsonSafe('https://economia.awesomeapi.com.br/json/last/USD-BRL')
+      ]).then(results => {
+        const [tot, agro, met, ener, fx] = results;
+        let commOk = false;
+        if (tot.status === 'fulfilled' && Array.isArray(tot.value) && tot.value[0]) {
+          state.commodities.icbr.total = tot.value[0]; commOk = true;
+        }
+        if (agro.status === 'fulfilled' && Array.isArray(agro.value) && agro.value[0]) {
+          state.commodities.icbr.agro = agro.value[0]; commOk = true;
+        }
+        if (met.status === 'fulfilled' && Array.isArray(met.value) && met.value[0]) {
+          state.commodities.icbr.metal = met.value[0]; commOk = true;
+        }
+        if (ener.status === 'fulfilled' && Array.isArray(ener.value) && ener.value[0]) {
+          state.commodities.icbr.energia = ener.value[0]; commOk = true;
+        }
+        if (fx.status === 'fulfilled' && fx.value && fx.value.USDBRL && !state.bcb.usdBrl) {
+          state.bcb.usdBrl = { data: 'ao vivo', valor: fx.value.USDBRL.bid };
+          state.bcb.status = 'ok';
+        }
+        if (commOk) {
+          state.commodities.status = 'ok';
         }
       })
     ];

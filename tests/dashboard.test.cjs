@@ -105,8 +105,8 @@ test('busca sem acentos e favoritos persistem ao reiniciar', () => {
 
 test('gráficos oferecem tabelas e a falha da biblioteca não bloqueia o relógio', () => {
   const dom = createApp({ chart: false }); const { document } = dom.window;
-  assert.equal(document.querySelectorAll('.chart-data').length, 10);
-  assert.equal(document.querySelectorAll('.chart-fallback').length, 10);
+  assert.equal(document.querySelectorAll('.chart-data').length, 12);
+  assert.equal(document.querySelectorAll('.chart-fallback').length, 12);
   assert.match(document.getElementById('clockTime').textContent, /^\d\d:\d\d:\d\d$/);
   assert.ok(document.querySelector('.chart-data[open] table tbody tr'));
   document.getElementById('btn-eco').click();
@@ -162,7 +162,7 @@ test('notícias têm links, filtro, navegação, pausa e janela móvel', t => {
   assert.match(document.getElementById('terminalBox').textContent, /Nenhuma notícia/);
   search.value = 'teresina'; search.dispatchEvent(new Event('input'));
   assert.ok(document.querySelectorAll('.news-item').length > 0);
-  assert.equal(document.querySelectorAll('.chart-context').length, 10);
+  assert.equal(document.querySelectorAll('.chart-context').length, 12);
 });
 
 
@@ -397,5 +397,75 @@ test('v2 integra telemetria Gov-BR ao vivo (IBGE, BCB, Open-Meteo, SICONFI) e co
   assert.match(document.getElementById('eog-node-inspector').textContent, /SEFAZ \/ LRF \/ DCL/);
   runCmd('anomalies');
   assert.match(document.getElementById('eog-terminal-body').textContent, /Divergências metodológicas/);
+});
+
+test('economia e geopolítica exibem corredores, cruzamentos, commodities, petróleo e calculadora ao vivo', async t => {
+  const fakeFetch = async url => {
+    if (url.includes('piaui-live.json')) {
+      return {
+        ok: true,
+        json: async () => ({
+          generatedAt: '2026-11-13T03:00:00Z',
+          sources: {
+            ibge: { uf: 'PI', municipiosCount: 224 },
+            commodities: {
+              status: 'ok',
+              quotes: {
+                brent: { symbol: 'BZ=F', price: 73.5, unit: 'USD/barril', changePct: 1.25 },
+                wti: { symbol: 'CL=F', price: 69.8, unit: 'USD/barril', changePct: 1.1 },
+                soja: { symbol: 'ZS=F', price: 1020, unit: 'USc/bushel', changePct: -0.45 },
+                milho: { symbol: 'ZC=F', price: 430, unit: 'USc/bushel', changePct: 0.3 },
+                ouro: { symbol: 'GC=F', price: 2650, unit: 'USD/oz', changePct: 0.8 },
+                gas_natural: { symbol: 'NG=F', price: 2.95, unit: 'USD/MMBtu', changePct: -1.2 }
+              }
+            }
+          },
+          news: []
+        })
+      };
+    }
+    if (url.includes('bcdata.sgs.1/')) return { ok: true, json: async () => [{ data: '13/11/2026', valor: '5.80' }] };
+    if (url.includes('bcdata.sgs.27574/')) return { ok: true, json: async () => [{ data: '10/2026', valor: '412.50' }] };
+    if (url.includes('bcdata.sgs.27575/')) return { ok: true, json: async () => [{ data: '10/2026', valor: '398.10' }] };
+    if (url.includes('bcdata.sgs.27576/')) return { ok: true, json: async () => [{ data: '10/2026', valor: '440.00' }] };
+    if (url.includes('bcdata.sgs.27577/')) return { ok: true, json: async () => [{ data: '10/2026', valor: '365.40' }] };
+    return { ok: false, status: 404 };
+  };
+
+  const dom = createApp({ hash: '#eye-of-god', canvasMock: true, fetchMock: fakeFetch });
+  t.after(() => dom.window.close());
+  const { window } = dom;
+  const { document, Event, KeyboardEvent } = window;
+  await new Promise(resolve => setTimeout(resolve, 25));
+
+  // Geopolítica: corredores e matriz de cruzamento
+  assert.equal(document.querySelectorAll('#geoPolCorridors .corridor-card').length, 4);
+  assert.equal(document.querySelectorAll('#geoCrossMatrix tr').length, 5);
+  assert.match(document.getElementById('tab-geo-pol').textContent, /MATOPIBA/);
+
+  // Economia: cruzamentos, IC-Br, petróleo/commodities convertidos em R$
+  assert.equal(document.querySelectorAll('#ecoCrossings .cross-card').length, 4);
+  assert.equal(document.querySelectorAll('#commodityGrid .commodity-card').length, 6);
+  assert.equal(document.getElementById('commSourceBadge').dataset.state, 'online');
+  assert.equal(document.getElementById('icbrTotalVal').textContent, '412.50');
+  assert.equal(document.getElementById('icbrEnerVal').textContent, '365.40');
+  assert.match(document.getElementById('commodityGrid').textContent, /US\$ 73\.50 \/ bbl/);
+  assert.match(document.getElementById('commodityGrid').textContent, /R\$ 426,30 \/ barril/);
+  assert.match(document.getElementById('commodityGrid').textContent, /saca 60 kg/);
+
+  // Simulador interativo Petróleo × Soja × Dólar
+  const brentInput = document.getElementById('commBrentInput');
+  const usdInput = document.getElementById('commUsdInput');
+  usdInput.value = '6.00';
+  brentInput.value = '90';
+  brentInput.dispatchEvent(new Event('input', { bubbles: true }));
+  assert.match(document.getElementById('commBrentBrlOut').textContent, /R\$ 540,00 \/ bbl/);
+  assert.match(document.getElementById('commDieselOut').textContent, /Alerta de frete caro/);
+
+  // Comando commodities / petroleo no CLI do Eye of God
+  const input = document.getElementById('eog-terminal-input');
+  input.value = 'petroleo';
+  input.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true }));
+  assert.match(document.getElementById('eog-terminal-body').textContent, /Brent: US\$ 73\.50\/bbl/);
 });
 

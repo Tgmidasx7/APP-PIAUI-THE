@@ -44,28 +44,64 @@
   function setupTabs() {
     const buttons = $$('#tabNav .tab-btn');
     const panels = $$('.tab-content');
-    const activate = tabId => {
+    if (!buttons.length) return;
+
+    const activate = (tabId, { updateHash = false, focusBtn = false } = {}) => {
+      const targetBtn = buttons.find(btn => btn.dataset.tab === tabId) || buttons[0];
+      const activeId = targetBtn.dataset.tab;
       buttons.forEach(btn => {
-        const active = btn.dataset.tab === tabId;
+        const active = btn.dataset.tab === activeId;
         btn.classList.toggle('active', active);
         btn.setAttribute('aria-selected', String(active));
+        btn.tabIndex = active ? 0 : -1;
       });
       panels.forEach(panel => {
-        panel.classList.toggle('active', panel.id === `tab-${tabId}`);
+        panel.classList.toggle('active', panel.id === `tab-${activeId}`);
       });
-      if (tabId === 'eye-of-god' && !eyeMounted && typeof window.mountEyeOfGod === 'function') {
+      if (updateHash) {
+        try {
+          history.replaceState(null, '', `#${activeId}`);
+        } catch (_) { /* noop */ }
+      }
+      if (focusBtn) targetBtn.focus();
+      if (activeId === 'eye-of-god' && !eyeMounted && typeof window.mountEyeOfGod === 'function') {
         const host = $('#eyeOfGodRoot');
         if (host && !host.querySelector('#eog-hud-shell')) {
           window.mountEyeOfGod(host, 'tab');
         }
         eyeMounted = true;
       }
-      document.dispatchEvent(new CustomEvent('dashboard:tabchange', { detail: tabId }));
+      document.dispatchEvent(new CustomEvent('dashboard:tabchange', { detail: activeId }));
       if (!chartsBuilt) buildCharts();
     };
-    buttons.forEach(btn => {
-      btn.addEventListener('click', () => activate(btn.dataset.tab));
+
+    buttons.forEach((btn, idx) => {
+      btn.addEventListener('click', () => activate(btn.dataset.tab, { updateHash: true }));
+      btn.addEventListener('keydown', e => {
+        let nextIdx = -1;
+        if (e.key === 'ArrowRight') nextIdx = (idx + 1) % buttons.length;
+        else if (e.key === 'ArrowLeft') nextIdx = (idx - 1 + buttons.length) % buttons.length;
+        else if (e.key === 'Home') nextIdx = 0;
+        else if (e.key === 'End') nextIdx = buttons.length - 1;
+        if (nextIdx >= 0) {
+          e.preventDefault();
+          activate(buttons[nextIdx].dataset.tab, { updateHash: true, focusBtn: true });
+        }
+      });
     });
+
+    $$('[data-open-tab]').forEach(el => {
+      el.addEventListener('click', () => {
+        activate(el.dataset.openTab, { updateHash: true });
+        const nav = $('#tabNav');
+        if (nav && typeof nav.scrollIntoView === 'function') nav.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      });
+    });
+
+    const initialHash = (window.location.hash || '').replace('#', '').trim();
+    if (initialHash && buttons.some(btn => btn.dataset.tab === initialHash)) {
+      activate(initialHash);
+    }
   }
 
   function setupCardsAndFavorites() {
@@ -139,6 +175,31 @@
       });
     }
 
+    const triggerDownload = (content, filename, type) => {
+      const blob = new Blob([content], { type });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      a.click();
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
+    };
+
+    const csvBtn = $('#exportCsvBtn');
+    if (csvBtn) {
+      csvBtn.addEventListener('click', () => {
+        const rows = [['Secao', 'Indicador', 'Valor', 'Detalhe']];
+        $$('.tab-content .kpi-card').forEach(card => {
+          const sec = card.closest('.tab-content')?.id || 'teresina';
+          const lbl = card.querySelector('.kpi-label')?.textContent?.trim() || '';
+          const val = card.querySelector('.kpi-value')?.textContent?.trim() || '';
+          const sub = card.querySelector('.kpi-sub')?.textContent?.trim() || '';
+          rows.push([sec, lbl, val, sub].map(cell => `"${String(cell).replace(/"/g, '""')}"`));
+        });
+        triggerDownload(rows.map(r => r.join(',')).join('\n'), `teresina-kpis-${new Date().toISOString().slice(0, 10)}.csv`, 'text/csv;charset=utf-8');
+      });
+    }
+
     const exportBtn = $('#exportDataBtn');
     if (exportBtn) {
       exportBtn.addEventListener('click', () => {
@@ -151,13 +212,7 @@
           securitySeries: (ont.publicSecurity && ont.publicSecurity.teresinaSeries) || [],
           realtime: window.PiauiRealtime ? window.PiauiRealtime.getState() : null
         };
-        const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = `teresina-capital-analytics-${new Date().toISOString().slice(0, 10)}.json`;
-        a.click();
-        setTimeout(() => URL.revokeObjectURL(url), 1000);
+        triggerDownload(JSON.stringify(payload, null, 2), `teresina-capital-analytics-${new Date().toISOString().slice(0, 10)}.json`, 'application/json');
       });
     }
   }
@@ -185,6 +240,20 @@
       });
     }
 
+    const mobGrid = $('#theMobilityGrid');
+    if (mobGrid && Array.isArray(cap.mobilityAndInfra)) {
+      mobGrid.replaceChildren();
+      cap.mobilityAndInfra.forEach(m => {
+        const card = document.createElement('article');
+        card.className = 'award-card';
+        const b = document.createElement('span'); b.className = 'award-badge'; b.textContent = m.metric;
+        const h = document.createElement('h4'); h.textContent = m.title;
+        const p = document.createElement('p'); p.textContent = m.detail;
+        card.append(b, h, p);
+        mobGrid.append(card);
+      });
+    }
+
     const body = $('#theNeighborhoodsBody');
     if (body) {
       body.replaceChildren();
@@ -208,7 +277,23 @@
     }
   }
 
-  function renderFiscalSimulator() {
+  function renderFiscalAndBudget() {
+    const ont = window.PIAUI_ONTOLOGY;
+    const budget = ont && ont.teresinaCapital && ont.teresinaCapital.budget;
+    const strip = $('#theBudgetStrip');
+    if (strip && budget && Array.isArray(budget.seriesReceitasCorrentes)) {
+      strip.replaceChildren();
+      budget.seriesReceitasCorrentes.forEach(row => {
+        const box = document.createElement('div');
+        box.className = 'edu-stat-box';
+        const sp = document.createElement('span'); sp.textContent = `Receitas Correntes (${row.year})`;
+        const st = document.createElement('strong'); st.textContent = `R$ ${row.valueBi.toFixed(3).replace('.', ',')} bi`;
+        const sm = document.createElement('small'); sm.textContent = row.year === 2025 ? 'Projeção LOA 2025 (R$ 5,668 bi totais)' : 'Série realizada SICONFI / LDO';
+        box.append(sp, st, sm);
+        strip.append(box);
+      });
+    }
+
     const recEl = $('#theSimRec');
     const folhaEl = $('#theSimFolha');
     if (!recEl || !folhaEl) return;
@@ -314,6 +399,21 @@
       if (el) el.addEventListener(el.tagName === 'INPUT' ? 'input' : 'change', draw);
     });
     draw();
+
+    const awardsGrid = $('#theEduAwardsGrid');
+    if (awardsGrid && Array.isArray(ont.educationAwards)) {
+      awardsGrid.replaceChildren();
+      ont.educationAwards.forEach(aw => {
+        const card = document.createElement('article');
+        card.className = 'award-card';
+        const b = document.createElement('span'); b.className = 'award-badge'; b.textContent = aw.badge;
+        const h = document.createElement('h4'); h.textContent = aw.title;
+        const sc = document.createElement('span'); sc.className = 'award-scope'; sc.textContent = aw.scope;
+        const p = document.createElement('p'); p.textContent = aw.detail;
+        card.append(b, h, sc, p);
+        awardsGrid.append(card);
+      });
+    }
   }
 
   function renderSecurityAndEdtech() {
@@ -341,6 +441,20 @@
       });
     }
 
+    const secPillars = $('#theSecPillarsGrid');
+    if (secPillars && ont.publicSecurity && Array.isArray(ont.publicSecurity.pillars)) {
+      secPillars.replaceChildren();
+      ont.publicSecurity.pillars.forEach(p => {
+        const card = document.createElement('article');
+        card.className = 'cross-card';
+        const tag = document.createElement('span'); tag.className = 'cross-tag'; tag.textContent = p.tag;
+        const h = document.createElement('h4'); h.textContent = p.title;
+        const desc = document.createElement('p'); desc.textContent = p.detail;
+        card.append(tag, h, desc);
+        secPillars.append(card);
+      });
+    }
+
     const edGrid = $('#theEdtechGrid');
     if (edGrid && ont.edtechEcosystem && Array.isArray(ont.edtechEcosystem.initiatives)) {
       edGrid.replaceChildren();
@@ -354,6 +468,40 @@
         card.append(b, h, s, p);
         edGrid.append(card);
       });
+    }
+
+    const edBase = $('#theEdSimBase');
+    const edRate = $('#theEdSimRate');
+    const updateEdSim = () => {
+      if (!edBase || !edRate) return;
+      const base = Number(edBase.value);
+      const rate = Number(edRate.value);
+      const talents = Math.round((base * rate) / 100);
+      if ($('#theEdSimBaseVal')) $('#theEdSimBaseVal').textContent = base.toLocaleString('pt-BR');
+      if ($('#theEdSimRateVal')) $('#theEdSimRateVal').textContent = `${rate}%`;
+      if ($('#theEdSimTalents')) $('#theEdSimTalents').textContent = `${talents.toLocaleString('pt-BR')} jovens`;
+      if ($('#theEdSimBadge') && $('#theEdSimImpact') && $('#theEdSimText')) {
+        if (rate >= 18) {
+          $('#theEdSimBadge').dataset.risk = 'ok';
+          $('#theEdSimBadge').textContent = 'ACELERAÇÃO TECH';
+          $('#theEdSimImpact').textContent = 'Exportação de Serviços TI';
+          $('#theEdSimText').textContent = `Com ${talents.toLocaleString('pt-BR')} jovens na capital entrando em TI/IA, Teresina consolida hub nacional de GovTech e software.`;
+        } else if (rate <= 7) {
+          $('#theEdSimBadge').dataset.risk = 'critical';
+          $('#theEdSimBadge').textContent = 'GARGALO DE RETENÇÃO';
+          $('#theEdSimImpact').textContent = 'Demanda reprimida';
+          $('#theEdSimText').textContent = 'Conversão baixa requer ampliação de vagas no PIT, bolsas tecnológicas e conexão direta com empresas locais.';
+        } else {
+          $('#theEdSimBadge').dataset.risk = 'ok';
+          $('#theEdSimBadge').textContent = 'HUB ATIVO';
+          $('#theEdSimImpact').textContent = 'PIT + GovTech + Empresas';
+          $('#theEdSimText').textContent = `Fluxo consistente de ${talents.toLocaleString('pt-BR')} novos profissionais sustentando SoberanIA e startups em Teresina.`;
+        }
+      }
+    };
+    if (edBase && edRate) {
+      [edBase, edRate].forEach(el => el.addEventListener('input', updateEdSim));
+      updateEdSim();
     }
   }
 
@@ -384,6 +532,26 @@
           card.append(item);
         });
         swotGrid.append(card);
+      });
+    }
+
+    const swotCross = $('#theSwotCrossGrid');
+    if (swotCross) {
+      const items = [
+        { tag: 'SO · OFENSIVA', title: 'Hub Saúde/Edu + PIT & SoberanIA', desc: 'Unir o 1º IDEB das capitais do NE (6,4/5,8), Selo Ouro (80,58%) e base universitária (>70 mil alunos) ao PIT e SoberanIA para escalar empregos de alto salário.' },
+        { tag: 'WO · REFORÇO', title: 'Saneamento 39% + Metrô/VLT R$ 600M', desc: 'Acelerar universalização do esgotamento sanitário nas 170 comunidades e entregar o novo VLT ligando Grande Dirceu (Sudeste) ao Centro e Zona Sul.' },
+        { tag: 'ST · DEFENSIVA', title: 'DataSSP/CellGuard + Requalificação Centro', desc: 'Usar a queda de -74% nos roubos de celulares e monitoramento SPIA para revitalizar a habitação e economia criativa no Centro Histórico (-23 mil hab.).' },
+        { tag: 'WT · CONTINGÊNCIA', title: 'Arborização Urbana + Mitigação B-R-O BRÓ', desc: 'Expandir corredores verdes para além de 58,16% e ampliar cobertura médica preventiva contra estresse térmico extremo nos meses secos.' }
+      ];
+      swotCross.replaceChildren();
+      items.forEach(it => {
+        const card = document.createElement('article');
+        card.className = 'cross-card';
+        const tag = document.createElement('span'); tag.className = 'cross-tag'; tag.textContent = it.tag;
+        const h = document.createElement('h4'); h.textContent = it.title;
+        const p = document.createElement('p'); p.textContent = it.desc;
+        card.append(tag, h, p);
+        swotCross.append(card);
       });
     }
 
@@ -421,6 +589,7 @@
       list.forEach(c => {
         const card = document.createElement('article');
         card.className = 'spia-card';
+
         const thumb = document.createElement('div');
         thumb.className = 'spia-thumb';
         const img = document.createElement('img');
@@ -433,12 +602,49 @@
         body.className = 'spia-body';
         const t = document.createElement('h4'); t.textContent = c.title;
         const loc = document.createElement('p'); loc.textContent = `${c.place} · Tipo: ${c.type}`;
+
+        const actions = document.createElement('div');
+        actions.className = 'action-row';
+        actions.style.marginTop = '0.45rem';
+
+        const playBtn = document.createElement('button');
+        playBtn.type = 'button';
+        playBtn.className = 'tool-button camera-trigger';
+        playBtn.textContent = '▶ Player';
+        playBtn.addEventListener('click', () => {
+          if (thumb.querySelector('iframe')) return;
+          const iframe = document.createElement('iframe');
+          iframe.src = `https://www.youtube-nocookie.com/embed/${encodeURIComponent(c.id)}?autoplay=1&rel=0`;
+          iframe.title = c.title;
+          iframe.allow = 'autoplay; encrypted-media';
+          iframe.allowFullscreen = true;
+          iframe.style.width = '100%';
+          iframe.style.height = '180px';
+          iframe.style.border = '0';
+          thumb.replaceChildren(iframe);
+          playBtn.hidden = true;
+          closeBtn.hidden = false;
+        });
+
+        const closeBtn = document.createElement('button');
+        closeBtn.type = 'button';
+        closeBtn.className = 'tool-button camera-close';
+        closeBtn.textContent = '✕ Fechar';
+        closeBtn.hidden = true;
+        closeBtn.addEventListener('click', () => {
+          thumb.replaceChildren(img);
+          playBtn.hidden = false;
+          closeBtn.hidden = true;
+        });
+
         const link = document.createElement('a');
         link.href = `https://www.youtube.com/watch?v=${encodeURIComponent(c.id)}`;
         link.target = '_blank';
         link.rel = 'noopener noreferrer';
-        link.textContent = 'Abrir feed ↗';
-        body.append(t, loc, link);
+        link.textContent = 'YouTube ↗';
+
+        actions.append(playBtn, closeBtn, link);
+        body.append(t, loc, actions);
         card.append(thumb, body);
         camGrid.append(card);
       });
@@ -452,14 +658,19 @@
     const drawNews = () => {
       if (!newsList) return;
       const rt = window.PiauiRealtime ? window.PiauiRealtime.getState() : null;
-      const liveItems = (rt && Array.isArray(rt.rssFeed) ? rt.rssFeed : [])
-        .concat(rt && Array.isArray(rt.ibgeNews) ? rt.ibgeNews : []);
+      const liveItems = []
+        .concat(rt && Array.isArray(rt.snapshotNews) ? rt.snapshotNews : [])
+        .concat(rt && rt.education && Array.isArray(rt.education.rssSeduc) ? rt.education.rssSeduc : [])
+        .concat(rt && rt.education && Array.isArray(rt.education.ibgeNoticias) ? rt.education.ibgeNoticias.map(n => ({ ...n, source: 'IBGE Educação', category: 'Educação' })) : [])
+        .concat(rt && rt.ibge && Array.isArray(rt.ibge.noticias) ? rt.ibge.noticias.map(n => ({ ...n, source: 'IBGE', category: 'Economia' })) : []);
       const curated = Array.isArray(window.PIAUI_NEWS) ? window.PIAUI_NEWS : [];
-      const eduArch = (window.PIAUI_ONTOLOGY && Array.isArray(window.PIAUI_ONTOLOGY.educationNewsArchive)) ? window.PIAUI_ONTOLOGY.educationNewsArchive : [];
+      const eduArch = (window.PIAUI_ONTOLOGY && Array.isArray(window.PIAUI_ONTOLOGY.educationNewsArchive)) ? window.PIAUI_ONTOLOGY.educationNewsArchive.map(n => ({ ...n, category: 'Educação' })) : [];
 
       const seen = new Map();
       [...liveItems, ...eduArch, ...curated].forEach(it => {
-        if (it && it.url && !seen.has(it.url)) seen.set(it.url, it);
+        if (it && typeof it.url === 'string' && /^https:\/\//.test(it.url) && !seen.has(it.url)) {
+          seen.set(it.url, it);
+        }
       });
 
       const q = normalize((newsSearch?.value || '').trim());
@@ -468,8 +679,9 @@
         if (c && it.category !== c) return false;
         if (q && !normalize(`${it.title} ${it.source} ${it.category}`).includes(q)) return false;
         return true;
-      }).slice(0, 40);
+      }).slice(0, 50);
 
+      if ($('#theNewsCountPill')) $('#theNewsCountPill').textContent = `${list.length} registros`;
       newsList.replaceChildren();
       list.forEach(item => {
         const a = document.createElement('a');
@@ -496,29 +708,66 @@
     drawNews();
   }
 
+  function renderSourcesInventory() {
+    const tbody = $('#theSourcesInventory');
+    const ont = window.PIAUI_ONTOLOGY;
+    const cap = ont && ont.teresinaCapital;
+    if (!tbody || !cap) return;
+
+    const rows = [
+      ['População Censo 2022', `${cap.overview.pop2022.toLocaleString('pt-BR')} hab. (Est. 2025: ${cap.overview.pop2025.toLocaleString('pt-BR')})`, '2022 / 2025', 'IBGE Censo & Estimativas'],
+      ['PIB Municipal & Per Capita', `R$ ${cap.overview.pib2023Bi} bi (R$ ${cap.overview.pibPerCapita2023.toLocaleString('pt-BR')} / hab.)`, '2023', 'IBGE / CEPRO-PI'],
+      ['SICONFI Receita Bruta / LOA', 'R$ 5,397 bi (2024) · LOA 2025 R$ 5,668 bi', '2024–2025', 'Tesouro Nacional SICONFI 2211001'],
+      ['Emprego Formal (Novo Caged)', `+${cap.overview.cagedNet2025.toLocaleString('pt-BR')} vagas (estoque ${cap.overview.cagedStock2025.toLocaleString('pt-BR')})`, '2025', 'MTE / Novo Caged'],
+      ['IDEB Municipal & Alfabetização', '6,4 (AI) / 5,8 (AF) · ICA 80,58% (Selo Ouro)', '2023 / 2025', 'INEP / SEMEC-THE'],
+      ['Segurança Pública Teresina', 'CVLI 55 (-52,17%) · Roubo celular 1.200 (-74,15%)', 'Jan–Mai 2022–2026', 'SSP-PI / DataSSP'],
+      ['Saneamento & Favelas (2022)', 'Esgoto 39% · Arborização 58,16% · 170 favelas (198.189 hab.)', '2022', 'IBGE Censo 2022'],
+      ['IDHM Teresina (PNUD/IPEA)', '0,751 (Renda 0,731 · Long. 0,820 · Educ. 0,707)', '2010 (ref. oficial)', 'PNUD / IPEA / FJP']
+    ];
+
+    tbody.replaceChildren();
+    rows.forEach(r => {
+      const tr = document.createElement('tr');
+      r.forEach(txt => {
+        const td = document.createElement('td');
+        td.textContent = txt;
+        tr.append(td);
+      });
+      tbody.append(tr);
+    });
+  }
+
   function syncRealtimeBanner() {
     const update = () => {
       const rt = window.PiauiRealtime ? window.PiauiRealtime.getState() : null;
       if (!rt) return;
-      if (rt.weather && rt.weather.tempC != null) {
-        const tempStr = `${rt.weather.tempC}°C`;
+
+      const t = rt.weather && rt.weather.teresina;
+      if (t && t.tempC != null) {
+        const tempStr = `${Number(t.tempC).toFixed(1)}°C`;
         if ($('#theClockTemp')) $('#theClockTemp').textContent = tempStr;
-        if ($('#rtWeatherVal')) $('#rtWeatherVal').textContent = `${tempStr} · ${rt.weather.humidityPct ?? '—'}% UR`;
-        if ($('#rtWeatherSub')) $('#rtWeatherSub').textContent = `Vento ${rt.weather.windKmh ?? '—'} km/h · Teresina Live`;
+        if ($('#rtWeatherVal')) $('#rtWeatherVal').textContent = `${tempStr} · ${t.humidity ?? '—'}% UR`;
+        if ($('#rtWeatherSub')) $('#rtWeatherSub').textContent = `Vento ${t.windKmh ?? '—'} km/h · UV ${t.uv ?? '—'} · Teresina Live`;
       }
+
       if (rt.bcb) {
         const parts = [];
-        if (rt.bcb.selic != null) parts.push(`Selic ${rt.bcb.selic}%`);
-        if (rt.bcb.usdBrl != null) parts.push(`USD R$ ${Number(rt.bcb.usdBrl).toFixed(2)}`);
+        if (rt.bcb.selic && rt.bcb.selic.valor != null) parts.push(`Selic ${rt.bcb.selic.valor}%`);
+        if (rt.bcb.ipca && rt.bcb.ipca.valor != null) parts.push(`IPCA ${rt.bcb.ipca.valor}%`);
+        if (rt.bcb.usdBrl && rt.bcb.usdBrl.valor != null) {
+          const usd = Number(String(rt.bcb.usdBrl.valor).replace(',', '.'));
+          if (Number.isFinite(usd)) parts.push(`USD R$ ${usd.toFixed(2)}`);
+        }
         if (parts.length && $('#rtMacroVal')) $('#rtMacroVal').textContent = parts.join(' · ');
       }
-      if (rt.siconfiTeresina && rt.siconfiTeresina.receitaBi) {
-        const v = `R$ ${Number(rt.siconfiTeresina.receitaBi).toFixed(2).replace('.', ',')} bi`;
-        if ($('#theSiconfiVal')) $('#theSiconfiVal').textContent = `${v} (${rt.siconfiTeresina.year || '2024'})`;
-        if ($('#theEcoSiconfiCard')) $('#theEcoSiconfiCard').textContent = v;
+
+      if (rt.siconfiTeresina && rt.siconfiTeresina.status === 'ok') {
+        if ($('#theSiconfiVal')) $('#theSiconfiVal').textContent = `RGF ${rt.siconfiTeresina.exercicio} (Ao Vivo)`;
+        if ($('#theSiconfiSub')) $('#theSiconfiSub').textContent = `Prefeitura 2211001 · ${rt.siconfiTeresina.itens} linhas (${rt.siconfiTeresina.periodo}º quad.)`;
       }
+
       if ($('#rtLastSync')) {
-        $('#rtLastSync').textContent = rt.modeLabel ? `${rt.modeLabel} · ${rt.lastSync ? new Date(rt.lastSync).toLocaleTimeString('pt-BR') : ''}` : 'Base estruturada';
+        $('#rtLastSync').textContent = rt.modeLabel ? `${rt.modeLabel}${rt.lastSync ? ` · ${rt.lastSync}` : ''}` : 'Base estruturada';
       }
     };
     document.addEventListener('piaui:realtime-update', update);
@@ -530,9 +779,58 @@
     update();
   }
 
+  function attachChartTableFallback(canvas, config) {
+    const container = canvas.closest('.chart-container');
+    if (!container || container.querySelector('.chart-data')) return;
+    const labels = (config.data && config.data.labels) || [];
+    const datasets = (config.data && config.data.datasets) || [];
+    if (!labels.length || !datasets.length) return;
+
+    const details = document.createElement('details');
+    details.className = 'chart-data';
+    const summary = document.createElement('summary');
+    summary.textContent = 'Ver tabela de dados deste gráfico';
+    const wrap = document.createElement('div');
+    wrap.className = 'table-wrap';
+    const table = document.createElement('table');
+    table.className = 'v2-table';
+
+    const thead = document.createElement('thead');
+    const hRow = document.createElement('tr');
+    const th0 = document.createElement('th'); th0.textContent = 'Categoria';
+    hRow.append(th0);
+    datasets.forEach(ds => {
+      const th = document.createElement('th');
+      th.textContent = ds.label || 'Valor';
+      hRow.append(th);
+    });
+    thead.append(hRow);
+
+    const tbody = document.createElement('tbody');
+    labels.forEach((lbl, idx) => {
+      const tr = document.createElement('tr');
+      const td0 = document.createElement('td'); td0.textContent = String(lbl);
+      tr.append(td0);
+      datasets.forEach(ds => {
+        const td = document.createElement('td');
+        const val = Array.isArray(ds.data) ? ds.data[idx] : '';
+        td.textContent = val != null ? String(val) : '—';
+        tr.append(td);
+      });
+      tbody.append(tr);
+    });
+
+    table.append(thead, tbody);
+    wrap.append(table);
+    details.append(summary, wrap);
+    container.append(details);
+  }
+
   function createTheChart(id, config) {
     const el = document.getElementById(id);
-    if (!el || typeof window.Chart !== 'function') return null;
+    if (!el) return null;
+    attachChartTableFallback(el, config);
+    if (typeof window.Chart !== 'function') return null;
     try {
       return new window.Chart(el, config);
     } catch (_) {
@@ -541,10 +839,12 @@
   }
 
   function buildCharts() {
-    if (chartsBuilt || typeof window.Chart !== 'function') return;
+    if (chartsBuilt) return;
     chartsBuilt = true;
-    window.Chart.defaults.color = '#8899aa';
-    window.Chart.defaults.borderColor = 'rgba(0,255,65,0.08)';
+    if (typeof window.Chart === 'function') {
+      window.Chart.defaults.color = '#8899aa';
+      window.Chart.defaults.borderColor = 'rgba(0,255,65,0.08)';
+    }
 
     createTheChart('chartTheOverviewPop', {
       type: 'line',
@@ -567,6 +867,7 @@
       data: {
         labels: ['Educação (SEMEC + Fundeb)', 'Saúde (FMS / SUS)', 'Infraestrutura, VLT & Urbanismo', 'Administração & Previdência'],
         datasets: [{
+          label: 'LOA 2025 (R$ bilhões)',
           data: [1.58, 1.44, 1.18, 1.47],
           backgroundColor: ['rgba(0,255,65,0.75)', 'rgba(0,240,255,0.75)', 'rgba(255,215,0,0.75)', 'rgba(255,140,0,0.75)']
         }]
@@ -616,7 +917,7 @@
       type: 'doughnut',
       data: {
         labels: ['Serviços & Comércio', 'Administração Pública', 'Indústria & Construção', 'Agropecuária'],
-        datasets: [{ data: [58, 24, 17, 1], backgroundColor: ['#00ff41', '#00f0ff', '#ffd700', '#ff8c00'] }]
+        datasets: [{ label: 'Participação VAB (%)', data: [58, 24, 17, 1], backgroundColor: ['#00ff41', '#00f0ff', '#ffd700', '#ff8c00'] }]
       },
       options: { responsive: true, maintainAspectRatio: false }
     });
@@ -682,14 +983,14 @@
     setupSearchAndExport();
     applyFilters();
     renderZonesAndNeighborhoods();
-    renderFiscalSimulator();
+    renderFiscalAndBudget();
     renderSchoolsExplorer();
     renderSecurityAndEdtech();
     renderSwotAndAnomalies();
     renderCamerasAndNews();
+    renderSourcesInventory();
     syncRealtimeBanner();
     buildCharts();
-    setTimeout(buildCharts, 250);
   }
 
   if (document.readyState === 'loading') {

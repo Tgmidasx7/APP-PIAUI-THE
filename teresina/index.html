@@ -6,7 +6,7 @@
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' https://i.ytimg.com data:; connect-src 'self' https://servicodados.ibge.gov.br https://api.bcb.gov.br https://apidatalake.tesouro.gov.br https://api.open-meteo.com https://api.rss2json.com https://economia.awesomeapi.com.br; frame-src https://www.youtube-nocookie.com https://www.youtube.com; object-src 'none'; base-uri 'self'; form-action 'self';">
 <meta name="referrer" content="no-referrer">
 <title>Teresina Capital Analytics | Sala de Situação Municipal (IBGE 2211001)</title>
-<meta name="description" content="Edição paralela dedicada a Teresina Capital (IBGE 2211001): 5 zonas urbanas, 170 comunidades, LOA/SICONFI, IDEB capital NE, Segurança DataSSP, EdTech, SPIA e Eye of God.">
+<meta name="description" content="Edição paralela dedicada a Teresina Capital (IBGE 2211001): 5 zonas urbanas, 170 comunidades, LOA/SICONFI, IDEB capital NE, Segurança DataSSP, EdTech, SPIA, Eye of God e Fontes.">
 <meta name="theme-color" content="#0a0a0f">
 <script defer src="../assets/vendor/chart.umd.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -41,8 +41,8 @@
     <section class="hero-section">
       <div class="hero-badge"><span class="dot"></span>TERESINA-PI // CENSO 2022–2026 &amp; SICONFI MUNICIPAL</div>
       <h1 class="hero-title">TERESINA CAPITAL ANALYTICS</h1>
-      <p class="hero-subtitle">CENTRO NORTE LESTE SUL SUDESTE // METRÓPOLE DO MEIO-NORTE (IBGE 2211001)</p>
-      <p class="hero-desc">Edição paralela dedicada à capital piauiense com os mesmos 14 módulos de inteligência: zonas urbanas, bairros e comunidades IBGE, finanças SICONFI/LOA, Educação SEMEC/Estadual, Segurança DataSSP, EdTech, Saúde SUS, Mobilidade, SWOT, C4ISR e 30 câmeras SPIA.</p>
+      <p class="hero-subtitle">CENTRO · NORTE · LESTE · SUL · SUDESTE // METRÓPOLE DO MEIO-NORTE (IBGE 2211001)</p>
+      <p class="hero-desc">Edição paralela dedicada à capital piauiense espelhando todos os 14 módulos do painel estadual: zonas urbanas, bairros e 170 comunidades IBGE, finanças SICONFI/LOA, Educação SEMEC/Estadual, Segurança DataSSP, EdTech, Saúde SUS, SWOT, Terminal OSINT, SPIA, C4ISR e Fontes.</p>
       <div class="edition-switcher" role="navigation" aria-label="Alternar entre edição estadual e Teresina Capital">
         <a class="edition-pill link" href="../">🏛️ Painel Estadual Piauí (14 abas)</a>
         <span class="edition-pill active" aria-current="page">🏙️ Edição Teresina Capital (Ativo)</span>
@@ -108,25 +108,26 @@
       <div class="tool-actions">
         <button type="button" class="tool-button" id="resetSearchBtn" hidden>Limpar filtro</button>
         <button type="button" class="tool-button" id="toggleFavoritesBtn">★ Somente favoritos (<span id="favCount">0</span>)</button>
-        <button type="button" class="tool-button" id="exportDataBtn">Exportar JSON THE</button>
+        <button type="button" class="tool-button" id="exportCsvBtn">↓ CSV</button>
+        <button type="button" class="tool-button" id="exportDataBtn">↓ JSON THE</button>
       </div>
     </div>
 
     <div class="tab-navigation" id="tabNav" role="tablist" aria-label="Seções de Teresina Capital">
-      <button type="button" class="tab-btn active" role="tab" aria-selected="true" id="btn-overview" data-tab="overview">📊 VISÃO GERAL</button>
-      <button type="button" class="tab-btn" role="tab" aria-selected="false" id="btn-geo" data-tab="geo">🗺️ ZONAS &amp; BAIRROS</button>
-      <button type="button" class="tab-btn" role="tab" aria-selected="false" id="btn-geo-pol" data-tab="geo-pol">🌐 METRÓPOLE &amp; EIXOS</button>
-      <button type="button" class="tab-btn" role="tab" aria-selected="false" id="btn-demo" data-tab="demo">👥 DEMOGRAFIA THE</button>
-      <button type="button" class="tab-btn" role="tab" aria-selected="false" id="btn-eco" data-tab="eco">💰 ECONOMIA &amp; LOA</button>
-      <button type="button" class="tab-btn" role="tab" aria-selected="false" id="btn-edu" data-tab="edu">🎓 EDUCAÇÃO CAPITAL</button>
-      <button type="button" class="tab-btn" role="tab" aria-selected="false" id="btn-seguranca" data-tab="seguranca">🛡️ SEGURANÇA THE</button>
-      <button type="button" class="tab-btn" role="tab" aria-selected="false" id="btn-edtech" data-tab="edtech">🤖 EDTECH &amp; PIT</button>
-      <button type="button" class="tab-btn" role="tab" aria-selected="false" id="btn-idh" data-tab="idh">🏥 SAÚDE &amp; IDH</button>
-      <button type="button" class="tab-btn" role="tab" aria-selected="false" id="btn-swot" data-tab="swot">⚡ SWOT TERESINA</button>
-      <button type="button" class="tab-btn" role="tab" aria-selected="false" id="btn-analytics" data-tab="analytics">🧠 ANALYTICS THE</button>
-      <button type="button" class="tab-btn" role="tab" aria-selected="false" id="btn-eye-of-god" data-tab="eye-of-god">👁️ OLHO DE DEUS THE</button>
-      <button type="button" class="tab-btn" role="tab" aria-selected="false" id="btn-spia" data-tab="spia">📹 CÂMERAS SPIA</button>
-      <button type="button" class="tab-btn" role="tab" aria-selected="false" id="btn-news" data-tab="news">📡 NOTÍCIAS THE</button>
+      <button type="button" class="tab-btn active" role="tab" aria-selected="true" aria-controls="tab-overview" tabindex="0" id="btn-overview" data-tab="overview">⬡ Visão Geral</button>
+      <button type="button" class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-geo" tabindex="-1" id="btn-geo" data-tab="geo">🗺️ Geográfica &amp; Zonas</button>
+      <button type="button" class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-demo" tabindex="-1" id="btn-demo" data-tab="demo">👥 Demográfica THE</button>
+      <button type="button" class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-geo-pol" tabindex="-1" id="btn-geo-pol" data-tab="geo-pol">🏛️ Metrópole &amp; RIDE</button>
+      <button type="button" class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-eco" tabindex="-1" id="btn-eco" data-tab="eco">💰 Econômica &amp; LOA</button>
+      <button type="button" class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-edu" tabindex="-1" id="btn-edu" data-tab="edu">🎓 Educação Capital</button>
+      <button type="button" class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-seguranca" tabindex="-1" id="btn-seguranca" data-tab="seguranca">🛡️ Segurança THE</button>
+      <button type="button" class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-edtech" tabindex="-1" id="btn-edtech" data-tab="edtech">🚀 EdTech &amp; PIT</button>
+      <button type="button" class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-idh" tabindex="-1" id="btn-idh" data-tab="idh">🏥 Saúde &amp; IDH</button>
+      <button type="button" class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-swot" tabindex="-1" id="btn-swot" data-tab="swot">⚔️ SWOT Teresina</button>
+      <button type="button" class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-spia" tabindex="-1" id="btn-spia" data-tab="spia">◉ SPIA Teresina</button>
+      <button type="button" class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-eye-of-god" tabindex="-1" id="btn-eye-of-god" data-tab="eye-of-god">👁️ Eye of God</button>
+      <button type="button" class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-terminal" tabindex="-1" id="btn-terminal" data-tab="terminal">💻 Terminal OSINT</button>
+      <button type="button" class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-fontes" tabindex="-1" id="btn-fontes" data-tab="fontes">◈ Fontes &amp; método</button>
     </div>
 
     <div class="search-empty" id="searchEmpty" hidden>
@@ -134,14 +135,14 @@
     </div>
 
     <!-- 1. OVERVIEW -->
-    <div id="tab-overview" class="tab-content active">
+    <div id="tab-overview" class="tab-content active" role="tabpanel" aria-labelledby="btn-overview" tabindex="0">
       <div class="kpi-grid">
         <div class="kpi-card">
           <div class="kpi-icon">👥</div>
           <div class="kpi-label">População Teresina</div>
           <div class="kpi-value">866.300</div>
           <div class="kpi-sub">Censo IBGE 2022 · Est. 2025: 905.692</div>
-          <div class="kpi-change up">▲ +6,4% vs 2010 (814.230)</div>
+          <div class="kpi-change up">▲ +6,4% vs 2010 (814.230) · 26,76% do PI</div>
         </div>
         <div class="kpi-card">
           <div class="kpi-icon">💰</div>
@@ -155,7 +156,7 @@
           <div class="kpi-label">Orçamento LOA 2025</div>
           <div class="kpi-value">R$ 5,668 bi</div>
           <div class="kpi-sub">SICONFI 2024 arrecadado: R$ 5,397 bi</div>
-          <div class="kpi-change up">▲ Saúde + Educação &gt;48%</div>
+          <div class="kpi-change up">▲ Receita própria R$ 1,02 bi</div>
         </div>
         <div class="kpi-card">
           <div class="kpi-icon">🏅</div>
@@ -176,7 +177,7 @@
           <div class="kpi-label">Novo Caged 2025</div>
           <div class="kpi-value">+9.646</div>
           <div class="kpi-sub">45,9% de todo o emprego formal do PI</div>
-          <div class="kpi-change up">▲ Polo de serviços &amp; construção</div>
+          <div class="kpi-change up">▲ Estoque 234,7 mil vínculos</div>
         </div>
         <div class="kpi-card">
           <div class="kpi-icon">🛡️</div>
@@ -203,7 +204,7 @@
           <span class="rt-pill">IBGE 2211001 · -5,0892° / -42,8016°</span>
         </div>
         <div class="edu-stat-strip">
-          <div class="edu-stat-box"><span>Área territorial</span><strong>1.391,29 km²</strong><small>Densidade 622,36 hab/km² · 72m alt.</small></div>
+          <div class="edu-stat-box"><span>Área &amp; Mancha Urbana</span><strong>1.391,29 km² · 172,3 km²</strong><small>Densidade 622,66 hab/km² · 72m alt.</small></div>
           <div class="edu-stat-box"><span>Favelas &amp; Comunidades (2022)</span><strong>170 núcleos</strong><small>198.189 hab. (22,87% da capital)</small></div>
           <div class="edu-stat-box"><span>Saneamento &amp; Água</span><strong>39% · 97%</strong><small>Esgoto em expansão · Água tratada</small></div>
           <div class="edu-stat-box"><span>Arborização Urbana (IBGE)</span><strong>58,16%</strong><small>Domicílios com arborização viária</small></div>
@@ -223,10 +224,21 @@
         </div>
       </div>
 
+      <section class="v2-module" style="margin-bottom:1.5rem;" aria-label="Detector de Anomalias Urbanas de Teresina">
+        <div class="v2-head">
+          <div>
+            <h3>🔍 Detector de Anomalias &amp; Divergências Urbanas de Teresina</h3>
+            <p class="v2-sub">Cruzamento automático entre demografia intra-urbana, infraestrutura sanitária, educação e finanças municipais.</p>
+          </div>
+          <button type="button" class="tool-button" data-open-tab="fontes">Ver auditoria e fontes →</button>
+        </div>
+        <div class="anomaly-grid" id="theAnomaliesGrid"></div>
+      </section>
+
       <div class="detail-grid">
         <div class="detail-card">
           <h3>Confluência Parnaíba–Poti &amp; Perfil Urbano</h3>
-          <div class="data-row"><span class="data-label">Localização geográfica</span><span class="data-value">Centro-Norte PI · divisa com Timon-MA</span></div>
+          <div class="data-row"><span class="data-label">Fundação &amp; Localização</span><span class="data-value">16/08/1852 · Centro-Norte PI / divisa MA</span></div>
           <div class="data-row"><span class="data-label">Única capital do NE</span><span class="data-value info">Sem litoral (polo interiorizado)</span></div>
           <div class="data-row"><span class="data-label">Rios principais</span><span class="data-value">Rio Parnaíba e Rio Poti</span></div>
           <div class="data-row"><span class="data-label">Zona com maior crescimento</span><span class="data-value">Zona Sul (+16,01% · 195.228 hab.)</span></div>
@@ -235,16 +247,16 @@
         <div class="detail-card">
           <h3>Dívida, Liquidez e Execução Fiscal (SICONFI)</h3>
           <div class="data-row"><span class="data-label">Receita realizada (SICONFI 2024)</span><span class="data-value">R$ 5,397 bilhões</span></div>
-          <div class="data-row"><span class="data-label">Despesa empenhada (2024)</span><span class="data-value info">R$ 5,457 bilhões</span></div>
+          <div class="data-row"><span class="data-label">Despesa empenhada (2024)</span><span class="data-value info">R$ 5,397 bilhões</span></div>
           <div class="data-row"><span class="data-label">LOA aprovada (Exercício 2025)</span><span class="data-value">R$ 5,668 bilhões</span></div>
           <div class="data-row"><span class="data-label">Fração no Novo Caged PI (2025)</span><span class="data-value">45,88% (+9.646 de +21.022 vagas)</span></div>
-          <div class="data-row"><span class="data-label">Base econômica dominante</span><span class="data-value">Serviços médicos, educacionais e varejo</span></div>
+          <div class="data-row"><span class="data-label">Dependência de transferências (2024)</span><span class="data-value warn">65,99% da receita realizada</span></div>
         </div>
       </div>
     </div>
 
-    <!-- 2. ZONAS & BAIRROS -->
-    <div id="tab-geo" class="tab-content">
+    <!-- 2. GEOGRÁFICA & ZONAS -->
+    <div id="tab-geo" class="tab-content" role="tabpanel" aria-labelledby="btn-geo" tabindex="0">
       <div class="section-header">
         <div class="section-icon">🗺️</div>
         <div>
@@ -269,6 +281,16 @@
         <div class="chart-wrapper"><canvas id="chartTheZonasPop"></canvas></div>
       </div>
 
+      <section class="v2-module" style="margin-bottom:1.5rem;">
+        <div class="v2-head">
+          <div>
+            <h3>🚆 Infraestrutura Urbana, Metrô/VLT &amp; Saneamento em Teresina</h3>
+            <p class="v2-sub">Obras estruturantes, sistema Inthegra, cobertura sanitária e arborização ("Cidade Verde").</p>
+          </div>
+        </div>
+        <div class="awards-grid" id="theMobilityGrid"></div>
+      </section>
+
       <div class="detail-grid">
         <div class="detail-card">
           <h3>Mobilidade Urbana &amp; Infraestrutura Viária</h3>
@@ -287,13 +309,75 @@
       </div>
     </div>
 
-    <!-- 3. METRÓPOLE & EIXOS -->
-    <div id="tab-geo-pol" class="tab-content">
+    <!-- 3. DEMOGRÁFICA THE -->
+    <div id="tab-demo" class="tab-content" role="tabpanel" aria-labelledby="btn-demo" tabindex="0">
       <div class="section-header">
-        <div class="section-icon">🌐</div>
+        <div class="section-icon">👥</div>
+        <div>
+          <div class="section-title">DEMOGRAFIA &amp; DINÂMICA DE BAIRROS (CENSO IBGE 2022)</div>
+          <div class="section-subtitle">Crescimento periférico, despovoamento histórico do Centro e mapa das 170 comunidades</div>
+        </div>
+      </div>
+
+      <div class="kpi-grid">
+        <div class="kpi-card"><div class="kpi-icon">📉</div><div class="kpi-label">Centro (2010 → 2022)</div><div class="kpi-value">95.857</div><div class="kpi-sub">-23.066 moradores (de 118.923)</div><div class="kpi-change down">▼ -19,4% residencial</div></div>
+        <div class="kpi-card"><div class="kpi-icon">📈</div><div class="kpi-label">Maior Zona: Sul</div><div class="kpi-value">195.228</div><div class="kpi-sub">32 bairros · +16,01% em 12 anos</div><div class="kpi-change up">▲ Maior expansão urbana</div></div>
+        <div class="kpi-card"><div class="kpi-icon">🏘️</div><div class="kpi-label">Maior Bairro: Itararé</div><div class="kpi-value">37.443</div><div class="kpi-sub">Zona Sudeste (Dirceu Arcoverde)</div><div class="kpi-change neutral">◆ 2º maior: Angelim (Sul)</div></div>
+        <div class="kpi-card"><div class="kpi-icon">🏡</div><div class="kpi-label">Maior Comunidade</div><div class="kpi-value">13.596</div><div class="kpi-sub">Vila Irmã Dulce (Zona Sul)</div><div class="kpi-change warn">◆ 170 favelas no município</div></div>
+      </div>
+
+      <div class="chart-container">
+        <h3>📊 Comparativo Demográfico 2010 vs 2022 por Zona Urbana de Teresina</h3>
+        <div class="chart-wrapper"><canvas id="chartTheDemoZonas"></canvas></div>
+      </div>
+
+      <section class="v2-module" style="margin-bottom:1.5rem;">
+        <div class="v2-head">
+          <div>
+            <h3>🏙️ Tabela Auditada por Subdistrito, Bairros-Chave &amp; Comunidades (IBGE 2022)</h3>
+            <p class="v2-sub">Dados do Censo Demográfico IBGE 2022 com total populacional, variação frente a 2010 e residentes em favelas.</p>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table class="v2-table">
+            <thead>
+              <tr><th>Subdistrito / Zona</th><th>Pop. 2022</th><th>Variação 2010–22</th><th>Bairros</th><th>Pop. em Favelas</th><th>Principais Bairros &amp; Comunidades</th></tr>
+            </thead>
+            <tbody id="theNeighborhoodsBody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <div class="detail-grid">
+        <div class="detail-card">
+          <h3>Mortalidade, Urbanização &amp; Domicílios</h3>
+          <div class="data-row"><span class="data-label">População estimada 2025 (IBGE)</span><span class="data-value">905.692 habitantes (26,76% do PI)</span></div>
+          <div class="data-row"><span class="data-label">Taxa de mortalidade infantil (2023)</span><span class="data-value warn">14,71 óbitos / mil nasc. vivos</span></div>
+          <div class="data-row"><span class="data-label">Trabalhadores ocupados totais (IBGE 2023)</span><span class="data-value info">367.319 pessoas ocupadas</span></div>
+        </div>
+        <div class="detail-card">
+          <h3>Comunidades &amp; Vulnerabilidade Habitacional</h3>
+          <div class="data-row"><span class="data-label">Residentes em 170 favelas (IBGE 2022)</span><span class="data-value warn">198.189 hab. (22,87% da capital)</span></div>
+          <div class="data-row"><span class="data-label">Concentração por zonas</span><span class="data-value">Leste 56,6 mil · Norte 55,8 mil · Sul 47,5 mil</span></div>
+          <div class="data-row"><span class="data-label">Maior núcleo urbano informal</span><span class="data-value">Vila Irmã Dulce (13.596 hab. · Zona Sul)</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. METRÓPOLE & RIDE -->
+    <div id="tab-geo-pol" class="tab-content" role="tabpanel" aria-labelledby="btn-geo-pol" tabindex="0">
+      <div class="section-header">
+        <div class="section-icon">🏛️</div>
         <div>
           <div class="section-title">RIDE GRANDE TERESINA &amp; EIXOS METROPOLITANOS</div>
           <div class="section-subtitle">Centralidade regional sobre Piauí, Maranhão oriental e corredores logísticos</div>
+        </div>
+      </div>
+
+      <div class="plain-summary-banner">
+        <span class="plain-badge">LEITURA ESTRATÉGICA</span>
+        <div>
+          <strong>Por que Teresina comanda a economia do Meio-Norte?</strong> Embora o agro de exportação esteja no Sudoeste (MATOPIBA) e a ZPE no Litoral, Teresina centraliza <strong>36% do PIB estadual</strong>, o polo hospitalar para 4,5 milhões de pessoas, as sedes estaduais, o hub universitário (UFPI/UESPI/IFPI) e a infraestrutura digital (PIT/SoberanIA), formando com <strong>Timon-MA</strong> e o <strong>TD4 Entre Rios</strong> uma mancha metropolitana de <strong>~1,22 milhão de habitantes</strong>.
         </div>
       </div>
 
@@ -311,62 +395,22 @@
 
       <div class="detail-grid">
         <div class="detail-card">
-          <h3>Integração Teresina–Timon &amp; Entorno</h3>
-          <div class="data-row"><span class="data-label">Fluxo pendular diário THE–Timon</span><span class="data-value info">&gt;65 mil deslocamentos/dia</span></div>
-          <div class="data-row"><span class="data-label">Municípios-satélite no PI</span><span class="data-value">Altos, Demerval Lobão, José de Freitas, União</span></div>
-          <div class="data-row"><span class="data-label">Conexão Sul Agro (MATOPIBA)</span><span class="data-value">PI-130 / BR-316 · Hub decisório e jurídico</span></div>
+          <h3>Integração Teresina–Timon &amp; Entorno (TD4 Entre Rios)</h3>
+          <div class="data-row"><span class="data-label">Fluxo pendular diário THE–Timon</span><span class="data-value info">&gt;65 mil deslocamentos/dia (3 pontes)</span></div>
+          <div class="data-row"><span class="data-label">Municípios-satélite integrados no PI</span><span class="data-value">Altos, Demerval Lobão, José de Freitas, União, Nazária</span></div>
+          <div class="data-row"><span class="data-label">Conexão Sul Agro (MATOPIBA)</span><span class="data-value">PI-130 / BR-316 · Hub financeiro, técnico e jurídico</span></div>
         </div>
         <div class="detail-card">
-          <h3>Hub de Inovação &amp; Serviços Avançados</h3>
-          <div class="data-row"><span class="data-label">Polo de Saúde Frei Serafim / Ilhotas</span><span class="data-value">Concentra hospitais públicos e privados</span></div>
-          <div class="data-row"><span class="data-label">Sede SoberanIA &amp; PIT</span><span class="data-value">Infraestrutura de nuvem estadual e pesquisa</span></div>
-          <div class="data-row"><span class="data-label">Conexão ZPE Parnaíba</span><span class="data-value">Gestão corporativa e P&amp;D sediados na capital</span></div>
+          <h3>Hub de Inovação, Saúde &amp; Serviços Avançados</h3>
+          <div class="data-row"><span class="data-label">Polo de Saúde Frei Serafim / Ilhotas</span><span class="data-value">Concentra hospitais de alta complexidade públicos e privados</span></div>
+          <div class="data-row"><span class="data-label">Sede SoberanIA &amp; PIT</span><span class="data-value">Infraestrutura de nuvem estadual e formação em IA</span></div>
+          <div class="data-row"><span class="data-label">Energia solar distribuída</span><span class="data-value" style="color:var(--green);">4ª cidade do Brasil em energia solar residencial</span></div>
         </div>
       </div>
-    </div>
-
-    <!-- 4. DEMOGRAFIA -->
-    <div id="tab-demo" class="tab-content">
-      <div class="section-header">
-        <div class="section-icon">👥</div>
-        <div>
-          <div class="section-title">DEMOGRAFIA &amp; DINÂMICA DE BAIRROS (CENSO IBGE 2022)</div>
-          <div class="section-subtitle">Crescimento periférico, despovoamento histórico do Centro e mapa das comunidades</div>
-        </div>
-      </div>
-
-      <div class="kpi-grid">
-        <div class="kpi-card"><div class="kpi-icon">📉</div><div class="kpi-label">Centro (2010 → 2022)</div><div class="kpi-value">95.857</div><div class="kpi-sub">-23.066 moradores (de 118.923)</div><div class="kpi-change down">▼ -19,4% residencial</div></div>
-        <div class="kpi-card"><div class="kpi-icon">📈</div><div class="kpi-label">Maior Zona: Sul</div><div class="kpi-value">195.228</div><div class="kpi-sub">32 bairros · +16,01% em 12 anos</div><div class="kpi-change up">▲ Maior expansão urbana</div></div>
-        <div class="kpi-card"><div class="kpi-icon">🏘️</div><div class="kpi-label">Maior Bairro: Itararé</div><div class="kpi-value">37.443</div><div class="kpi-sub">Zona Sudeste (Dirceu Arcoverde)</div><div class="kpi-change neutral">◆ 2º maior: Angelim (Sul)</div></div>
-        <div class="kpi-card"><div class="kpi-icon">🏡</div><div class="kpi-label">Maior Comunidade</div><div class="kpi-value">13.596</div><div class="kpi-sub">Vila Irmã Dulce (Zona Sul)</div><div class="kpi-change warn">◆ 170 favelas no município</div></div>
-      </div>
-
-      <div class="chart-container">
-        <h3>📊 Comparativo Demográfico 2010 vs 2022 por Zona Urbana de Teresina</h3>
-        <div class="chart-wrapper"><canvas id="chartTheDemoZonas"></canvas></div>
-      </div>
-
-      <section class="v2-module">
-        <div class="v2-head">
-          <div>
-            <h3>🏙️ Tabela Auditada por Subdistrito, Bairros-Chave &amp; Comunidades (IBGE 2022)</h3>
-            <p class="v2-sub">Dados do Censo Demográfico IBGE 2022 com total populacional, variação frente a 2010 e residentes em favelas.</p>
-          </div>
-        </div>
-        <div class="table-wrap">
-          <table class="v2-table">
-            <thead>
-              <tr><th>Subdistrito / Zona</th><th>Pop. 2022</th><th>Variação 2010–22</th><th>Bairros</th><th>Pop. em Favelas</th><th>Principais Bairros &amp; Comunidades</th></tr>
-            </thead>
-            <tbody id="theNeighborhoodsBody"></tbody>
-          </table>
-        </div>
-      </section>
     </div>
 
     <!-- 5. ECONOMIA & LOA -->
-    <div id="tab-eco" class="tab-content">
+    <div id="tab-eco" class="tab-content" role="tabpanel" aria-labelledby="btn-eco" tabindex="0">
       <div class="section-header">
         <div class="section-icon">💰</div>
         <div>
@@ -378,8 +422,8 @@
       <div class="kpi-grid">
         <div class="kpi-card"><div class="kpi-icon">🏢</div><div class="kpi-label">Serviços no VAB</div><div class="kpi-value">~82%</div><div class="kpi-sub">Comércio, saúde, educação, Adm. pública</div></div>
         <div class="kpi-card"><div class="kpi-icon">🏭</div><div class="kpi-label">Indústria &amp; Construção</div><div class="kpi-value">~17%</div><div class="kpi-sub">Distrito Industrial Sul, têxtil, bebidas</div></div>
-        <div class="kpi-card"><div class="kpi-icon">🧾</div><div class="kpi-label">Arrecadação SICONFI 2024</div><div class="kpi-value" id="theEcoSiconfiCard">R$ 5,397 bi</div><div class="kpi-sub">ISS, IPTU, FPM e Cota-Parte ICMS</div></div>
-        <div class="kpi-card"><div class="kpi-icon">📈</div><div class="kpi-label">Vagas Novo Caged 2025</div><div class="kpi-value">+9.646</div><div class="kpi-sub">Líder disparada no Piauí (+45,9%)</div></div>
+        <div class="kpi-card"><div class="kpi-icon">🧾</div><div class="kpi-label">Arrecadação SICONFI 2024</div><div class="kpi-value" id="theEcoSiconfiCard">R$ 5,397 bi</div><div class="kpi-sub">Impostos próprios 2025: R$ 1,020 bi</div></div>
+        <div class="kpi-card"><div class="kpi-icon">📈</div><div class="kpi-label">Vagas Novo Caged 2025</div><div class="kpi-value">+9.646</div><div class="kpi-sub">Estoque 234,7 mil vínculos (45,9% vagas PI)</div></div>
       </div>
 
       <div class="charts-grid">
@@ -392,6 +436,17 @@
           <div class="chart-wrapper"><canvas id="chartTheEcoLoa"></canvas></div>
         </div>
       </div>
+
+      <section class="v2-module" style="margin-bottom:1.5rem;" aria-label="Série de Receitas Correntes de Teresina">
+        <div class="v2-head">
+          <div>
+            <h3>📈 Trajetória Orçamentária &amp; Receitas Correntes (2021–2025 · SICONFI / LOA)</h3>
+            <p class="v2-sub">Evolução nominal das receitas correntes de Teresina (R$ 3,51 bi em 2021 → R$ 5,25 bi estimados em 2025) e pisos constitucionais.</p>
+          </div>
+          <span class="rt-pill">25% Educação · 15% Saúde (Mínimos CF)</span>
+        </div>
+        <div class="edu-stat-strip" id="theBudgetStrip"></div>
+      </section>
 
       <section class="v2-module" aria-label="Simulador Fiscal Municipal de Teresina">
         <div class="v2-head">
@@ -421,7 +476,7 @@
     </div>
 
     <!-- 6. EDUCAÇÃO CAPITAL -->
-    <div id="tab-edu" class="tab-content">
+    <div id="tab-edu" class="tab-content" role="tabpanel" aria-labelledby="btn-edu" tabindex="0">
       <div class="section-header">
         <div class="section-icon">🎓</div>
         <div>
@@ -431,7 +486,7 @@
       </div>
 
       <div class="kpi-grid">
-        <div class="kpi-card"><div class="kpi-icon">🏫</div><div class="kpi-label">Matrículas Públicas (2026)</div><div class="kpi-value">126.719</div><div class="kpi-sub">SEMEC + Seduc (Tempo Integral) + IFPI</div></div>
+        <div class="kpi-card"><div class="kpi-icon">🏫</div><div class="kpi-label">Matrículas Públicas (2026)</div><div class="kpi-value">126.719</div><div class="kpi-sub">89.576 SEMEC + 37.143 Seduc/IFPI</div></div>
         <div class="kpi-card"><div class="kpi-icon">🏆</div><div class="kpi-label">IDEB Municipal Iniciais</div><div class="kpi-value">6,4</div><div class="kpi-sub">1º lugar entre todas as capitais do NE</div></div>
         <div class="kpi-card"><div class="kpi-icon">📊</div><div class="kpi-label">IDEB Municipal Finais</div><div class="kpi-value">5,8</div><div class="kpi-sub">Maior nota de rede municipal do Nordeste</div></div>
         <div class="kpi-card"><div class="kpi-icon">✍️</div><div class="kpi-label">Alfabetização (ICA)</div><div class="kpi-value">80,58%</div><div class="kpi-sub">Selo Ouro MEC na Capital (meta 2024: 75%)</div></div>
@@ -442,7 +497,7 @@
         <div class="chart-wrapper"><canvas id="chartTheEduEtapas"></canvas></div>
       </div>
 
-      <section class="v2-module">
+      <section class="v2-module" style="margin-bottom:1.5rem;">
         <div class="v2-head">
           <div>
             <h3>🔎 Explorador de Escolas de Teresina (INEP Auditado)</h3>
@@ -469,10 +524,20 @@
         </div>
         <div class="edu-school-grid" id="theSchoolsGrid"></div>
       </section>
+
+      <section class="v2-module" aria-label="Premiações educacionais com destaque na capital">
+        <div class="v2-head">
+          <div>
+            <h3>🏅 Premiações, Olimpíadas &amp; Reconhecimentos na Capital</h3>
+            <p class="v2-sub">Destaques nacionais conquistados pelas redes SEMEC, SEDUC e IFPI em Teresina.</p>
+          </div>
+        </div>
+        <div class="edu-awards-grid" id="theEduAwardsGrid"></div>
+      </section>
     </div>
 
     <!-- 7. SEGURANÇA TERESINA -->
-    <div id="tab-seguranca" class="tab-content">
+    <div id="tab-seguranca" class="tab-content" role="tabpanel" aria-labelledby="btn-seguranca" tabindex="0">
       <div class="section-header">
         <div class="section-icon">🛡️</div>
         <div>
@@ -485,7 +550,7 @@
         <div class="kpi-card"><div class="kpi-icon">📉</div><div class="kpi-label">CVLI (Jan–Mai)</div><div class="kpi-value">55</div><div class="kpi-sub">115 (2022) → 89 (2025) → 55 (2026)</div><div class="kpi-change up">▼ -52,17% em 4 anos</div></div>
         <div class="kpi-card"><div class="kpi-icon">⚖️</div><div class="kpi-label">Homicídio Doloso</div><div class="kpi-value">54</div><div class="kpi-sub">108 (2022) → 84 (2025) → 54 (2026)</div><div class="kpi-change up">▼ -50,00% vs 2022</div></div>
         <div class="kpi-card"><div class="kpi-icon">🚨</div><div class="kpi-label">Roubo Geral</div><div class="kpi-value">2.240</div><div class="kpi-sub">6.690 (2022) → 3.800 (2025) → 2.240 (2026)</div><div class="kpi-change up">▼ -66,52% vs 2022</div></div>
-        <div class="kpi-card"><div class="kpi-icon">📱</div><div class="kpi-label">Roubo de Celulares</div><div class="kpi-value">1.200</div><div class="kpi-sub">4.640 (2022) → 2.530 (2025) → 1.200 (2026)</div><div class="kpi-change up">▼ -74,14% (efeito CellGuard)</div></div>
+        <div class="kpi-card"><div class="kpi-icon">📱</div><div class="kpi-label">Roubo de Celulares</div><div class="kpi-value">1.200</div><div class="kpi-sub">4.643 (2022) → 2.530 (2025) → 1.200 (2026)</div><div class="kpi-change up">▼ -74,15% (efeito CellGuard)</div></div>
       </div>
 
       <div class="chart-container">
@@ -493,7 +558,7 @@
         <div class="chart-wrapper"><canvas id="chartTheSecQueda"></canvas></div>
       </div>
 
-      <section class="v2-module">
+      <section class="v2-module" style="margin-bottom:1.5rem;">
         <div class="v2-head">
           <div>
             <h3>📊 Tabela Comparativa DataSSP — Teresina Capital (Jan–Mai)</h3>
@@ -509,12 +574,22 @@
           </table>
         </div>
       </section>
+
+      <section class="v2-module" aria-label="Pilares operacionais em Teresina">
+        <div class="v2-head">
+          <div>
+            <h3>🏛️ Pilares Tecnológicos &amp; Policiamento Inteligente na Capital</h3>
+            <p class="v2-sub">Programas integrados entre SSP-PI, Guarda Civil Municipal (GCM/ROMU) e Etipi em Teresina.</p>
+          </div>
+        </div>
+        <div class="cross-grid" id="theSecPillarsGrid"></div>
+      </section>
     </div>
 
     <!-- 8. EDTECH & PIT -->
-    <div id="tab-edtech" class="tab-content">
+    <div id="tab-edtech" class="tab-content" role="tabpanel" aria-labelledby="btn-edtech" tabindex="0">
       <div class="section-header">
-        <div class="section-icon">🤖</div>
+        <div class="section-icon">🚀</div>
         <div>
           <div class="section-title">ECOSSISTEMA EDTECH, IA &amp; INOVAÇÃO EM TERESINA</div>
           <div class="section-subtitle">PIT (Piauí Instituto de Tecnologia), SoberanIA, Piauí IA nas escolas da capital e Seduckathon</div>
@@ -523,7 +598,7 @@
 
       <div class="kpi-grid">
         <div class="kpi-card"><div class="kpi-icon">🎓</div><div class="kpi-label">PIT Teresina (IA)</div><div class="kpi-value">78 aprovados</div><div class="kpi-sub">Egressos da rede pública em Graduação IA (2026)</div></div>
-        <div class="kpi-card"><div class="kpi-icon">🏆</div><div class="kpi-label">Piauí IA (UNESCO)</div><div class="kpi-value">120 mil+</div><div class="kpi-sub">Prêmio Global UNESCO 2026 · Rede capital inclusa</div></div>
+        <div class="kpi-card"><div class="kpi-icon">🏆</div><div class="kpi-label">Piauí IA (UNESCO)</div><div class="kpi-value">120 mil+</div><div class="kpi-sub">Prêmio Global UNESCO · Rede capital inclusa</div></div>
         <div class="kpi-card"><div class="kpi-icon">🚀</div><div class="kpi-label">SoberanIA (Capital)</div><div class="kpi-value">1ª Nuvem PI</div><div class="kpi-sub">Modelo LLM &amp; data cloud estadual em Teresina</div></div>
         <div class="kpi-card"><div class="kpi-icon">💻</div><div class="kpi-label">Seduckathon</div><div class="kpi-value">9.000+ alunos</div><div class="kpi-sub">Intercâmbios internacionais &amp; startups</div></div>
       </div>
@@ -533,20 +608,45 @@
         <div class="chart-wrapper"><canvas id="chartTheEdtechHub"></canvas></div>
       </div>
 
-      <section class="v2-module">
+      <section class="v2-module" style="margin-bottom:1.5rem;">
         <div class="v2-head">
           <div>
-            <h3>🚀 Iniciativas Tech na Capital &amp; Simulador de Formação Digital</h3>
+            <h3>🚀 Iniciativas Tech na Capital</h3>
             <p class="v2-sub">Como as escolas estaduais e municipais de Teresina alimentam o PIT, Escola Tech e startups locais.</p>
           </div>
           <span class="rt-pill">HUB TERESINA · PIT + SEDUC + SEMEC</span>
         </div>
         <div class="awards-grid" id="theEdtechGrid"></div>
       </section>
+
+      <section class="v2-module" aria-label="Simulador de Formação Digital em Teresina">
+        <div class="v2-head">
+          <div>
+            <h3>🧮 Simulador de Talentos Tech em Teresina Capital</h3>
+            <p class="v2-sub">Projeta quantos estudantes da capital ingressam no ecossistema de software, dados e IA (PIT / UFPI / UESPI / IFPI).</p>
+          </div>
+          <span class="sim-badge" id="theEdSimBadge" data-risk="ok">HUB ATIVO</span>
+        </div>
+        <div class="sim-grid">
+          <div class="sim-controls">
+            <label for="theEdSimBase">Estudantes em trilhas IA/EPT em Teresina: <strong id="theEdSimBaseVal">32.000</strong>
+              <input id="theEdSimBase" type="range" min="10000" max="50000" step="2000" value="32000">
+            </label>
+            <label for="theEdSimRate">Taxa de conversão para TI/IA superior (%): <strong id="theEdSimRateVal">14%</strong>
+              <input id="theEdSimRate" type="range" min="4" max="30" step="1" value="14">
+            </label>
+          </div>
+          <div class="sim-output">
+            <div><span>Talentos Tech Formados / Ano (THE)</span><strong id="theEdSimTalents">4.480 jovens</strong></div>
+            <div><span>Capacidade de Absorção</span><strong id="theEdSimImpact">PIT + GovTech + Empresas</strong></div>
+            <p class="sim-text" id="theEdSimText">Fluxo consistente sustentando empresas digitais, SoberanIA e serviços de tecnologia sediados na capital.</p>
+          </div>
+        </div>
+      </section>
     </div>
 
     <!-- 9. SAÚDE & IDH -->
-    <div id="tab-idh" class="tab-content">
+    <div id="tab-idh" class="tab-content" role="tabpanel" aria-labelledby="btn-idh" tabindex="0">
       <div class="section-header">
         <div class="section-icon">🏥</div>
         <div>
@@ -586,31 +686,65 @@
     </div>
 
     <!-- 10. SWOT TERESINA -->
-    <div id="tab-swot" class="tab-content">
+    <div id="tab-swot" class="tab-content" role="tabpanel" aria-labelledby="btn-swot" tabindex="0">
       <div class="section-header">
-        <div class="section-icon">⚡</div>
+        <div class="section-icon">⚔️</div>
         <div>
           <div class="section-title">MATRIZ SWOT ESTRATÉGICA DE TERESINA CAPITAL</div>
-          <div class="section-subtitle">Forças, Fraquezas, Oportunidades e Ameaças específicas do município (IBGE 2211001)</div>
+          <div class="section-subtitle">Forças, Fraquezas, Oportunidades, Ameaças e Matriz Cruzada (IBGE 2211001)</div>
         </div>
       </div>
       <div class="swot-grid" id="theSwotGrid"></div>
+      <section class="v2-module" style="margin-top:1.25rem;" aria-label="Matriz estratégica cruzada de Teresina">
+        <div class="v2-head">
+          <div>
+            <h3>🎯 Matriz Estratégica Cruzada — Teresina 2025–2030 (SO · WO · ST · WT)</h3>
+            <p class="v2-sub">Plano de conversão dos ativos urbanos em desenvolvimento sustentável na capital.</p>
+          </div>
+          <a class="tool-button" href="../#swot">🏛️ Comparar com SWOT Estadual →</a>
+        </div>
+        <div class="cross-grid" id="theSwotCrossGrid"></div>
+      </section>
     </div>
 
-    <!-- 11. ANALYTICS THE -->
-    <div id="tab-analytics" class="tab-content">
+    <!-- 11. SPIA TERESINA -->
+    <div id="tab-spia" class="tab-content" role="tabpanel" aria-labelledby="btn-spia" tabindex="0">
       <div class="section-header">
-        <div class="section-icon">🧠</div>
+        <div class="section-icon">◉</div>
         <div>
-          <div class="section-title">DETECTOR DE ANOMALIAS &amp; DIVERGÊNCIAS URBANAS DE TERESINA</div>
-          <div class="section-subtitle">Cruzamento crítico entre PIB, distribuição de renda, infraestrutura e demografia intra-urbana</div>
+          <div class="section-title">REDE DE CÂMERAS SPIA — TERESINA CAPITAL (30 PONTOS)</div>
+          <div class="section-subtitle">Corredores viários da capital e catálogo demonstrativo de 30 câmeras públicas com reprodução sob clique</div>
         </div>
       </div>
-      <div class="anomaly-grid" id="theAnomaliesGrid"></div>
+      <div class="plain-summary-banner">
+        <span class="plain-badge">AVISO DE TRANSPARÊNCIA</span>
+        <div>
+          <strong>Mural demonstrativo sem acesso a câmeras privadas da polícia:</strong> os corredores abaixo resumem os principais pontos de tráfego da capital; os 30 players exibem transmissões públicas de terceiros (YouTube) carregadas apenas após o clique.
+        </div>
+      </div>
+      <div class="detail-grid" style="margin-bottom:1.25rem;">
+        <div class="detail-card">
+          <h3>Eixos Viários Monitorados em Teresina</h3>
+          <div class="data-row"><span class="data-label">Av. Frei Serafim / Ponte JK</span><span class="data-value">Fluxo Centro ↔ Leste</span></div>
+          <div class="data-row"><span class="data-label">Av. Raul Lopes / Ponte Estaiada</span><span class="data-value info">Orla do Rio Poti · Leste</span></div>
+          <div class="data-row"><span class="data-label">BR-316 / Av. Barão de Gurguéia</span><span class="data-value">Corredor Zona Sul</span></div>
+        </div>
+        <div class="detail-card">
+          <h3>Integração Metropolitana &amp; Pontes</h3>
+          <div class="data-row"><span class="data-label">Ponte da Amizade / José Sarney</span><span class="data-value info">Ligação pendular Teresina ↔ Timon (MA)</span></div>
+          <div class="data-row"><span class="data-label">Av. Joaquim Nelson (Itararé)</span><span class="data-value">Corredor Grande Dirceu / Sudeste</span></div>
+          <div class="data-row"><span class="data-label">Av. Duque de Caxias / Aeroporto</span><span class="data-value">Acesso Norte / Buenos Aires</span></div>
+        </div>
+      </div>
+      <div class="spia-controls">
+        <input type="search" id="theCamSearch" placeholder="Filtrar câmera por local, tipo ou código...">
+        <span class="rt-pill" id="theCamCount">30 câmeras listadas</span>
+      </div>
+      <div class="spia-grid" id="theCamerasGrid"></div>
     </div>
 
     <!-- 12. EYE OF GOD THE -->
-    <div id="tab-eye-of-god" class="tab-content">
+    <div id="tab-eye-of-god" class="tab-content" role="tabpanel" aria-labelledby="btn-eye-of-god" tabindex="0">
       <div class="section-header">
         <div class="section-icon">👁️</div>
         <div>
@@ -621,29 +755,13 @@
       <div id="eyeOfGodRoot" data-eog-mount="tab"></div>
     </div>
 
-    <!-- 13. SPIA CAMERAS THE -->
-    <div id="tab-spia" class="tab-content">
+    <!-- 13. TERMINAL OSINT THE -->
+    <div id="tab-terminal" class="tab-content" role="tabpanel" aria-labelledby="btn-terminal" tabindex="0">
       <div class="section-header">
-        <div class="section-icon">📹</div>
+        <div class="section-icon">💻</div>
         <div>
-          <div class="section-title">REDE DE CÂMERAS SPIA — TERESINA CAPITAL (30 PONTOS)</div>
-          <div class="section-subtitle">Monitoramento urbano e viário em avenidas, pontes e corredores da capital</div>
-        </div>
-      </div>
-      <div class="spia-controls">
-        <input type="search" id="theCamSearch" placeholder="Filtrar câmera por avenida, zona ou código em Teresina...">
-        <span class="rt-pill" id="theCamCount">30 câmeras em Teresina</span>
-      </div>
-      <div class="spia-grid" id="theCamerasGrid"></div>
-    </div>
-
-    <!-- 14. NEWS THE -->
-    <div id="tab-news" class="tab-content">
-      <div class="section-header">
-        <div class="section-icon">📡</div>
-        <div>
-          <div class="section-title">CENTRAL DE NOTÍCIAS &amp; OSINT — TERESINA &amp; PIAUÍ</div>
-          <div class="section-subtitle">Curadoria verificada + feeds ao vivo de SEDUC-PI, SSP-PI, Governo do Piauí e IBGE</div>
+          <div class="section-title">TERMINAL &amp; CENTRAL OSINT — TERESINA &amp; PIAUÍ</div>
+          <div class="section-subtitle">Curadoria verificada (50 notícias) + feeds ao vivo de SEDUC-PI, SSP-PI, Governo do Piauí e IBGE</div>
         </div>
       </div>
       <div class="edu-filter-bar">
@@ -657,8 +775,57 @@
           <option value="Infraestrutura">Infraestrutura</option>
           <option value="Cultura">Cultura</option>
         </select>
+        <span class="rt-pill" id="theNewsCountPill">Carregando…</span>
       </div>
       <div class="news-list" id="theNewsList"></div>
+    </div>
+
+    <!-- 14. FONTES & MÉTODO -->
+    <div id="tab-fontes" class="tab-content" role="tabpanel" aria-labelledby="btn-fontes" tabindex="0">
+      <div class="section-header">
+        <div class="section-icon">◈</div>
+        <div>
+          <div class="section-title">FONTES OFICIAIS, AUDITORIA &amp; METODOLOGIA (IBGE 2211001)</div>
+          <div class="section-subtitle">Rastreabilidade primária dos dados municipais de Teresina e portais públicos consultados</div>
+        </div>
+      </div>
+
+      <div class="detail-grid" style="margin-bottom:1.5rem;">
+        <div class="detail-card">
+          <h3>Fontes Primárias de Teresina Capital</h3>
+          <div class="data-row"><span class="data-label">IBGE Cidades / Censo 2022 (Subdistritos &amp; Favelas)</span><span class="data-value info">cidades.ibge.gov.br/brasil/pi/teresina</span></div>
+          <div class="data-row"><span class="data-label">Tesouro Nacional SICONFI (`id_ente=2211001`)</span><span class="data-value">RREO/RGF Prefeitura de Teresina + LOA 2025</span></div>
+          <div class="data-row"><span class="data-label">INEP / QEdu Teresina (`2211001`)</span><span class="data-value">IDEB 2023 (6,4/5,8) · 24 escolas verificadas</span></div>
+          <div class="data-row"><span class="data-label">SSP-PI / DataSSP &amp; Novo Caged (MTE)</span><span class="data-value">Série Jan–Mai 2022–2026 · +9.646 vagas</span></div>
+        </div>
+        <div class="detail-card">
+          <h3>Governança, Privacidade &amp; Exportação</h3>
+          <div class="data-row"><span class="data-label">Política de Segurança (CSP)</span><span class="data-value">Sem scripts externos; Chart.js local embutido</span></div>
+          <div class="data-row"><span class="data-label">Fallback Offline &amp; Cache</span><span class="data-value">Snapshot `data/piaui-live.json` + `ontology.js`</span></div>
+          <div class="data-row"><span class="data-label">Exportação Estruturada</span><span class="data-value">CSV dos KPIs e JSON completo de Teresina</span></div>
+          <div class="action-row" style="margin-top:0.8rem;">
+            <button type="button" class="tool-button" data-open-tab="overview">← Voltar para Visão Geral</button>
+            <button type="button" class="tool-button" data-open-tab="eco">Simular LOA / LRF Municipal →</button>
+          </div>
+        </div>
+      </div>
+
+      <section class="v2-module" aria-label="Inventário auditado de indicadores de Teresina">
+        <div class="v2-head">
+          <div>
+            <h3>📚 Matriz Auditada de Indicadores Municipais — Teresina</h3>
+            <p class="v2-sub">Resumo metodológico das principais séries quantitativas da edição Teresina Capital.</p>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table class="v2-table">
+            <thead>
+              <tr><th>Indicador</th><th>Valor Auditado</th><th>Período</th><th>Fonte Primária</th></tr>
+            </thead>
+            <tbody id="theSourcesInventory"></tbody>
+          </table>
+        </div>
+      </section>
     </div>
 
     <footer class="app-footer">

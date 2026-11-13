@@ -156,6 +156,7 @@ class SiteTests(unittest.TestCase):
         duplicates = [key for key, count in collections.Counter(the.ids).items() if count > 1]
         self.assertEqual(duplicates, [])
         self.assertEqual(len(the.tabs), 14, "Teresina Capital deve espelhar todas as 14 abas")
+        self.assertEqual(set(the.tabs), set(self.page.tabs), "Abas de Teresina devem espelhar exatamente os mesmos IDs do painel estadual")
         for tab in the.tabs:
             with self.subTest(teresina_tab=tab):
                 self.assertIn("tab-" + tab, the.ids)

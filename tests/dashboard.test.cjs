@@ -604,7 +604,10 @@ test('edição paralela Teresina Capital (/teresina/) funciona com 14 abas, 5 zo
     resize() {}
   };
   window.fetch = async url => {
-    if (url.includes('open-meteo')) return { ok: true, json: async () => [{ current: { temperature_2m: 34.8, relative_humidity_2m: 39, wind_speed_10m: 11 } }] };
+    if (url.includes('open-meteo')) return { ok: true, json: async () => [{ current: { temperature_2m: 34.8, relative_humidity_2m: 39, uv_index: 9.4, wind_speed_10m: 11 } }] };
+    if (url.includes('bcdata.sgs.432')) return { ok: true, json: async () => [{ data: '13/11/2026', valor: '11.25' }] };
+    if (url.includes('bcdata.sgs.433')) return { ok: true, json: async () => [{ data: '10/2026', valor: '0.42' }] };
+    if (url.includes('bcdata.sgs.1')) return { ok: true, json: async () => [{ data: '13/11/2026', valor: '5.45' }] };
     if (url.includes('id_ente=2211001')) return { ok: true, json: async () => ({ items: [{ conta: 'Receitas', valor: 5397000000 }] }) };
     return { ok: false, status: 404 };
   };
@@ -616,16 +619,33 @@ test('edição paralela Teresina Capital (/teresina/) funciona com 14 abas, 5 zo
   window.eval(eyeOfGod);
   window.eval(teresinaApp);
   window.document.dispatchEvent(new window.Event('DOMContentLoaded'));
-  await new Promise(resolve => setTimeout(resolve, 25));
+  await new Promise(resolve => setTimeout(resolve, 35));
 
-  const { document, Event } = window;
+  const { document, Event, KeyboardEvent } = window;
   assert.equal(document.querySelectorAll('#tabNav .tab-btn').length, 14);
+  assert.equal(document.querySelectorAll('.chart-data').length, 11);
+  assert.match(document.getElementById('rtWeatherVal').textContent, /34\.8°C · 39% UR/);
+  assert.match(document.getElementById('rtMacroVal').textContent, /Selic 11\.25%/);
+  assert.match(document.getElementById('rtMacroVal').textContent, /USD R\$ 5\.45/);
+  assert.match(document.getElementById('theSiconfiVal').textContent, /RGF 2025/);
+
   assert.equal(document.querySelectorAll('#theZonesGrid .mun-card').length, 5);
+  assert.equal(document.querySelectorAll('#theMobilityGrid .award-card').length, 4);
   assert.equal(document.querySelectorAll('#theNeighborhoodsBody tr').length, 5);
+  assert.equal(document.querySelectorAll('#theBudgetStrip .edu-stat-box').length, 5);
+  assert.equal(document.querySelectorAll('#theEduAwardsGrid .award-card').length, 6);
   assert.equal(document.querySelectorAll('#theSecTableBody tr').length, 6);
+  assert.equal(document.querySelectorAll('#theSecPillarsGrid .cross-card').length, 4);
   assert.equal(document.querySelectorAll('#theEdtechGrid .award-card').length, 6);
   assert.equal(document.querySelectorAll('#theSwotGrid .swot-card').length, 4);
+  assert.equal(document.querySelectorAll('#theSwotCrossGrid .cross-card').length, 4);
+  assert.equal(document.querySelectorAll('#theSourcesInventory tr').length, 8);
   assert.equal(document.querySelectorAll('#theCamerasGrid .spia-card').length, 30);
+
+  // Navegação por teclado nas abas
+  document.getElementById('btn-overview').dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowRight', bubbles: true }));
+  assert.equal(document.getElementById('btn-geo').getAttribute('aria-selected'), 'true');
+  assert.ok(document.getElementById('tab-geo').classList.contains('active'));
 
   // Explorador de 24 escolas de Teresina filtrável por zona Sul
   assert.equal(document.querySelectorAll('#theSchoolsGrid .edu-school-card').length, 24);
@@ -634,11 +654,22 @@ test('edição paralela Teresina Capital (/teresina/) funciona com 14 abas, 5 zo
   zoneSel.dispatchEvent(new Event('change', { bubbles: true }));
   assert.equal(document.querySelectorAll('#theSchoolsGrid .edu-school-card').length, 5);
 
-  // Simulador Fiscal Municipal LRF Teresina
+  // Simulador Fiscal Municipal LRF Teresina + Simulador EdTech Capital
   const folha = document.getElementById('theSimFolha');
   folha.value = '14';
   folha.dispatchEvent(new Event('input', { bubbles: true }));
   assert.equal(document.getElementById('theSimBadge').dataset.risk, 'critical');
+
+  const edRate = document.getElementById('theEdSimRate');
+  edRate.value = '20';
+  edRate.dispatchEvent(new Event('input', { bubbles: true }));
+  assert.equal(document.getElementById('theEdSimBadge').textContent, 'ACELERAÇÃO TECH');
+
+  // Player SPIA inline seguro (youtube-nocookie) sob clique
+  document.querySelector('#theCamerasGrid .camera-trigger').click();
+  assert.match(document.querySelector('#theCamerasGrid iframe').src, /youtube-nocookie/);
+  document.querySelector('#theCamerasGrid .camera-close').click();
+  assert.equal(document.querySelectorAll('#theCamerasGrid iframe').length, 0);
 
   // Eye of God dentro da edição Teresina
   document.getElementById('btn-eye-of-god').click();

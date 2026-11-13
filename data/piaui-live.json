@@ -17,6 +17,16 @@
       "ente": "22",
       "status": "awaiting_live_sync"
     },
+    "commodities": {
+      "status": "awaiting_live_sync",
+      "icbr": {
+        "total": null,
+        "agro": null,
+        "metal": null,
+        "energia": null
+      },
+      "quotes": {}
+    },
     "weather": {
       "teresina": {
         "tempC": null,

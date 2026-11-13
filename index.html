@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' https://i.ytimg.com data:; connect-src 'self' https://servicodados.ibge.gov.br https://api.bcb.gov.br https://apidatalake.tesouro.gov.br https://api.open-meteo.com https://api.rss2json.com; frame-src https://www.youtube-nocookie.com https://www.youtube.com; object-src 'none'; base-uri 'self'; form-action 'self';">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' https://i.ytimg.com data:; connect-src 'self' https://servicodados.ibge.gov.br https://api.bcb.gov.br https://apidatalake.tesouro.gov.br https://api.open-meteo.com https://api.rss2json.com https://economia.awesomeapi.com.br; frame-src https://www.youtube-nocookie.com https://www.youtube.com; object-src 'none'; base-uri 'self'; form-action 'self';">
 <meta name="referrer" content="no-referrer">
 <title>Piauí Teresina Analytics v2 | Sala de Situação Gov-BR &amp; C4ISR</title>
 <meta name="description" content="Painel de indicadores e telemetria pública do Piauí e Teresina com ontologia estruturada, GIS e integração Gov-BR.">
@@ -1189,9 +1189,14 @@ body {
         <div class="section-header">
           <div class="section-icon">🏛️</div>
           <div>
-            <div class="section-title">Análise Geopolítica e Contexto Regional</div>
-            <div class="section-subtitle">Papel nacional, infraestrutura, geopolítica interna e desafios</div>
+            <div class="section-title">Análise Geopolítica e Corredores Estratégicos</div>
+            <div class="section-subtitle">Posição nacional, logística, cruzamentos territoriais e matriz de choques</div>
           </div>
+        </div>
+
+        <div class="plain-summary-banner">
+          <h3>Em resumo simples: qual é a posição estratégica do Piauí?</h3>
+          <p>O estado está no cruzamento entre a <strong>fronteira agrícola do MATOPIBA</strong> (soja e milho no Sudoeste), uma das maiores reservas de <strong>energia limpa</strong> do país (&gt;95% eólica e solar) e a saída atlântica pela <strong>ZPE Parnaíba / Porto de Luís Correia</strong>. O gargalo ainda é a logística: sem ferrovia operando até o litoral, a safra e o abastecimento urbano dependem de caminhões e ficam expostos ao preço do petróleo/diesel.</p>
         </div>
 
         <div class="detail-grid">
@@ -1271,18 +1276,59 @@ body {
             </div>
             <div class="data-row">
               <span class="data-label">Concentração Econômica</span>
-              <span class="data-value warn">Teresina dominante</span>
+              <span class="data-value warn">Teresina dominante (+37,4% PIB/cap.)</span>
             </div>
             <div class="data-row">
               <span class="data-label">Equilíbrio Regional</span>
-              <span class="data-value danger">Limitado</span>
+              <span class="data-value danger">50,1% da pop. em 14 municípios</span>
             </div>
             <div class="data-row">
               <span class="data-label">Recomendação</span>
-              <span class="data-value info" style="font-size:0.75rem;">H₂ verde, educação profissional, irrigação</span>
+              <span class="data-value info" style="font-size:0.75rem;">H₂ verde, ferrovia, educação profissional, irrigação</span>
             </div>
           </div>
         </div>
+
+        <section class="corridor-panel" aria-label="Corredores geoeconômicos do Piauí">
+          <div class="lrf-sim-head">
+            <div>
+              <span class="eyebrow">// GEOGRAFIA × PODER PRODUTIVO</span>
+              <h3>Os 4 Corredores Geoeconômicos do Piauí</h3>
+            </div>
+            <span class="tool-index">POTENCIAL VS INFRAESTRUTURA</span>
+          </div>
+          <div id="geoPolCorridors" class="corridor-grid"></div>
+        </section>
+
+        <div class="chart-container" style="margin-bottom:1.4rem;">
+          <h3>🧭 Maturidade dos Corredores: Potencial Estratégico vs Infraestrutura Atual (0–100)</h3>
+          <div class="chart-wrapper">
+            <canvas id="chartGeoCorredores"></canvas>
+          </div>
+        </div>
+
+        <section class="cross-panel" aria-label="Matriz de cruzamento geopolítico e econômico">
+          <div class="lrf-sim-head">
+            <div>
+              <span class="eyebrow">// LEITURA DE IMPACTO DIRETO · EM PORTUGUÊS CLARO</span>
+              <h3>Cruzamento Geopolítico × Econômico: Se o cenário mudar, onde bate no Piauí?</h3>
+            </div>
+            <button type="button" class="tool-button" data-open-tab="eco">Ver Petróleo &amp; Commodities →</button>
+          </div>
+          <div class="lrf-sim-table-wrap">
+            <table class="lrf-sim-table">
+              <thead>
+                <tr>
+                  <th scope="col">Choque / Cenário Externo</th>
+                  <th scope="col">Canal de Transmissão</th>
+                  <th scope="col">Efeito Prático no Piauí</th>
+                  <th scope="col">Amortecedor / Defesa</th>
+                </tr>
+              </thead>
+              <tbody id="geoCrossMatrix"></tbody>
+            </table>
+          </div>
+        </section>
       </div>
     </div>
 
@@ -1292,9 +1338,14 @@ body {
         <div class="section-header">
           <div class="section-icon">💰</div>
           <div>
-            <div class="section-title">Análise Econômica e Fiscal (SEFAZ-PI)</div>
-            <div class="section-subtitle">PIB, Finanças Públicas, Dívida e Investimentos</div>
+            <div class="section-title">Análise Econômica, Fiscal &amp; Commodities</div>
+            <div class="section-subtitle">PIB, Finanças Públicas, Petróleo, Soja, Câmbio e Cruzamentos de Impacto</div>
           </div>
+        </div>
+
+        <div class="plain-summary-banner">
+          <h3>Leitura rápida: como a economia do Piauí funciona na prática?</h3>
+          <p><strong>Serviços (71,7%)</strong> geram a maior parte dos empregos urbanos (principalmente em Teresina), enquanto a <strong>Agropecuária (18,0%, +5,1% a.a.)</strong> e as <strong>Energias Renováveis / Indústria (10,3%, +4,6% a.a.)</strong> puxam o crescimento no interior. Nas contas públicas, o estado mantém gastos de pessoal sob controle (38,77% da RCL), mas monitora o avanço da dívida (+30,65%) frente à Selic.</p>
         </div>
 
         <div class="kpi-grid">
@@ -1475,6 +1526,100 @@ body {
             <div class="chart-wrapper">
               <canvas id="chartPIBSetores2"></canvas>
             </div>
+          </div>
+        </div>
+
+        <section id="ecoCommoditiesPanel" class="commodity-panel" aria-label="Preços de petróleo e commodities">
+          <div class="lrf-sim-head">
+            <div>
+              <span class="eyebrow">// MERCADO GLOBAL × ECONOMIA DO PIAUÍ</span>
+              <h3>Petróleo, Commodities Agrícolas &amp; Índice BCB (IC-Br)</h3>
+            </div>
+            <span id="commSourceBadge" class="commodity-badge" data-state="baseline">AGUARDANDO SYNC / OSINT</span>
+          </div>
+
+          <div class="commodity-icbr-strip" aria-label="Índices IC-Br do Banco Central do Brasil">
+            <div class="icbr-pill">
+              <span>IC-BR TOTAL (BCB 27574)</span>
+              <strong id="icbrTotalVal">—</strong>
+              <small id="icbrTotalDate">Índice agregado em R$</small>
+            </div>
+            <div class="icbr-pill">
+              <span>IC-BR AGRO (BCB 27575)</span>
+              <strong id="icbrAgroVal">—</strong>
+              <small>Soja, milho, grãos e carnes</small>
+            </div>
+            <div class="icbr-pill">
+              <span>IC-BR ENERGIA (BCB 27577)</span>
+              <strong id="icbrEnerVal">—</strong>
+              <small>Petróleo, gás e combustíveis</small>
+            </div>
+            <div class="icbr-pill">
+              <span>IC-BR METAL (BCB 27576)</span>
+              <strong id="icbrMetalVal">—</strong>
+              <small>Metais industriais e minérios</small>
+            </div>
+          </div>
+
+          <div id="commodityGrid" class="commodity-grid"></div>
+
+          <div id="commodityCrossSim" style="margin-top:1.15rem; padding-top:1rem; border-top:1px solid #1f3c33;">
+            <div class="lrf-sim-head" style="margin-bottom:.65rem;">
+              <div>
+                <span class="eyebrow">// TERMÔMETRO INTERATIVO DE IMPACTO NO PIAUÍ</span>
+                <h4 style="font-family:var(--font-display); color:#f1f5f9; font-size:.95rem; margin:.2rem 0 0;">Simule Câmbio, Petróleo Brent e Soja na Economia Estadual</h4>
+              </div>
+              <span class="tool-index">PARIDADE SACA 60 KG = 2,2046 BU</span>
+            </div>
+            <div class="lrf-sim-controls">
+              <div class="lrf-slider-box">
+                <label for="commUsdInput">Dólar (R$/USD) <span id="commUsdLabel">R$ 5,70</span></label>
+                <input id="commUsdInput" type="range" min="4.5" max="7.0" step="0.05" value="5.70">
+              </div>
+              <div class="lrf-slider-box">
+                <label for="commBrentInput">Petróleo Brent (USD/barril) <span id="commBrentLabel">US$ 72,00</span></label>
+                <input id="commBrentInput" type="range" min="45" max="125" step="1" value="72">
+              </div>
+              <div class="lrf-slider-box">
+                <label for="commSoyInput">Soja CBOT (USD/bushel) <span id="commSoyLabel">US$ 10,20</span></label>
+                <input id="commSoyInput" type="range" min="7.5" max="16.5" step="0.1" value="10.2">
+              </div>
+            </div>
+            <div class="impact-calc-grid">
+              <div class="impact-result-box">
+                <span>BARRIL BRENT EM REAIS</span>
+                <strong id="commBrentBrlOut">R$ 410,40 / bbl</strong>
+                <small id="commDieselOut">Pressão de frete/diesel moderada nas rodovias do Piauí.</small>
+              </div>
+              <div class="impact-result-box">
+                <span>SOJA PARIDADE BRUTA (SACA 60 KG)</span>
+                <strong id="commSoySacaOut">R$ 128,17 / sc</strong>
+                <small>Valor de referência portuária antes do frete rodoviário (Uruçuí/Bom Jesus → porto).</small>
+              </div>
+              <div class="impact-result-box">
+                <span>SÍNTESE PARA O PIAUÍ</span>
+                <strong id="commBalanceOut">SALDO AGRO POSITIVO</strong>
+                <small id="commSummaryOut">Ajuste os controles ou sincronize cotações reais acima.</small>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="cross-panel" aria-label="Cruzamentos econômicos de fácil entendimento">
+          <div class="lrf-sim-head">
+            <div>
+              <span class="eyebrow">// CRUZAMENTO DE DADOS ECONÔMICOS</span>
+              <h3>O que os números dizem quando olhados juntos?</h3>
+            </div>
+            <button type="button" class="tool-button" data-open-tab="geo-pol">Ver Cruzamento Geopolítico →</button>
+          </div>
+          <div id="ecoCrossings" class="cross-grid"></div>
+        </section>
+
+        <div class="chart-container" style="margin-bottom:1.4rem;">
+          <h3>⚖️ Motores do Piauí: Peso Estrutural vs Exposição a Câmbio, Petróleo e Clima (0–100)</h3>
+          <div class="chart-wrapper">
+            <canvas id="chartEcoVetores"></canvas>
           </div>
         </div>
 
@@ -2378,6 +2523,94 @@ function initCharts() {
           borderColor: '#1a3a2a',
           borderWidth: 1,
           titleColor: '#00ff41',
+          bodyColor: '#e0e0e0'
+        }
+      }
+    }
+  });
+
+  // BAR: Maturidade dos 4 Corredores Geopolíticos do Piauí
+  createChart(document.getElementById('chartGeoCorredores'), {
+    type: 'bar',
+    data: {
+      labels: ['Litoral (ZPE/H₂V)', 'MATOPIBA (Soja/Milho)', 'Grande Teresina (Serviços)', 'Semiárido (Energia/Minérios)'],
+      datasets: [
+        {
+          label: 'Potencial Estratégico (0–100)',
+          data: [92, 95, 84, 86],
+          backgroundColor: 'rgba(0,255,65,0.65)',
+          borderColor: '#00ff41',
+          borderWidth: 1,
+          borderRadius: 4
+        },
+        {
+          label: 'Infraestrutura Atual (0–100)',
+          data: [48, 56, 78, 52],
+          backgroundColor: 'rgba(255,215,0,0.6)',
+          borderColor: '#ffd700',
+          borderWidth: 1,
+          borderRadius: 4
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+        y: { min: 0, max: 100, grid: { color: 'rgba(255,255,255,0.05)' } },
+        x: { grid: { color: 'rgba(255,255,255,0.05)' } }
+      },
+      plugins: {
+        legend: { position: 'top' },
+        tooltip: {
+          backgroundColor: '#111820',
+          borderColor: '#1a3a2a',
+          borderWidth: 1,
+          titleColor: '#00f0ff',
+          bodyColor: '#e0e0e0'
+        }
+      }
+    }
+  });
+
+  // BAR: Vetores Econômicos & Exposição Externa
+  createChart(document.getElementById('chartEcoVetores'), {
+    type: 'bar',
+    data: {
+      labels: ['Serviços & Comércio (Teresina)', 'Agroexportação (MATOPIBA)', 'Energia Eólica/Solar & H₂V', 'Setor Público & Transferências', 'Indústria & Mineração'],
+      datasets: [
+        {
+          label: 'Peso / Tração no Estado (0–100)',
+          data: [85, 76, 82, 74, 48],
+          backgroundColor: 'rgba(0,240,255,0.6)',
+          borderColor: '#00f0ff',
+          borderWidth: 1,
+          borderRadius: 4
+        },
+        {
+          label: 'Sensibilidade a Petróleo/Câmbio/Clima (0–100)',
+          data: [45, 88, 55, 40, 72],
+          backgroundColor: 'rgba(255,140,0,0.6)',
+          borderColor: '#ff8c00',
+          borderWidth: 1,
+          borderRadius: 4
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+        y: { min: 0, max: 100, grid: { color: 'rgba(255,255,255,0.05)' } },
+        x: { grid: { color: 'rgba(255,255,255,0.05)' } }
+      },
+      plugins: {
+        legend: { position: 'top' },
+        tooltip: {
+          backgroundColor: '#111820',
+          borderColor: '#1a3a2a',
+          borderWidth: 1,
+          titleColor: '#ffd700',
           bodyColor: '#e0e0e0'
         }
       }

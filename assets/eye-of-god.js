@@ -1226,7 +1226,7 @@
       switch (main) {
         case 'help':
           printTerminal(
-            'COMANDOS: help, target <nome>, lockdown, standdown, thermal, nvg, lidar, optical, neural, sar, scan, radar, intercept, status, clear | DADOS: pib, pop, fiscal, edu, swot, geo [the|pi], mun <nome>, graph <id>, anomalies, weather, macro, govbr',
+            'COMANDOS: help, target <nome>, lockdown, standdown, thermal, nvg, lidar, optical, neural, sar, scan, radar, intercept, status, clear | DADOS: pib, pop, fiscal, edu, swot, geo [the|pi], mun <nome>, graph <id>, anomalies, weather, macro, commodities, govbr',
             'success'
           );
           break;
@@ -1311,6 +1311,27 @@
             printTerminal('MACRO BCB SGS: ' + parts.join(' | '), 'success');
           } else {
             printTerminal('MACRO BCB SGS: Sem leitura ao vivo na sessão (execute "govbr" com rede ativa).', 'sys');
+          }
+          break;
+        }
+        case 'commodities':
+        case 'petroleo':
+        case 'oil': {
+          const rt = window.PiauiRealtime ? window.PiauiRealtime.getState() : null;
+          const comm = rt && rt.commodities ? rt.commodities : { icbr: {}, quotes: {} };
+          const q = comm.quotes || {};
+          const icbr = comm.icbr || {};
+          const pieces = [];
+          if (q.brent && typeof q.brent.price === 'number') pieces.push(`Brent: US$ ${q.brent.price.toFixed(2)}/bbl`);
+          if (q.wti && typeof q.wti.price === 'number') pieces.push(`WTI: US$ ${q.wti.price.toFixed(2)}/bbl`);
+          if (q.soja && typeof q.soja.price === 'number') pieces.push(`Soja CBOT: US$ ${(q.soja.price / 100).toFixed(2)}/bu`);
+          if (q.milho && typeof q.milho.price === 'number') pieces.push(`Milho CBOT: US$ ${(q.milho.price / 100).toFixed(2)}/bu`);
+          if (icbr.total && icbr.total.valor != null) pieces.push(`IC-Br Total: ${icbr.total.valor}`);
+          if (icbr.energia && icbr.energia.valor != null) pieces.push(`IC-Br Energia: ${icbr.energia.valor}`);
+          if (pieces.length) {
+            printTerminal('COMMODITIES & PETRÓLEO: ' + pieces.join(' | '), 'success');
+          } else {
+            printTerminal('COMMODITIES & PETRÓLEO: Aguardando sync OSINT/BCB IC-Br (ver aba Econômica ou execute "govbr").', 'sys');
           }
           break;
         }

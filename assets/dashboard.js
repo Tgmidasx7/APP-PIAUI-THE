@@ -413,7 +413,9 @@
     chartConcentracao: ['Proporção da população concentrada na Região Metropolitana / Grande Teresina e polos regionais versus demais municípios do Piauí (Censo 2022 / Est. 2025).', 'https://www.ibge.gov.br/cidades-e-estados/pi.html'],
     chartFinancas: ['Série homogênea de execução orçamentária de 2025 (SEFAZ-PI / RGF-SICONFI) em bilhões de reais: Receita Corrente Bruta (R$ 21,60 bi), RCL (R$ 19,50 bi), Despesa Corrente (R$ 18,19 bi) e DCL (R$ 10,93 bi).', 'https://www.gov.br/tesouronacional/pt-br'],
     chartIDEB: ['Notas oficiais do IDEB 2023 (INEP) por etapa de ensino (Anos Iniciais, Anos Finais e Ensino Médio) comparando Piauí, Brasil e média do Nordeste.', 'https://www.gov.br/inep/pt-br/areas-de-atuacao/pesquisas-estatisticas-e-indicadores/ideb'],
-    chartPosicaoEM: ['Ranking estadual do Piauí no IDEB Ensino Médio em 2021 e 2023 (escala invertida: 4ª posição em 2023 representa melhor colocação no Brasil e liderança no Nordeste).', 'https://www.gov.br/inep/pt-br/areas-de-atuacao/pesquisas-estatisticas-e-indicadores/ideb']
+    chartPosicaoEM: ['Ranking estadual do Piauí no IDEB Ensino Médio em 2021 e 2023 (escala invertida: 4ª posição em 2023 representa melhor colocação no Brasil e liderança no Nordeste).', 'https://www.gov.br/inep/pt-br/areas-de-atuacao/pesquisas-estatisticas-e-indicadores/ideb'],
+    chartGeoCorredores: ['Índices sintéticos ilustrativos (0–100) construídos a partir da síntese de ativos e gargalos logísticos de cada corredor geoeconômico do Piauí.', 'https://www.ibge.gov.br/cidades-e-estados/pi.html'],
+    chartEcoVetores: ['Comparativo qualitativo-estrutural (0–100) entre o peso de cada motor econômico no Piauí e sua exposição direta a petróleo/diesel, dólar e clima.', 'https://www.bcb.gov.br/']
   };
 
   function setupClock() {
@@ -626,6 +628,258 @@
     };
     document.addEventListener('piaui:realtime-update', renderEcoMacro);
     renderEcoMacro();
+
+    // 6. Corredores Geoeconômicos & Matriz de Cruzamento (Aba Geopolítica)
+    const corridorsBox = $('#geoPolCorridors');
+    if (corridorsBox && Array.isArray(ontology.geoCorridors)) {
+      corridorsBox.replaceChildren();
+      ontology.geoCorridors.forEach(c => {
+        const card = document.createElement('article');
+        card.className = 'corridor-card';
+        const tag = document.createElement('span');
+        tag.className = 'cross-tag';
+        tag.textContent = c.status;
+        const h = document.createElement('h4');
+        h.textContent = c.name;
+        const meta = document.createElement('span');
+        meta.className = 'corridor-meta';
+        meta.textContent = `Foco: ${c.focus}`;
+        const p = document.createElement('p');
+        p.textContent = c.summary;
+
+        const meters = document.createElement('div');
+        meters.className = 'corridor-meters';
+        [
+          ['Potencial Estratégico', c.potentialScore, ''],
+          ['Infraestrutura Atual', c.infraScore, 'infra']
+        ].forEach(([lbl, val, cls]) => {
+          const row = document.createElement('div');
+          row.className = 'corridor-meter-row';
+          const s1 = document.createElement('span'); s1.textContent = lbl;
+          const s2 = document.createElement('span'); s2.textContent = `${val}/100`;
+          row.append(s1, s2);
+          const track = document.createElement('div');
+          track.className = 'corridor-meter-track';
+          const fill = document.createElement('div');
+          fill.className = `corridor-meter-fill ${cls}`.trim();
+          fill.style.width = `${Math.max(0, Math.min(100, Number(val) || 0))}%`;
+          track.append(fill);
+          meters.append(row, track);
+        });
+
+        card.append(tag, h, meta, p, meters);
+        corridorsBox.append(card);
+      });
+    }
+
+    const geoMatrixBody = $('#geoCrossMatrix');
+    if (geoMatrixBody && Array.isArray(ontology.geoCrossMatrix)) {
+      geoMatrixBody.replaceChildren();
+      ontology.geoCrossMatrix.forEach(item => {
+        const tr = document.createElement('tr');
+        [item.shock, item.channel, item.effect, item.buffer].forEach(txt => {
+          const td = document.createElement('td');
+          td.textContent = txt;
+          tr.append(td);
+        });
+        geoMatrixBody.append(tr);
+      });
+    }
+
+    // 7. Cruzamentos Econômicos em Linguagem Acessível (Aba Econômica)
+    const ecoCrossBox = $('#ecoCrossings');
+    if (ecoCrossBox && Array.isArray(ontology.economicCrossings)) {
+      ecoCrossBox.replaceChildren();
+      ontology.economicCrossings.forEach(item => {
+        const card = document.createElement('article');
+        card.className = 'cross-card';
+        const tag = document.createElement('span');
+        tag.className = 'cross-tag';
+        tag.textContent = item.tag;
+        const h = document.createElement('h4');
+        h.textContent = item.title;
+        const p = document.createElement('p');
+        p.textContent = item.plainText;
+        card.append(tag, h, p);
+        ecoCrossBox.append(card);
+      });
+    }
+
+    // 8. Commodities, Petróleo, IC-Br (BCB) & Termômetro Interativo Piauí
+    const commGrid = $('#commodityGrid');
+    const commBadge = $('#commSourceBadge');
+    const usdInput = $('#commUsdInput');
+    const brentInput = $('#commBrentInput');
+    const soyInput = $('#commSoyInput');
+    let userEditedCommSim = false;
+
+    const updateCommodityCalculator = () => {
+      if (!usdInput || !brentInput || !soyInput) return;
+      const usd = Number(usdInput.value);
+      const brent = Number(brentInput.value);
+      const soyBu = Number(soyInput.value);
+      if ($('#commUsdLabel')) $('#commUsdLabel').textContent = `R$ ${usd.toFixed(2).replace('.', ',')}`;
+      if ($('#commBrentLabel')) $('#commBrentLabel').textContent = `US$ ${brent.toFixed(2).replace('.', ',')}`;
+      if ($('#commSoyLabel')) $('#commSoyLabel').textContent = `US$ ${soyBu.toFixed(2).replace('.', ',')}`;
+
+      const brentBrl = brent * usd;
+      const soySacaBrl = soyBu * 2.20462262 * usd;
+
+      if ($('#commBrentBrlOut')) {
+        $('#commBrentBrlOut').textContent = `R$ ${brentBrl.toFixed(2).replace('.', ',')} / bbl`;
+      }
+      if ($('#commDieselOut')) {
+        $('#commDieselOut').textContent = brentBrl >= 480
+          ? 'Alerta de frete caro: pressão elevada sobre caminhões no MATOPIBA e ônibus/cargas em Teresina.'
+          : brentBrl >= 380
+            ? 'Pressão moderada de diesel sobre as rodovias estaduais; ferrovia reduziria esse custo.'
+            : 'Alívio logístico: petróleo em reais abaixo de R$ 380/barril reduz custo de transporte.';
+      }
+      if ($('#commSoySacaOut')) {
+        $('#commSoySacaOut').textContent = `R$ ${soySacaBrl.toFixed(2).replace('.', ',')} / sc`;
+      }
+      if ($('#commBalanceOut') && $('#commSummaryOut')) {
+        if (soySacaBrl >= 135 && brentBrl < 450) {
+          $('#commBalanceOut').textContent = 'MARGEM AGRO FAVORÁVEL';
+          $('#commSummaryOut').textContent = `Soja a R$ ${soySacaBrl.toFixed(0)}/sc com frete sob controle favorece Uruçuí e Bom Jesus.`;
+        } else if (brentBrl >= 480 && soySacaBrl < 120) {
+          $('#commBalanceOut').textContent = 'COMPRESSÃO DE MARGEM';
+          $('#commSummaryOut').textContent = 'Diesel caro com soja pressionada reduz lucro líquido do produtor piauiense na estrada.';
+        } else {
+          $('#commBalanceOut').textContent = 'EQUILÍBRIO CONDICIONADO';
+          $('#commSummaryOut').textContent = `Receita bruta da saca (~R$ ${soySacaBrl.toFixed(0)}) disputa espaço com custo de frete rodoviário (barril R$ ${brentBrl.toFixed(0)}).`;
+        }
+      }
+    };
+
+    if (usdInput && brentInput && soyInput) {
+      [usdInput, brentInput, soyInput].forEach(el => el.addEventListener('input', () => {
+        userEditedCommSim = true;
+        updateCommodityCalculator();
+      }));
+      updateCommodityCalculator();
+    }
+
+    const renderCommodities = () => {
+      const rt = window.PiauiRealtime ? window.PiauiRealtime.getState() : null;
+      const comm = rt && rt.commodities ? rt.commodities : { icbr: {}, quotes: {} };
+      const icbr = comm.icbr || {};
+      const quotes = comm.quotes || {};
+      const usdRaw = rt && rt.bcb && rt.bcb.usdBrl && rt.bcb.usdBrl.valor != null
+        ? Number(String(rt.bcb.usdBrl.valor).replace(',', '.'))
+        : null;
+      const usdRate = Number.isFinite(usdRaw) && usdRaw > 0 ? usdRaw : null;
+
+      const setIcbr = (id, obj) => {
+        const el = $(id);
+        if (el) el.textContent = obj && obj.valor != null ? `${obj.valor}` : 'Aguardando sync';
+      };
+      setIcbr('#icbrTotalVal', icbr.total);
+      setIcbr('#icbrAgroVal', icbr.agro);
+      setIcbr('#icbrEnerVal', icbr.energia);
+      setIcbr('#icbrMetalVal', icbr.metal);
+      if ($('#icbrTotalDate') && icbr.total && icbr.total.data) {
+        $('#icbrTotalDate').textContent = `Ref. BCB: ${icbr.total.data}`;
+      }
+
+      const hasQuotes = Object.keys(quotes).length > 0;
+      const hasIcbr = Object.values(icbr).some(Boolean);
+      if (commBadge) {
+        commBadge.dataset.state = (hasQuotes || hasIcbr) ? 'online' : 'baseline';
+        commBadge.textContent = hasQuotes && hasIcbr
+          ? 'AO VIVO (BCB IC-BR + OSINT)'
+          : hasIcbr
+            ? 'AO VIVO (BCB IC-BR) · SNAPSHOT PARCIAL'
+            : hasQuotes
+              ? 'OSINT MERCADO ATUALIZADO'
+              : 'OFFLINE / AGUARDANDO SYNC OSINT';
+      }
+
+      if (!userEditedCommSim && usdInput && brentInput && soyInput) {
+        let changed = false;
+        if (usdRate) { usdInput.value = String(Math.min(7, Math.max(4.5, usdRate)).toFixed(2)); changed = true; }
+        if (quotes.brent && typeof quotes.brent.price === 'number') {
+          brentInput.value = String(Math.min(125, Math.max(45, Math.round(quotes.brent.price)))); changed = true;
+        }
+        if (quotes.soja && typeof quotes.soja.price === 'number') {
+          soyInput.value = String(Math.min(16.5, Math.max(7.5, quotes.soja.price / 100)).toFixed(1)); changed = true;
+        }
+        if (changed) updateCommodityCalculator();
+      }
+
+      if (commGrid && Array.isArray(ontology.commoditiesMeta)) {
+        commGrid.replaceChildren();
+        ontology.commoditiesMeta.forEach(meta => {
+          const q = quotes[meta.id] || null;
+          const card = document.createElement('article');
+          card.className = 'commodity-card';
+
+          const top = document.createElement('div');
+          top.className = 'commodity-card-top';
+          const cat = document.createElement('span');
+          cat.className = 'commodity-cat';
+          cat.textContent = meta.category;
+          const delta = document.createElement('span');
+          delta.className = 'commodity-delta';
+          if (q && typeof q.changePct === 'number') {
+            delta.textContent = `${q.changePct >= 0 ? '+' : ''}${q.changePct.toFixed(2)}%`;
+            if (q.changePct > 0) delta.classList.add('up');
+            else if (q.changePct < 0) delta.classList.add('down');
+          } else {
+            delta.textContent = 'REF. OSINT';
+          }
+          top.append(cat, delta);
+
+          const h = document.createElement('h4');
+          h.textContent = meta.name;
+
+          const priceEl = document.createElement('div');
+          priceEl.className = 'commodity-price';
+          const brlEl = document.createElement('div');
+          brlEl.className = 'commodity-brl';
+
+          if (q && typeof q.price === 'number') {
+            if (meta.unit === 'USc/bushel') {
+              const usdBu = q.price / 100;
+              priceEl.textContent = `US$ ${usdBu.toFixed(2)} / bu`;
+              if (usdRate) {
+                const factor = meta.id === 'soja' ? 2.20462262 : 2.3620957;
+                const scBrl = usdBu * factor * usdRate;
+                brlEl.textContent = `≈ R$ ${scBrl.toFixed(2).replace('.', ',')} / saca 60 kg (USD ${usdRate.toFixed(2)})`;
+              } else {
+                brlEl.textContent = 'Conecte o câmbio BCB para converter em R$/saca 60 kg';
+              }
+            } else if (meta.id === 'brent' || meta.id === 'wti') {
+              priceEl.textContent = `US$ ${q.price.toFixed(2)} / bbl`;
+              brlEl.textContent = usdRate
+                ? `≈ R$ ${(q.price * usdRate).toFixed(2).replace('.', ',')} / barril`
+                : 'Aguardando câmbio para conversão em R$/barril';
+            } else if (meta.id === 'ouro') {
+              priceEl.textContent = `US$ ${q.price.toFixed(2)} / oz`;
+              brlEl.textContent = usdRate
+                ? `≈ R$ ${((q.price * usdRate) / 31.1034768).toFixed(2).replace('.', ',')} / grama`
+                : 'Aguardando câmbio para R$/g';
+            } else {
+              priceEl.textContent = `US$ ${q.price.toFixed(2)} (${meta.unit})`;
+              brlEl.textContent = `Ticker ${meta.symbol}`;
+            }
+          } else {
+            priceEl.textContent = 'Aguardando sync';
+            brlEl.textContent = `${meta.symbol} · ${meta.unit} (use o simulador ou sincronize OSINT)`;
+          }
+
+          const impact = document.createElement('p');
+          impact.className = 'commodity-impact';
+          impact.textContent = meta.piauiLink;
+
+          card.append(top, h, priceEl, brlEl, impact);
+          commGrid.append(card);
+        });
+      }
+    };
+
+    document.addEventListener('piaui:realtime-update', renderCommodities);
+    renderCommodities();
   }
 
   window.initDashboard = function () {

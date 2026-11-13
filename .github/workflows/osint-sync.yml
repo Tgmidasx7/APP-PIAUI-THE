@@ -1,0 +1,34 @@
+name: Sincronização OSINT (Gov-BR & Piauí)
+
+on:
+  schedule:
+    - cron: '0 */6 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    name: Atualizar snapshot público do Piauí
+    runs-on: ubuntu-latest
+    steps:
+      - name: Baixar repositório
+        uses: actions/checkout@v4
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Coletar APIs públicas (IBGE, BCB, Open-Meteo, RSS)
+        run: node scripts/sync_osint.mjs
+      - name: Publicar snapshot atualizado se houver alterações
+        run: |
+          if [ -n "$(git status --porcelain data/piaui-live.json)" ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add data/piaui-live.json
+            git commit -m "chore: atualiza snapshot OSINT Gov-BR/Piauí"
+            git push
+          else
+            echo "Nenhuma alteração no snapshot."
+          fi

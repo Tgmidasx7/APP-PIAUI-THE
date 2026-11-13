@@ -1,14 +1,16 @@
-# Arquitetura e limitações
+# Arquitetura e limitações (v2)
 
-## Estado atual
+## Arquitetura atual
 
-O projeto é um site estático, sem backend, banco de dados, processo de build ou integração de indicadores identificados no repositório. `index.html` reúne a marcação, os dados, os gráficos e parte dos estilos e scripts. `assets/enhancements.css` e `assets/dashboard.js` complementam a interface e suas interações.
+O projeto adota uma arquitetura estática híbrida zero-backend compatível com GitHub Pages e execução local (`python3 -m http.server` ou `file://`):
 
-O navegador controla as abas, a busca em indicadores e detalhes, os favoritos locais, a exportação CSV e a impressão. Chart.js está incluído localmente; as fontes são carregadas do Google Fonts com alternativas locais. Se o arquivo local do Chart.js estiver indisponível, tabelas com os valores das configurações dos gráficos ficam acessíveis; o relógio continua funcionando. O relógio usa o fuso `America/Fortaleza` e o terminal tenta consultar feeds de notícias a cada cinco minutos por meio de RSS2JSON, com alternativa local estática. O SPIA mostra vídeos públicos do YouTube e simulação textual sem análise real. O painel não comprova atualização automática ou auditoria dos números.
+- **Camada de ontologia e dados auditados (`assets/ontology.js`)**: concentra a base de referência de Piauí e Teresina, catálogo de 10 indicadores com fonte/período/status, 4 registros de anomalias metodológicas, geometria geográfica WGS84 (polígono do Piauí, 16 polos municipais e hidrografia/corredores de Teresina) e grafo ontológico de 9 nós e 12 vínculos.
+- **Camada de telemetria Gov-BR (`assets/realtime-gov.js`)**: consulta diretamente no navegador APIs públicas brasileiras (IBGE Localidades, IBGE Projeções, IBGE Notícias, Banco Central SGS 432/433/1, Tesouro Nacional SICONFI e Open-Meteo para clima/UV de Teresina e polos regionais) e consome `data/piaui-live.json` quando servido via HTTP/HTTPS. Em modo offline, mantém fallback determinístico sem quebrar a interface.
+- **Pipeline OSINT zero-backend (`scripts/sync_osint.mjs` + `.github/workflows/osint-sync.yml`)**: executa a cada 6 horas no GitHub Actions para atualizar `data/piaui-live.json` diretamente dos feeds RSS oficiais e APIs públicas, eliminando dependência exclusiva de proxies de terceiros.
+- **Interface unificada (`index.html`, `eyeofgod/index.html`, `assets/dashboard.js`, `assets/eye-of-god.js`)**: o HUD do *Eye of God* agora é montado a partir de um único componente (`window.mountEyeOfGod`), eliminando duplicação de marcação entre a aba `#eye-of-god` e a rota `/eyeofgod/`. Ambas as páginas aplicam `Content-Security-Policy` e `referrer="no-referrer"`.
 
-## Evolução recomendada
+## Limitações conhecidas
 
-1. Validar os indicadores com fonte específica, período e metodologia.
-2. Centralizar os dados em uma estrutura documentada e separar gradualmente a lógica restante.
-3. Adicionar testes em navegadores reais e uma revisão completa de acessibilidade e responsividade.
-4. Avaliar uma estratégia para indisponibilidade das fontes externas e acompanhar condições de uso de serviços.
+1. Algumas APIs públicas (como feeds RSS externos ou consultas eventuais ao SICONFI) podem limitar CORS em chamadas diretas do navegador; nesses cenários o painel recorre ao snapshot `data/piaui-live.json` ou aos dados locais auditados.
+2. O painel de câmeras C4ISR do *Eye of God* e o módulo SPIA permanecem demonstrativos e sem acesso a câmeras policiais ou dados sigilosos da SSP-PI.
+3. Mudanças futuras de indicadores devem atualizar `assets/ontology.js` juntamente com fonte primária, período e unidade.

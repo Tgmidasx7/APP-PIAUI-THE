@@ -1,6 +1,6 @@
 /**
- * S.P.I.A. · EYE OF GOD // PALANTIR MATRIX ENGINE
- * Módulo demonstrativo isolado na aba #tab-eye-of-god.
+ * S.P.I.A. · EYE OF GOD // PALANTIR MATRIX & GIS ENGINE v2.0
+ * Componente compartilhado entre a aba #tab-eye-of-god e /eyeofgod/.
  */
 (() => {
   'use strict';
@@ -17,18 +17,240 @@
     }
   }
 
+  function buildHudMarkup(mode = 'tab') {
+    const isStandalone = mode === 'standalone';
+    const headingTag = isStandalone ? 'h1' : 'h2';
+    const topNavAction = isStandalone
+      ? '<a class="eog-btn eog-link-btn" href="../">← PAINEL PRINCIPAL</a>'
+      : '<a class="eog-btn eog-link-btn" href="eyeofgod/">↗ TELA DEDICADA</a>';
+
+    return `
+      <div class="eog-hud-shell" id="eog-hud-shell">
+        <canvas id="eog-matrix-rain-canvas" aria-hidden="true"></canvas>
+        <div class="eog-crt-overlay" aria-hidden="true"></div>
+
+        <!-- TOP HEADER BAR -->
+        <header class="eog-header">
+          <div class="eog-brand-zone">
+            <div class="eog-god-eye-logo" aria-hidden="true">
+              <div class="eog-iris-ring"></div>
+              <div class="eog-pupil-core"></div>
+            </div>
+            <div>
+              <${headingTag} class="eog-glitch-text">S.P.I.A. // EYE OF GOD</${headingTag}>
+              <p class="eog-brand-sub">GIS TERESINA–PIAUÍ · ONTOLOGIA PALANTIR · TELEMETRIA GOV-BR v2.0</p>
+            </div>
+          </div>
+
+          <div class="eog-header-status-grid">
+            <div class="eog-stat-pill">
+              <span class="eog-pill-label">FONTE GOV-BR:</span>
+              <span class="eog-pill-value ok" id="eog-gov-source-tag">BASE LOCAL</span>
+            </div>
+            <div class="eog-stat-pill">
+              <span class="eog-pill-label">SATELLITE LINK:</span>
+              <span class="eog-pill-value ok" id="eog-sat-uplink">GEO-PI-01 [WGS84]</span>
+            </div>
+            <div class="eog-stat-pill">
+              <span class="eog-pill-label">HASH KERNEL:</span>
+              <span class="eog-pill-value" id="eog-kernel-hash">0x9F4C...B21</span>
+            </div>
+            <div class="eog-stat-pill">
+              <span class="eog-pill-label">DEFCON ESTADUAL:</span>
+              <span class="eog-pill-value warn" id="eog-defcon-status">NÍVEL 2 - ELEVADO</span>
+            </div>
+            <div class="eog-stat-pill">
+              <span class="eog-pill-label">HORA TÁTICA (BRT):</span>
+              <span class="eog-pill-value clock" id="eog-tactical-clock">00:00:00.000</span>
+            </div>
+          </div>
+
+          <div class="eog-header-actions">
+            ${topNavAction}
+            <button type="button" class="eog-btn alert-btn" id="eog-lockdown-btn" aria-pressed="false">🚨 LOCKDOWN TOTAL</button>
+            <button type="button" class="eog-btn" id="eog-audio-toggle" aria-pressed="true">🔊 AUDIO: ON</button>
+          </div>
+        </header>
+
+        <!-- MAIN TACTICAL GRID -->
+        <div class="eog-main-grid">
+          <!-- COLUNA 1: TELEMETRIA REAL GOV-BR & AMBIENTE DO PIAUÍ -->
+          <aside class="eog-panel-box" id="eog-panel-telemetry">
+            <div class="eog-panel-title">
+              <span>📡 TELEMETRIA PIAUÍ &amp; GOV-BR AO VIVO</span>
+              <span class="eog-corner-code">LOC: -05.0892° / -42.8016°</span>
+            </div>
+            <div class="eog-panel-content">
+              <div class="eog-telemetry-grid">
+                <div class="eog-sensor-card">
+                  <div class="eog-s-label">CLIMA TERESINA (OPEN-METEO)</div>
+                  <div class="eog-s-val" id="eog-sensor-temp">MODO LOCAL</div>
+                  <div class="eog-s-sub">Sensores públicos · America/Fortaleza</div>
+                </div>
+                <div class="eog-sensor-card">
+                  <div class="eog-s-label">POPULAÇÃO PIAUÍ (IBGE)</div>
+                  <div class="eog-s-val" id="eog-sensor-pop">3.384.547</div>
+                  <div class="eog-s-sub">Censo 2022: 3.271.199 · Est. 2025</div>
+                </div>
+                <div class="eog-sensor-card">
+                  <div class="eog-s-label">FISCAL / SELIC (BCB SGS)</div>
+                  <div class="eog-s-val" id="eog-sensor-grid">DCL 61% RCL</div>
+                  <div class="eog-s-sub">SEFAZ-PI / CAPAG-STN B / Selic</div>
+                </div>
+                <div class="eog-sensor-card">
+                  <div class="eog-s-label">MALHA MUNICIPAL (IBGE)</div>
+                  <div class="eog-s-val" id="eog-sensor-rf">224 MUN. PI</div>
+                  <div class="eog-s-sub">UF 22 · 16 polos georreferenciados</div>
+                </div>
+              </div>
+
+              <div class="eog-sub-section-title">CAMADAS ANALÍTICAS &amp; OSINT</div>
+              <div class="eog-modules-status-list">
+                <div class="eog-mod-item">
+                  <span>GIS TERESINA [PARNAÍBA &amp; POTI]</span>
+                  <span class="eog-mod-badge active">WGS84</span>
+                </div>
+                <div class="eog-mod-item">
+                  <span>ONTOLOGIA PALANTIR [10 NÓS]</span>
+                  <span class="eog-mod-badge active">INTERATIVO</span>
+                </div>
+                <div class="eog-mod-item">
+                  <span>IBGE · BCB SGS · OPEN-METEO</span>
+                  <span class="eog-mod-badge active">API DIRETA</span>
+                </div>
+                <div class="eog-mod-item">
+                  <span>SIMULADOR LRF &amp; ANOMALIAS</span>
+                  <span class="eog-mod-badge compute">AUDITORIA</span>
+                </div>
+                <div class="eog-mod-item">
+                  <span>C4ISR CAM MATRIX [SIMULAÇÃO]</span>
+                  <span class="eog-mod-badge active">6 MODOS</span>
+                </div>
+              </div>
+
+              <div class="eog-sub-section-title">ANALISADOR DE ESPECTRO RF (SIM.)</div>
+              <canvas id="eog-spectrum-canvas" class="eog-spectrum-box" width="280" height="72" aria-label="Analisador de espectro RF simulado"></canvas>
+            </div>
+          </aside>
+
+          <!-- COLUNA 2: MODULAÇÃO DE CÂMERAS & ALVO -->
+          <section class="eog-panel-box eog-center-viewport" aria-label="Modulação de câmeras Eye of God">
+            <div class="eog-panel-title">
+              <span>👁️ MATRIX CAM MODULATION // EYE OF GOD TARGET LOCK</span>
+              <div class="eog-cam-modes-bar" role="group" aria-label="Modo de visão das câmeras">
+                <button type="button" class="eog-cam-mode-btn active" data-eog-mode="OPTICAL" aria-pressed="true">ÓPTICA HUD</button>
+                <button type="button" class="eog-cam-mode-btn" data-eog-mode="FLIR" aria-pressed="false">TÉRMICA FLIR</button>
+                <button type="button" class="eog-cam-mode-btn" data-eog-mode="NVG" aria-pressed="false">NOTURNA NVG</button>
+                <button type="button" class="eog-cam-mode-btn" data-eog-mode="LIDAR" aria-pressed="false">LIDAR 3D</button>
+                <button type="button" class="eog-cam-mode-btn" data-eog-mode="NEURAL" aria-pressed="false">FLUXO IA</button>
+                <button type="button" class="eog-cam-mode-btn" data-eog-mode="SAR" aria-pressed="false">ORBITAL SAR</button>
+              </div>
+            </div>
+
+            <div class="eog-panel-content eog-viewport-content">
+              <div class="eog-cctv-matrix-grid" id="eog-cctv-grid"></div>
+
+              <div class="eog-target-inspect-card">
+                <div class="eog-target-profile-pic">
+                  <canvas id="eog-wireframe-face-canvas" width="100" height="100" aria-label="Wireframe biométrico simulado"></canvas>
+                  <div class="eog-target-scan-line" aria-hidden="true"></div>
+                </div>
+                <div class="eog-target-data">
+                  <div class="eog-target-id" id="eog-target-id-label">ALVO #01: VEÍCULO / INDIVÍDUO IDENTIFICADO</div>
+                  <div class="eog-target-details" id="eog-target-details-label">Carregando telemetria…</div>
+                </div>
+                <div class="eog-target-actions">
+                  <button type="button" class="eog-btn" id="eog-lock-target-btn">🎯 CRAVAR MIRA</button>
+                  <button type="button" class="eog-btn alert-btn" id="eog-dispatch-drone-btn">🚁 DESPACHAR DRONE</button>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- COLUNA 3: GIS REAL TERESINA/PIAUÍ & GRAFO PALANTIR -->
+          <aside class="eog-panel-box" id="eog-panel-radar-intel">
+            <div class="eog-panel-title eog-panel-header-split">
+              <span>🌐 GIS PIAUÍ &amp; RADAR C4ISR</span>
+              <div class="eog-map-tabs" role="group" aria-label="Camada geográfica do radar">
+                <button type="button" class="eog-map-btn active" data-eog-map="GEO-THE" aria-pressed="true">TERESINA</button>
+                <button type="button" class="eog-map-btn" data-eog-map="GEO-PI" aria-pressed="false">PIAUÍ (16)</button>
+                <button type="button" class="eog-map-btn" data-eog-map="RADAR" aria-pressed="false">RADAR</button>
+              </div>
+            </div>
+            <div class="eog-panel-content">
+              <div class="eog-radar-wrapper">
+                <canvas id="eog-tactical-radar-canvas" width="340" height="240" aria-label="Mapa GIS Teresina Piauí e radar tático"></canvas>
+                <div class="eog-radar-hud-info">
+                  <span>ALVOS RASTREADOS: <b id="eog-radar-target-count">6 CAM</b></span>
+                  <span>POLOS GIS: <b id="eog-radar-units-count">16 PI</b></span>
+                </div>
+              </div>
+
+              <div class="eog-sub-section-title">GRAFO DE ONTOLOGIA PIAUÍ (PALANTIR MATRIX · CLICÁVEL)</div>
+              <div class="eog-graph-wrapper">
+                <canvas id="eog-palantir-graph-canvas" width="340" height="200" aria-label="Grafo interativo de ontologia do Piauí"></canvas>
+              </div>
+              <div class="eog-node-inspector" id="eog-node-inspector">
+                <strong>Nó selecionado: Estado do Piauí</strong> · Clique em qualquer nó do grafo acima ou use <code>graph &lt;id&gt;</code>.
+              </div>
+
+              <div class="eog-sub-section-title">FEED DE EVENTOS TÁTICOS &amp; GOV-BR</div>
+              <div class="eog-event-feed-list" id="eog-event-feed-container" aria-live="polite"></div>
+            </div>
+          </aside>
+        </div>
+
+        <!-- BOTTOM CLI TERMINAL DOCK -->
+        <div class="eog-footer-terminal" role="region" aria-label="Terminal CLI Kernel Eye of God">
+          <div class="eog-terminal-bar-header">
+            <span>⚡ EYE OF GOD KERNEL TERMINAL // V.2.0-GOV-BR</span>
+            <span>COMANDOS: help, pib, pop, fiscal, edu, geo pi, mun parnaiba, graph, govbr, target, thermal, scan</span>
+          </div>
+          <div class="eog-terminal-body" id="eog-terminal-body" role="log" aria-live="polite">
+            <div class="eog-term-line output">&gt; S.P.I.A. Eye of God v2.0 carregado (GIS Teresina/Piauí WGS84 + Ontologia Palantir + APIs Gov-BR).</div>
+            <div class="eog-term-line output">&gt; Digite "help" para comandos C4ISR e consultas de dados estruturados.</div>
+          </div>
+          <div class="eog-terminal-prompt">
+            <label class="eog-prompt-symbol" for="eog-terminal-input">root@SPIA-GODS-EYE:~#</label>
+            <input type="text" id="eog-terminal-input" class="eog-prompt-input" autocomplete="off" spellcheck="false" placeholder="Ex: geo pi, mun teresina, pib, fiscal, govbr, target, help...">
+          </div>
+        </div>
+      </div>`;
+  }
+
+  function mountEyeOfGod(container, mode = 'tab') {
+    if (!container) return null;
+    if (!container.querySelector('#eog-hud-shell')) {
+      container.innerHTML = buildHudMarkup(mode);
+    }
+    initEyeOfGod();
+    return container.querySelector('#eog-hud-shell');
+  }
+
   function initEyeOfGod() {
     const tabPanel = document.getElementById('tab-eye-of-god');
+    if (!tabPanel) return;
+
+    const mountTarget = tabPanel.querySelector('[data-eog-mount]') || tabPanel;
+    if (!document.getElementById('eog-hud-shell')) {
+      const mode = mountTarget.dataset.eogMount || 'tab';
+      mountTarget.innerHTML = buildHudMarkup(mode);
+    }
+
     const shell = document.getElementById('eog-hud-shell');
-    if (!tabPanel || !shell || shell.dataset.initialized === 'true') return;
+    if (!shell || shell.dataset.initialized === 'true') return;
     shell.dataset.initialized = 'true';
 
-    // ==================== ESTADO & DADOS SIMULADOS ====================
+    const ontology = window.PIAUI_ONTOLOGY || null;
+
+    // ==================== ESTADO & DADOS ====================
     const camerasDB = [
       {
         id: 'CAM-01',
         loc: 'Pte. Estaiada / Av. Raul Lopes',
         zone: 'ZL',
+        lat: -5.0688,
+        lng: -42.8012,
         targetId: 'ALVO #01: VEÍCULO / INDIVÍDUO IDENTIFICADO',
         plate: 'PIU-8B42',
         model: 'Toyota Hilux Prata',
@@ -41,6 +263,8 @@
         id: 'CAM-02',
         loc: 'Av. Frei Serafim / São Benedito',
         zone: 'CT',
+        lat: -5.0894,
+        lng: -42.8095,
         targetId: 'ALVO #02: MONITORAMENTO CORREDOR CENTRAL',
         plate: 'NHW-4E19',
         model: 'Honda Civic Preto',
@@ -53,6 +277,8 @@
         id: 'CAM-03',
         loc: 'Terminal Mocambinho (Norte)',
         zone: 'ZN',
+        lat: -5.0415,
+        lng: -42.8112,
         targetId: 'ALVO #03: CERCO ZONA NORTE',
         plate: 'QRT-9A71',
         model: 'Fiat Toro Branca',
@@ -65,6 +291,8 @@
         id: 'CAM-04',
         loc: 'Grande Dirceu / Av. Principal',
         zone: 'ZSE',
+        lat: -5.1072,
+        lng: -42.7525,
         targetId: 'ALVO #04: VARREDURA SUDESTE',
         plate: 'PIJ-2C88',
         model: 'VW Gol Cinza',
@@ -77,6 +305,8 @@
         id: 'CAM-05',
         loc: 'Ponte Metálica / Divisa Timon',
         zone: 'ZO',
+        lat: -5.0865,
+        lng: -42.8235,
         targetId: 'ALVO #05: PONTO DE DIVISA INTERESTADUAL',
         plate: 'OXZ-7D05',
         model: 'Honda XRE 300',
@@ -89,6 +319,8 @@
         id: 'CAM-06',
         loc: 'Aeroporto Sen. Petrônio Portella',
         zone: 'ZN',
+        lat: -5.0598,
+        lng: -42.8238,
         targetId: 'ALVO #06: PERÍMETRO AEROPORTUÁRIO',
         plate: 'LVX-5F30',
         model: 'Chevrolet Tracker Azul',
@@ -109,21 +341,16 @@
     };
 
     const sampleEvents = [
-      { text: 'LPR: Placa PIU-8B42 com restrição em ZL', crit: true },
-      { text: 'FACE-RECON: 98.9% compatibilidade em CAM-01', crit: true },
-      { text: 'SST: Disparo acústico descartado (Ruído Urbano)', crit: false },
-      { text: 'DRONE-02: Decolagem autorizada pelo CICC', crit: false },
-      { text: 'SAR-ORBITAL: Varredura da Bacia do Parnaíba concluída', crit: false }
-    ];
-
-    const radarTargets = [
-      { x: 118, y: 82, id: 'TGT-01', host: true },
-      { x: 224, y: 142, id: 'RONE-04', host: false },
-      { x: 84, y: 176, id: 'TGT-02', host: true },
-      { x: 256, y: 68, id: 'BOPE-01', host: false }
+      { text: 'GIS: Rios Parnaíba e Poti calibrados em WGS84', crit: false },
+      { text: 'LPR: Placa PIU-8B42 monitorada em Pte. Estaiada (sim.)', crit: true },
+      { text: 'ONTOLOGIA: 10 nós estratégicos do Piauí vinculados', crit: false },
+      { text: 'FISCAL-PI: DCL 56,1% da RCL 2025 (61% ref. ant. | Teto: 200%)', crit: false }
     ];
 
     let activeCamMode = 'OPTICAL';
+    let activeMapMode = 'GEO-THE';
+    let selectedNodeId = 'PI';
+    let selectedHubIbge = '2211001';
     let focusedCamIdx = 0;
     let soundEnabled = true;
     let lockdownActive = false;
@@ -136,6 +363,7 @@
     let eventTimer = null;
     let lastSpecTime = 0;
     let lastTelemetryTime = 0;
+    let renderedGraphNodes = [];
     const cmdHistory = [];
     let historyPos = -1;
 
@@ -143,7 +371,7 @@
       window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches
     );
 
-    // ==================== 1. ÁUDIO TÁTICO (Web Audio API) ====================
+    // ==================== 1. ÁUDIO TÁTICO ====================
     function playTacticalSound(freq = 880, type = 'sine', duration = 0.06, vol = 0.04) {
       if (!soundEnabled) return;
       const AudioConstructor = window.AudioContext || window.webkitAudioContext;
@@ -186,13 +414,13 @@
       line.className = `eog-term-line ${type}`;
       line.textContent = `> ${msg}`;
       termBody.appendChild(line);
-      while (termBody.children.length > 80) {
+      while (termBody.children.length > 90) {
         termBody.firstElementChild.remove();
       }
       termBody.scrollTop = termBody.scrollHeight;
     }
 
-    // ==================== 3. FEED DE EVENTOS TÁTICOS ====================
+    // ==================== 3. FEED DE EVENTOS ====================
     const eventFeedContainer = document.getElementById('eog-event-feed-container');
 
     function formatFortalezaTime(date, withMs = false) {
@@ -230,7 +458,7 @@
       }
     }
 
-    sampleEvents.slice(0, 4).forEach(ev => pushEventFeed(ev));
+    sampleEvents.forEach(ev => pushEventFeed(ev));
 
     // ==================== 4. MATRIX RAIN CANVAS ====================
     const rainCanvas = document.getElementById('eog-matrix-rain-canvas');
@@ -270,7 +498,43 @@
       }
     }
 
-    // ==================== 5. RELÓGIO & TELEMETRIA ====================
+    // ==================== 5. RELÓGIO & TELEMETRIA REAL GOV-BR ====================
+    function syncRealtimeSensors() {
+      const rt = window.PiauiRealtime ? window.PiauiRealtime.getState() : null;
+      const tempEl = document.getElementById('eog-sensor-temp');
+      const popEl = document.getElementById('eog-sensor-pop');
+      const gridEl = document.getElementById('eog-sensor-grid');
+      const rfEl = document.getElementById('eog-sensor-rf');
+      const srcTag = document.getElementById('eog-gov-source-tag');
+
+      if (rt && rt.weather && rt.weather.teresina && rt.weather.teresina.tempC != null) {
+        if (tempEl) tempEl.textContent = `${Number(rt.weather.teresina.tempC).toFixed(1)}°C (UV ${rt.weather.teresina.uv ?? '—'})`;
+      } else if (tempEl) {
+        tempEl.textContent = 'MODO LOCAL';
+      }
+
+      if (popEl) {
+        popEl.textContent = rt && rt.ibge && rt.ibge.populacaoBrasilProjecao
+          ? `PI 3.384.547 · BR ${(Number(rt.ibge.populacaoBrasilProjecao) / 1e6).toFixed(1)}M`
+          : '3.384.547 (IBGE)';
+      }
+
+      if (gridEl) {
+        gridEl.textContent = rt && rt.bcb && rt.bcb.selic && rt.bcb.selic.valor != null
+          ? `SELIC ${rt.bcb.selic.valor}% · DCL 56,1%`
+          : 'DCL 56,1% RCL';
+      }
+
+      if (rfEl) {
+        const muns = rt && rt.ibge ? (rt.ibge.municipiosCount || 224) : 224;
+        rfEl.textContent = rt && rt.status === 'online' ? `${muns} MUN. · ONLINE` : `${muns} MUN. · LOCAL`;
+      }
+
+      if (srcTag && rt) {
+        srcTag.textContent = rt.status === 'online' ? 'GOV-BR AO VIVO' : (rt.status === 'partial' ? 'GOV-BR PARCIAL' : 'BASE LOCAL');
+      }
+    }
+
     function updateTacticalClock() {
       const now = new Date();
       const clockEl = document.getElementById('eog-tactical-clock');
@@ -281,18 +545,19 @@
       const ts = now.getTime();
       if (ts - lastTelemetryTime > 2600) {
         lastTelemetryTime = ts;
-        const tempEl = document.getElementById('eog-sensor-temp');
-        const popEl = document.getElementById('eog-sensor-pop');
-        const gridEl = document.getElementById('eog-sensor-grid');
-        const rfEl = document.getElementById('eog-sensor-rf');
-        if (tempEl) tempEl.textContent = (38.7 + Math.random() * 0.3).toFixed(1) + '°C';
-        if (popEl) popEl.textContent = (164190 + Math.floor(Math.random() * 90)).toLocaleString('pt-BR');
-        if (gridEl) gridEl.textContent = (84.0 + Math.random() * 0.6).toFixed(1) + '%';
-        if (rfEl) rfEl.textContent = (2.41 + Math.random() * 0.03).toFixed(2) + ' GHz';
+        syncRealtimeSensors();
       }
     }
 
-    // ==================== 6. CARTÃO DE INSPEÇÃO DO ALVO ====================
+    document.addEventListener('piaui:realtime-update', event => {
+      syncRealtimeSensors();
+      const detail = event.detail || {};
+      if (detail.status === 'online') {
+        pushEventFeed({ text: 'GOV-BR: IBGE, BCB e Clima Teresina sincronizados', crit: false });
+      }
+    });
+
+    // ==================== 6. INSPEÇÃO DE ALVO ====================
     function updateTargetInspectCard() {
       const cam = camerasDB[focusedCamIdx] || camerasDB[0];
       const idEl = document.getElementById('eog-target-id-label');
@@ -328,7 +593,7 @@
       }
     }
 
-    // ==================== 7. CÂMERAS MODULADAS (6 MODOS IA) ====================
+    // ==================== 7. CÂMERAS MODULADAS ====================
     const cctvGrid = document.getElementById('eog-cctv-grid');
 
     function focusCamera(idx) {
@@ -371,7 +636,7 @@
         camSpan.textContent = `${cam.id} // ${cam.zone}`;
         const recSpan = document.createElement('span');
         recSpan.className = 'eog-cam-rec';
-        recSpan.textContent = '● REC_LOCK';
+        recSpan.textContent = '● SIM_HUD';
         headerTag.append(camSpan, recSpan);
 
         const locDiv = document.createElement('div');
@@ -453,7 +718,7 @@
           ctx.strokeRect(hx - 18, hy - 12, 36, 24);
           ctx.fillStyle = '#fff';
           ctx.font = '8px "Share Tech Mono", monospace';
-          ctx.fillText('82.4°C PEAK', hx - 20, hy - 16);
+          ctx.fillText('FLIR SIM', hx - 16, hy - 16);
         } else if (activeCamMode === 'NVG') {
           ctx.fillStyle = 'rgba(0, 255, 102, 0.14)';
           ctx.fillRect(0, 0, w, h);
@@ -520,7 +785,7 @@
       });
     }
 
-    // ==================== 8. WIREFRAME FACIAL (CANVAS) ====================
+    // ==================== 8. WIREFRAME FACIAL ====================
     const faceCanvas = document.getElementById('eog-wireframe-face-canvas');
 
     function renderWireframeFace(nowMs) {
@@ -557,122 +822,321 @@
       faceCtx.stroke();
     }
 
-    // ==================== 9. RADAR ORBITAL TÁTICO ====================
+    // ==================== 9. MAPA GIS REAL (TERESINA / PIAUÍ) + RADAR ====================
     const radarCanvas = document.getElementById('eog-tactical-radar-canvas');
 
+    function setMapMode(mode) {
+      const norm = String(mode || '').toUpperCase();
+      if (!['GEO-THE', 'GEO-PI', 'RADAR'].includes(norm)) return false;
+      activeMapMode = norm;
+      $$('.eog-map-btn', tabPanel).forEach(btn => {
+        const isCurrent = btn.dataset.eogMap === activeMapMode;
+        btn.classList.toggle('active', isCurrent);
+        btn.setAttribute('aria-pressed', String(isCurrent));
+      });
+      renderTacticalRadar(Date.now());
+      return true;
+    }
+
+    $$('.eog-map-btn', tabPanel).forEach(btn => {
+      btn.addEventListener('click', () => {
+        setMapMode(btn.dataset.eogMap);
+        printTerminal(`Camada GIS alterada para [${activeMapMode}].`, 'success');
+      });
+    });
+
+    function projectPoint(lat, lng, bounds, w, h, pad = 18) {
+      const minLon = bounds.minLon ?? bounds.minLng;
+      const maxLon = bounds.maxLon ?? bounds.maxLng;
+      const x = pad + ((lng - minLon) / (maxLon - minLon)) * (w - pad * 2);
+      const y = h - pad - ((lat - bounds.minLat) / (bounds.maxLat - bounds.minLat)) * (h - pad * 2);
+      return [x, y];
+    }
+
     function renderTacticalRadar(nowMs) {
-      const radarCtx = safeCtx(radarCanvas);
-      if (!radarCtx || !radarCanvas) return;
+      const ctx = safeCtx(radarCanvas);
+      if (!ctx || !radarCanvas) return;
       const w = radarCanvas.width;
       const h = radarCanvas.height;
       const cx = w / 2;
       const cy = h / 2;
       const time = nowMs * 0.0015;
 
-      radarCtx.fillStyle = '#01050a';
-      radarCtx.fillRect(0, 0, w, h);
+      ctx.fillStyle = '#01050a';
+      ctx.fillRect(0, 0, w, h);
 
-      radarCtx.strokeStyle = 'rgba(0, 255, 102, 0.22)';
-      radarCtx.lineWidth = 1;
-      [40, 80, 110].forEach(r => {
-        radarCtx.beginPath();
-        radarCtx.arc(cx, cy, r, 0, Math.PI * 2);
-        radarCtx.stroke();
-      });
+      // Grade coordenada sutil
+      ctx.strokeStyle = 'rgba(0, 240, 255, 0.08)';
+      ctx.lineWidth = 1;
+      for (let gx = 34; gx < w; gx += 48) {
+        ctx.beginPath(); ctx.moveTo(gx, 0); ctx.lineTo(gx, h); ctx.stroke();
+      }
+      for (let gy = 28; gy < h; gy += 46) {
+        ctx.beginPath(); ctx.moveTo(0, gy); ctx.lineTo(w, gy); ctx.stroke();
+      }
 
-      radarCtx.beginPath();
-      radarCtx.moveTo(cx, 0);
-      radarCtx.lineTo(cx, h);
-      radarCtx.moveTo(0, cy);
-      radarCtx.lineTo(w, cy);
-      radarCtx.stroke();
+      if (activeMapMode === 'GEO-THE' && ontology && ontology.teresinaGeo) {
+        const tg = ontology.teresinaGeo;
+        const bounds = tg.bounds;
+        const drawLine = (pts, color, width = 2) => {
+          if (!pts || !pts.length) return;
+          ctx.strokeStyle = color;
+          ctx.lineWidth = width;
+          ctx.beginPath();
+          pts.forEach(([lat, lon], i) => {
+            const [x, y] = projectPoint(lat, lon, bounds, w, h, 16);
+            if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+          });
+          ctx.stroke();
+        };
 
-      // Feixe de varredura 360°
-      radarCtx.strokeStyle = lockdownActive ? '#ff003c' : '#00ff66';
-      radarCtx.lineWidth = 2;
-      radarCtx.beginPath();
-      radarCtx.moveTo(cx, cy);
-      radarCtx.lineTo(cx + Math.cos(time) * 110, cy + Math.sin(time) * 110);
-      radarCtx.stroke();
+        // Rios reais e corredores viários de Teresina
+        drawLine(tg.rioParnaiba, 'rgba(0, 175, 255, 0.55)', 3);
+        drawLine(tg.rioPoti, 'rgba(0, 240, 255, 0.45)', 2.2);
+        (tg.corridors || []).forEach(c => drawLine(c.points, 'rgba(255, 230, 0, 0.38)', 1.3));
 
-      // Plotagem de alvos
-      radarTargets.forEach((tgt, idx) => {
-        const px = tgt.x + Math.sin(time + idx) * 3;
-        const py = tgt.y + Math.cos(time + idx) * 3;
-        radarCtx.fillStyle = tgt.host ? '#ff003c' : '#00f0ff';
-        radarCtx.beginPath();
-        radarCtx.arc(px, py, 4, 0, Math.PI * 2);
-        radarCtx.fill();
+        // Pontos estratégicos
+        (tg.points || []).forEach(pt => {
+          const [px, py] = projectPoint(pt.lat, pt.lon, bounds, w, h, 16);
+          ctx.fillStyle = pt.type === 'totem' ? '#ff003c' : (pt.type === 'infra' ? '#ffe600' : '#00ff66');
+          ctx.beginPath(); ctx.arc(px, py, 2.8, 0, Math.PI * 2); ctx.fill();
+          if (pt.type !== 'camera') {
+            ctx.fillStyle = '#94a3b8';
+            ctx.font = '8px "Share Tech Mono", monospace';
+            ctx.fillText(pt.id, px + 5, py + 3);
+          }
+        });
 
-        if (idx === 0 && targetLocked) {
-          radarCtx.strokeStyle = '#ffe600';
-          radarCtx.lineWidth = 1.2;
-          radarCtx.strokeRect(px - 8, py - 8, 16, 16);
-        }
+        // Câmeras em coordenadas reais de Teresina
+        camerasDB.forEach((cam, idx) => {
+          const [px, py] = projectPoint(cam.lat, cam.lng, bounds, w, h, 16);
+          const isFocus = idx === focusedCamIdx;
+          ctx.fillStyle = isFocus ? '#ff003c' : '#ffe600';
+          ctx.beginPath(); ctx.arc(px, py, isFocus ? 4.5 : 3, 0, Math.PI * 2); ctx.fill();
+          if (isFocus && targetLocked) {
+            ctx.strokeStyle = '#ffe600';
+            ctx.strokeRect(px - 7, py - 7, 14, 14);
+          }
+          ctx.fillStyle = '#fff';
+          ctx.font = '8px "Share Tech Mono", monospace';
+          ctx.fillText(cam.id, px + 6, py - 4);
+        });
 
-        radarCtx.fillStyle = '#fff';
-        radarCtx.font = '8px "Share Tech Mono", monospace';
-        radarCtx.fillText(tgt.id, px + 7, py + 3);
-      });
+        ctx.fillStyle = 'rgba(0, 240, 255, 0.8)';
+        ctx.font = '8px "Share Tech Mono", monospace';
+        ctx.fillText('GIS TERESINA · PARNAÍBA & POTI (WGS84)', 8, 12);
+      } else if (activeMapMode === 'GEO-PI' && ontology && ontology.piauiPolygon) {
+        const bounds = { minLat: -11.1, maxLat: -2.6, minLng: -46.1, maxLng: -40.2 };
+        ctx.strokeStyle = lockdownActive ? 'rgba(255, 0, 60, 0.7)' : 'rgba(0, 255, 102, 0.55)';
+        ctx.fillStyle = 'rgba(0, 255, 102, 0.06)';
+        ctx.lineWidth = 1.6;
+        ctx.beginPath();
+        ontology.piauiPolygon.forEach(([lat, lon], i) => {
+          const [x, y] = projectPoint(lat, lon, bounds, w, h, 14);
+          if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+        });
+        if (typeof ctx.closePath === 'function') ctx.closePath();
+        ctx.fill();
+        ctx.stroke();
+
+        ontology.municipalities.forEach(mun => {
+          const [mx, my] = projectPoint(mun.lat, mun.lon, bounds, w, h, 14);
+          const isCapital = String(mun.ibge) === '2211001';
+          const isSelected = String(mun.ibge) === String(selectedHubIbge);
+          ctx.fillStyle = isSelected ? '#00ff66' : (isCapital ? '#ff003c' : (mun.territory.includes('Chapada') || mun.territory.includes('Tabuleiros') ? '#ffe600' : '#00f0ff'));
+          ctx.beginPath(); ctx.arc(mx, my, isSelected ? 5 : (isCapital ? 4.5 : 2.8), 0, Math.PI * 2); ctx.fill();
+          if (isSelected) {
+            ctx.strokeStyle = '#fff';
+            ctx.lineWidth = 1.2;
+            ctx.beginPath(); ctx.arc(mx, my, 8, 0, Math.PI * 2); ctx.stroke();
+          }
+          if (isSelected || isCapital || ['Parnaíba', 'Picos', 'Bom Jesus', 'Uruçuí', 'Floriano', 'São Raimundo Nonato'].includes(mun.name)) {
+            ctx.fillStyle = isSelected ? '#00ff66' : '#e2e8f0';
+            ctx.font = '8px "Share Tech Mono", monospace';
+            ctx.fillText(mun.name.slice(0, 12), mx + 5, my + 2);
+          }
+        });
+        ctx.fillStyle = 'rgba(0, 240, 255, 0.8)';
+        ctx.font = '8px "Share Tech Mono", monospace';
+        ctx.fillText('GIS PIAUÍ · 16 POLOS ESTRATÉGICOS (WGS84)', 8, 12);
+      }
+
+      // Varredura radar sutil em qualquer camada (mais forte em RADAR)
+      if (activeMapMode === 'RADAR') {
+        ctx.strokeStyle = 'rgba(0, 255, 102, 0.25)';
+        ctx.lineWidth = 1;
+        [38, 76, 108].forEach(r => {
+          ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI * 2); ctx.stroke();
+        });
+        ctx.beginPath();
+        ctx.moveTo(cx, 0); ctx.lineTo(cx, h);
+        ctx.moveTo(0, cy); ctx.lineTo(w, cy);
+        ctx.stroke();
+      }
+
+      ctx.strokeStyle = lockdownActive ? 'rgba(255, 0, 60, 0.7)' : 'rgba(0, 255, 102, 0.5)';
+      ctx.lineWidth = 1.6;
+      ctx.beginPath();
+      ctx.moveTo(cx, cy);
+      ctx.lineTo(cx + Math.cos(time) * 112, cy + Math.sin(time) * 112);
+      ctx.stroke();
 
       if (droneDispatched) {
-        const dx = 118 + Math.cos(time * 2.2) * 35;
-        const dy = 82 + Math.sin(time * 2.2) * 28;
-        radarCtx.fillStyle = '#ffe600';
-        radarCtx.beginPath();
-        radarCtx.arc(dx, dy, 3.5, 0, Math.PI * 2);
-        radarCtx.fill();
-        radarCtx.fillText('DRONE-02', dx + 6, dy + 3);
+        const dx = cx + Math.cos(time * 2.2) * 38;
+        const dy = cy + Math.sin(time * 2.2) * 30;
+        ctx.fillStyle = '#ffe600';
+        ctx.beginPath(); ctx.arc(dx, dy, 3.5, 0, Math.PI * 2); ctx.fill();
+        ctx.font = '8px "Share Tech Mono", monospace';
+        ctx.fillText('DRONE-02', dx + 6, dy + 3);
       }
     }
 
-    // ==================== 10. GRAFO PALANTIR ====================
+    if (radarCanvas) {
+      radarCanvas.addEventListener('click', event => {
+        const rect = radarCanvas.getBoundingClientRect();
+        const scaleX = radarCanvas.width / Math.max(rect.width, 1);
+        const scaleY = radarCanvas.height / Math.max(rect.height, 1);
+        const cx = (event.clientX - rect.left) * scaleX;
+        const cy = (event.clientY - rect.top) * scaleY;
+        if (activeMapMode === 'GEO-PI' && ontology && Array.isArray(ontology.municipalities)) {
+          const bounds = { minLat: -11.1, maxLat: -2.6, minLng: -46.1, maxLng: -40.2 };
+          let hit = null;
+          let minD = 22;
+          ontology.municipalities.forEach(mun => {
+            const [mx, my] = projectPoint(mun.lat, mun.lon, bounds, radarCanvas.width, radarCanvas.height, 14);
+            const d = Math.hypot(mx - cx, my - cy);
+            if (d < minD) { minD = d; hit = mun; }
+          });
+          if (hit) {
+            selectedHubIbge = String(hit.ibge);
+            playTacticalSound(1050, 'sine', 0.05);
+            printTerminal(`GIS PIAUÍ [${hit.ibge}]: ${hit.name} · Pop. ${hit.pop2022.toLocaleString('pt-BR')} · ${hit.territory} · ${hit.role}`, 'success');
+            renderTacticalRadar(Date.now());
+          }
+        } else if (activeMapMode === 'GEO-THE' && ontology && ontology.teresinaGeo) {
+          const bounds = ontology.teresinaGeo.bounds;
+          let hitIdx = -1;
+          let minD = 24;
+          camerasDB.forEach((cam, idx) => {
+            const [px, py] = projectPoint(cam.lat, cam.lng, bounds, radarCanvas.width, radarCanvas.height, 16);
+            const d = Math.hypot(px - cx, py - cy);
+            if (d < minD) { minD = d; hitIdx = idx; }
+          });
+          if (hitIdx >= 0) {
+            focusCamera(hitIdx);
+            printTerminal(`GIS TERESINA: Foco ajustado para ${camerasDB[hitIdx].id} (${camerasDB[hitIdx].loc}).`, 'success');
+            renderTacticalRadar(Date.now());
+          }
+        }
+      });
+    }
+
+    // ==================== 10. GRAFO DE ONTOLOGIA PALANTIR INTERATIVO ====================
     const graphCanvas = document.getElementById('eog-palantir-graph-canvas');
+    const nodeInspector = document.getElementById('eog-node-inspector');
+
+    function updateNodeInspector(nodeId) {
+      if (!nodeInspector || !ontology) return;
+      const node = ontology.ontologyGraph.nodes.find(n => n.id === nodeId) || ontology.ontologyGraph.nodes[0];
+      if (!node) return;
+      selectedNodeId = node.id;
+      const links = ontology.ontologyGraph.edges
+        .filter(([from, to]) => from === node.id || to === node.id)
+        .map(([from, to, relation]) => {
+          const peerId = from === node.id ? to : from;
+          const peer = ontology.ontologyGraph.nodes.find(n => n.id === peerId);
+          return `${relation}: ${peer ? peer.label : peerId}`;
+        });
+      nodeInspector.replaceChildren();
+      const title = document.createElement('strong');
+      title.textContent = `${node.label} [${node.group.toUpperCase()}]`;
+      nodeInspector.append(
+        title,
+        document.createTextNode(` · ${node.detail}`),
+        document.createElement('br'),
+        document.createTextNode(`Vínculos: ${links.join(' | ')}`)
+      );
+    }
 
     function renderPalantirGraph(nowMs) {
       const graphCtx = safeCtx(graphCanvas);
       if (!graphCtx || !graphCanvas) return;
-      const cam = camerasDB[focusedCamIdx] || camerasDB[0];
+      const w = graphCanvas.width;
+      const h = graphCanvas.height;
       const t = nowMs * 0.002;
-      const nodes = [
-        { id: customTargetLabel ? customTargetLabel.slice(0, 14) : `ALVO #0${focusedCamIdx + 1}`, x: 170, y: 100, color: '#ff003c' },
-        { id: cam.model.slice(0, 14), x: 82, y: 58, color: '#00f0ff' },
-        { id: cam.loc.split('/')[0].trim().slice(0, 15), x: 258, y: 58, color: '#00ff66' },
-        { id: `VTR ${cam.unit}`, x: 82, y: 152, color: '#ffe600' },
-        { id: cam.imei, x: 258, y: 152, color: '#00f0ff' }
-      ];
 
       graphCtx.fillStyle = '#01050a';
-      graphCtx.fillRect(0, 0, graphCanvas.width, graphCanvas.height);
+      graphCtx.fillRect(0, 0, w, h);
 
-      graphCtx.strokeStyle = lockdownActive ? 'rgba(255, 0, 60, 0.35)' : 'rgba(0, 240, 255, 0.28)';
-      graphCtx.lineWidth = 1.2;
-      for (let i = 1; i < nodes.length; i++) {
-        graphCtx.beginPath();
-        graphCtx.moveTo(nodes[0].x, nodes[0].y);
-        graphCtx.lineTo(nodes[i].x, nodes[i].y);
-        graphCtx.stroke();
+      if (ontology && ontology.ontologyGraph) {
+        const nodes = ontology.ontologyGraph.nodes;
+        const cx = w / 2;
+        const cy = h / 2;
+        renderedGraphNodes = nodes.map((n, idx) => {
+          if (idx === 0) return { ...n, x: cx, y: cy };
+          const angle = ((idx - 1) / (nodes.length - 1)) * Math.PI * 2 - Math.PI / 2;
+          return { ...n, x: cx + Math.cos(angle) * 124, y: cy + Math.sin(angle) * 76 };
+        });
+        const byId = Object.fromEntries(renderedGraphNodes.map(n => [n.id, n]));
 
-        // Pulso trafegando pelo vínculo
-        const ratio = (t * 0.4 + i * 0.25) % 1;
-        const px = nodes[0].x + (nodes[i].x - nodes[0].x) * ratio;
-        const py = nodes[0].y + (nodes[i].y - nodes[0].y) * ratio;
-        graphCtx.fillStyle = '#00ff66';
-        graphCtx.fillRect(px - 1.5, py - 1.5, 3, 3);
+        ontology.ontologyGraph.edges.forEach(([from, to], i) => {
+          const a = byId[from];
+          const b = byId[to];
+          if (!a || !b) return;
+          const highlighted = from === selectedNodeId || to === selectedNodeId;
+          graphCtx.strokeStyle = highlighted ? 'rgba(0, 255, 102, 0.72)' : 'rgba(0, 240, 255, 0.22)';
+          graphCtx.lineWidth = highlighted ? 1.5 : 1;
+          graphCtx.beginPath(); graphCtx.moveTo(a.x, a.y); graphCtx.lineTo(b.x, b.y); graphCtx.stroke();
+
+          if (highlighted) {
+            const ratio = (t * 0.4 + i * 0.17) % 1;
+            graphCtx.fillStyle = '#ffe600';
+            graphCtx.fillRect(a.x + (b.x - a.x) * ratio - 1.5, a.y + (b.y - a.y) * ratio - 1.5, 3, 3);
+          }
+        });
+
+        renderedGraphNodes.forEach(node => {
+          const isSel = node.id === selectedNodeId;
+          graphCtx.fillStyle = node.color || '#00f0ff';
+          graphCtx.beginPath();
+          graphCtx.arc(node.x, node.y, isSel ? 6.5 : 4.5, 0, Math.PI * 2);
+          graphCtx.fill();
+          if (isSel) {
+            graphCtx.strokeStyle = '#fff';
+            graphCtx.lineWidth = 1.2;
+            graphCtx.beginPath(); graphCtx.arc(node.x, node.y, 9, 0, Math.PI * 2); graphCtx.stroke();
+          }
+          graphCtx.fillStyle = isSel ? '#fff' : '#cbd5e1';
+          graphCtx.font = '8px "Share Tech Mono", monospace';
+          graphCtx.fillText(node.label.slice(0, 14), node.x - 24, node.y - 9);
+        });
       }
+    }
 
-      nodes.forEach(node => {
-        graphCtx.fillStyle = node.color;
-        graphCtx.beginPath();
-        graphCtx.arc(node.x, node.y, 5, 0, Math.PI * 2);
-        graphCtx.fill();
-        graphCtx.fillStyle = '#cbd5e1';
-        graphCtx.font = '9px "Share Tech Mono", monospace';
-        graphCtx.fillText(node.id, node.x - 28, node.y - 9);
+    if (graphCanvas) {
+      graphCanvas.addEventListener('click', event => {
+        if (!renderedGraphNodes.length) return;
+        const rect = graphCanvas.getBoundingClientRect();
+        const scaleX = graphCanvas.width / Math.max(rect.width, 1);
+        const scaleY = graphCanvas.height / Math.max(rect.height, 1);
+        const cx = (event.clientX - rect.left) * scaleX;
+        const cy = (event.clientY - rect.top) * scaleY;
+        let hit = null;
+        let minD = 20;
+        renderedGraphNodes.forEach(n => {
+          const d = Math.hypot(n.x - cx, n.y - cy);
+          if (d < minD) { minD = d; hit = n; }
+        });
+        if (hit) {
+          updateNodeInspector(hit.id);
+          playTacticalSound(1020, 'sine', 0.05);
+          printTerminal(`NÓ ONTOLÓGICO [${hit.id}]: ${hit.label} — ${hit.detail}`, 'success');
+          renderPalantirGraph(Date.now());
+        }
       });
     }
 
-    // ==================== 11. ESPECTRO RF / ÁUDIO ====================
+    // ==================== 11. ESPECTRO RF ====================
     const specCanvas = document.getElementById('eog-spectrum-canvas');
 
     function renderSpectrum(nowMs) {
@@ -740,17 +1204,11 @@
       renderTacticalRadar(Date.now());
     }
 
-    if (lockdownBtn) {
-      lockdownBtn.addEventListener('click', () => setLockdown(!lockdownActive));
-    }
-    if (lockTargetBtn) {
-      lockTargetBtn.addEventListener('click', lockTargetOnRadar);
-    }
-    if (dispatchDroneBtn) {
-      dispatchDroneBtn.addEventListener('click', deployInterceptorDrone);
-    }
+    if (lockdownBtn) lockdownBtn.addEventListener('click', () => setLockdown(!lockdownActive));
+    if (lockTargetBtn) lockTargetBtn.addEventListener('click', lockTargetOnRadar);
+    if (dispatchDroneBtn) dispatchDroneBtn.addEventListener('click', deployInterceptorDrone);
 
-    // ==================== 13. INTERPRETADOR DE COMANDOS CLI ====================
+    // ==================== 13. INTERPRETADOR CLI UNIFICADO ====================
     function executeCommand(rawCmd) {
       const trimmed = rawCmd.trim();
       if (!trimmed) return;
@@ -768,7 +1226,7 @@
       switch (main) {
         case 'help':
           printTerminal(
-            'COMANDOS: help, target <nome>, lockdown, standdown, thermal, nvg, lidar, optical, neural, sar, scan, radar, intercept, status, clear',
+            'COMANDOS: help, target <nome>, lockdown, standdown, thermal, nvg, lidar, optical, neural, sar, scan, radar, intercept, status, clear | DADOS: pib, pop, fiscal, edu, swot, geo [the|pi], mun <nome>, graph <id>, anomalies, weather, macro, govbr',
             'success'
           );
           break;
@@ -795,40 +1253,127 @@
           playTacticalSound(400, 'sawtooth', 0.18);
           break;
         }
-        case 'lockdown':
-          setLockdown(true);
-          break;
+        case 'lockdown': setLockdown(true); break;
         case 'standdown':
         case 'unlock':
-        case 'reset':
-          setLockdown(false);
-          break;
+        case 'reset': setLockdown(false); break;
         case 'thermal':
-        case 'flir':
-          setCameraMode('FLIR');
-          break;
-        case 'nvg':
-          setCameraMode('NVG');
-          break;
-        case 'lidar':
-          setCameraMode('LIDAR');
-          break;
-        case 'optical':
-          setCameraMode('OPTICAL');
-          break;
-        case 'neural':
-          setCameraMode('NEURAL');
-          break;
-        case 'sar':
-          setCameraMode('SAR');
-          break;
+        case 'flir': setCameraMode('FLIR'); break;
+        case 'nvg': setCameraMode('NVG'); break;
+        case 'lidar': setCameraMode('LIDAR'); break;
+        case 'optical': setCameraMode('OPTICAL'); break;
+        case 'neural': setCameraMode('NEURAL'); break;
+        case 'sar': setCameraMode('SAR'); break;
         case 'scan':
           printTerminal('VARREDURA MULTI-SETORIAL: 6 câmeras ativas em Teresina (ZL, CT, ZN, ZSE, ZO) — 100% operacionais (simulação).', 'success');
           pushEventFeed({ text: 'SCAN: Varredura orbital concluída nas 6 zonas', crit: false });
           break;
         case 'radar':
+          setMapMode('RADAR');
           printTerminal('RADAR C4ISR: 12 alvos monitorados · 8 viaturas em campo · varredura 360° ativa.', 'success');
-          renderTacticalRadar(Date.now());
+          break;
+        case 'geo': {
+          const targetLayer = arg.toLowerCase() === 'pi' ? 'GEO-PI' : 'GEO-THE';
+          setMapMode(targetLayer);
+          printTerminal(`CAMADA GIS ATIVA: ${targetLayer} (projeção WGS84 carregada no painel tático).`, 'success');
+          break;
+        }
+        case 'pib':
+          printTerminal('PIB PIAUÍ (IBGE 2023): R$ 80,9 bilhões (+4,2% a.a.) | Teresina: R$ 28,2 bi (2023) | Agro: 18% (destaque Sudoeste/MATOPIBA).', 'success');
+          break;
+        case 'pop':
+          printTerminal('POPULAÇÃO (IBGE): Censo 2022 = 3.271.199 hab. (PI) / 866.300 (Teresina, 26,48%) | Est. 2025 = 3.384.547 (PI) / 905.692 (Teresina, 26,76%).', 'success');
+          break;
+        case 'fiscal':
+          printTerminal('FISCAL (SEFAZ-PI 2025): DCL R$ 10,93 bi (56,1% da RCL 2025 de R$ 19,5 bi · 61% RGF anterior) · Limite LRF Senado = 200% | CAPAG-STN: B.', 'success');
+          break;
+        case 'weather': {
+          const rt = window.PiauiRealtime ? window.PiauiRealtime.getState() : null;
+          if (rt && rt.weather && rt.weather.teresina && rt.weather.teresina.tempC != null) {
+            const hubs = [
+              `Teresina: ${Number(rt.weather.teresina.tempC).toFixed(1)}°C (Umid. ${rt.weather.teresina.humidity ?? '—'}% · UV ${rt.weather.teresina.uv ?? '—'})`,
+              rt.weather.parnaiba ? `Parnaíba: ${Number(rt.weather.parnaiba.tempC).toFixed(1)}°C` : null,
+              rt.weather.picos ? `Picos: ${Number(rt.weather.picos.tempC).toFixed(1)}°C` : null,
+              rt.weather.bomJesus ? `Bom Jesus: ${Number(rt.weather.bomJesus.tempC).toFixed(1)}°C` : null
+            ].filter(Boolean);
+            printTerminal('CLIMA PIAUÍ (Open-Meteo): ' + hubs.join(' | '), 'success');
+          } else {
+            printTerminal('CLIMA PIAUÍ: Telemetria local aguardando sincronização Open-Meteo (execute "govbr").', 'sys');
+          }
+          break;
+        }
+        case 'macro': {
+          const rt = window.PiauiRealtime ? window.PiauiRealtime.getState() : null;
+          if (rt && rt.bcb && rt.bcb.selic && rt.bcb.selic.valor != null) {
+            const parts = [`Selic Meta: ${rt.bcb.selic.valor}% (${rt.bcb.selic.data || 'atual'})`];
+            if (rt.bcb.ipca && rt.bcb.ipca.valor != null) parts.push(`IPCA Mês: ${rt.bcb.ipca.valor}%`);
+            if (rt.bcb.usdBrl && rt.bcb.usdBrl.valor != null) parts.push(`USD PTAX: R$ ${rt.bcb.usdBrl.valor}`);
+            printTerminal('MACRO BCB SGS: ' + parts.join(' | '), 'success');
+          } else {
+            printTerminal('MACRO BCB SGS: Sem leitura ao vivo na sessão (execute "govbr" com rede ativa).', 'sys');
+          }
+          break;
+        }
+        case 'edu':
+          printTerminal('EDUCAÇÃO (INEP/SEDUC): IDEB Ensino Médio 2023 = 4,5 (4º lugar no Brasil, melhor do Nordeste) | IDEP/IDEPI monitorados.', 'success');
+          break;
+        case 'swot':
+          printTerminal('SWOT PIAUÍ: Forças (Energia limpa/IDEB/Solidez fiscal) | Oportunidades (H2V ZPE Parnaíba/MATOPIBA/Transnordestina) | Riscos (Seca/Concentração/Saneamento).', 'success');
+          break;
+        case 'anomalies':
+          if (ontology && ontology.anomalies) {
+            ontology.anomalies.forEach(a => printTerminal(`[${a.severity.toUpperCase()}] ${a.title}: ${a.detail}`, 'sys'));
+          } else {
+            printTerminal('Módulo ontology.js não carregado.', 'error');
+          }
+          break;
+        case 'mun': {
+          const normText = str => String(str || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+          const q = normText(arg.trim());
+          if (!q) {
+            printTerminal('Uso: mun <nome ou código IBGE>. Ex: mun parnaiba, mun urucui', 'error');
+            break;
+          }
+          const hub = ontology && ontology.municipalities.find(m =>
+            normText(m.name).includes(q) || String(m.ibge || '') === q
+          );
+          if (hub) {
+            setMapMode('GEO-PI');
+            printTerminal(`${hub.name} (IBGE ${hub.ibge}): Pop. Censo 2022 = ${hub.pop2022.toLocaleString('pt-BR')} · Território: ${hub.territory} · Coord: ${hub.lat}, ${hub.lon} · ${hub.role}`, 'success');
+          } else {
+            const rt = window.PiauiRealtime ? window.PiauiRealtime.getState() : null;
+            const liveHit = rt && rt.ibge && Array.isArray(rt.ibge.municipios)
+              ? rt.ibge.municipios.find(m => normText(m.nome).includes(q))
+              : null;
+            if (liveHit) {
+              printTerminal(`${liveHit.nome} (IBGE ${liveHit.id}) — município oficial do Piauí validado via IBGE Localidades API.`, 'success');
+            } else {
+              printTerminal(`Município "${arg}" não encontrado nos 16 polos locais (use "govbr" para indexar todos os 224 via IBGE).`, 'error');
+            }
+          }
+          break;
+        }
+        case 'graph': {
+          const targetId = (arg || 'PI').toUpperCase();
+          if (ontology && ontology.ontologyGraph.nodes.some(n => n.id === targetId)) {
+            updateNodeInspector(targetId);
+            renderPalantirGraph(Date.now());
+            printTerminal(`Grafo centralizado no nó [${targetId}].`, 'success');
+          } else {
+            const ids = ontology ? ontology.ontologyGraph.nodes.map(n => n.id).join(', ') : '';
+            printTerminal(`Nó "${arg}" desconhecido. Nós disponíveis: ${ids}`, 'error');
+          }
+          break;
+        }
+        case 'govbr':
+          if (window.PiauiRealtime) {
+            printTerminal('Consultando IBGE, Banco Central SGS, Open-Meteo e SICONFI…', 'sys');
+            window.PiauiRealtime.syncAll().then(res => {
+              printTerminal(`Sincronização Gov-BR concluída [${res.modeLabel}].`, 'success');
+            });
+          } else {
+            printTerminal('Módulo realtime-gov.js indisponível.', 'error');
+          }
           break;
         case 'intercept':
           lockTargetOnRadar();
@@ -839,7 +1384,7 @@
           break;
         case 'status':
           printTerminal(
-            `SISTEMA ESTÁVEL [MODO ${activeCamMode}]: 6 CÂMERAS // 8 VIATURAS // DEFCON ${lockdownActive ? '1 (CRÍTICO)' : '2 (ELEVADO)'}`,
+            `SISTEMA ESTÁVEL [MODO ${activeCamMode} · GIS ${activeMapMode}]: 6 CÂMERAS // 8 VIATURAS // DEFCON ${lockdownActive ? '1 (CRÍTICO)' : '2 (ELEVADO)'}`,
             'success'
           );
           break;
@@ -872,7 +1417,7 @@
       });
     }
 
-    // ==================== 14. LOOP DE RENDERIZAÇÃO & CICLO DE VIDA ====================
+    // ==================== 14. LOOP DE RENDERIZAÇÃO ====================
     function renderAllFrames(nowMs) {
       renderMatrixRain();
       renderCCTVFeeds(nowMs);
@@ -901,6 +1446,7 @@
 
     function startActiveLoops() {
       resizeMatrixRain();
+      syncRealtimeSensors();
       updateTacticalClock();
       renderAllFrames(Date.now());
 
@@ -914,7 +1460,7 @@
           if (isTabActive()) {
             pushEventFeed(sampleEvents[Math.floor(Math.random() * sampleEvents.length)]);
           }
-        }, 4500);
+        }, 5500);
       }
       if (!rafId && !reducedMotion && typeof window.requestAnimationFrame === 'function') {
         rafId = window.requestAnimationFrame(animationStep);
@@ -930,6 +1476,8 @@
 
     buildCameraGrid();
     updateTargetInspectCard();
+    updateNodeInspector(selectedNodeId);
+    syncRealtimeSensors();
     updateTacticalClock();
 
     window.addEventListener('resize', () => {
@@ -950,6 +1498,8 @@
       startActiveLoops();
     }
   }
+
+  window.mountEyeOfGod = mountEyeOfGod;
 
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initEyeOfGod, { once: true });

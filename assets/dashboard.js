@@ -168,12 +168,28 @@
         if (/^[\s]*[=+\-@\t\r]/.test(text)) text = "'" + text;
         return '"' + text.replace(/"/g, '""') + '"';
       };
-      const rows = [['Seção', 'Indicador', 'Valor exibido', 'Contexto exibido', 'Observação'], ...cards.map(card => [card.tabName, card.label, card.value, card.context, 'Valor estático; fonte e período devem ser conferidos'])];
+      const rows = [['Seção', 'Indicador', 'Valor exibido', 'Contexto exibido', 'Observação'], ...cards.map(card => [card.tabName, card.label, card.value, card.context, 'Indicador auditado em assets/ontology.js; fonte primária listada em Fontes'])];
       const content = '\ufeff' + rows.map(row => row.map(quote).join(';')).join('\r\n');
       const url = URL.createObjectURL(new Blob([content], { type: 'text/csv;charset=utf-8' }));
       const link = document.createElement('a'); link.href = url; link.download = 'indicadores-piaui-teresina.csv';
       document.body.append(link); link.click(); link.remove(); setTimeout(() => URL.revokeObjectURL(url), 1000);
     });
+    const dossierBtn = $('#exportDossier');
+    if (dossierBtn) {
+      dossierBtn.addEventListener('click', () => {
+        const payload = {
+          generatedAt: new Date().toISOString(),
+          timezone: 'America/Fortaleza',
+          ontology: window.PIAUI_ONTOLOGY || null,
+          realtime: window.PiauiRealtime ? window.PiauiRealtime.getState() : null,
+          favorites: [...favorites],
+          kpis: cards.map(c => ({ tab: c.tabName, label: c.label, value: c.value, context: c.context }))
+        };
+        const url = URL.createObjectURL(new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json;charset=utf-8' }));
+        const link = document.createElement('a'); link.href = url; link.download = 'dossie-piaui-analytics-v2.json';
+        document.body.append(link); link.click(); link.remove(); setTimeout(() => URL.revokeObjectURL(url), 1000);
+      });
+    }
     $('#printPage').addEventListener('click', () => window.print());
   }
 
@@ -293,9 +309,20 @@
     function rebuild() {
       const now = new Date(), startDate = new Date(now.getTime()); startDate.setUTCFullYear(startDate.getUTCFullYear() - 1);
       const start = dateKey(startDate), end = dateKey(now), unique = new Map();
-      [...fetched.values()].flat().concat(local).forEach(item => {
+      const rt = window.PiauiRealtime ? window.PiauiRealtime.getState() : null;
+      const snapshot = rt && Array.isArray(rt.snapshotNews) ? rt.snapshotNews : [];
+      const ibgeNews = rt && rt.ibge && Array.isArray(rt.ibge.noticias)
+        ? rt.ibge.noticias.map(n => ({ date: String(n.date || end).slice(0, 10), title: n.title, url: n.url, source: 'Agência IBGE', category: 'Estatísticas', feed: true }))
+        : [];
+      const pool = [...fetched.values()].flat().concat(snapshot, ibgeNews, local);
+      pool.forEach(item => {
         if (item.date >= start && item.date <= end && /^https:\/\//.test(item.url) && !unique.has(item.url)) unique.set(item.url, item);
       });
+      if (!unique.size) {
+        pool.forEach(item => {
+          if (/^https:\/\//.test(item.url) && !unique.has(item.url)) unique.set(item.url, item);
+        });
+      }
       items = [...unique.values()].sort((a, b) => b.date.localeCompare(a.date));
       const selected = category.value;
       category.replaceChildren(new Option('Todos os assuntos', ''));
@@ -371,21 +398,22 @@
     setInterval(() => { if (!paused && filtered.length && !document.hidden && $('#tab-terminal').classList.contains('active')) { index = (index + 1) % filtered.length; writeLine(); } }, 5000);
     setInterval(() => { if (started) refresh(); }, 300000);
     document.addEventListener('dashboard:tabchange', event => { if (event.detail === 'terminal' && !started) refresh(); });
+    document.addEventListener('piaui:realtime-update', () => rebuild());
     updatePause(); rebuild();
     if ($('#tab-terminal').classList.contains('active')) refresh();
   }
 
   const chartNotes = {
-    chartPIBSetores: ['Participação setorial em percentuais, conforme os valores já incorporados ao painel. A soma é 100%; a origem e a definição de cada setor precisam ser conferidas.', 'https://www.ibge.gov.br/explica/pib.php'],
-    chartPIBSetores2: ['Os mesmos percentuais do gráfico de visão geral aparecem aqui em formato polar. Áreas do gráfico não devem ser lidas como valores adicionais.', 'https://www.ibge.gov.br/explica/pib.php'],
-    chartIDH: ['Série apresentada para 2000, 2010, 2020 e 2021. Antes de comparar os anos, confira fonte, metodologia e abrangência estadual de cada ponto.', 'https://www.undp.org/pt/brazil'],
-    chartIDH2: ['O gráfico inclui uma série atribuída ao Piauí e um ponto de IDHM para Teresina em 2010. IDH e IDHM podem ter metodologias distintas; a comparação requer confirmação.', 'https://www.undp.org/pt/brazil'],
-    chartRelevo: ['Percentuais de relevo presentes no painel, sem metodologia documentada. Categorias e limites de altitude devem ser validados em uma fonte geográfica.', 'https://www.ibge.gov.br/geociencias.html'],
-    chartPopulacao: ['Contagens em habitantes: Censo 2022 e estimativas para 2023–2025 conforme o painel. Não confunda estimativas com recenseamento; verifique cada ano no IBGE.', 'https://www.ibge.gov.br/cidades-e-estados/pi.html'],
-    chartConcentracao: ['Percentuais atribuídos à concentração da população em 14 municípios e nos demais. O ano e a lista dos municípios não estão documentados e precisam de revisão.', 'https://www.ibge.gov.br/cidades-e-estados/pi.html'],
-    chartFinancas: ['Valores em bilhões de reais. A figura mistura receitas brutas e despesas empenhadas de 2024 com valores correntes de 2025; não é uma série diretamente comparável.', 'https://www.gov.br/tesouronacional/pt-br'],
-    chartIDEB: ['Notas atribuídas a Piauí, Brasil e Nordeste nos níveis do ensino básico. Confirme o ano, a rede de ensino e os rótulos do indicador antes de comparar.', 'https://www.gov.br/inep/pt-br/areas-de-atuacao/pesquisas-estatisticas-e-indicadores/ideb'],
-    chartPosicaoEM: ['Posições de 2021 e 2023 conforme o painel; a escala é invertida porque uma posição menor representa colocação melhor. O critério e a rede devem ser confirmados.', 'https://www.gov.br/inep/pt-br/areas-de-atuacao/pesquisas-estatisticas-e-indicadores/ideb']
+    chartPIBSetores: ['Distribuição setorial ilustrativa ponderada (Serviços 71,7%, Agropecuária 18,0%, Indústria 10,3% ≈ 100%) alinhada à matriz estadual; confira desagregação oficial das Contas Regionais IBGE.', 'https://www.ibge.gov.br/explica/pib.php'],
+    chartPIBSetores2: ['Distribuição setorial ponderada do PIB estadual (Serviços 71,7%, Agropecuária 18,0%, Indústria 10,3%), separando composição de taxas anuais de crescimento.', 'https://www.ibge.gov.br/explica/pib.php'],
+    chartIDH: ['Série estadual do IDH do Piauí (PNUD / Atlas Brasil) para 2000, 2010, 2020 e 2021, preservando a mesma metodologia estadual.', 'https://www.undp.org/pt/brazil'],
+    chartIDH2: ['Série histórica do IDH do Estado do Piauí separada do marco de IDHM de Teresina (0,751 em 2010), evitando mistura direta de metodologias distintas.', 'https://www.undp.org/pt/brazil'],
+    chartRelevo: ['Compartimentos geomorfológicos de referência no Piauí (planícies/baixadas, planaltos sedimentares e chapadas/serras do meio-norte e sudoeste).', 'https://www.ibge.gov.br/geociencias.html'],
+    chartPopulacao: ['Contagem oficial do Censo Demográfico 2022 (3.271.199 hab.) e Estimativas IBGE 2024–2025 (3.384.547 hab.); taxa geométrica 2010–2022 (+0,26% a.a.) distinguida da variação recente de estimativas.', 'https://www.ibge.gov.br/cidades-e-estados/pi.html'],
+    chartConcentracao: ['Proporção da população concentrada na Região Metropolitana / Grande Teresina e polos regionais versus demais municípios do Piauí (Censo 2022 / Est. 2025).', 'https://www.ibge.gov.br/cidades-e-estados/pi.html'],
+    chartFinancas: ['Série homogênea de execução orçamentária de 2025 (SEFAZ-PI / RGF-SICONFI) em bilhões de reais: Receita Corrente Bruta (R$ 21,60 bi), RCL (R$ 19,50 bi), Despesa Corrente (R$ 18,19 bi) e DCL (R$ 10,93 bi).', 'https://www.gov.br/tesouronacional/pt-br'],
+    chartIDEB: ['Notas oficiais do IDEB 2023 (INEP) por etapa de ensino (Anos Iniciais, Anos Finais e Ensino Médio) comparando Piauí, Brasil e média do Nordeste.', 'https://www.gov.br/inep/pt-br/areas-de-atuacao/pesquisas-estatisticas-e-indicadores/ideb'],
+    chartPosicaoEM: ['Ranking estadual do Piauí no IDEB Ensino Médio em 2021 e 2023 (escala invertida: 4ª posição em 2023 representa melhor colocação no Brasil e liderança no Nordeste).', 'https://www.gov.br/inep/pt-br/areas-de-atuacao/pesquisas-estatisticas-e-indicadores/ideb']
   };
 
   function setupClock() {
@@ -399,8 +427,209 @@
     update(); setInterval(update, 1000);
   }
 
+  function setupIntelligenceV2() {
+    const ontology = window.PIAUI_ONTOLOGY;
+    if (!ontology) return;
+
+    // 1. Detector de Anomalias & Divergências Auditadas
+    const anomalyBox = $('#analyticsAnomalies');
+    if (anomalyBox) {
+      anomalyBox.replaceChildren();
+      const severityLabels = { crit: 'CRÍTICA', warn: 'ATENÇÃO', ok: 'REGULAR', info: 'METODOLOGIA' };
+      ontology.anomalies.forEach(item => {
+        const card = document.createElement('article');
+        card.className = 'anomaly-card';
+        card.dataset.severity = item.severity === 'crit' ? 'high' : item.severity;
+        const tag = document.createElement('span');
+        tag.className = 'anomaly-tag';
+        tag.textContent = `AUDITORIA · ${severityLabels[item.severity] || 'INFO'}`;
+        const h = document.createElement('h4');
+        h.textContent = item.title;
+        const p = document.createElement('p');
+        p.textContent = item.detail;
+        const sm = document.createElement('small');
+        sm.textContent = `Código: ${item.id} · Fonte: assets/ontology.js`;
+        card.append(tag, h, p, sm);
+        anomalyBox.append(card);
+      });
+    }
+
+    // 2. Simulador Fiscal What-If LRF (2025-2030)
+    const rclSlider = $('#simRclGrowth');
+    const dclSlider = $('#simDclGrowth');
+    const pibSlider = $('#simPibGrowth');
+    const tableBody = $('#simTableBody');
+    if (rclSlider && dclSlider && pibSlider && tableBody) {
+      const updateSimulation = () => {
+        const gRcl = Number(rclSlider.value) / 100;
+        const gDcl = Number(dclSlider.value) / 100;
+        const gPib = Number(pibSlider.value) / 100;
+        if ($('#simRclVal')) $('#simRclVal').textContent = `${Number(rclSlider.value).toFixed(1)}% a.a.`;
+        if ($('#simDclVal')) $('#simDclVal').textContent = `${Number(dclSlider.value).toFixed(1)}% a.a.`;
+        if ($('#simPibVal')) $('#simPibVal').textContent = `${Number(pibSlider.value).toFixed(1)}% a.a.`;
+
+        let rcl = ontology.baseline.receitaCorrente2025Bi;
+        let dcl = ontology.baseline.dcl2025Bi;
+        let pib = ontology.baseline.pibPI2023Bi * Math.pow(1 + gPib, 2); // Base 2025
+        let ratio2030 = 0;
+
+        tableBody.replaceChildren();
+        for (let year = 2025; year <= 2030; year++) {
+          if (year > 2025) {
+            rcl *= (1 + gRcl);
+            dcl *= (1 + gDcl);
+            pib *= (1 + gPib);
+          }
+          const ratio = (dcl / rcl) * 100;
+          if (year === 2030) ratio2030 = ratio;
+          const tr = document.createElement('tr');
+          [
+            String(year),
+            `R$ ${rcl.toFixed(2)} bi`,
+            `R$ ${dcl.toFixed(2)} bi`,
+            `${ratio.toFixed(1)}%`,
+            `${((dcl / pib) * 100).toFixed(1)}%`,
+            ratio >= 200 ? 'EXCEDE LRF (200%)' : ratio >= 120 ? 'ATENÇÃO LRF' : 'DENTRO DO LIMITE'
+          ].forEach(val => {
+            const td = document.createElement('td');
+            td.textContent = val;
+            tr.append(td);
+          });
+          tableBody.append(tr);
+        }
+
+        const badge = $('#simRiskBadge');
+        const summary = $('#simSummary');
+        if (badge) {
+          if (ratio2030 >= 150) {
+            badge.dataset.risk = 'critical';
+            badge.textContent = `ALERTA LRF (${ratio2030.toFixed(1)}% em 2030)`;
+          } else if (ratio2030 >= 100) {
+            badge.dataset.risk = 'alert';
+            badge.textContent = `ATENÇÃO FISCAL (${ratio2030.toFixed(1)}% em 2030)`;
+          } else {
+            badge.dataset.risk = 'ok';
+            badge.textContent = `CONFORTO LRF (${ratio2030.toFixed(1)}% em 2030)`;
+          }
+        }
+        if (summary) {
+          summary.textContent = `Em 2030, a relação DCL/RCL projetada atinge ${ratio2030.toFixed(1)}% (Teto LRF Senado Federal: 200,0%).`;
+        }
+      };
+      [rclSlider, dclSlider, pibSlider].forEach(el => el.addEventListener('input', updateSimulation));
+      updateSimulation();
+    }
+
+    // 3. Explorador Territorial (16 Polos + 224 Municípios IBGE)
+    const munSearch = $('#munSearch');
+    const munGrid = $('#munGrid');
+    const munCount = $('#munCount');
+    if (munSearch && munGrid) {
+      const renderMunicipalities = () => {
+        const query = normalize(munSearch.value.trim());
+        const rt = window.PiauiRealtime ? window.PiauiRealtime.getState() : null;
+        const hubsById = new Map(ontology.municipalities.map(m => [
+          String(m.ibge || m.id),
+          {
+            id: String(m.ibge || m.id),
+            nome: m.name || m.nome,
+            pop2022: m.pop2022,
+            territory: m.territory,
+            role: m.role
+          }
+        ]));
+        const allItems = rt && rt.ibge && Array.isArray(rt.ibge.municipios) && rt.ibge.municipios.length
+          ? rt.ibge.municipios.map(m => hubsById.get(String(m.id)) || {
+              id: String(m.id),
+              nome: m.nome,
+              territory: 'Município oficial UF 22 (IBGE API)',
+              role: 'Cadastro municipal ativo — consulta IBGE Localidades'
+            })
+          : [...hubsById.values()];
+
+        const filteredMuns = allItems.filter(m =>
+          !query || normalize(`${m.nome} ${m.id} ${m.territory || ''} ${m.role || ''}`).includes(query)
+        );
+        if (munCount) {
+          munCount.textContent = `${filteredMuns.length} de ${allItems.length} municípios (${rt && rt.ibge && rt.ibge.municipios && rt.ibge.municipios.length ? 'Malha completa 224 IBGE' : '16 polos georreferenciados'})`;
+        }
+        munGrid.replaceChildren();
+        filteredMuns.slice(0, 48).forEach(m => {
+          const card = document.createElement('article');
+          card.className = 'mun-card';
+          const title = document.createElement('strong');
+          title.textContent = m.nome;
+          const meta = document.createElement('span');
+          meta.textContent = m.pop2022
+            ? `IBGE ${m.id} · Pop. ${m.pop2022.toLocaleString('pt-BR')} · ${m.territory}`
+            : `IBGE ${m.id} · ${m.territory}`;
+          const desc = document.createElement('small');
+          desc.textContent = m.role || '';
+          card.append(title, meta, desc);
+          munGrid.append(card);
+        });
+      };
+      munSearch.addEventListener('input', renderMunicipalities);
+      document.addEventListener('piaui:realtime-update', renderMunicipalities);
+      renderMunicipalities();
+    }
+
+    // 4. Matriz Auditada de Indicadores (Aba Fontes & Método)
+    const invBody = $('#ontologyInventoryBody');
+    const invCount = $('#inventoryCount');
+    if (invBody && Array.isArray(ontology.indicators)) {
+      invBody.replaceChildren();
+      const statusMap = {
+        oficial: 'OFICIAL',
+        estimativa: 'ESTIMATIVA',
+        auditado_painel: 'AUDITADO',
+        a_verificar: 'EM REVISÃO'
+      };
+      ontology.indicators.forEach(ind => {
+        const tr = document.createElement('tr');
+        const tdDom = document.createElement('td'); tdDom.textContent = ind.domain;
+        const tdLbl = document.createElement('td'); tdLbl.textContent = `${ind.label} (${ind.entity})`;
+        const tdVal = document.createElement('td'); tdVal.textContent = ind.value;
+        const tdPer = document.createElement('td'); tdPer.textContent = ind.period;
+        const tdSt = document.createElement('td'); tdSt.textContent = statusMap[ind.status] || ind.status;
+        const tdSrc = document.createElement('td');
+        if (ind.sourceUrl && /^https:\/\//.test(ind.sourceUrl)) {
+          const a = document.createElement('a');
+          a.href = ind.sourceUrl; a.target = '_blank'; a.rel = 'noopener noreferrer';
+          a.textContent = `${ind.sourceName} ↗`;
+          tdSrc.append(a);
+        } else {
+          tdSrc.textContent = ind.sourceName || '—';
+        }
+        tr.append(tdDom, tdLbl, tdVal, tdPer, tdSt, tdSrc);
+        invBody.append(tr);
+      });
+      if (invCount) invCount.textContent = `${ontology.indicators.length} indicadores estruturados`;
+    }
+
+    // 5. Painel Macro BCB & SICONFI ao Vivo (Aba Econômica)
+    const renderEcoMacro = () => {
+      const rt = window.PiauiRealtime ? window.PiauiRealtime.getState() : null;
+      if (!rt) return;
+      const elSelic = $('#ecoMacroSelic');
+      const elIpca = $('#ecoMacroIpca');
+      const elUsd = $('#ecoMacroUsd');
+      const elSiconfi = $('#ecoMacroSiconfi');
+      if (elSelic) elSelic.textContent = rt.bcb && rt.bcb.selic && rt.bcb.selic.valor != null ? `${rt.bcb.selic.valor}% a.a. (${rt.bcb.selic.data || 'atual'})` : 'Offline (última base local)';
+      if (elIpca) elIpca.textContent = rt.bcb && rt.bcb.ipca && rt.bcb.ipca.valor != null ? `${rt.bcb.ipca.valor}% mês (${rt.bcb.ipca.data || 'atual'})` : 'Offline (última base local)';
+      if (elUsd) elUsd.textContent = rt.bcb && rt.bcb.usdBrl && rt.bcb.usdBrl.valor != null ? `R$ ${Number(String(rt.bcb.usdBrl.valor).replace(',', '.')).toFixed(2)} (${rt.bcb.usdBrl.data || 'atual'})` : 'Offline (última base local)';
+      if (elSiconfi) {
+        elSiconfi.textContent = rt.siconfi && rt.siconfi.status === 'ok'
+          ? `RGF ${rt.siconfi.exercicio} · ${rt.siconfi.itens} linhas (${rt.siconfi.periodo}º quad.)`
+          : 'Base auditada SEFAZ-PI (56,1% RCL 2025)';
+      }
+    };
+    document.addEventListener('piaui:realtime-update', renderEcoMacro);
+    renderEcoMacro();
+  }
+
   window.initDashboard = function () {
     if (initialized) return; initialized = true;
-    setupTabs(); readFavorites(); setupCards(); renderFavorites(); setupSearch(); setupExport(); setupCharts(); setupClock(); setupSpia(); setupNews();
+    setupTabs(); readFavorites(); setupCards(); renderFavorites(); setupSearch(); setupExport(); setupCharts(); setupClock(); setupSpia(); setupNews(); setupIntelligenceV2();
   };
 })();

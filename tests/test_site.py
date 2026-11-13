@@ -23,6 +23,8 @@ class PageParser(HTMLParser):
         self.in_inline_script = False
         self.lang = None
         self.viewport = False
+        self.csp = False
+        self.referrer = False
         self.has_doctype = False
 
     def handle_decl(self, decl):
@@ -37,6 +39,10 @@ class PageParser(HTMLParser):
             self.lang = attrs.get("lang")
         if tag == "meta" and attrs.get("name", "").lower() == "viewport":
             self.viewport = True
+        if tag == "meta" and attrs.get("http-equiv", "").lower() == "content-security-policy":
+            self.csp = True
+        if tag == "meta" and attrs.get("name", "").lower() == "referrer":
+            self.referrer = attrs.get("content") == "no-referrer"
         if tag == "button" and "data-tab" in attrs:
             self.tabs.append(attrs["data-tab"])
         if tag == "canvas" and "id" in attrs:
@@ -67,6 +73,8 @@ class SiteTests(unittest.TestCase):
         self.assertTrue(self.page.has_doctype)
         self.assertEqual(self.page.lang, "pt-BR")
         self.assertTrue(self.page.viewport)
+        self.assertTrue(self.page.csp)
+        self.assertTrue(self.page.referrer)
 
     def test_ids_are_unique(self):
         duplicates = [key for key, count in collections.Counter(self.page.ids).items() if count > 1]
@@ -114,12 +122,25 @@ class SiteTests(unittest.TestCase):
         self.assertTrue(eog.has_doctype)
         self.assertEqual(eog.lang, "pt-BR")
         self.assertTrue(eog.viewport)
+        self.assertTrue(eog.csp)
+        self.assertTrue(eog.referrer)
         duplicates = [key for key, count in collections.Counter(eog.ids).items() if count > 1]
         self.assertEqual(duplicates, [])
         for src in eog.script_sources:
             self.assertFalse(src.startswith(("http:", "https:")), f"Script externo: {src}")
             resolved = (eog_path.parent / src).resolve()
             self.assertTrue(resolved.is_file(), f"Script ausente: {src}")
+
+    def test_v2_structured_data_and_snapshot_exist(self):
+        import json
+        snapshot_path = ROOT / "data" / "piaui-live.json"
+        self.assertTrue(snapshot_path.is_file(), "Snapshot data/piaui-live.json ausente")
+        data = json.loads(snapshot_path.read_text(encoding="utf-8"))
+        self.assertIn("sources", data)
+        self.assertEqual(data["sources"]["ibge"]["municipiosCount"], 224)
+        self.assertTrue((ROOT / "assets" / "ontology.js").is_file())
+        self.assertTrue((ROOT / "assets" / "realtime-gov.js").is_file())
+        self.assertTrue((ROOT / "scripts" / "sync_osint.mjs").is_file())
 
 
 if __name__ == "__main__":

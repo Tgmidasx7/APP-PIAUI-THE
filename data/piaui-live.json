@@ -1,0 +1,31 @@
+{
+  "generatedAt": "2026-11-13T02:25:00Z",
+  "mode": "baseline",
+  "sources": {
+    "ibge": {
+      "uf": "PI",
+      "municipiosCount": 224,
+      "status": "baseline"
+    },
+    "bcb": {
+      "selic": null,
+      "ipca": null,
+      "usdBrl": null,
+      "status": "awaiting_live_sync"
+    },
+    "siconfi": {
+      "ente": "22",
+      "status": "awaiting_live_sync"
+    },
+    "weather": {
+      "teresina": {
+        "tempC": null,
+        "humidity": null,
+        "uv": null,
+        "windKmh": null,
+        "status": "awaiting_live_sync"
+      }
+    }
+  },
+  "news": []
+}

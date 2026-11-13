@@ -836,3 +836,51 @@ body.eog-standalone-body {
   color: #00f0ff;
   text-decoration: underline;
 }
+
+/* v2: Camadas GIS reais & Inspetor de Ontologia Palantir */
+#tab-eye-of-god .eog-panel-header-split {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+#tab-eye-of-god .eog-map-tabs {
+  display: flex;
+  gap: 4px;
+}
+
+#tab-eye-of-god .eog-map-btn {
+  padding: 2px 6px;
+  font-family: inherit;
+  font-size: 0.62rem;
+  font-weight: 700;
+  color: var(--eog-dim);
+  background: rgba(0, 15, 25, 0.85);
+  border: 1px solid var(--eog-border);
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+#tab-eye-of-god .eog-map-btn.active {
+  color: #000;
+  background: var(--eog-cyan);
+  border-color: var(--eog-cyan);
+}
+
+#tab-eye-of-god .eog-node-inspector {
+  margin-top: 6px;
+  padding: 6px 8px;
+  border: 1px solid var(--eog-border);
+  border-left: 2px solid var(--eog-cyan);
+  background: rgba(0, 15, 25, 0.72);
+  font-size: 0.68rem;
+  line-height: 1.4;
+  color: #cbd5e1;
+}
+
+#tab-eye-of-god .eog-node-inspector strong {
+  color: var(--eog-cyan);
+}
+

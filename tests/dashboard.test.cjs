@@ -105,8 +105,8 @@ test('busca sem acentos e favoritos persistem ao reiniciar', () => {
 
 test('gráficos oferecem tabelas e a falha da biblioteca não bloqueia o relógio', () => {
   const dom = createApp({ chart: false }); const { document } = dom.window;
-  assert.equal(document.querySelectorAll('.chart-data').length, 12);
-  assert.equal(document.querySelectorAll('.chart-fallback').length, 12);
+  assert.equal(document.querySelectorAll('.chart-data').length, 14);
+  assert.equal(document.querySelectorAll('.chart-fallback').length, 14);
   assert.match(document.getElementById('clockTime').textContent, /^\d\d:\d\d:\d\d$/);
   assert.ok(document.querySelector('.chart-data[open] table tbody tr'));
   document.getElementById('btn-eco').click();
@@ -162,7 +162,7 @@ test('notícias têm links, filtro, navegação, pausa e janela móvel', t => {
   assert.match(document.getElementById('terminalBox').textContent, /Nenhuma notícia/);
   search.value = 'teresina'; search.dispatchEvent(new Event('input'));
   assert.ok(document.querySelectorAll('.news-item').length > 0);
-  assert.equal(document.querySelectorAll('.chart-context').length, 12);
+  assert.equal(document.querySelectorAll('.chart-context').length, 14);
 });
 
 
@@ -468,4 +468,89 @@ test('economia e geopolítica exibem corredores, cruzamentos, commodities, petr�
   input.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true }));
   assert.match(document.getElementById('eog-terminal-body').textContent, /Brent: US\$ 73\.50\/bbl/);
 });
+
+test('aba Educacional exibe zonas, 27 escolas INEP, premiações, simulador, notícias ao vivo e CLI escolas', async t => {
+  const fakeFetch = async url => {
+    if (url.includes('piaui-live.json')) return { ok: false, status: 404 };
+    if (url.includes('open-meteo.com')) {
+      return { ok: true, json: async () => [{ current: { temperature_2m: 36.2, relative_humidity_2m: 28, uv_index: 10.2, wind_speed_10m: 12 } }] };
+    }
+    if (url.includes('busca=educacao')) {
+      return { ok: true, json: async () => ({ items: [{ titulo: 'IBGE: Piauí amplia taxa de frequência escolar no Ensino Médio', data_publicacao: '2026-11-10', link: 'https://agenciadenoticias.ibge.gov.br/educacao-piaui' }] }) };
+    }
+    if (url.includes('seduc.pi.gov.br')) {
+      return { ok: true, json: async () => ({ status: 'ok', items: [{ title: 'SEDUC-PI abre inscrições para olimpíada estadual de robótica e matemática', pubDate: '2026-11-12 09:00:00', link: 'https://www.seduc.pi.gov.br/noticias/noticia/99999/robotica' }] }) };
+    }
+    return { ok: false, status: 404 };
+  };
+
+  const dom = createApp({ hash: '#edu', canvasMock: true, fetchMock: fakeFetch });
+  t.after(() => dom.window.close());
+  const { window } = dom;
+  const { document, Event, KeyboardEvent } = window;
+  await new Promise(resolve => setTimeout(resolve, 35));
+
+  // Preserva invariante de 26 kpi-card no painel e 4 em Educacional
+  assert.equal(document.querySelectorAll('.tab-content .kpi-card').length, 26);
+  assert.equal(document.querySelectorAll('#tab-edu .kpi-card').length, 4);
+
+  // Catálogo inicial com 27 escolas reais + 6 premiações
+  assert.equal(document.querySelectorAll('#eduSchoolsGrid .school-card').length, 27);
+  assert.equal(document.querySelectorAll('#eduAwardsGrid .award-card').length, 6);
+  assert.match(document.getElementById('eduSumCount').textContent, /27 de 27/);
+
+  // Filtrar por Zona Sul
+  const sulBtn = Array.from(document.querySelectorAll('#eduZoneTabs .edu-zone-btn')).find(b => b.textContent.includes('Sul ('));
+  assert.ok(sulBtn);
+  sulBtn.click();
+  assert.equal(document.querySelectorAll('#eduSchoolsGrid .school-card').length, 5);
+  assert.match(document.getElementById('eduSumCount').textContent, /5 de 27/);
+
+  // Busca por código INEP 22256725 (CETI João Henrique de Almeida Sousa) e leitura do Raio-X
+  const sInput = document.getElementById('eduSchoolSearch');
+  sInput.value = '22256725';
+  sInput.dispatchEvent(new Event('input', { bubbles: true }));
+  assert.equal(document.querySelectorAll('#eduSchoolsGrid .school-card').length, 1);
+  assert.match(document.getElementById('eduSchoolDetail').textContent, /Morada Nova/);
+  assert.match(document.getElementById('eduSchoolDetail').textContent, /6,3/);
+  assert.equal(document.querySelector('#eduSchoolDetail .edu-detail-link').href, 'https://qedu.org.br/escola/22256725');
+
+  // Volta para Todas + filtra rede Municipal
+  sInput.value = '';
+  sInput.dispatchEvent(new Event('input', { bubbles: true }));
+  document.querySelector('#eduZoneTabs .edu-zone-btn').click();
+  const netSel = document.getElementById('eduNetworkFilter');
+  netSel.value = 'Municipal';
+  netSel.dispatchEvent(new Event('change', { bubbles: true }));
+  assert.equal(document.querySelectorAll('#eduSchoolsGrid .school-card').length, 6);
+  netSel.value = 'Federal';
+  netSel.dispatchEvent(new Event('change', { bubbles: true }));
+  assert.equal(document.querySelectorAll('#eduSchoolsGrid .school-card').length, 1);
+
+  // Simulador Tempo Integral × EPT
+  const intRange = document.getElementById('eduSimIntegral');
+  intRange.value = '30';
+  intRange.dispatchEvent(new Event('input', { bubbles: true }));
+  assert.equal(document.getElementById('eduSimBadge').dataset.risk, 'critical');
+
+  // Monitoramento climático escolar ao vivo (calor extremo >= 35°C) + notícias ao vivo (SEDUC-PI + IBGE)
+  assert.equal(document.getElementById('eduLiveClimateCard').dataset.alert, 'high');
+  assert.match(document.getElementById('eduLiveClimateVal').textContent, /36\.2°C/);
+  assert.match(document.getElementById('eduNewsList').textContent, /SEDUC-PI abre inscrições/);
+  assert.match(document.getElementById('eduNewsList').textContent, /IBGE: Piauí amplia/);
+
+  // Comandos Eye of God CLI: escolas, premios e edu
+  const eogIn = document.getElementById('eog-terminal-input');
+  const runCmd = cmd => {
+    eogIn.value = cmd;
+    eogIn.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true }));
+  };
+  runCmd('escolas centro');
+  assert.match(document.getElementById('eog-terminal-body').textContent, /22022376/);
+  runCmd('premios');
+  assert.match(document.getElementById('eog-terminal-body').textContent, /TME² 2025/);
+  runCmd('edu');
+  assert.match(document.getElementById('eog-terminal-body').textContent, /829\.549 matr/);
+});
+
 

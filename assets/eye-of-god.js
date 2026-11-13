@@ -1226,7 +1226,7 @@
       switch (main) {
         case 'help':
           printTerminal(
-            'COMANDOS: help, target <nome>, lockdown, standdown, thermal, nvg, lidar, optical, neural, sar, scan, radar, intercept, status, clear | DADOS: pib, pop, fiscal, edu, swot, geo [the|pi], mun <nome>, graph <id>, anomalies, weather, macro, commodities, govbr',
+            'COMANDOS: help, target <nome>, lockdown, standdown, thermal, nvg, lidar, optical, neural, sar, scan, radar, intercept, status, clear | DADOS: pib, pop, fiscal, edu, escolas <zona|nome|inep>, premios, swot, geo [the|pi], mun <nome>, graph <id>, anomalies, weather, macro, commodities, govbr',
             'success'
           );
           break;
@@ -1336,8 +1336,48 @@
           break;
         }
         case 'edu':
-          printTerminal('EDUCAÇÃO (INEP/SEDUC): IDEB Ensino Médio 2023 = 4,5 (4º lugar no Brasil, melhor do Nordeste) | IDEP/IDEPI monitorados.', 'success');
+          printTerminal(
+            'EDUCAÇÃO PI/TERESINA: Piauí Total = 829.549 matr. (4.143 escolas, 46.616 prof., 2024) | Rede Pública 2026 prel. = 698.725 PI / 126.719 Teresina (89.576 SEMEC + 37.143 SEDUC) | IDEB EM = 4,5 (4º Brasil / 1º NE) | 100% EM Tempo Integral | EPT 61.420 jovens (~60% · 1º Brasil) | ICA Teresina 80,58% (Selo Ouro MEC).',
+            'success'
+          );
           break;
+        case 'escolas':
+        case 'escola': {
+          const catalog = ontology && Array.isArray(ontology.schoolsCatalog) ? ontology.schoolsCatalog : [];
+          if (!catalog.length) {
+            printTerminal('Catálogo de escolas indisponível.', 'error');
+            break;
+          }
+          const normStr = str => String(str || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+          const q = normStr(arg.trim());
+          const hits = q
+            ? catalog.filter(s => normStr(`${s.name} ${s.inep} ${s.zone} ${s.neighborhood} ${s.municipality} ${s.network}`).includes(q))
+            : catalog.slice(0, 8);
+          if (!hits.length) {
+            printTerminal(`Nenhuma escola encontrada para "${arg}". Zonas: Centro, Norte, Leste, Sul, Sudeste, Interior.`, 'error');
+            break;
+          }
+          printTerminal(`ESCOLAS VERIFICADAS (${hits.length} resultado${hits.length === 1 ? '' : 's'} · Censo INEP):`, 'success');
+          hits.slice(0, 8).forEach(s => {
+            const idebTxt = s.idebEm != null ? `IDEB EM ${s.idebEm}` : (s.idebEf != null ? `IDEB EF ${s.idebEf}` : 'IDEB —');
+            printTerminal(`[INEP ${s.inep}] ${s.name} (${s.network} · Zona ${s.zone} · ${s.neighborhood}) | ${s.students ?? '—'} matr. · ${s.teachers ?? '—'} doc. · ${idebTxt}`, 'sys');
+          });
+          if (hits.length > 8) {
+            printTerminal(`… +${hits.length - 8} escolas na aba Educacional.`, 'sys');
+          }
+          break;
+        }
+        case 'premios':
+        case 'olimpiadas': {
+          const awards = ontology && Array.isArray(ontology.educationAwards) ? ontology.educationAwards : [];
+          if (!awards.length) {
+            printTerminal('Lista de premiações indisponível.', 'error');
+            break;
+          }
+          printTerminal('PREMIAÇÕES EDUCACIONAIS VERIFICADAS DO PIAUÍ:', 'success');
+          awards.forEach(a => printTerminal(`[${a.badge}] ${a.title} — ${a.scope}`, 'sys'));
+          break;
+        }
         case 'swot':
           printTerminal('SWOT PIAUÍ: Forças (Energia limpa/IDEB/Solidez fiscal) | Oportunidades (H2V ZPE Parnaíba/MATOPIBA/Transnordestina) | Riscos (Seca/Concentração/Saneamento).', 'success');
           break;

@@ -1674,8 +1674,15 @@ body {
         <div class="section-header">
           <div class="section-icon">🎓</div>
           <div>
-            <div class="section-title">Análise Educacional (IDEB, SEDUC, SEMEC)</div>
-            <div class="section-subtitle">Piauí rompeu ciclo histórico de baixo desempenho</div>
+            <div class="section-title">Inteligência Educacional — Escolas, Zonas, IDEB &amp; Rede (PI / Teresina)</div>
+            <div class="section-subtitle">Censo Escolar INEP 2024–2026, 27 unidades georreferenciadas por zona, premiações e feeds educacionais ao vivo</div>
+          </div>
+        </div>
+
+        <div class="plain-summary-banner">
+          <span class="plain-badge">LEITURA RÁPIDA</span>
+          <div>
+            <strong>O retrato real das escolas do Piauí e de Teresina:</strong> O Piauí reúne <strong>829.549 matrículas totais</strong> em 4.143 escolas e 46.616 professores (Anuário 2025/INEP). Na rede pública presencial (Censo 2026 prel.), são <strong>698.725 estudantes</strong> no estado (<strong>126.719</strong> apenas em Teresina: 89.576 na SEMEC e 37.143 na SEDUC). O Piauí alcançou <strong>100% do Ensino Médio estadual em tempo integral</strong>, lidera o Brasil em EPT integrada (~60% · 61.420 jovens) e saltou para <strong>4º IDEB EM do país (4,5)</strong>; na capital, a alfabetização (ICA 2025) atingiu <strong>80,58%</strong> com o <strong>Selo Ouro MEC</strong>.
           </div>
         </div>
 
@@ -1684,72 +1691,127 @@ body {
             <div class="kpi-icon">📊</div>
             <div class="kpi-label">IDEB Anos Iniciais EF</div>
             <div class="kpi-value">5,9</div>
-            <div class="kpi-sub">Acima BR (5,0) e NE (4,7)</div>
+            <div class="kpi-sub">Acima BR (5,0) e NE (4,7) · SEMEC THE 6,4</div>
           </div>
           <div class="kpi-card">
             <div class="kpi-icon">📊</div>
             <div class="kpi-label">IDEB Anos Finais EF</div>
             <div class="kpi-value">5,2</div>
-            <div class="kpi-sub">Acima BR (5,0) e NE (4,7)</div>
+            <div class="kpi-sub">Acima BR (5,0) e NE (4,7) · SEMEC THE 5,8</div>
           </div>
           <div class="kpi-card">
             <div class="kpi-icon">🏆</div>
             <div class="kpi-label">IDEB Ensino Médio</div>
             <div class="kpi-value">4,5</div>
-            <div class="kpi-sub">Melhor NE, 4º Brasil</div>
+            <div class="kpi-sub">Melhor NE, 4º Brasil (2023)</div>
             <div class="kpi-change up">▲ +0,3 vs 2021</div>
           </div>
           <div class="kpi-card">
             <div class="kpi-icon">🎯</div>
             <div class="kpi-label">Tempo Integral (EM)</div>
             <div class="kpi-value">100%</div>
-            <div class="kpi-sub">Escolas estaduais (2025)</div>
+            <div class="kpi-sub">Escolas estaduais (84.474 matr. integrais)</div>
             <div class="kpi-change up">▲ 1º lugar nacional</div>
           </div>
         </div>
 
+        <div class="edu-stat-strip" aria-label="Totais oficiais do Censo Escolar Piauí e Teresina">
+          <div class="edu-stat-box">
+            <span>Piauí Total (Todas as Redes)</span>
+            <strong>829.549 matrículas</strong>
+            <small>4.143 escolas · 46.616 professores (Anuário Todos pela Educação / INEP 2024)</small>
+          </div>
+          <div class="edu-stat-box">
+            <span>Piauí Rede Pública (Censo 2026)</span>
+            <strong>698.725 presenciais</strong>
+            <small>527.365 municipais + 171.360 estaduais (Infantil, Fundamental, Médio e EJA)</small>
+          </div>
+          <div class="edu-stat-box">
+            <span>Teresina Pública (Censo 2026)</span>
+            <strong>126.719 matrículas</strong>
+            <small>89.576 SEMEC (323 unidades / 173 CMEIs) + 37.143 SEDUC-PI na capital</small>
+          </div>
+          <div class="edu-stat-box">
+            <span>EPT Integrada &amp; Alfabetização</span>
+            <strong>61.420 em EPT · ICA 80,58%</strong>
+            <small>1º do Brasil em Ensino Médio Técnico Integrado (~60%) e Selo Ouro CNCA em Teresina</small>
+          </div>
+        </div>
+
+        <section class="v2-module" aria-label="Análise e Monitoramento Educacional em Tempo Real">
+          <div class="v2-head">
+            <div>
+              <h3>📡 Monitoramento Educacional &amp; Operacional em Tempo Real (Sem Dados Inventados)</h3>
+              <p class="v2-sub">Cruza telemetria ambiental ao vivo (Open-Meteo) nas zonas escolares, notícias em tempo real (SEDUC-PI / IBGE) e base fiscal (LRF 24,75% Educação) — mantendo matrículas e IDEB estritamente ligados às divulgações oficiais do INEP.</p>
+            </div>
+            <span class="v2-badge" id="eduLiveBadge" data-state="baseline">INICIALIZANDO</span>
+          </div>
+          <div class="edu-live-strip">
+            <div class="edu-live-card" id="eduLiveClimateCard">
+              <span>Conforto Térmico &amp; UV Escolar (Ao Vivo)</span>
+              <strong id="eduLiveClimateVal">Consultando Open-Meteo…</strong>
+              <small id="eduLiveClimateSub">Teresina e polos estaduais: monitora calor extremo e UV para quadras e transporte escolar.</small>
+            </div>
+            <div class="edu-live-card">
+              <span>Radar de Notícias da Educação</span>
+              <strong id="eduLiveNewsVal">Curadoria + Feeds</strong>
+              <small id="eduLiveNewsSub">Monitora SEDUC-PI RSS, Agência IBGE Educação e snapshot OSINT de 6h em 6h.</small>
+            </div>
+            <div class="edu-live-card">
+              <span>Orçamento Constitucional (LRF-PI)</span>
+              <strong id="eduLiveBudgetVal">24,75% da RCL</strong>
+              <small id="eduLiveBudgetSub">Aplicação estadual vinculada à manutenção das escolas 100% em tempo integral e EPT.</small>
+            </div>
+            <div class="edu-live-card">
+              <span>Frequência dos Dados Escolares</span>
+              <strong id="eduLiveCycleVal">Censo 2024–2026 / IDEB 2023</strong>
+              <small id="eduLiveCycleSub">Contagens de alunos/docentes por unidade vêm do Censo Escolar INEP (sem chamada ao vivo fictícia).</small>
+            </div>
+          </div>
+        </section>
+
         <div class="detail-grid">
           <div class="detail-card">
-            <h3>Avanços SEDUC</h3>
+            <h3>Avanços SEDUC-PI</h3>
             <div class="data-row">
               <span class="data-label">EM Tempo Integral</span>
-              <span class="data-value" style="color:var(--green);">100% (2025)</span>
+              <span class="data-value" style="color:var(--green);">100% escolas (2025)</span>
             </div>
             <div class="data-row">
               <span class="data-label">Matrículas Integrais</span>
-              <span class="data-value info">81% — 1º nacional</span>
+              <span class="data-value info">84.474 (vs 23.812 em 2022)</span>
             </div>
             <div class="data-row">
-              <span class="data-label">Crescimento Matrículas</span>
-              <span class="data-value info">+13,35% rede estadual</span>
+              <span class="data-label">EPT Integrada ao EM</span>
+              <span class="data-value info">61.420 (~60% · 1º Brasil)</span>
             </div>
             <div class="data-row">
-              <span class="data-label">Redução Evasão</span>
-              <span class="data-value" style="color:var(--green);">Líder NE</span>
+              <span class="data-label">Redução Evasão / Fluxo</span>
+              <span class="data-value" style="color:var(--green);">Líder NE (IDEB 4,5)</span>
             </div>
             <div class="data-row">
-              <span class="data-label">Redução Reprovação</span>
-              <span class="data-value" style="color:var(--green);">Líder NE</span>
+              <span class="data-label">Investimento na RCL</span>
+              <span class="data-value info">24,75% (SEFAZ-PI)</span>
             </div>
           </div>
 
           <div class="detail-card">
-            <h3>SEMEC-Teresina</h3>
+            <h3>SEMEC-Teresina (Rede Municipal)</h3>
             <div class="data-row">
-              <span class="data-label">ICA 2025</span>
-              <span class="data-value" style="color:var(--green);">1º lugar nacional</span>
+              <span class="data-label">ICA 2025 (Alfabetização)</span>
+              <span class="data-value" style="color:var(--green);">80,58% (1º Capitais / Selo Ouro)</span>
             </div>
             <div class="data-row">
-              <span class="data-label">Indicador</span>
-              <span class="data-value info">Criança Alfabetizada</span>
+              <span class="data-label">Unidades Escolares</span>
+              <span class="data-value info">323 unidades (173 CMEIs)</span>
             </div>
             <div class="data-row">
-              <span class="data-label">Oferta EJA</span>
-              <span class="data-value info">Forte oferta</span>
+              <span class="data-label">Matrículas SEMEC (2026 prel.)</span>
+              <span class="data-value info">89.576 presenciais</span>
             </div>
             <div class="data-row">
-              <span class="data-label">Profissionalizante</span>
-              <span class="data-value info">Forte oferta</span>
+              <span class="data-label">IDEB Municipal 2023</span>
+              <span class="data-value" style="color:var(--green);">6,4 (AI) · 5,8 (AF)</span>
             </div>
           </div>
 
@@ -1757,11 +1819,11 @@ body {
             <h3>Evolução IDEB Ensino Médio</h3>
             <div class="data-row">
               <span class="data-label">2021</span>
-              <span class="data-value">4,2</span>
+              <span class="data-value">4,2 (9º Brasil)</span>
             </div>
             <div class="data-row">
               <span class="data-label">2023</span>
-              <span class="data-value info">4,5</span>
+              <span class="data-value info">4,5 (4º Brasil · 1º NE)</span>
             </div>
             <div class="data-row">
               <span class="data-label">Rede Estadual 2023</span>
@@ -1778,6 +1840,97 @@ body {
           </div>
         </div>
 
+        <section class="v2-module" aria-label="Explorador de Zonas e Escolas Reais de Teresina e Piauí">
+          <div class="v2-head">
+            <div>
+              <h3>🏫 Explorador de Zonas &amp; Escolas Verificadas (Teresina e Polos do Piauí)</h3>
+              <p class="v2-sub">Catálogo oficial com Código INEP, bairro/zona, dependência administrativa, matrículas, docentes e IDEB 2023 — clique em qualquer unidade para abrir o Raio-X completo.</p>
+            </div>
+            <span class="v2-badge" id="eduCatalogCount" data-state="online">27 unidades verificadas</span>
+          </div>
+
+          <div class="edu-zone-tabs" id="eduZoneTabs" role="group" aria-label="Filtrar escolas por zona"></div>
+
+          <div class="edu-zone-summary" id="eduZoneSummary" aria-live="polite">
+            <div><span>Unidades na seleção</span><strong id="eduSumCount">0</strong></div>
+            <div><span>Matrículas verificadas</span><strong id="eduSumStudents">0</strong></div>
+            <div><span>Docentes somados</span><strong id="eduSumTeachers">0</strong></div>
+            <div><span>IDEB médio divulgado</span><strong id="eduSumIdeb">—</strong></div>
+          </div>
+
+          <div class="edu-explorer-controls">
+            <input type="search" id="eduSchoolSearch" placeholder="Buscar escola por nome, código INEP (ex: 22022376), bairro ou curso…" aria-label="Buscar escola por nome, código INEP, bairro ou curso">
+            <select id="eduNetworkFilter" aria-label="Filtrar por rede administrativa">
+              <option value="">Todas as redes</option>
+              <option value="Estadual">Rede Estadual (SEDUC)</option>
+              <option value="Municipal">Rede Municipal (SEMEC)</option>
+              <option value="Federal">Rede Federal (IFPI)</option>
+            </select>
+            <select id="eduStageFilter" aria-label="Filtrar por modalidade ou indicador">
+              <option value="">Todas as modalidades</option>
+              <option value="tecnico">Com Técnico Integrado</option>
+              <option value="ideb">Com IDEB 2023 divulgado</option>
+              <option value="eja">Com oferta de EJA</option>
+            </select>
+          </div>
+
+          <div class="edu-workspace">
+            <div class="edu-schools-grid" id="eduSchoolsGrid" role="region" aria-label="Lista de escolas filtradas"></div>
+            <aside class="edu-school-detail" id="eduSchoolDetail" aria-live="polite">
+              <span class="cross-tag">RAIO-X DA UNIDADE</span>
+              <h4>Selecione uma escola ao lado</h4>
+              <p class="v2-sub">Veja código INEP, zona/GRE, matrículas, razão alunos/docente, notas no IDEB, cursos técnicos integrados e link direto para consulta oficial no QEdu.</p>
+            </aside>
+          </div>
+        </section>
+
+        <section class="v2-module" aria-label="Simulador de Expansão do Tempo Integral e EPT">
+          <div class="v2-head">
+            <div>
+              <h3>🧪 Simulador Estrutural: Tempo Integral × Educação Profissional (EPT)</h3>
+              <p class="v2-sub">Simula como o avanço do Tempo Integral (de 19% em 2022 para 100% em 2025) e da EPT integrada (~60%) altera a carga de formação e retenção dos ~106,6 mil jovens do Ensino Médio público no Piauí.</p>
+            </div>
+            <span class="v2-badge" id="eduSimBadge" data-risk="ok">CENÁRIO ATUAL 2025/2026</span>
+          </div>
+          <div class="lrf-sliders">
+            <label>
+              <span>Escolas EM em Tempo Integral (%): <strong id="eduSimIntVal">100%</strong></span>
+              <input type="range" id="eduSimIntegral" min="19" max="100" step="1" value="100">
+            </label>
+            <label>
+              <span>Matrículas EM com EPT Integrada (%): <strong id="eduSimEptVal">60%</strong></span>
+              <input type="range" id="eduSimEpt" min="15" max="85" step="1" value="60">
+            </label>
+          </div>
+          <div class="impact-calc-outputs" id="eduSimOutWrap">
+            <div>
+              <span>Estudantes em Jornada Integral (est. rede EM)</span>
+              <strong id="eduSimIntStudents">84.474 alunos</strong>
+              <small>Referência real 2025: 84.474 matrículas (vs 23.812 em 2022).</small>
+            </div>
+            <div>
+              <span>Jovens em Ensino Técnico Integrado (EPT)</span>
+              <strong id="eduSimEptStudents">61.420 jovens</strong>
+              <small>Formação para TI, Enfermagem, Agro 4.0, Energias Limpas e Gestão.</small>
+            </div>
+            <div>
+              <span>Leitura Estrutural</span>
+              <strong id="eduSimReading">Liderança Nacional</strong>
+              <small id="eduSimSummary">100% das escolas estaduais em tempo integral com 60% em EPT conecta o IDEB 4,5 ao emprego qualificado.</small>
+            </div>
+          </div>
+        </section>
+
+        <section class="v2-module" aria-label="Premiações, Olimpíadas e Reconhecimentos">
+          <div class="v2-head">
+            <div>
+              <h3>🏅 Premiações, Olimpíadas Científicas &amp; Reconhecimentos (Piauí / Teresina)</h3>
+              <p class="v2-sub">Conquistas nacionais verificadas da rede pública piauiense em alfabetização, matemática olímpica, ensino técnico e inovação.</p>
+            </div>
+          </div>
+          <div class="edu-awards-grid" id="eduAwardsGrid"></div>
+        </section>
+
         <div class="charts-grid">
           <div class="chart-container">
             <h3>🎓 Comparativo IDEB Piauí vs Brasil vs NE</h3>
@@ -1791,7 +1944,39 @@ body {
               <canvas id="chartPosicaoEM"></canvas>
             </div>
           </div>
+          <div class="chart-container">
+            <h3>🏫 Matrículas Públicas por Etapa (Censo 2026 Prelim: Piauí vs Teresina)</h3>
+            <div class="chart-wrapper">
+              <canvas id="chartEduMatriculasRede"></canvas>
+            </div>
+          </div>
+          <div class="chart-container">
+            <h3>🗺️ Zonas de Teresina &amp; Polos: Matrículas vs Docentes (Catálogo Verificado)</h3>
+            <div class="chart-wrapper">
+              <canvas id="chartEduZonasAlunos"></canvas>
+            </div>
+          </div>
         </div>
+
+        <section class="v2-module" aria-label="Notícias Educacionais ao Vivo e Curadoria">
+          <div class="v2-head">
+            <div>
+              <h3>📰 Notícias Educacionais (SEDUC-PI Ao Vivo · Agência IBGE · Curadoria Piauí)</h3>
+              <p class="v2-sub" id="eduNewsStatus">Consolidando feeds ao vivo de educação e arquivo verificado…</p>
+            </div>
+            <button type="button" class="live-refresh-btn" id="eduNewsRefreshBtn">↻ Atualizar Educação</button>
+          </div>
+          <div class="edu-explorer-controls">
+            <input type="search" id="eduNewsSearch" placeholder="Filtrar notícias de educação (ex: Enem, SEDUC, Seduckathon, professor, Liceu…)" aria-label="Filtrar notícias de educação">
+            <select id="eduNewsSourceFilter" aria-label="Filtrar por fonte de notícia educacional">
+              <option value="">Todas as fontes</option>
+              <option value="live">Apenas Ao Vivo (SEDUC-PI / IBGE / OSINT)</option>
+              <option value="curated">Curadoria Verificada</option>
+            </select>
+            <div class="v2-badge" id="eduNewsCounter" data-state="online" style="align-self:center;justify-self:end;">0 notícias</div>
+          </div>
+          <div class="edu-news-list" id="eduNewsList"></div>
+        </section>
       </div>
     </div>
 
@@ -2602,6 +2787,94 @@ function initCharts() {
       maintainAspectRatio: false,
       scales: {
         y: { min: 0, max: 100, grid: { color: 'rgba(255,255,255,0.05)' } },
+        x: { grid: { color: 'rgba(255,255,255,0.05)' } }
+      },
+      plugins: {
+        legend: { position: 'top' },
+        tooltip: {
+          backgroundColor: '#111820',
+          borderColor: '#1a3a2a',
+          borderWidth: 1,
+          titleColor: '#ffd700',
+          bodyColor: '#e0e0e0'
+        }
+      }
+    }
+  });
+
+  // BAR: Matrículas Públicas por Etapa — Piauí vs Teresina (Censo Escolar 2026 Preliminar MEC/INEP)
+  createChart(document.getElementById('chartEduMatriculasRede'), {
+    type: 'bar',
+    data: {
+      labels: ['Infantil', 'Fund. Anos Iniciais', 'Fund. Anos Finais', 'Ensino Médio', 'EJA'],
+      datasets: [
+        {
+          label: 'Piauí Público Total (mil matr.)',
+          data: [130.9, 194.3, 157.1, 106.6, 109.8],
+          backgroundColor: 'rgba(0,240,255,0.6)',
+          borderColor: '#00f0ff',
+          borderWidth: 1,
+          borderRadius: 4
+        },
+        {
+          label: 'Teresina Pública (mil matr.)',
+          data: [24.4, 38.4, 31.0, 22.0, 10.9],
+          backgroundColor: 'rgba(0,255,65,0.65)',
+          borderColor: '#00ff41',
+          borderWidth: 1,
+          borderRadius: 4
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+        y: { beginAtZero: true, grid: { color: 'rgba(255,255,255,0.05)' } },
+        x: { grid: { color: 'rgba(255,255,255,0.05)' } }
+      },
+      plugins: {
+        legend: { position: 'top' },
+        tooltip: {
+          backgroundColor: '#111820',
+          borderColor: '#1a3a2a',
+          borderWidth: 1,
+          titleColor: '#00f0ff',
+          bodyColor: '#e0e0e0'
+        }
+      }
+    }
+  });
+
+  // BAR: Matrículas & Docentes nas 27 Escolas Catalogadas por Zona (Censo Escolar INEP)
+  createChart(document.getElementById('chartEduZonasAlunos'), {
+    type: 'bar',
+    data: {
+      labels: ['Centro (5 esc.)', 'Norte (5 esc.)', 'Leste (4 esc.)', 'Sul (5 esc.)', 'Sudeste (5 esc.)', 'Interior (3 esc.)'],
+      datasets: [
+        {
+          label: 'Matrículas verificadas',
+          data: [4185, 2824, 1143, 1358, 1940, 979],
+          backgroundColor: 'rgba(0,255,65,0.6)',
+          borderColor: '#00ff41',
+          borderWidth: 1,
+          borderRadius: 4
+        },
+        {
+          label: 'Docentes somados',
+          data: [512, 168, 84, 118, 161, 89],
+          backgroundColor: 'rgba(255,215,0,0.65)',
+          borderColor: '#ffd700',
+          borderWidth: 1,
+          borderRadius: 4
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+        y: { beginAtZero: true, grid: { color: 'rgba(255,255,255,0.05)' } },
         x: { grid: { color: 'rgba(255,255,255,0.05)' } }
       },
       plugins: {

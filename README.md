@@ -1,31 +1,30 @@
-# Piauí Teresina Analytics
+# Piauí Teresina Analytics v2 // Sala de Situação Gov-BR & Palantir C4ISR
 
-Painel web que reúne indicadores e análises sobre o estado do Piauí e sua capital, Teresina. A proposta é facilitar a consulta de informações territoriais, sociais e econômicas em uma interface visual com gráficos e seções temáticas.
+Painel analítico de indicadores sobre o estado do Piauí e sua capital, Teresina, com ontologia estruturada, auditoria metodológica, simulador fiscal LRF, mapa GIS real (WGS84), integração direta com APIs públicas brasileiras em tempo real (IBGE, Banco Central SGS, Tesouro SICONFI, Open-Meteo) e módulo visual C4ISR (*Eye of God*).
 
-**Site público:** [tgmidasx7.github.io/APP-PIAUI-THE/](https://tgmidasx7.github.io/APP-PIAUI-THE/)
+**Site público:** [tgmidasx7.github.io/APP-PIAUI-THE/](https://tgmidasx7.github.io/APP-PIAUI-THE/) · **Modo dedicado Eye of God:** [`/eyeofgod/`](eyeofgod/)
 
 **Relatório de entendimento:** [docs/relatorio-entendimento.md](docs/relatorio-entendimento.md)
 
-> **Importante:** o painel contém números inseridos manualmente no código. Não foi identificada coleta automática das fontes nem documentação que comprove auditoria dos indicadores. A interface identifica os dados como estáticos e sujeitos a verificação. Consulte e valide as fontes antes de usar os dados em decisões ou publicações.
+> **Transparência e arquitetura híbrida (v2):** o núcleo de indicadores auditados está centralizado em `assets/ontology.js` com período, fonte, metodologia e registro de anomalias. Quando aberto em navegador conectado à internet, `assets/realtime-gov.js` consulta APIs públicas oficiais e `data/piaui-live.json` (atualizado a cada 6h via GitHub Actions). Sem conectividade externa ou em `file://`, o painel preserva automaticamente a base local auditada.
 
-## O que o painel apresenta
+## O que o painel apresenta (v2)
 
-| Seção | Conteúdo exibido |
+| Recurso / Seção | Conteúdo implementado |
 | --- | --- |
-| Visão Geral | Indicadores resumidos e gráficos de PIB e IDH |
-| Geográfica | Território, relevo, clima, hidrografia e recursos |
-| Demográfica | População estadual e municipal, estimativas e concentração |
-| Geopolítica | Papel regional, infraestrutura, desafios e oportunidades |
-| Econômica | PIB, finanças públicas, dívida e investimentos |
-| Educacional | Indicadores educacionais estaduais e municipais |
-| Desenvolvimento Humano | IDH, componentes e desigualdades |
+| Sala de Situação Gov-BR (`#govLiveBar`) | Telemetria em tempo real via IBGE Localidades (224 municípios), Projeção BR, Banco Central SGS (Selic, IPCA, USD/BRL), Tesouro SICONFI e clima/UV de Teresina (Open-Meteo) |
+| Visão Geral + Auditoria | Indicadores corrigidos, gráficos Chart.js e **Detector de Anomalias & Divergências** (`assets/ontology.js`) |
+| Geográfica + Explorador | Território, relevo, clima, MATOPIBA/Cerrados (Sudoeste) e **Explorador Territorial** para filtrar os 16 polos georreferenciados e os 224 municípios do Piauí |
+| Demográfica | Censo 2022 vs Estimativas 2025 com distinção explícita entre taxa intercensitária (+0,26% a.a.) e variação recente (+1,14% a.a.) |
+| Geopolítica | Papel regional, infraestrutura, energia renovável, H₂ verde e desafios |
+| Econômica + Simulador LRF | PIB setorial, série fiscal homogênea (2025) e **Simulador What-If LRF (2025–2030)** para DCL/RCL |
+| Educacional | Indicadores **IDEB** (Anos Iniciais, Anos Finais e Ensino Médio), SEDUC-PI e SEMEC-Teresina |
+| Desenvolvimento Humano | Evolução estadual do IDH (2000–2021) separada metodologicamente do marco de IDHM de Teresina (2010) |
 | SWOT | Forças, fraquezas, oportunidades e ameaças |
-| Terminal | Notícias em rolagem, feeds e arquivo de notícias locais |
-| SPIA | Catálogo de 30 vídeos públicos e cenários fictícios para Teresina |
-| Eye of God | Simulação tática e visual em Canvas (`#eye-of-god` e `/eyeofgod/`): 6 modos de câmera, radar, grafo, CLI e áudio sintetizado |
-| Fontes & método | Portais institucionais, orientações de leitura e limitações |
-
-Os temas e indicadores acima descrevem o que a interface **apresenta**, não uma validação de sua precisão. O painel se apresenta como um dossiê de 2025 e reúne referências a diferentes anos; não se deve presumir que os valores estejam atualizados.
+| SPIA | Catálogo de 30 vídeos públicos e laboratório demonstrativo para Teresina |
+| Eye of God (`#eye-of-god` & `/eyeofgod/`) | Componente compartilhado (`mountEyeOfGod`) com GIS real de Teresina (Rios Parnaíba/Poti) e Piauí (16 polos), grafo de ontologia interativo, 6 modos de câmera em Canvas, sensores Gov-BR e CLI unificada (`pib`, `pop`, `fiscal`, `edu`, `geo pi`, `mun`, `graph`, `govbr`, `anomalies`) |
+| Terminal & OSINT | Snapshot automático (`data/piaui-live.json` via `scripts/sync_osint.mjs`), IBGE Notícias, feeds RSS e curadoria local de 50 notícias |
+| Fontes & método | Portais institucionais, checklist de governança e exportação em CSV e **Dossiê JSON completo** |
 
 ## Como funciona
 
@@ -73,18 +72,19 @@ Veja [publicação e manutenção](docs/publicacao.md) para o fluxo de atualiza�
 ## Estrutura do repositório
 
 ```text
-index.html                      Página principal, dados e gráficos
-assets/                         Recursos de interface (CSS e JavaScript)
-README.md                       Visão geral e instruções de uso
-CONTRIBUTING.md                 Orientações de contribuição
-docs/relatorio-entendimento.md  Análise do funcionamento e do estado do projeto
-docs/arquitetura.md             Arquitetura e limitações
-docs/dados.md                   Orientações para verificar indicadores
-docs/publicacao.md              GitHub Pages e manutenção
-docs/roteiro.md                 Prioridades para evolução
-tests/                          Testes estruturais e de interação
-package.json / package-lock.json Dependências usadas apenas nos testes
-.github/workflows/checks.yml    Verificações no GitHub Actions
+index.html                         Página principal (12 abas), CSP/Referrer-Policy e gráficos Chart.js
+eyeofgod/index.html                Rota dedicada para o Eye of God (usa componente compartilhado)
+assets/ontology.js                 Fonte única estruturada (indicadores, anomalias, GIS WGS84 e grafo)
+assets/realtime-gov.js             Cliente ao vivo Gov-BR (IBGE, BCB SGS, SICONFI, Open-Meteo e snapshot)
+assets/dashboard.js                Navegação, busca, favoritos, exportação CSV/JSON, simulador LRF e notícias
+assets/eye-of-god.js               Componente compartilhado Eye of God (GIS, grafo clicável, CLI e HUD)
+assets/eye-of-god.css / enhancements.css Estilos escopados da v2 e Sala de Situação Gov-BR
+assets/news.js / cameras.js        Curadoria local de notícias e catálogo de telas públicas
+data/piaui-live.json               Snapshot OSINT atualizado periodicamente via GitHub Actions
+scripts/sync_osint.mjs             Coletor zero-backend Node 22 para APIs públicas e RSS direto
+.github/workflows/osint-sync.yml   Workflow agendado (a cada 6h) para atualizar data/piaui-live.json
+.github/workflows/checks.yml       Verificações automáticas (Python unittest + Node JSDOM)
+tests/                             8 testes estruturais (Python) + 13 testes de interação/v2 (JSDOM)
 ```
 
 ## Como contribuir

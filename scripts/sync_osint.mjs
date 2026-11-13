@@ -1,0 +1,208 @@
+#!/usr/bin/env node
+/**
+ * Coletor OSINT zero-backend para Piauí Teresina Analytics.
+ * Executa via GitHub Actions (ou manualmente com Node 22+) para atualizar data/piaui-live.json
+ * diretamente de APIs públicas brasileiras e feeds RSS oficiais, sem intermediários pagos.
+ */
+import fs from 'node:fs/promises';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const rootDir = path.resolve(__dirname, '..');
+const outFile = path.join(rootDir, 'data', 'piaui-live.json');
+
+async function fetchJson(url, timeoutMs = 15000) {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), timeoutMs);
+  try {
+    const res = await fetch(url, {
+      signal: controller.signal,
+      headers: { 'User-Agent': 'PiauiTeresinaAnalytics-OSINT/2.0' }
+    });
+    if (!res.ok) throw new Error(`HTTP ${res.status} for ${url}`);
+    return await res.json();
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
+async function fetchText(url, timeoutMs = 15000) {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), timeoutMs);
+  try {
+    const res = await fetch(url, {
+      signal: controller.signal,
+      headers: { 'User-Agent': 'PiauiTeresinaAnalytics-OSINT/2.0' }
+    });
+    if (!res.ok) throw new Error(`HTTP ${res.status} for ${url}`);
+    return await res.text();
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
+function decodeXmlEntities(text) {
+  return String(text || '')
+    .replace(/<!\[CDATA\[([\s\S]*?)\]\]>/g, '$1')
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;|&apos;/g, "'")
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function parseRssItems(xml, sourceName, expectedHost) {
+  const items = [];
+  const itemMatches = xml.match(/<item\b[\s\S]*?<\/item>/gi) || [];
+  for (const block of itemMatches.slice(0, 25)) {
+    const titleMatch = block.match(/<title\b[^>]*>([\s\S]*?)<\/title>/i);
+    const linkMatch = block.match(/<link\b[^>]*>([\s\S]*?)<\/link>/i);
+    const pubMatch = block.match(/<pubDate\b[^>]*>([\s\S]*?)<\/pubDate>/i);
+    if (!titleMatch || !linkMatch || !pubMatch) continue;
+    try {
+      const url = new URL(decodeXmlEntities(linkMatch[1]));
+      if (url.protocol !== 'https:' || url.hostname !== expectedHost) continue;
+      const published = new Date(decodeXmlEntities(pubMatch[1]));
+      if (!Number.isFinite(published.getTime())) continue;
+      const date = published.toISOString().slice(0, 10);
+      const title = decodeXmlEntities(titleMatch[1]);
+      if (title) {
+        items.push({
+          date,
+          title,
+          url: url.href,
+          source: sourceName,
+          category: 'Atualidades',
+          feed: true
+        });
+      }
+    } catch (_) {
+      // Ignora item malformado
+    }
+  }
+  return items;
+}
+
+async function main() {
+  const previous = JSON.parse(await fs.readFile(outFile, 'utf8'));
+  const snapshot = {
+    generatedAt: new Date().toISOString(),
+    mode: 'osint-github-actions',
+    sources: {
+      ibge: { ...previous.sources.ibge },
+      bcb: { ...previous.sources.bcb },
+      siconfi: { ...previous.sources.siconfi },
+      weather: { ...previous.sources.weather }
+    },
+    news: []
+  };
+
+  // 1. IBGE Localidades (224 municípios PI) + Projeção Brasil
+  try {
+    const [muns, proj] = await Promise.all([
+      fetchJson('https://servicodados.ibge.gov.br/api/v1/localidades/estados/22/municipios'),
+      fetchJson('https://servicodados.ibge.gov.br/api/v1/projecoes/populacao/BR')
+    ]);
+    if (Array.isArray(muns)) {
+      snapshot.sources.ibge = {
+        uf: 'PI',
+        municipiosCount: muns.length,
+        populacaoBrasilProjecao: proj?.projecao?.populacao ?? null,
+        horarioProjecao: proj?.horario ?? null,
+        status: 'ok'
+      };
+    }
+  } catch (err) {
+    snapshot.sources.ibge.status = `fallback (${err.message})`;
+  }
+
+  // 2. Banco Central do Brasil (Selic 432, IPCA 433, USD/BRL 1)
+  try {
+    const [selic, ipca, usd] = await Promise.all([
+      fetchJson('https://api.bcb.gov.br/dados/serie/bcdata.sgs.432/dados/ultimos/1?formato=json'),
+      fetchJson('https://api.bcb.gov.br/dados/serie/bcdata.sgs.433/dados/ultimos/1?formato=json'),
+      fetchJson('https://api.bcb.gov.br/dados/serie/bcdata.sgs.1/dados/ultimos/1?formato=json')
+    ]);
+    snapshot.sources.bcb = {
+      selic: selic?.[0] || null,
+      ipca: ipca?.[0] || null,
+      usdBrl: usd?.[0] || null,
+      status: 'ok'
+    };
+  } catch (err) {
+    snapshot.sources.bcb.status = `fallback (${err.message})`;
+  }
+
+  // 3. Clima ao vivo em Teresina e polos do Piauí (Open-Meteo)
+  try {
+    const weather = await fetchJson(
+      'https://api.open-meteo.com/v1/forecast?latitude=-5.0892,-2.9055,-7.0769,-9.0744&longitude=-42.8016,-41.7754,-41.4669,-44.3586&current=temperature_2m,relative_humidity_2m,uv_index,wind_speed_10m&timezone=America/Fortaleza'
+    );
+    const list = Array.isArray(weather) ? weather : [weather];
+    const [ter, phb, pic, bjs] = list;
+    snapshot.sources.weather = {
+      teresina: ter?.current ? {
+        tempC: ter.current.temperature_2m,
+        humidity: ter.current.relative_humidity_2m,
+        uv: ter.current.uv_index,
+        windKmh: ter.current.wind_speed_10m,
+        time: ter.current.time,
+        status: 'ok'
+      } : previous.sources.weather.teresina,
+      parnaiba: phb?.current ? { tempC: phb.current.temperature_2m, uv: phb.current.uv_index } : null,
+      picos: pic?.current ? { tempC: pic.current.temperature_2m, uv: pic.current.uv_index } : null,
+      bomJesus: bjs?.current ? { tempC: bjs.current.temperature_2m, uv: bjs.current.uv_index } : null
+    };
+  } catch (err) {
+    snapshot.sources.weather.teresina.status = `fallback (${err.message})`;
+  }
+
+  // 4. Tesouro Nacional SICONFI RGF (Estado do Piauí - id_ente=22)
+  try {
+    const siconfi = await fetchJson(
+      'https://apidatalake.tesouro.gov.br/ords/siconfi/tt/rgf?an_exercicio=2025&in_periodicidade=Q&nr_periodo=3&co_tipo_demonstrativo=RGF&no_anexo=RGF-Anexo%2001&co_esfera=E&co_poder=E&id_ente=22',
+      10000
+    );
+    if (siconfi && Array.isArray(siconfi.items) && siconfi.items.length) {
+      snapshot.sources.siconfi = {
+        status: 'ok',
+        exercicio: 2025,
+        periodo: 3,
+        itens: siconfi.items.length
+      };
+    }
+  } catch (err) {
+    snapshot.sources.siconfi.status = `fallback (${err.message})`;
+  }
+
+  // 5. RSS direto de g1 Piauí e Governo do Piauí (sem rss2json)
+  const rssTargets = [
+    { name: 'g1 Piauí', url: 'https://g1.globo.com/rss/g1/pi/piaui/', host: 'g1.globo.com' },
+    { name: 'Governo do Piauí', url: 'https://www.pi.gov.br/feed/', host: 'www.pi.gov.br' }
+  ];
+  const collectedNews = new Map();
+  for (const src of rssTargets) {
+    try {
+      const xml = await fetchText(src.url);
+      for (const item of parseRssItems(xml, src.name, src.host)) {
+        if (!collectedNews.has(item.url)) collectedNews.set(item.url, item);
+      }
+    } catch (_) {
+      // Mantém fontes que responderam
+    }
+  }
+  const freshNews = [...collectedNews.values()].sort((a, b) => b.date.localeCompare(a.date)).slice(0, 40);
+  snapshot.news = freshNews.length ? freshNews : (Array.isArray(previous.news) ? previous.news : []);
+
+  await fs.writeFile(outFile, JSON.stringify(snapshot, null, 2) + '\n', 'utf8');
+  console.log('Snapshot atualizado:', outFile, 'Notícias:', snapshot.news.length);
+}
+
+main().catch(err => {
+  console.error(err);
+  process.exit(1);
+});

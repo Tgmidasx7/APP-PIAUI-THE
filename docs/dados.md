@@ -1,32 +1,27 @@
-# Governança de dados
+# Governança de dados (v2)
 
-O painel apresenta dados sobre população, território, PIB, educação, finanças públicas e desenvolvimento humano. Ele menciona IBGE, INEP/MEC, SEFAZ-PI, SEDUC-PI, SEMEC-Teresina, PNUD, Seplan-PI e Tesouro Nacional. Essas menções **não comprovam**, por si só, que cada valor esteja correto ou tenha sido auditado. Os dados e gráficos atuais estão incorporados ao `index.html`; não há rotina de coleta automática no repositório.
+O painel apresenta indicadores sobre população, território, PIB, educação, finanças públicas e desenvolvimento humano do Piauí e de Teresina, estruturados em `assets/ontology.js` e complementados por consultas diretas às APIs públicas Gov-BR (`assets/realtime-gov.js`) e pelo snapshot OSINT gerado via GitHub Actions (`data/piaui-live.json`).
 
-## Checklist por indicador
+## Inventário e rastreabilidade
 
-Antes de usar ou atualizar um número, registre e revise:
+Na v2, o catálogo de indicadores em `assets/ontology.js` registra para cada série:
 
-- Nome, definição e abrangência geográfica (estado ou município).
-- Valor, unidade, período de referência e situação: observado, estimado ou projetado.
-- Instituição responsável e link para a tabela, relatório ou conjunto de dados específico, não apenas a página inicial.
-- Data de publicação e data de consulta; versão da fonte quando disponível.
-- Método de cálculo ou transformação, inclusive arredondamentos e comparações.
-- Responsável pela conferência e eventuais ressalvas ou diferenças entre fontes.
+- Nome, domínio e abrangência geográfica (`Piauí` ou `Teresina`).
+- Valor, unidade, período de referência e classificação (`oficial`, `estimativa`, `auditado_painel` ou `a_verificar`).
+- Instituição responsável, link primário e notas metodológicas (ex.: distinção entre DCL/RCL 2025 direta de `56,1%` e `61%` sobre RCL anterior de `R$ 17,92 bi`, e entre taxa intercensitária 2010–2022 e variação recente de estimativas 2022–2025).
 
-Separe claramente indicadores estaduais e municipais, assim como séries com anos, metodologias ou unidades diferentes. Não confunda o ano de publicação com o ano de referência. Caso não seja possível confirmar um valor, marque-o como pendente e não o apresente como auditado.
+A aba **Fontes & método** exibe dinamicamente a matriz completa de indicadores a partir da ontologia.
 
-## Processo sugerido
+## Processo de atualização
 
-1. Fazer um inventário dos valores e gráficos existentes, incluindo textos interpretativos.
-2. Localizar fontes primárias específicas e conferir cada número e série.
-3. Registrar divergências e decidir correções com quem mantém o projeto.
-4. Atualizar conteúdo, períodos e ressalvas na interface em mudança revisada separadamente.
-5. Definir uma periodicidade de revisão compatível com cada fonte; não prometer atualização em tempo real sem uma integração real.
+1. Atualizar séries anuais estruturais em `assets/ontology.js` e sincronizar os cartões correspondentes em `index.html`.
+2. Garantir coerência entre gráficos (`initCharts()`) e notas metodológicas (`chartNotes` em `assets/dashboard.js`).
+3. Executar `npm test` (suítes Python `unittest` e Node `JSDOM`) antes de abrir pull request para `main`.
+4. Deixar a coleta dinâmica de clima, BCB SGS, IBGE e feeds sob responsabilidade de `assets/realtime-gov.js` e `.github/workflows/osint-sync.yml`, sem credenciais privadas no repositório.
 
-Este documento é um guia de verificação, não um atestado da precisão do conteúdo atual. Nenhuma fonte ou indicador foi auditado nesta etapa.
+## Curadoria de notícias e módulo SPIA
 
-## Curadoria de notícias
+A seleção inicial de `assets/news.js` reúne 50 publicações com links, datas, fontes e categorias. Na execução v2, o Terminal combina automaticamente o snapshot `data/piaui-live.json`, notícias oficiais da Agência IBGE e consulta de feeds RSS, mantendo a curadoria local disponível offline.
 
-A seleção inicial de `assets/news.js` reúne 50 publicações com links, títulos resumidos, datas, fontes e categorias, consultadas em 30/10/2026. Essa curadoria é estática; o navegador também tenta consultar feeds RSS externos a cada cinco minutos via RSS2JSON e, se falhar, mantém o conteúdo anterior e informa o problema. A interface usa uma janela móvel de 12 meses; entradas antigas saem da exibição, portanto a manutenção precisa acrescentar novas publicações para manter 50 itens. Ao atualizar, verifique cada URL, data, conteúdo, relação com o Piauí e evite duplicatas. A seleção pode conter comunicados oficiais além de reportagens; uma fonte pode alterar ou remover páginas após a consulta.
+A aba **SPIA Piauí** utiliza 30 vídeos públicos identificados pelo local verdadeiro, e o painel **Eye of God** integra mapa GIS real (WGS84), grafo ontológico e telemetria Gov-BR com câmeras e biometria ilustrativas sem acesso a sistemas policiais.
 
-A aba SPIA é ilustrativa, inclui vídeos públicos externos e não dispõe de câmeras oficiais piauienses nem análise real de imagens. As notas nos gráficos explicam unidades e limitações conhecidas; os links de referência não são prova de cada valor já incorporado ao projeto.

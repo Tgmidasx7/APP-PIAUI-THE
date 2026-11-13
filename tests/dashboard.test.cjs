@@ -6,15 +6,18 @@ const { JSDOM } = require('jsdom');
 
 const root = path.join(__dirname, '..');
 const html = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
+const ontology = fs.readFileSync(path.join(root, 'assets/ontology.js'), 'utf8');
+const realtimeGov = fs.readFileSync(path.join(root, 'assets/realtime-gov.js'), 'utf8');
 const dashboard = fs.readFileSync(path.join(root, 'assets/dashboard.js'), 'utf8');
 const news = fs.readFileSync(path.join(root, 'assets/news.js'), 'utf8');
 const cameras = fs.readFileSync(path.join(root, 'assets/cameras.js'), 'utf8');
 const eyeOfGod = fs.readFileSync(path.join(root, 'assets/eye-of-god.js'), 'utf8');
 
-function createApp({ chart = true, hash = '', timerSpy = null, canvasMock = false } = {}) {
+function createApp({ chart = true, hash = '', timerSpy = null, canvasMock = false, fetchMock = null } = {}) {
   const dom = new JSDOM(html, { url: 'https://example.test/' + hash, runScripts: 'outside-only', pretendToBeVisual: true });
   const { window } = dom;
   window.matchMedia = () => ({ matches: false, addListener() {}, removeListener() {} });
+  if (fetchMock) window.fetch = fetchMock;
   if (timerSpy) { const interval = window.setInterval.bind(window); window.setInterval = (fn, delay) => { timerSpy.push({fn, delay}); return interval(fn, delay); }; }
   const RealDate = window.Date;
   window.Date = class extends RealDate { constructor(...args) { super(...(args.length ? args : ['2026-10-30T15:00:00-03:00'])); } static now() { return new RealDate('2026-10-30T15:00:00-03:00').getTime(); } };
@@ -30,6 +33,7 @@ function createApp({ chart = true, hash = '', timerSpy = null, canvasMock = fals
         clearRect() {},
         strokeRect() {},
         beginPath() {},
+        closePath() {},
         moveTo() {},
         lineTo() {},
         arc() {},
@@ -52,6 +56,8 @@ function createApp({ chart = true, hash = '', timerSpy = null, canvasMock = fals
   // Executa os scripts locais como o navegador, sem carregar CDNs.
   const script = [...window.document.querySelectorAll('script')].find(item => !item.src);
   window.eval(script.textContent);
+  window.eval(ontology);
+  window.eval(realtimeGov);
   window.eval(news);
   window.eval(cameras);
   window.eval(dashboard);
@@ -290,6 +296,8 @@ test('página dedicada /eyeofgod/ funciona de forma autônoma', t => {
   const { window } = dom;
   window.matchMedia = () => ({ matches: false, addListener() {}, removeListener() {} });
   window.HTMLCanvasElement.prototype.getContext = () => null;
+  window.eval(ontology);
+  window.eval(realtimeGov);
   window.eval(eyeOfGod);
   window.document.dispatchEvent(new window.Event('DOMContentLoaded'));
   assert.equal(window.document.querySelectorAll('#eog-cctv-grid .eog-cam-cell').length, 6);
@@ -297,3 +305,97 @@ test('página dedicada /eyeofgod/ funciona de forma autônoma', t => {
   assert.equal(window.document.querySelector('[data-eog-mode="SAR"]').getAttribute('aria-pressed'), 'true');
   assert.match(window.document.getElementById('eog-terminal-body').textContent, /SAR/);
 });
+
+test('v2 exibe anomalias, simulador LRF What-If, explorador de municípios e exportação JSON', t => {
+  const dom = createApp(); t.after(() => dom.window.close());
+  const { window } = dom;
+  const { document, Event } = window;
+
+  // Detector de anomalias na visão geral e inventário na aba Fontes
+  assert.equal(document.querySelectorAll('#analyticsAnomalies .anomaly-card').length, 4);
+  assert.equal(document.querySelectorAll('#ontologyInventoryBody tr').length, 10);
+  assert.match(document.getElementById('inventoryCount').textContent, /10 indicadores estruturados/);
+
+  // Simulador LRF What-If (testa transição de 'ok' -> 'alert' -> 'critical')
+  assert.equal(document.querySelectorAll('#simTableBody tr').length, 6);
+  const rclInput = document.getElementById('simRclGrowth');
+  const dclInput = document.getElementById('simDclGrowth');
+  dclInput.value = '28';
+  dclInput.dispatchEvent(new Event('input', { bubbles: true }));
+  assert.equal(document.getElementById('simRiskBadge').dataset.risk, 'alert');
+  rclInput.value = '2';
+  dclInput.value = '30';
+  dclInput.dispatchEvent(new Event('input', { bubbles: true }));
+  assert.equal(document.getElementById('simRiskBadge').dataset.risk, 'critical');
+
+  // Explorador territorial de municípios (16 polos estratégicos iniciais)
+  assert.equal(document.querySelectorAll('#munGrid .mun-card').length, 16);
+  const munSearch = document.getElementById('munSearch');
+  munSearch.value = 'urucui';
+  munSearch.dispatchEvent(new Event('input', { bubbles: true }));
+  assert.equal(document.querySelectorAll('#munGrid .mun-card').length, 1);
+  assert.match(document.getElementById('munGrid').textContent, /Uruçuí/);
+
+  // Exportação do dossiê JSON
+  let createdBlob = null;
+  window.URL.createObjectURL = blob => { createdBlob = blob; return 'blob:dossier'; };
+  window.URL.revokeObjectURL = () => {};
+  document.getElementById('exportDossier').click();
+  assert.ok(createdBlob);
+});
+
+test('v2 integra telemetria Gov-BR ao vivo (IBGE, BCB, Open-Meteo, SICONFI) e comandos GIS/CLI', async t => {
+  const fakeFetch = async url => {
+    if (url.includes('piaui-live.json')) return { ok: false, status: 404 };
+    if (url.includes('open-meteo.com')) {
+      return { ok: true, json: async () => [{ current: { temperature_2m: 33.4, relative_humidity_2m: 44, uv_index: 9.1, wind_speed_10m: 14 } }] };
+    }
+    if (url.includes('bcdata.sgs.432')) return { ok: true, json: async () => [{ data: '13/11/2026', valor: '11.25' }] };
+    if (url.includes('bcdata.sgs.433')) return { ok: true, json: async () => [{ data: '10/2026', valor: '0.42' }] };
+    if (url.includes('bcdata.sgs.1')) return { ok: true, json: async () => [{ data: '13/11/2026', valor: '5.45' }] };
+    if (url.includes('estados/22/municipios')) {
+      return { ok: true, json: async () => [{ id: 2211001, nome: 'Teresina' }, { id: 2207702, nome: 'Parnaíba' }, { id: 2200202, nome: 'Água Branca' }] };
+    }
+    if (url.includes('projecoes/populacao/BR')) return { ok: true, json: async () => ({ projecao: { populacao: 213500000 } }) };
+    if (url.includes('servicodados.ibge.gov.br/api/v3/noticias')) return { ok: true, json: async () => ({ items: [] }) };
+    if (url.includes('apidatalake.tesouro.gov.br')) return { ok: true, json: async () => ({ items: [{ cod_conta: 'DCL' }] }) };
+    return { ok: false, status: 404 };
+  };
+
+  const dom = createApp({ hash: '#eye-of-god', canvasMock: true, fetchMock: fakeFetch });
+  t.after(() => dom.window.close());
+  const { window } = dom;
+  const { document, KeyboardEvent } = window;
+  await new Promise(resolve => setTimeout(resolve, 25));
+
+  assert.equal(document.getElementById('govLiveBadge').dataset.state, 'online');
+  assert.match(document.getElementById('govLiveWeather').textContent, /33\.4°C/);
+  assert.match(document.getElementById('govLiveBcb').textContent, /11\.25%/);
+  assert.match(document.getElementById('govLiveIbge').textContent, /3 municípios/);
+  assert.match(document.getElementById('govLiveSiconfi').textContent, /RGF 2025/);
+  assert.match(document.getElementById('ecoMacroSelic').textContent, /11\.25%/);
+
+  // Comandos GIS e dados unificados no Eye of God CLI
+  const input = document.getElementById('eog-terminal-input');
+  const runCmd = cmd => {
+    input.value = cmd;
+    input.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true }));
+  };
+  runCmd('geo pi');
+  assert.equal(document.querySelector('[data-eog-map="GEO-PI"]').getAttribute('aria-pressed'), 'true');
+  runCmd('mun água branca');
+  assert.match(document.getElementById('eog-terminal-body').textContent, /IBGE Localidades API/);
+  runCmd('pib');
+  assert.match(document.getElementById('eog-terminal-body').textContent, /R\$ 80,9 bilhões/);
+  runCmd('fiscal');
+  assert.match(document.getElementById('eog-terminal-body').textContent, /CAPAG-STN: B/);
+  runCmd('weather');
+  assert.match(document.getElementById('eog-terminal-body').textContent, /33\.4°C/);
+  runCmd('macro');
+  assert.match(document.getElementById('eog-terminal-body').textContent, /Selic Meta: 11\.25%/);
+  runCmd('graph FISCAL');
+  assert.match(document.getElementById('eog-node-inspector').textContent, /SEFAZ \/ LRF \/ DCL/);
+  runCmd('anomalies');
+  assert.match(document.getElementById('eog-terminal-body').textContent, /Divergências metodológicas/);
+});
+

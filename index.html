@@ -3,8 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Piauí Teresina Analytics | Painel de Indicadores</title>
-<meta name="description" content="Explore indicadores e análises sobre o Piauí e Teresina em um painel temático.">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' https://i.ytimg.com data:; connect-src 'self' https://servicodados.ibge.gov.br https://api.bcb.gov.br https://apidatalake.tesouro.gov.br https://api.open-meteo.com https://api.rss2json.com; frame-src https://www.youtube-nocookie.com https://www.youtube.com; object-src 'none'; base-uri 'self'; form-action 'self';">
+<meta name="referrer" content="no-referrer">
+<title>Piauí Teresina Analytics v2 | Sala de Situação Gov-BR &amp; C4ISR</title>
+<meta name="description" content="Painel de indicadores e telemetria pública do Piauí e Teresina com ontologia estruturada, GIS e integração Gov-BR.">
 <meta name="theme-color" content="#0a0a0f">
 <script defer src="assets/vendor/chart.umd.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -43,116 +45,6 @@ body {
   font-family: var(--font-body);
   overflow-x: hidden;
   min-height: 100vh;
-}
-
-/* LOADING SCREEN */
-#loadingScreen {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: #000;
-  z-index: 99999;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  transition: opacity 0.8s ease, visibility 0.8s ease;
-}
-
-#loadingScreen.hidden {
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-}
-
-#matrixCanvas {
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  opacity: 0.3;
-}
-
-.loading-content {
-  position: relative;
-  z-index: 2;
-  text-align: center;
-  max-width: 800px;
-  padding: 2rem;
-}
-
-.loading-title {
-  font-family: var(--font-display);
-  font-size: clamp(1.5rem, 4vw, 3rem);
-  color: var(--green);
-  text-shadow: 0 0 20px var(--green), 0 0 40px var(--green), 0 0 80px rgba(0,255,65,0.3);
-  margin-bottom: 1rem;
-  letter-spacing: 4px;
-  animation: flicker 2s infinite alternate;
-}
-
-@keyframes flicker {
-  0%, 95% { opacity: 1; }
-  96% { opacity: 0.8; }
-  97% { opacity: 1; }
-  98% { opacity: 0.6; }
-  100% { opacity: 1; }
-}
-
-.loading-subtitle {
-  font-family: var(--font-mono);
-  font-size: clamp(0.7rem, 1.5vw, 1rem);
-  color: var(--cyan);
-  margin-bottom: 2rem;
-  opacity: 0.8;
-}
-
-.loading-terminal {
-  background: rgba(0,255,65,0.03);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 1.5rem;
-  text-align: left;
-  font-family: var(--font-mono);
-  font-size: clamp(0.6rem, 1.2vw, 0.85rem);
-  color: var(--green-dim);
-  max-height: 250px;
-  overflow: hidden;
-  margin-bottom: 2rem;
-}
-
-.loading-terminal .line {
-  margin-bottom: 4px;
-  opacity: 0;
-  animation: typeLine 0.3s forwards;
-}
-
-@keyframes typeLine {
-  to { opacity: 1; }
-}
-
-.loading-bar-container {
-  width: 100%;
-  max-width: 500px;
-  height: 4px;
-  background: rgba(0,255,65,0.1);
-  border-radius: 2px;
-  overflow: hidden;
-  margin: 0 auto 1rem;
-}
-
-.loading-bar {
-  height: 100%;
-  background: linear-gradient(90deg, var(--green), var(--cyan));
-  border-radius: 2px;
-  width: 0%;
-  transition: width 0.3s ease;
-  box-shadow: 0 0 10px var(--green);
-}
-
-.loading-percent {
-  font-family: var(--font-display);
-  font-size: 1.2rem;
-  color: var(--green);
 }
 
 /* MAIN APP */
@@ -734,18 +626,6 @@ body {
   margin-bottom: 4px;
 }
 
-/* SCROLL ANIMATION */
-.reveal {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: all 0.6s ease;
-}
-
-.reveal.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
 /* RESPONSIVE */
 @media (max-width: 768px) {
   .main-content { padding: 1rem; }
@@ -794,94 +674,6 @@ body {
 ::-webkit-scrollbar-track { background: var(--bg-primary); }
 ::-webkit-scrollbar-thumb { background: var(--green-dark); border-radius: 3px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--green-dim); }
-
-.progress-ring {
-  display: inline-block;
-  position: relative;
-}
-
-.progress-ring svg {
-  transform: rotate(-90deg);
-}
-
-.progress-ring .ring-bg {
-  fill: none;
-  stroke: var(--green-dark);
-  stroke-width: 4;
-}
-
-.progress-ring .ring-fill {
-  fill: none;
-  stroke: var(--green);
-  stroke-width: 4;
-  stroke-linecap: round;
-  transition: stroke-dashoffset 1s ease;
-  filter: drop-shadow(0 0 4px var(--green));
-}
-
-.tag {
-  display: inline-block;
-  background: rgba(0,255,65,0.08);
-  border: 1px solid var(--border);
-  border-radius: 4px;
-  padding: 2px 8px;
-  font-family: var(--font-mono);
-  font-size: 0.65rem;
-  color: var(--green);
-  margin: 2px;
-}
-
-.tag.cyan {
-  background: rgba(0,240,255,0.08);
-  color: var(--cyan);
-  border-color: rgba(0,240,255,0.2);
-}
-
-.tag.orange {
-  background: rgba(255,140,0,0.08);
-  color: var(--orange);
-  border-color: rgba(255,140,0,0.2);
-}
-
-.tag.red {
-  background: rgba(255,0,64,0.08);
-  color: var(--red);
-  border-color: rgba(255,0,64,0.2);
-}
-
-.comparison-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 1rem 0;
-}
-
-.comparison-table th {
-  background: rgba(0,255,65,0.05);
-  border: 1px solid var(--border);
-  padding: 10px 14px;
-  font-family: var(--font-mono);
-  font-size: 0.7rem;
-  color: var(--green);
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  text-align: left;
-}
-
-.comparison-table td {
-  border: 1px solid var(--border);
-  padding: 10px 14px;
-  font-size: 0.8rem;
-  color: var(--text-secondary);
-}
-
-.comparison-table td:last-child {
-  font-family: var(--font-mono);
-  color: var(--green);
-}
-
-.comparison-table tr:hover td {
-  background: rgba(0,255,65,0.02);
-}
 </style>
 <link rel="stylesheet" href="assets/enhancements.css">
 <link rel="stylesheet" href="assets/eye-of-god.css">
@@ -903,9 +695,9 @@ body {
       <div class="nav-title">PIAUÍ TERESINA ANALYTICS</div>
     </div>
     <div class="nav-status">
-      <span><span class="status-dot"></span>PAINEL ESTÁTICO</span>
+      <span><span class="status-dot"></span>SALA DE SITUAÇÃO v2</span>
       <span id="navTime" class="nav-hash">00:00:00</span>
-      <span class="nav-hash">DADOS A CONFERIR</span>
+      <span class="nav-hash">GOV-BR + ONTOLOGIA</span>
     </div>
   </nav>
 
@@ -914,12 +706,12 @@ body {
     <div class="hero-section">
       <div class="hero-badge">
         <span class="dot"></span>
-        DOSSIÊ TEMÁTICO • PIAUÍ & TERESINA
+        SALA DE SITUAÇÃO v2.0 • PIAUÍ &amp; TERESINA
       </div>
       <h1 class="hero-title">PIAUÍ & TERESINA</h1>
-      <p class="hero-subtitle">GEOPOLÍTICA • ECONOMIA • EDUCAÇÃO • DESENVOLVIMENTO HUMANO</p>
+      <p class="hero-subtitle">GEOPOLÍTICA • ECONOMIA • EDUCAÇÃO • TELEMETRIA GOV-BR</p>
       <p class="hero-desc">
-        Um ponto de partida para explorar indicadores, contextos e desafios do estado e da capital. Navegue por temas e consulte as fontes antes de utilizar os dados.
+        Plataforma analítica com ontologia estruturada, auditoria metodológica, simulador fiscal LRF, GIS de Teresina/Piauí e sincronização direta com APIs públicas brasileiras (IBGE, Banco Central, SICONFI e clima ao vivo).
       </p>
       <div class="live-clock-bar">
         <div class="clock-item">
@@ -935,14 +727,50 @@ body {
           <div class="value" id="clockTimestamp">----------</div>
         </div>
         <div class="clock-item">
-          <div class="label">Base do painel</div>
-          <div class="value" style="font-size:0.85rem;">ESTÁTICA</div>
+          <div class="label">Arquitetura</div>
+          <div class="value" style="font-size:0.85rem;">HÍBRIDA v2</div>
         </div>
       </div>
     </div>
 
+    <!-- SALA DE SITUAÇÃO GOV-BR EM TEMPO REAL -->
+    <section id="govLiveBar" class="gov-live-bar" aria-label="Telemetria em tempo real Gov-BR">
+      <div class="gov-live-head">
+        <div class="gov-live-title">
+          <span class="gov-br-pill">GOV-BR · TEMPO REAL</span>
+          <span id="govLiveBadge" class="gov-live-badge" data-state="baseline">BASE LOCAL (ESTÁTICA)</span>
+        </div>
+        <div class="gov-live-controls">
+          <span id="govLiveTimestamp" class="gov-live-timestamp">Aguardando sincronização</span>
+          <button type="button" class="tool-button" id="govSyncNow">↻ Sincronizar Gov-BR</button>
+        </div>
+      </div>
+      <div class="gov-live-grid">
+        <div class="gov-live-card">
+          <span>CLIMA TERESINA · OPEN-METEO</span>
+          <strong id="govLiveWeather">Estático</strong>
+          <small id="govLiveWeatherSub">Teresina: conecte para clima ao vivo</small>
+        </div>
+        <div class="gov-live-card">
+          <span>MACROECONOMIA · BCB SGS</span>
+          <strong id="govLiveBcb">BCB SGS</strong>
+          <small id="govLiveBcbSub">Selic / IPCA / PTAX aguardando sync</small>
+        </div>
+        <div class="gov-live-card">
+          <span>MALHA TERRITORIAL · IBGE</span>
+          <strong id="govLiveIbge">224 municípios</strong>
+          <small id="govLiveIbgeSub">UF 22 (PI) · IBGE Localidades</small>
+        </div>
+        <div class="gov-live-card">
+          <span>CONTAS PÚBLICAS · SICONFI</span>
+          <strong id="govLiveSiconfi">DCL 56,1% RCL</strong>
+          <small id="govLiveSiconfiSub">R$ 10,93 bi / R$ 19,5 bi (61% ref. ant.)</small>
+        </div>
+      </div>
+    </section>
+
     <section class="dashboard-tools" aria-label="Ferramentas do painel">
-      <div class="tools-heading"><div><span class="eyebrow">CENTRAL DE EXPLORAÇÃO</span><h2>Encontre o que importa<span class="heading-dot">.</span></h2><p>Pesquise os indicadores, salve seus favoritos e explore os dados por tema.</p></div><span class="tool-index">// 01 — EXPLORAR</span></div>
+      <div class="tools-heading"><div><span class="eyebrow">CENTRAL DE EXPLORAÇÃO</span><h2>Encontre o que importa<span class="heading-dot">.</span></h2><p>Pesquise os indicadores auditados, salve seus favoritos e exporte o dossiê completo.</p></div><span class="tool-index">// 01 — EXPLORAR</span></div>
       <div class="tools-grid">
         <div class="search-area">
           <label for="dashboardSearch">BUSCAR NO PAINEL</label>
@@ -950,11 +778,11 @@ body {
           <p id="searchHint">Busque nos indicadores e detalhes por tema, nome ou valor.</p>
           <div id="searchResults" class="search-results" aria-live="polite" hidden></div>
         </div>
-        <div class="quick-actions"><span class="tool-label">AÇÕES RÁPIDAS</span><div class="action-row"><button type="button" class="tool-button" id="exportCsv">↓ Exportar indicadores</button><button type="button" class="tool-button" id="printPage">⎙ Imprimir aba</button></div><p>O CSV reúne os cartões do painel, não uma base oficial.</p></div>
+        <div class="quick-actions"><span class="tool-label">AÇÕES RÁPIDAS</span><div class="action-row"><button type="button" class="tool-button" id="exportCsv">↓ Exportar CSV</button><button type="button" class="tool-button" id="exportDossier">↓ Dossiê JSON (v2)</button><button type="button" class="tool-button" id="printPage">⎙ Imprimir aba</button></div><p>CSV exporta os cartões; JSON inclui ontologia e telemetria Gov-BR.</p></div>
       </div>
       <div class="favorites-panel"><div><span class="tool-label">★ SEUS FAVORITOS</span><p id="favoritesStatus" aria-live="polite">Salvos apenas neste navegador.</p></div><div id="favoritesList" class="favorites-list"><span class="empty-favorites">Marque uma estrela nos indicadores para acompanhar aqui.</span></div></div>
     </section>
-    <aside class="data-notice"><span aria-hidden="true">ⓘ</span><div><strong>Transparência dos dados</strong><p>Os valores e análises são estáticos, têm anos de referência diferentes e ainda precisam de verificação individual. Não representam um monitoramento em tempo real. <button type="button" class="text-link" data-open-tab="fontes">Entenda as fontes e limitações →</button></p></div></aside>
+    <aside class="data-notice"><span aria-hidden="true">ⓘ</span><div><strong>Transparência e Rastreabilidade (v2)</strong><p>Cada indicador combina série estruturada em <code>assets/ontology.js</code> com consultas diretas ao vivo no navegador (IBGE, Banco Central SGS, Tesouro SICONFI e Open-Meteo). Sem rede externa, o painel preserva os snapshots auditados. <button type="button" class="text-link" data-open-tab="fontes">Entenda as fontes e limitações →</button></p></div></aside>
 
     <!-- TABS -->
     <div class="tab-navigation" id="tabNav" role="tablist" aria-label="Seções do painel">
@@ -986,13 +814,13 @@ body {
           <div class="kpi-label">População (Est. 2025)</div>
           <div class="kpi-value">3.384.547</div>
           <div class="kpi-sub">Censo 2022: 3.271.199</div>
-          <div class="kpi-change up">▲ +0,26% a.a.</div>
+          <div class="kpi-change up">▲ Intercens. 10–22: +0,26% a.a. (Est. 22–25: +1,14% a.a.)</div>
         </div>
         <div class="kpi-card">
           <div class="kpi-icon">🏙️</div>
           <div class="kpi-label">Pop. Teresina (Est. 2025)</div>
-          <div class="kpi-value">~905.692</div>
-          <div class="kpi-sub">~26% da população estadual</div>
+          <div class="kpi-value">905.692</div>
+          <div class="kpi-sub">26,76% do estado (Censo 2022: 26,48%)</div>
           <div class="kpi-change up">▲ Maior polo urbano</div>
         </div>
         <div class="kpi-card">
@@ -1000,35 +828,35 @@ body {
           <div class="kpi-label">PIB Estadual 2023</div>
           <div class="kpi-value">R$ 80,9 BI</div>
           <div class="kpi-sub">+11,1% nominal vs 2022</div>
-          <div class="kpi-change up">▲ Real ~5,7%</div>
+          <div class="kpi-change up">▲ Real +4,2% (IBGE)</div>
         </div>
         <div class="kpi-card">
           <div class="kpi-icon">📊</div>
           <div class="kpi-label">PIB Per Capita (PI)</div>
           <div class="kpi-value">R$ 24.736</div>
           <div class="kpi-sub">3º menor do Brasil</div>
-          <div class="kpi-change up">▲ +913,5% desde 2002</div>
+          <div class="kpi-change up">▲ +913,5% nominal desde 2002</div>
         </div>
         <div class="kpi-card">
           <div class="kpi-icon">📊</div>
           <div class="kpi-label">PIB Per Capita (TER)</div>
           <div class="kpi-value">R$ 33.994</div>
-          <div class="kpi-sub">37% acima da média estadual</div>
+          <div class="kpi-sub">37,4% acima da média estadual</div>
           <div class="kpi-change up">▲ Bem acima da média</div>
         </div>
         <div class="kpi-card">
           <div class="kpi-icon">🎓</div>
-          <div class="kpi-label">IDEM Ensino Médio</div>
+          <div class="kpi-label">IDEB Ensino Médio</div>
           <div class="kpi-value">4,5</div>
-          <div class="kpi-sub">Melhor do NE, 4º Brasil</div>
+          <div class="kpi-sub">Melhor do NE, 4º Brasil (2023)</div>
           <div class="kpi-change up">▲ +0,3 vs 2021</div>
         </div>
         <div class="kpi-card">
           <div class="kpi-icon">📈</div>
-          <div class="kpi-label">IDH 2021</div>
-          <div class="kpi-value">0,69</div>
-          <div class="kpi-sub">0,480 (2000) → Alto</div>
-          <div class="kpi-change up">▲ 3º maior crescimento</div>
+          <div class="kpi-label">IDH Estadual 2021</div>
+          <div class="kpi-value">0,690</div>
+          <div class="kpi-sub">0,480 (2000) → Faixa média (pico 0,710 Alto em 2020)</div>
+          <div class="kpi-change up">▲ 3º maior crescimento em 20 anos</div>
         </div>
       </div>
 
@@ -1047,6 +875,18 @@ body {
           </div>
         </div>
       </div>
+
+      <!-- Detector de Anomalias & Auditoria Metodológica v2 -->
+      <section class="anomaly-panel" aria-label="Auditoria e alertas de divergência">
+        <div class="anomaly-head">
+          <div>
+            <span class="eyebrow">// AUDITORIA AUTOMATIZADA v2</span>
+            <h3>Alertas de Divergência &amp; Rastreabilidade Metodológica</h3>
+          </div>
+          <span class="tool-index">FONTE: assets/ontology.js</span>
+        </div>
+        <div id="analyticsAnomalies" class="anomaly-grid"></div>
+      </section>
     </div>
 
     <!-- TAB: GEOGRÁFICA -->
@@ -1073,7 +913,7 @@ body {
             </div>
             <div class="data-row">
               <span class="data-label">Densidade Demográfica</span>
-              <span class="data-value warn">12,99 hab/km²</span>
+              <span class="data-value warn">12,99 hab/km² (2022) · 13,44 (Est. 2025)</span>
             </div>
             <div class="data-row">
               <span class="data-label">Região</span>
@@ -1085,7 +925,7 @@ body {
             </div>
             <div class="data-row">
               <span class="data-label">Litoral</span>
-              <span class="data-value warn">Litoral atlântico no norte</span>
+              <span class="data-value warn">66 km atlânticos no norte (4 municípios)</span>
             </div>
           </div>
 
@@ -1120,12 +960,12 @@ body {
               <span class="data-value">Semiárido</span>
             </div>
             <div class="data-row">
-              <span class="data-label">Temperatura Média</span>
-              <span class="data-value warn">>30°C</span>
+              <span class="data-label">Temperatura</span>
+              <span class="data-value warn">Média ~27,5°C · Máximas &gt;33°C (B-O-B)</span>
             </div>
             <div class="data-row">
               <span class="data-label">Clima Sul/Litoral</span>
-              <span class="data-value info">Tropical úmido (Mata dos Cocais)</span>
+              <span class="data-value info">Tropical subúmido / transição</span>
             </div>
             <div class="data-row">
               <span class="data-label">Bacia Principal</span>
@@ -1145,7 +985,7 @@ body {
             <h3>Vegetação e Recursos</h3>
             <div class="data-row">
               <span class="data-label">Vegetação</span>
-              <span class="data-value">Caatinga (maioria), Mata dos Cocais</span>
+              <span class="data-value">Caatinga, Cerrado (SO), Mata dos Cocais e Delta</span>
             </div>
             <div class="data-row">
               <span class="data-label">Minérios</span>
@@ -1153,15 +993,15 @@ body {
             </div>
             <div class="data-row">
               <span class="data-label">Agropecuária</span>
-              <span class="data-value">Expansão soja no norte</span>
+              <span class="data-value">Expansão da soja no Sudoeste (MATOPIBA / Cerrados)</span>
             </div>
             <div class="data-row">
               <span class="data-label">Energias Renováveis</span>
-              <span class="data-value" style="font-size:0.7rem;">+2.500% capacidade 2013-2022</span>
+              <span class="data-value" style="font-size:0.7rem;">+2.500% capacidade 2013–2022</span>
             </div>
             <div class="data-row">
               <span class="data-label">Destaque</span>
-              <span class="data-value" style="color:var(--green);">Maior parque eólico da América Latina</span>
+              <span class="data-value" style="color:var(--green);">Complexos eólicos/solares líderes (&gt;95% matriz limpa)</span>
             </div>
           </div>
 
@@ -1176,8 +1016,8 @@ body {
               <span class="data-value info">Confluência Parnaíba-Poti</span>
             </div>
             <div class="data-row">
-              <span class="data-label">Densidade (2022)</span>
-              <span class="data-value warn">622,66 hab/km²</span>
+              <span class="data-label">Densidade Demográfica</span>
+              <span class="data-value warn">622,66 hab/km² (2022) · 650,97 (2025)</span>
             </div>
             <div class="data-row">
               <span class="data-label">Tipo</span>
@@ -1192,6 +1032,20 @@ body {
             <canvas id="chartRelevo"></canvas>
           </div>
         </div>
+
+        <section id="municipalityExplorer" class="mun-explorer" aria-label="Explorador dos municípios do Piauí">
+          <div class="mun-head">
+            <div>
+              <span class="eyebrow">// MALHA TERRITORIAL · 224 MUNICÍPIOS (IBGE UF 22)</span>
+              <h3>Polos Georreferenciados &amp; Diretório Municipal</h3>
+            </div>
+            <span id="munCount" class="mun-count">Carregando malha…</span>
+          </div>
+          <div class="mun-search-wrap">
+            <input id="munSearch" type="search" autocomplete="off" placeholder="Filtrar município ou código IBGE (ex: Parnaíba, Uruçuí, Picos, 2211001)…" aria-label="Filtrar municípios do Piauí">
+          </div>
+          <div id="munGrid" class="mun-grid"></div>
+        </section>
       </div>
     </div>
 
@@ -1217,14 +1071,14 @@ body {
             <div class="kpi-icon">📈</div>
             <div class="kpi-label">Estimativa 2025 (PI)</div>
             <div class="kpi-value">3.384.547</div>
-            <div class="kpi-sub">+0,26% anual</div>
-            <div class="kpi-change neutral">8º menor crescimento</div>
+            <div class="kpi-sub">Intercens. 10–22: +0,26% a.a. | Est. 22–25: +1,14% a.a.</div>
+            <div class="kpi-change neutral">8º menor cresc. intercensitário</div>
           </div>
           <div class="kpi-card">
             <div class="kpi-icon">🏙️</div>
             <div class="kpi-label">Pop. Censo 2022 (TER)</div>
             <div class="kpi-value">866.300</div>
-            <div class="kpi-sub">~26% do estado</div>
+            <div class="kpi-sub">26,48% do estado (26,76% na est. 2025)</div>
           </div>
           <div class="kpi-card">
             <div class="kpi-icon">📍</div>
@@ -1239,12 +1093,16 @@ body {
           <div class="detail-card">
             <h3>Dados Estaduais</h3>
             <div class="data-row">
-              <span class="data-label">Crescimento Anual</span>
-              <span class="data-value">+0,26%</span>
+              <span class="data-label">Crescimento Intercensitário (2010–2022)</span>
+              <span class="data-value">+0,26% a.a.</span>
+            </div>
+            <div class="data-row">
+              <span class="data-label">Variação Estimativa (2022–2025)</span>
+              <span class="data-value info">+1,14% a.a. (+3,47% acum.)</span>
             </div>
             <div class="data-row">
               <span class="data-label">Densidade</span>
-              <span class="data-value warn">12,99 hab/km²</span>
+              <span class="data-value warn">12,99 hab/km² (2022) · 13,44 (2025)</span>
             </div>
             <div class="data-row">
               <span class="data-label">Urbanização</span>
@@ -1268,19 +1126,43 @@ body {
             </div>
             <div class="data-row">
               <span class="data-label">Estimativa 2025</span>
-              <span class="data-value info">~905.692 hab.</span>
+              <span class="data-value info">905.692 hab.</span>
             </div>
             <div class="data-row">
               <span class="data-label">Participação no Estado</span>
-              <span class="data-value">~26%</span>
+              <span class="data-value">26,48% (2022) · 26,76% (2025)</span>
             </div>
             <div class="data-row">
               <span class="data-label">Densidade</span>
-              <span class="data-value warn">622,66 hab/km²</span>
+              <span class="data-value warn">622,66 hab/km² (2022) · 650,97 (2025)</span>
             </div>
             <div class="data-row">
               <span class="data-label">Perfil</span>
               <span class="data-value info">Maior polo urbano, forte atração migratória</span>
+            </div>
+          </div>
+
+          <div class="detail-card">
+            <h3>Polos Regionais (Censo 2022)</h3>
+            <div class="data-row">
+              <span class="data-label">Teresina (Entre Rios)</span>
+              <span class="data-value info">866.300 hab. (1º)</span>
+            </div>
+            <div class="data-row">
+              <span class="data-label">Parnaíba (Planície Litorânea)</span>
+              <span class="data-value">162.159 hab. (2º)</span>
+            </div>
+            <div class="data-row">
+              <span class="data-label">Picos (Vale do Guaribas)</span>
+              <span class="data-value">83.090 hab. (3º)</span>
+            </div>
+            <div class="data-row">
+              <span class="data-label">Piripiri (Cocais)</span>
+              <span class="data-value">65.538 hab. (4º)</span>
+            </div>
+            <div class="data-row">
+              <span class="data-label">Floriano (Vale dos Rios Piauí e Itaueira)</span>
+              <span class="data-value">62.036 hab. (5º)</span>
             </div>
           </div>
         </div>
@@ -1341,19 +1223,19 @@ body {
             <h3>Infraestrutura Estratégica</h3>
             <div class="data-row">
               <span class="data-label">Rodovias/Ferrovias</span>
-              <span class="data-value info">+1.274 km federais (2005-2023)</span>
+              <span class="data-value info">+1.274 km rodovias fed. + Transnordestina (Eliseu Martins)</span>
             </div>
             <div class="data-row">
               <span class="data-label">Aeroporto Teresina</span>
               <span class="data-value info">+5x passageiros</span>
             </div>
             <div class="data-row">
-              <span class="data-label">Porto</span>
-              <span class="data-value">Luís Correia (potencial)</span>
+              <span class="data-label">Porto &amp; ZPE</span>
+              <span class="data-value">Porto Luís Correia (implantação) + ZPE Parnaíba</span>
             </div>
             <div class="data-row">
               <span class="data-label">Energia Renovável</span>
-              <span class="data-value" style="color:var(--green);">95% eólica/solar</span>
+              <span class="data-value" style="color:var(--green);">&gt;95% eólica/solar (matriz limpa)</span>
             </div>
             <div class="data-row">
               <span class="data-label">Potencial</span>
@@ -1369,7 +1251,7 @@ body {
             </div>
             <div class="data-row">
               <span class="data-label">Interiorização</span>
-              <span class="data-value info">Avanço via agro + PPPs (fibra ótica)</span>
+              <span class="data-value info">Avanço via MATOPIBA + PPPs (fibra ótica)</span>
             </div>
             <div class="data-row">
               <span class="data-label">G20 Social 2024</span>
@@ -1377,7 +1259,7 @@ body {
             </div>
             <div class="data-row">
               <span class="data-label">Transição</span>
-              <span class="data-value info">"Muito baixo" → "Alto" desenvolvimento</span>
+              <span class="data-value info">IDH 0,480 (2000) → 0,690 (2021) / pico 0,710</span>
             </div>
           </div>
 
@@ -1420,7 +1302,7 @@ body {
             <div class="kpi-icon">💰</div>
             <div class="kpi-label">PIB 2023</div>
             <div class="kpi-value">R$ 80,9 BI</div>
-            <div class="kpi-sub">+11,1% nominal</div>
+            <div class="kpi-sub">+11,1% nominal (+4,2% real IBGE)</div>
           </div>
           <div class="kpi-card">
             <div class="kpi-icon">📊</div>
@@ -1432,7 +1314,7 @@ body {
             <div class="kpi-icon">🏙️</div>
             <div class="kpi-label">PIB per Capita (TER)</div>
             <div class="kpi-value">R$ 33.994</div>
-            <div class="kpi-sub">37% acima estadual</div>
+            <div class="kpi-sub">37,4% acima da média estadual</div>
           </div>
           <div class="kpi-card">
             <div class="kpi-icon">📈</div>
@@ -1445,7 +1327,7 @@ body {
             <div class="kpi-label">Dívida 2025</div>
             <div class="kpi-value" style="color:var(--red);">R$ 10,93 BI</div>
             <div class="kpi-sub">DCL +30,65% vs 2024</div>
-            <div class="kpi-change down">▼ 61% RCL (6º maior rel.)</div>
+            <div class="kpi-change down">▼ 56,1% RCL 2025 (61% RCL ant.)</div>
           </div>
           <div class="kpi-card">
             <div class="kpi-icon">🏗️</div>
@@ -1457,18 +1339,18 @@ body {
 
         <div class="detail-grid">
           <div class="detail-card">
-            <h3>Composição do PIB 2023</h3>
+            <h3>Composição &amp; Variação do PIB 2023</h3>
             <div class="data-row">
-              <span class="data-label">Serviços</span>
-              <span class="data-value">71,7% (+2,0%)</span>
+              <span class="data-label">Serviços (peso / var. real)</span>
+              <span class="data-value">71,7% (+2,0% a.a.)</span>
             </div>
             <div class="data-row">
-              <span class="data-label">Agropecuária</span>
-              <span class="data-value info">+5,1%</span>
+              <span class="data-label">Agropecuária (peso / var. real)</span>
+              <span class="data-value info">18,0% (+5,1% a.a.)</span>
             </div>
             <div class="data-row">
-              <span class="data-label">Indústria</span>
-              <span class="data-value info">+4,6%</span>
+              <span class="data-label">Indústria (peso / var. real)</span>
+              <span class="data-value info">10,3% (+4,6% a.a.)</span>
             </div>
           </div>
 
@@ -1507,16 +1389,16 @@ body {
               <span class="data-value danger">+30,65%</span>
             </div>
             <div class="data-row">
-              <span class="data-label">Índice DCL/RCL</span>
-              <span class="data-value warn">61%</span>
+              <span class="data-label">DCL / RCL (Base 2025)</span>
+              <span class="data-value warn">56,1% (R$ 10,93 bi / R$ 19,50 bi)</span>
+            </div>
+            <div class="data-row">
+              <span class="data-label">Ref. RGF Anterior</span>
+              <span class="data-value warn">61% (sobre RCL R$ 17,92 bi)</span>
             </div>
             <div class="data-row">
               <span class="data-label">Status LRF</span>
-              <span class="data-value" style="color:var(--green);">Abaixo do limite</span>
-            </div>
-            <div class="data-row">
-              <span class="data-label">Ranking</span>
-              <span class="data-value warn">6º maior endividamento relativo</span>
+              <span class="data-value" style="color:var(--green);">Abaixo do limite (200%)</span>
             </div>
           </div>
 
@@ -1531,12 +1413,32 @@ body {
               <span class="data-value" style="color:var(--green);">14,34% RCL</span>
             </div>
             <div class="data-row">
-              <span class="data-label">Despesa Pessoal</span>
-              <span class="data-value" style="color:var(--green);">38,77% (limite: 49%)</span>
+              <span class="data-label">Despesa Pessoal (Executivo)</span>
+              <span class="data-value" style="color:var(--green);">38,77% (Alerta: 44,1% · Teto: 49%)</span>
             </div>
             <div class="data-row">
               <span class="data-label">Invest. Público</span>
-              <span class="data-value" style="color:var(--green);">Maior do país (2025)</span>
+              <span class="data-value" style="color:var(--green);">Destaque nacional (2025)</span>
+            </div>
+          </div>
+
+          <div class="detail-card" id="ecoLiveMacro">
+            <h3>Macroeconomia &amp; Clima ao Vivo (v2)</h3>
+            <div class="data-row">
+              <span class="data-label">Selic Meta (BCB SGS)</span>
+              <span class="data-value info" id="ecoMacroSelic">Aguardando sync…</span>
+            </div>
+            <div class="data-row">
+              <span class="data-label">IPCA Mensal (BCB SGS)</span>
+              <span class="data-value info" id="ecoMacroIpca">Aguardando sync…</span>
+            </div>
+            <div class="data-row">
+              <span class="data-label">Dólar PTAX (BCB SGS)</span>
+              <span class="data-value info" id="ecoMacroUsd">Aguardando sync…</span>
+            </div>
+            <div class="data-row">
+              <span class="data-label">SICONFI PI (UF 22)</span>
+              <span class="data-value" id="ecoMacroSiconfi">Base SEFAZ-PI ativa</span>
             </div>
           </div>
 
@@ -1563,7 +1465,7 @@ body {
 
         <div class="charts-grid">
           <div class="chart-container">
-            <h3>💰 Receitas e despesas (2024–2025)</h3>
+            <h3>💰 Execução Fiscal Homogênea (SEFAZ-PI 2025)</h3>
             <div class="chart-wrapper">
               <canvas id="chartFinancas"></canvas>
             </div>
@@ -1575,6 +1477,49 @@ body {
             </div>
           </div>
         </div>
+
+        <section id="lrfSimulator" class="lrf-sim-panel" aria-label="Simulador fiscal LRF 2025-2030">
+          <div class="lrf-sim-head">
+            <div>
+              <span class="eyebrow">// MODELAGEM FISCAL · LEI DE RESPONSABILIDADE FISCAL</span>
+              <h3>Simulador What-If: Trajetória DCL / RCL (2025–2030)</h3>
+            </div>
+            <span id="simRiskBadge" class="lrf-risk-badge" data-risk="ok">CONFORTO LRF</span>
+          </div>
+          <div class="lrf-sim-controls">
+            <div class="lrf-slider-box">
+              <label for="simRclGrowth">Crescimento RCL (% a.a.) <span id="simRclVal">7.0% a.a.</span></label>
+              <input id="simRclGrowth" type="range" min="0" max="15" step="0.5" value="7">
+            </div>
+            <div class="lrf-slider-box">
+              <label for="simDclGrowth">Crescimento DCL (% a.a.) <span id="simDclVal">12.0% a.a.</span></label>
+              <input id="simDclGrowth" type="range" min="-5" max="30" step="0.5" value="12">
+            </div>
+            <div class="lrf-slider-box">
+              <label for="simPibGrowth">Crescimento PIB Nominal (% a.a.) <span id="simPibVal">6.5% a.a.</span></label>
+              <input id="simPibGrowth" type="range" min="0" max="14" step="0.5" value="6.5">
+            </div>
+          </div>
+          <div class="lrf-sim-status">
+            <span id="simSummary">Carregando projeção LRF…</span>
+            <small>Limite Resolução Senado 40/2001: DCL ≤ 200% da RCL</small>
+          </div>
+          <div class="lrf-sim-table-wrap">
+            <table class="lrf-sim-table">
+              <thead>
+                <tr>
+                  <th scope="col">Ano</th>
+                  <th scope="col">RCL Projetada</th>
+                  <th scope="col">DCL Projetada</th>
+                  <th scope="col">DCL / RCL</th>
+                  <th scope="col">DCL / PIB</th>
+                  <th scope="col">Status LRF</th>
+                </tr>
+              </thead>
+              <tbody id="simTableBody"></tbody>
+            </table>
+          </div>
+        </section>
       </div>
     </div>
 
@@ -1592,19 +1537,19 @@ body {
         <div class="kpi-grid">
           <div class="kpi-card">
             <div class="kpi-icon">📊</div>
-            <div class="kpi-label">IDEF Anos Iniciais EF</div>
+            <div class="kpi-label">IDEB Anos Iniciais EF</div>
             <div class="kpi-value">5,9</div>
             <div class="kpi-sub">Acima BR (5,0) e NE (4,7)</div>
           </div>
           <div class="kpi-card">
             <div class="kpi-icon">📊</div>
-            <div class="kpi-label">IDEF Anos Finais EF</div>
+            <div class="kpi-label">IDEB Anos Finais EF</div>
             <div class="kpi-value">5,2</div>
             <div class="kpi-sub">Acima BR (5,0) e NE (4,7)</div>
           </div>
           <div class="kpi-card">
             <div class="kpi-icon">🏆</div>
-            <div class="kpi-label">IDEM Ensino Médio</div>
+            <div class="kpi-label">IDEB Ensino Médio</div>
             <div class="kpi-value">4,5</div>
             <div class="kpi-sub">Melhor NE, 4º Brasil</div>
             <div class="kpi-change up">▲ +0,3 vs 2021</div>
@@ -1664,7 +1609,7 @@ body {
           </div>
 
           <div class="detail-card">
-            <h3>Evolução IDEM Ensino Médio</h3>
+            <h3>Evolução IDEB Ensino Médio</h3>
             <div class="data-row">
               <span class="data-label">2021</span>
               <span class="data-value">4,2</span>
@@ -1690,7 +1635,7 @@ body {
 
         <div class="charts-grid">
           <div class="chart-container">
-            <h3>🎓 Comparativo IDEM Piauí vs Brasil vs NE</h3>
+            <h3>🎓 Comparativo IDEB Piauí vs Brasil vs NE</h3>
             <div class="chart-wrapper">
               <canvas id="chartIDEB"></canvas>
             </div>
@@ -1732,8 +1677,8 @@ body {
           <div class="kpi-card">
             <div class="kpi-icon">📈</div>
             <div class="kpi-label">IDH 2021</div>
-            <div class="kpi-value">0,69</div>
-            <div class="kpi-sub">3º maior crescimento em 20 anos</div>
+            <div class="kpi-value">0,690</div>
+            <div class="kpi-sub">Faixa média · 3º maior cresc. em 20 anos</div>
           </div>
           <div class="kpi-card">
             <div class="kpi-icon">🏙️</div>
@@ -1823,9 +1768,9 @@ body {
 
           <div class="swot-card weaknesses">
             <h4>⚠️ FRAQUEZAS</h4>
-            <div class="swot-item">Dívida em alta (61% RCL, +30,65%)</div>
+            <div class="swot-item">Dívida em alta (56,1% RCL 2025 · 61% ant., +30,65%)</div>
             <div class="swot-item">PIB per capita baixo (3º menor BR)</div>
-            <div class="swot-item">Concentração pop/econômica (50% em 14 municípios)</div>
+            <div class="swot-item">Concentração pop/econômica (50,1% em 14 municípios)</div>
             <div class="swot-item">Semiárido — vulnerabilidade climática</div>
             <div class="swot-item">Interiorização fraca</div>
             <div class="swot-item">Gini subindo pós-2012 (0,552)</div>
@@ -1836,7 +1781,7 @@ body {
             <div class="swot-item">Expansão agro (soja, irrigação)</div>
             <div class="swot-item">Hidrogênio verde</div>
             <div class="swot-item">Turismo (Sete Cidades, Delta do Parnaíba)</div>
-            <div class="swot-item">Interiorização via infraestrutura</div>
+            <div class="swot-item">Interiorização via infraestrutura (Transnordestina &amp; ZPE)</div>
             <div class="swot-item">Polo industrial verde</div>
             <div class="swot-item">Porto de Luís Correia</div>
             <div class="swot-item">Educação profissionalizante</div>
@@ -1856,12 +1801,16 @@ body {
         <div class="detail-card" style="border-color: var(--cyan); background: rgba(0,240,255,0.03);">
           <h3>📋 Síntese interpretativa</h3>
           <p style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.8; margin-top: 0.5rem;">
-            O Piauí apresenta <strong style="color: var(--green);">crescimento convergente</strong> (IDH, PIB, educação) acima da média regional, com boa gestão fiscal apesar da dívida. <strong style="color: var(--cyan);">Teresina atua como motor econômico</strong> (PIB per capita 37% acima estadual). 
+            O Piauí apresenta <strong style="color: var(--green);">crescimento convergente</strong> (IDH, PIB, educação) acima da média regional, com boa gestão fiscal apesar da dívida. <strong style="color: var(--cyan);">Teresina atua como motor econômico</strong> (PIB per capita 37,4% acima estadual).
             <br><br>
             <strong style="color: var(--orange);">Pontos críticos:</strong> diversificação além de Teresina e controle da dívida para sustentabilidade.
             <br>
             <strong style="color: var(--green);">Recomendação:</strong> Priorizar hidrogênio verde, educação profissional e irrigação para multiplicar ganhos.
           </p>
+          <div class="action-row" style="margin-top:0.9rem;">
+            <button type="button" class="tool-button" data-open-tab="eco">📊 Simular trajetória LRF (2025–2030) →</button>
+            <button type="button" class="tool-button" data-open-tab="eye-of-god">👁️ Abrir Mapa GIS &amp; Ontologia →</button>
+          </div>
         </div>
       </div>
     </div>
@@ -1883,7 +1832,7 @@ body {
           <div class="news-terminal cmd-output" id="terminalBox" role="log" aria-label="Histórico de notícias" aria-live="off" tabindex="0"><span class="news-prompt">piaui@noticias:~$</span> Preparando notícias...</div>
           <div class="cmd-status" id="newsStatus" role="status">Curadoria local carregada. Aguardando atualização.</div>
           <div class="news-controls" aria-label="Controles do terminal"><button type="button" id="newsPrev" aria-label="Notícia anterior">← Anterior</button><button type="button" id="newsPause" aria-pressed="false">Ⅱ Pausar</button><button type="button" id="newsNext">Próxima →</button><button type="button" id="newsRefresh">↻ Atualizar agora</button><button type="button" id="newsClear">Limpar histórico</button></div>
-          <p class="news-note">Tentativa automática a cada 5 minutos enquanto a página estiver aberta, usando os feeds do g1 Piauí e Governo do Piauí via serviço externo RSS2JSON. Em caso de falha, a curadoria local de 30/10/2026 continua disponível. Notícias podem sofrer alterações nas fontes.</p>
+          <p class="news-note">Sistema híbrido v2: consome snapshot OSINT atualizado via GitHub Actions (<code>data/piaui-live.json</code>), Agência IBGE Notícias e feeds do g1 Piauí e Governo do Piauí (com atualização automática a cada 5 minutos). Sem conectividade, a curadoria local permanece ativa.</p>
         </div>
         <div class="news-archive"><div class="archive-header"><div><span class="eyebrow">// PIAUÍ & TERESINA</span><h3>Arquivo de notícias</h3><p>Publicações dos últimos 12 meses disponíveis nesta seleção.</p></div><span class="archive-count" id="archiveCount">—</span></div>
           <div class="archive-filters"><label>Buscar notícia<input id="newsSearch" type="search" placeholder="Ex.: Teresina, saúde, educação"></label><label>Assunto<select id="newsCategory"><option value="">Todos os assuntos</option></select></label></div>
@@ -1952,227 +1901,69 @@ body {
       <div class="method-grid"><div class="detail-card"><h3>Fontes públicas</h3><p>Os vídeos pertencem aos respectivos canais no YouTube. Cada tela traz o local informado e um link para o original.</p></div><div class="detail-card"><h3>Privacidade e responsabilidade</h3><p>Não coletamos imagens nem fazemos identificação. Integrações reais exigem autorização, avaliação de privacidade e responsáveis.</p></div><div class="detail-card"><h3>SPIA no Piauí</h3><p>Leia a <a href="https://www.ssp.pi.gov.br/ssp-pi-amplia-monitoramento-em-teresina-com-inauguracao-de-dois-novos-totens-inteligentes/" target="_blank" rel="noopener noreferrer">publicação da SSP-PI ↗</a> sobre totens anunciados em 2026. Este painel não tem acesso a eles.</p></div></div>
     </div>
 
-    <!-- TAB: S.P.I.A. · EYE OF GOD // PALANTIR MATRIX EDITION -->
+    <!-- TAB: S.P.I.A. · EYE OF GOD // PALANTIR MATRIX EDITION (componente compartilhado) -->
     <div class="tab-content" id="tab-eye-of-god" role="tabpanel" aria-labelledby="btn-eye-of-god" tabindex="0">
       <div class="data-notice">
         <span aria-hidden="true">ⓘ</span>
         <div>
-          <strong>Simulação tática e visual (modo demonstrativo)</strong>
-          <p>Esta aba apresenta uma interface conceitual inspirada em centros C4ISR. Os feeds em Canvas, telemetria, radar, grafo, terminal e áudio são gerados proceduralmente no navegador — não há conexão real com câmeras da SSP-PI, satélites, BNMP/DETRAN ou sistemas policiais.</p>
+          <strong>Eye of God v2 · GIS Teresina/Piauí, Ontologia e Telemetria Gov-BR</strong>
+          <p>O mapa geoespacial (WGS84), o grafo ontológico de 10 nós e os sensores Gov-BR utilizam dados reais e auditados (<code>assets/ontology.js</code> + <code>assets/realtime-gov.js</code>); as câmeras multi-espectrais, placas LPR e biometria em Canvas permanecem como simulação visual demonstrativa sem vínculo policial.</p>
         </div>
       </div>
 
-      <div class="eog-hud-shell" id="eog-hud-shell">
-        <canvas id="eog-matrix-rain-canvas" aria-hidden="true"></canvas>
-        <div class="eog-crt-overlay" aria-hidden="true"></div>
-
-        <!-- TOP HEADER BAR -->
-        <header class="eog-header">
-          <div class="eog-brand-zone">
-            <div class="eog-god-eye-logo" aria-hidden="true">
-              <div class="eog-iris-ring"></div>
-              <div class="eog-pupil-core"></div>
-            </div>
-            <div>
-              <h2 class="eog-glitch-text">S.P.I.A. // EYE OF GOD</h2>
-              <p class="eog-brand-sub">SISTEMA INTEGRADO DE INTELIGÊNCIA ARTIFICIAL E VIGILÂNCIA GLOBAL · GOV-PI</p>
-            </div>
-          </div>
-
-          <div class="eog-header-status-grid">
-            <div class="eog-stat-pill">
-              <span class="eog-pill-label">SATELLITE LINK:</span>
-              <span class="eog-pill-value ok" id="eog-sat-uplink">GEO-PI-01 [99.8%]</span>
-            </div>
-            <div class="eog-stat-pill">
-              <span class="eog-pill-label">CRIPTOGRAFIA:</span>
-              <span class="eog-pill-value ok">SHA-512 / POST-QUANTUM</span>
-            </div>
-            <div class="eog-stat-pill">
-              <span class="eog-pill-label">HASH KERNEL:</span>
-              <span class="eog-pill-value" id="eog-kernel-hash">0x9F4C...B21</span>
-            </div>
-            <div class="eog-stat-pill">
-              <span class="eog-pill-label">DEFCON ESTADUAL:</span>
-              <span class="eog-pill-value warn" id="eog-defcon-status">NÍVEL 2 - ELEVADO</span>
-            </div>
-            <div class="eog-stat-pill">
-              <span class="eog-pill-label">HORA TÁTICA:</span>
-              <span class="eog-pill-value clock" id="eog-tactical-clock">00:00:00.000</span>
-            </div>
-          </div>
-
-          <div class="eog-header-actions">
-            <a class="eog-btn eog-link-btn" href="eyeofgod/">↗ TELA DEDICADA</a>
-            <button type="button" class="eog-btn alert-btn" id="eog-lockdown-btn" aria-pressed="false">🚨 LOCKDOWN TOTAL</button>
-            <button type="button" class="eog-btn" id="eog-audio-toggle" aria-pressed="true">🔊 AUDIO: ON</button>
-          </div>
-        </header>
-
-        <!-- MAIN TACTICAL GRID -->
-        <div class="eog-main-grid">
-          <!-- COLUNA 1: TELEMETRIA & AMBIENTE DO PIAUÍ -->
-          <aside class="eog-panel-box" id="eog-panel-telemetry">
-            <div class="eog-panel-title">
-              <span>📡 TELEMETRIA AMBIENTAL &amp; MATRIZ ENERGÉTICA (PI)</span>
-              <span class="eog-corner-code">LOC: -05.0892° / -42.8016°</span>
-            </div>
-            <div class="eog-panel-content">
-              <div class="eog-telemetry-grid">
-                <div class="eog-sensor-card">
-                  <div class="eog-s-label">ÍNDICE TÉRMICO CAPITAL</div>
-                  <div class="eog-s-val" id="eog-sensor-temp">38.8°C</div>
-                  <div class="eog-s-sub">Pico Térmico: B-O-B [Alerta 11 UV]</div>
-                </div>
-                <div class="eog-sensor-card">
-                  <div class="eog-s-label">POPULAÇÃO ATIVA EM VIAS</div>
-                  <div class="eog-s-val" id="eog-sensor-pop">164.210</div>
-                  <div class="eog-s-sub">Taxa de Identificação: 99.1%</div>
-                </div>
-                <div class="eog-sensor-card">
-                  <div class="eog-s-label">CARGA DA REDE ELÉTRICA</div>
-                  <div class="eog-s-val" id="eog-sensor-grid">84.2%</div>
-                  <div class="eog-s-sub">Subestação Teresina II: 60.02 Hz</div>
-                </div>
-                <div class="eog-sensor-card">
-                  <div class="eog-s-label">ESPECTRO RF / SINAIS</div>
-                  <div class="eog-s-val" id="eog-sensor-rf">2.41 GHz</div>
-                  <div class="eog-s-sub">Triangulação de 842 Torres ERB</div>
-                </div>
-              </div>
-
-              <div class="eog-sub-section-title">ESTADO DOS MÓDULOS DE COMBATE</div>
-              <div class="eog-modules-status-list">
-                <div class="eog-mod-item">
-                  <span>FACE-RECON [BNMP/SESP]</span>
-                  <span class="eog-mod-badge active">RODANDO</span>
-                </div>
-                <div class="eog-mod-item">
-                  <span>CERCO LPR [DETRAN/RENAVAM]</span>
-                  <span class="eog-mod-badge active">RODANDO</span>
-                </div>
-                <div class="eog-mod-item">
-                  <span>ACOUSTIC SHOT-SPOTTER</span>
-                  <span class="eog-mod-badge active">RODANDO</span>
-                </div>
-                <div class="eog-mod-item">
-                  <span>PREDIÇÃO LPA (NEURAL NETWORK)</span>
-                  <span class="eog-mod-badge compute">COMPUTANDO</span>
-                </div>
-                <div class="eog-mod-item">
-                  <span>PALANTIR THREAT MATRIX</span>
-                  <span class="eog-mod-badge active">SINCRONIZADO</span>
-                </div>
-              </div>
-
-              <div class="eog-sub-section-title">ANALISADOR DE ESPECTRO EM TEMPO REAL</div>
-              <canvas id="eog-spectrum-canvas" class="eog-spectrum-box" width="280" height="72" aria-label="Analisador de espectro RF simulado"></canvas>
-            </div>
-          </aside>
-
-          <!-- COLUNA 2: MODULAGEM DE CÂMERAS & VETORIZAÇÃO -->
-          <section class="eog-panel-box eog-center-viewport" aria-label="Modulação de câmeras Eye of God">
-            <div class="eog-panel-title">
-              <span>👁️ MATRIX CAM MODULATION // EYE OF GOD TARGET LOCK</span>
-              <div class="eog-cam-modes-bar" role="group" aria-label="Modo de visão das câmeras">
-                <button type="button" class="eog-cam-mode-btn active" data-eog-mode="OPTICAL" aria-pressed="true">ÓPTICA HUD</button>
-                <button type="button" class="eog-cam-mode-btn" data-eog-mode="FLIR" aria-pressed="false">TÉRMICA FLIR</button>
-                <button type="button" class="eog-cam-mode-btn" data-eog-mode="NVG" aria-pressed="false">NOTURNA NVG</button>
-                <button type="button" class="eog-cam-mode-btn" data-eog-mode="LIDAR" aria-pressed="false">LIDAR 3D</button>
-                <button type="button" class="eog-cam-mode-btn" data-eog-mode="NEURAL" aria-pressed="false">FLUXO IA</button>
-                <button type="button" class="eog-cam-mode-btn" data-eog-mode="SAR" aria-pressed="false">ORBITAL SAR</button>
-              </div>
-            </div>
-
-            <div class="eog-panel-content eog-viewport-content">
-              <div class="eog-cctv-matrix-grid" id="eog-cctv-grid"></div>
-
-              <div class="eog-target-inspect-card">
-                <div class="eog-target-profile-pic">
-                  <canvas id="eog-wireframe-face-canvas" width="100" height="100" aria-label="Wireframe biométrico simulado"></canvas>
-                  <div class="eog-target-scan-line" aria-hidden="true"></div>
-                </div>
-                <div class="eog-target-data">
-                  <div class="eog-target-id" id="eog-target-id-label">ALVO #01: VEÍCULO / INDIVÍDUO IDENTIFICADO</div>
-                  <div class="eog-target-details" id="eog-target-details-label">
-                    PLACA: <span class="eog-highlight">PIU-8B42</span> · MODELO: <span class="eog-highlight">Toyota Hilux Prata</span> · RECON: <span class="eog-highlight">98.9%</span><br>
-                    VISTO EM: <span class="eog-highlight">Av. Raul Lopes / Ponte Estaiada</span> · ROTA: <span class="eog-highlight">Sentido Norte (68 km/h)</span>
-                  </div>
-                </div>
-                <div class="eog-target-actions">
-                  <button type="button" class="eog-btn" id="eog-lock-target-btn">🎯 CRAVAR MIRA</button>
-                  <button type="button" class="eog-btn alert-btn" id="eog-dispatch-drone-btn">🚁 DESPACHAR DRONE</button>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <!-- COLUNA 3: RADAR GEOESPACIAL & GRAFO PALANTIR -->
-          <aside class="eog-panel-box" id="eog-panel-radar-intel">
-            <div class="eog-panel-title">
-              <span>🌐 RADAR C4ISR &amp; GRAFO DE VÍNCULOS TÁTICOS</span>
-              <span class="eog-corner-code">ORBITAL SWEEP 360°</span>
-            </div>
-            <div class="eog-panel-content">
-              <div class="eog-radar-wrapper">
-                <canvas id="eog-tactical-radar-canvas" width="340" height="240" aria-label="Radar orbital tático simulado"></canvas>
-                <div class="eog-radar-hud-info">
-                  <span>ALVOS RASTREADOS: <b id="eog-radar-target-count">12</b></span>
-                  <span>VIATURAS EM CAMPO: <b id="eog-radar-units-count">8</b></span>
-                </div>
-              </div>
-
-              <div class="eog-sub-section-title">GRAFO DE RELAÇÕES &amp; AMEAÇAS (PALANTIR MATRIX)</div>
-              <div class="eog-graph-wrapper">
-                <canvas id="eog-palantir-graph-canvas" width="340" height="200" aria-label="Grafo de vínculos Palantir Matrix simulado"></canvas>
-              </div>
-
-              <div class="eog-sub-section-title">FEED DE EVENTOS TÁTICOS (INSTANTÂNEO)</div>
-              <div class="eog-event-feed-list" id="eog-event-feed-container" aria-live="polite"></div>
-            </div>
-          </aside>
-        </div>
-
-        <!-- BOTTOM CLI TERMINAL DOCK -->
-        <div class="eog-footer-terminal" role="region" aria-label="Terminal CLI Kernel Eye of God">
-          <div class="eog-terminal-bar-header">
-            <span>⚡ EYE OF GOD KERNEL TERMINAL // V.8.4.2-PROD</span>
-            <span>DIGITE 'help' PARA LISTAR COMANDOS TÁTICOS</span>
-          </div>
-          <div class="eog-terminal-body" id="eog-terminal-body" role="log" aria-live="polite">
-            <div class="eog-term-line output">&gt; S.P.I.A. Interface tática carregada em modo demonstrativo. Autenticação: ALFA-7 [SIMULAÇÃO]</div>
-            <div class="eog-term-line output">&gt; Malha óptica e radar orbital em Canvas prontos para operação.</div>
-          </div>
-          <div class="eog-terminal-prompt">
-            <label class="eog-prompt-symbol" for="eog-terminal-input">root@SPIA-GODS-EYE:~#</label>
-            <input type="text" id="eog-terminal-input" class="eog-prompt-input" autocomplete="off" placeholder="execute comandos como: help, target, lockdown, thermal, scan, clear...">
-          </div>
-        </div>
-      </div>
+      <div id="eog-tab-mount" data-eog-mount="tab"></div>
     </div>
 
     <!-- TAB: FONTES E MÉTODO -->
     <div class="tab-content" id="tab-fontes" role="tabpanel" aria-labelledby="btn-fontes" tabindex="0">
       <div class="data-section">
-        <div class="section-header"><div class="section-icon">◈</div><div><div class="section-title">Fontes & metodologia</div><div class="section-subtitle">TRANSPARÊNCIA PARA UMA LEITURA RESPONSÁVEL</div></div></div>
-        <div class="sources-intro"><span class="eyebrow">// ANTES DE COMEÇAR</span><h2>Dados com contexto<span class="heading-dot">.</span></h2><p>Este painel organiza informações já presentes no projeto. Os links abaixo levam aos portais institucionais para iniciar sua pesquisa — não são referências específicas para cada número.</p></div>
+        <div class="section-header"><div class="section-icon">◈</div><div><div class="section-title">Fontes & metodologia</div><div class="section-subtitle">TRANSPARÊNCIA, ONTOLOGIA E TELEMETRIA GOV-BR</div></div></div>
+        <div class="sources-intro"><span class="eyebrow">// RASTREABILIDADE v2</span><h2>Dados com origem verificável<span class="heading-dot">.</span></h2><p>A plataforma v2 combina uma ontologia local estruturada (<code>assets/ontology.js</code>), coleta automatizada a cada 6 horas via GitHub Actions (<code>data/piaui-live.json</code>) e consultas diretas às APIs públicas oficiais sem exposição de credenciais.</p></div>
         <div class="source-grid">
-          <a class="source-card" href="https://www.ibge.gov.br/" target="_blank" rel="noopener noreferrer"><span>01 / TERRITÓRIO & POPULAÇÃO</span><h3>IBGE ↗</h3><p>Estatísticas territoriais, demográficas e econômicas.</p></a>
-          <a class="source-card" href="https://www.gov.br/inep/pt-br" target="_blank" rel="noopener noreferrer"><span>02 / EDUCAÇÃO</span><h3>INEP ↗</h3><p>Indicadores e avaliações da educação brasileira.</p></a>
-          <a class="source-card" href="https://www.sefaz.pi.gov.br/" target="_blank" rel="noopener noreferrer"><span>03 / FINANÇAS</span><h3>SEFAZ-PI ↗</h3><p>Informações fiscais e da administração estadual.</p></a>
-          <a class="source-card" href="https://www.gov.br/tesouronacional/pt-br" target="_blank" rel="noopener noreferrer"><span>04 / CONTAS PÚBLICAS</span><h3>Tesouro Nacional ↗</h3><p>Dados e relatórios sobre finanças públicas.</p></a>
-          <a class="source-card" href="https://www.undp.org/pt/brazil" target="_blank" rel="noopener noreferrer"><span>05 / DESENVOLVIMENTO</span><h3>PNUD Brasil ↗</h3><p>Estudos e iniciativas de desenvolvimento humano.</p></a>
-          <a class="source-card" href="https://www.seduc.pi.gov.br/" target="_blank" rel="noopener noreferrer"><span>06 / REDE ESTADUAL</span><h3>SEDUC-PI ↗</h3><p>Informações sobre a educação no Piauí.</p></a>
+          <a class="source-card" href="https://servicodados.ibge.gov.br/" target="_blank" rel="noopener noreferrer"><span>01 / TERRITÓRIO &amp; POPULAÇÃO</span><h3>IBGE + APIs ↗</h3><p>Malha oficial dos 224 municípios (UF 22), estimativas e Agência IBGE Notícias.</p></a>
+          <a class="source-card" href="https://www.gov.br/inep/pt-br/areas-de-atuacao/pesquisas-estatisticas-e-indicadores/ideb" target="_blank" rel="noopener noreferrer"><span>02 / EDUCAÇÃO</span><h3>INEP / IDEB ↗</h3><p>Indicadores de aprendizagem e fluxo escolar (Anos Iniciais, Finais e EM).</p></a>
+          <a class="source-card" href="https://www.sefaz.pi.gov.br/" target="_blank" rel="noopener noreferrer"><span>03 / FINANÇAS ESTADUAIS</span><h3>SEFAZ-PI / RGF ↗</h3><p>Receitas, despesas, DCL/RCL e cumprimento dos limites da LRF.</p></a>
+          <a class="source-card" href="https://apidatalake.tesouro.gov.br/" target="_blank" rel="noopener noreferrer"><span>04 / CONTAS PÚBLICAS</span><h3>Tesouro SICONFI ↗</h3><p>Consulta direta de RREO/RGF do ente estadual (id_ente=22).</p></a>
+          <a class="source-card" href="https://www3.bcb.gov.br/sgspub/" target="_blank" rel="noopener noreferrer"><span>05 / MACROECONOMIA</span><h3>Banco Central SGS ↗</h3><p>Séries ao vivo de Selic meta, IPCA mensal e câmbio USD/BRL (PTAX).</p></a>
+          <a class="source-card" href="https://open-meteo.com/" target="_blank" rel="noopener noreferrer"><span>06 / METEOROLOGIA</span><h3>Open-Meteo ↗</h3><p>Telemetria climática em tempo real para Teresina, Parnaíba, Picos e Bom Jesus.</p></a>
+          <a class="source-card" href="https://www.undp.org/pt/brazil" target="_blank" rel="noopener noreferrer"><span>07 / DESENVOLVIMENTO</span><h3>PNUD Brasil ↗</h3><p>Série histórica do IDH Estadual e IDHM municipal.</p></a>
+          <a class="source-card" href="https://www.seduc.pi.gov.br/" target="_blank" rel="noopener noreferrer"><span>08 / REDE ESTADUAL</span><h3>SEDUC-PI ↗</h3><p>Expansão de tempo integral e resultados educacionais no Piauí.</p></a>
         </div>
-        <div class="method-grid"><div class="detail-card"><h3>Como interpretar</h3><p>Confira o ano, a unidade e a área geográfica antes de comparar. Estimativas, dados municipais e estaduais podem usar metodologias diferentes.</p></div><div class="detail-card"><h3>Limitações conhecidas</h3><p>Não há coleta automática nem auditoria comprovada. Alguns títulos, séries e conclusões precisam de validação em suas fontes primárias.</p></div><div class="detail-card"><h3>Próxima etapa</h3><p>Associar cada indicador à tabela ou relatório de origem, documentar a metodologia e revisar os valores antes de qualquer uso decisório.</p></div></div>
+
+        <section class="lrf-sim-panel" aria-label="Inventário estruturado de indicadores">
+          <div class="lrf-sim-head">
+            <div>
+              <span class="eyebrow">// INVENTÁRIO AUDITADO · ONTOLOGIA v2</span>
+              <h3>Matriz Completa de Indicadores &amp; Status Metodológico</h3>
+            </div>
+            <span class="tool-index" id="inventoryCount">10 indicadores</span>
+          </div>
+          <div class="lrf-sim-table-wrap">
+            <table class="lrf-sim-table">
+              <thead>
+                <tr>
+                  <th scope="col">Domínio</th>
+                  <th scope="col">Indicador</th>
+                  <th scope="col">Valor Atual</th>
+                  <th scope="col">Período</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Fonte Primária</th>
+                </tr>
+              </thead>
+              <tbody id="ontologyInventoryBody"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <div class="method-grid"><div class="detail-card"><h3>Como interpretar</h3><p>Confira sempre o ano de referência, a unidade e o recorte (estadual vs. municipal). O painel separa claramente censo definitivo, estimativa, simulação What-If (LRF) e leitura ao vivo.</p></div><div class="detail-card"><h3>Arquitetura híbrida v2</h3><p>APIs Gov-BR rodam direto do navegador com cache resiliente; caso não haja internet, o snapshot <code>data/piaui-live.json</code> (gerado via GitHub Actions) mantém o painel funcional.</p></div><div class="detail-card"><h3>Limitações conhecidas</h3><p>Séries anuais estaduais (ex.: PIB 2023, IDH 2021, IDEB 2023) seguem o calendário de divulgação dos órgãos oficiais. Câmeras SPIA e biometria HUD são ilustrativas.</p></div></div>
       </div>
     </div>
 
     <!-- FOOTER -->
     <footer class="app-footer">
-      <p style="color: var(--green); font-family: var(--font-display); font-size: 0.8rem; margin-bottom: 8px;">PIAUÍ TERESINA ANALYTICS</p>
-      <p>DOSSIÊ TEMÁTICO • PIAUÍ & TERESINA</p>
-      <p>Conteúdo estático • Indicadores sujeitos a verificação</p>
+      <p style="color: var(--green); font-family: var(--font-display); font-size: 0.8rem; margin-bottom: 8px;">PIAUÍ TERESINA ANALYTICS v2</p>
+      <p>SALA DE SITUAÇÃO • PIAUÍ &amp; TERESINA</p>
+      <p>Ontologia local auditada + Telemetria pública Gov-BR</p>
       <p><button type="button" class="text-link" data-open-tab="fontes">Fontes e metodologia</button> · <a href="https://github.com/Tgmidasx7/APP-PIAUI-THE" target="_blank" rel="noopener noreferrer">Repositório no GitHub ↗</a></p>
     </footer>
   </main>
@@ -2215,10 +2006,10 @@ function initCharts() {
   createChart(document.getElementById('chartPIBSetores'), {
     type: 'doughnut',
     data: {
-      labels: ['Serviços', 'Agropecuária', 'Indústria', 'Outros'],
+      labels: ['Serviços', 'Agropecuária', 'Indústria'],
       datasets: [{
-        data: [71.7, 12, 10, 6.3],
-        backgroundColor: ['#00ff41', '#00f0ff', '#ffd700', '#ff8c00'],
+        data: [71.7, 18.0, 10.3],
+        backgroundColor: ['#00ff41', '#00f0ff', '#ffd700'],
         borderColor: '#111820',
         borderWidth: 2,
         hoverOffset: 8
@@ -2387,16 +2178,16 @@ function initCharts() {
     }
   });
 
-  // BAR: Finanças
+  // BAR: Finanças Públicas (Série homogênea 2025 - SEFAZ-PI)
   createChart(document.getElementById('chartFinancas'), {
     type: 'bar',
     data: {
-      labels: ['Rec. Brutas 2024', 'Desp. Empenhadas 2024', 'Rec. Correntes 2025', 'Desp. Correntes 2025'],
+      labels: ['Receita Corrente Bruta 2025', 'Receita Corrente Líquida (RCL) 2025', 'Despesa Corrente Liquidada 2025', 'Dívida Consolidada Líquida (DCL) 2025'],
       datasets: [{
-        label: 'Bilhões R$',
-        data: [25.54, 22.93, 19.5, 18.19],
-        backgroundColor: ['rgba(0,255,65,0.6)', 'rgba(255,0,64,0.4)', 'rgba(0,240,255,0.6)', 'rgba(255,140,0,0.4)'],
-        borderColor: ['#00ff41', '#ff0040', '#00f0ff', '#ff8c00'],
+        label: 'Bilhões R$ (2025)',
+        data: [21.60, 19.50, 18.19, 10.93],
+        backgroundColor: ['rgba(0,255,65,0.6)', 'rgba(0,240,255,0.6)', 'rgba(255,140,0,0.45)', 'rgba(255,0,64,0.45)'],
+        borderColor: ['#00ff41', '#00f0ff', '#ff8c00', '#ff0040'],
         borderWidth: 1,
         borderRadius: 4
       }]
@@ -2423,11 +2214,11 @@ function initCharts() {
   createChart(document.getElementById('chartPIBSetores2'), {
     type: 'polarArea',
     data: {
-      labels: ['Serviços (71,7%)', 'Agropecuária', 'Indústria', 'Outros'],
+      labels: ['Serviços (71,7%)', 'Agropecuária (18,0%)', 'Indústria (10,3%)'],
       datasets: [{
-        data: [71.7, 12, 10, 6.3],
-        backgroundColor: ['rgba(0,255,65,0.5)', 'rgba(0,240,255,0.5)', 'rgba(255,215,0,0.5)', 'rgba(255,140,0,0.5)'],
-        borderColor: ['#00ff41', '#00f0ff', '#ffd700', '#ff8c00'],
+        data: [71.7, 18.0, 10.3],
+        backgroundColor: ['rgba(0,255,65,0.5)', 'rgba(0,240,255,0.5)', 'rgba(255,215,0,0.5)'],
+        borderColor: ['#00ff41', '#00f0ff', '#ffd700'],
         borderWidth: 1
       }]
     },
@@ -2594,6 +2385,8 @@ function initCharts() {
   });
 }
 </script>
+<script src="assets/ontology.js"></script>
+<script src="assets/realtime-gov.js"></script>
 <script src="assets/news.js"></script>
 <script src="assets/cameras.js"></script>
 <script src="assets/dashboard.js"></script>

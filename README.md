@@ -18,11 +18,11 @@ Painel analítico de indicadores sobre o estado do Piauí e sua capital, Teresin
 | Demográfica | Censo 2022 vs Estimativas 2025 com distinção explícita entre taxa intercensitária (+0,26% a.a.) e variação recente (+1,14% a.a.) |
 | Geopolítica & Corredores | Resumo em linguagem simples, 4 corredores geoeconômicos (Litoral/H₂V, MATOPIBA, Teresina e Semiárido), gráfico comparativo e matriz de choques × economia |
 | Econômica, Commodities & LRF | PIB setorial, série fiscal homogênea (2025), **Petróleo (Brent/WTI), Soja, Milho, Ouro, IC-Br (BCB)** com conversão em R$/saca, termômetro interativo de impacto, cruzamentos econômicos e **Simulador What-If LRF (2025–2030)** |
-| Educacional | Indicadores **IDEB** (Anos Iniciais, Anos Finais e Ensino Médio), SEDUC-PI e SEMEC-Teresina |
+| Educacional & Escolas | **Censo Escolar 2024–2026** (829.549 matr. totais / 698.725 públicas PI / 126.719 Teresina), **explorador de 27 escolas reais** com código INEP por zonas de Teresina (Centro, Norte, Leste, Sul, Sudeste) e polos do interior, **6 premiações verificadas** (`Prêmio MEC EPT`, `Selo Ouro CNCA`, `OBMEP`, `TME²`, `Seduckathon`), simulador Tempo Integral × EPT, clima escolar ao vivo e notícias educacionais (**SEDUC-PI RSS** + **IBGE Educação**) |
 | Desenvolvimento Humano | Evolução estadual do IDH (2000–2021) separada metodologicamente do marco de IDHM de Teresina (2010) |
 | SWOT | Forças, fraquezas, oportunidades e ameaças |
 | SPIA | Catálogo de 30 vídeos públicos e laboratório demonstrativo para Teresina |
-| Eye of God (`#eye-of-god` & `/eyeofgod/`) | Componente compartilhado (`mountEyeOfGod`) com GIS real de Teresina (Rios Parnaíba/Poti) e Piauí (16 polos), grafo de ontologia interativo, 6 modos de câmera em Canvas, sensores Gov-BR e CLI unificada (`pib`, `pop`, `fiscal`, `edu`, `geo pi`, `mun`, `graph`, `govbr`, `anomalies`, `weather`, `macro`, `commodities`) |
+| Eye of God (`#eye-of-god` & `/eyeofgod/`) | Componente compartilhado (`mountEyeOfGod`) com GIS real de Teresina (Rios Parnaíba/Poti) e Piauí (16 polos), grafo de ontologia interativo, 6 modos de câmera em Canvas, sensores Gov-BR e CLI unificada (`pib`, `pop`, `fiscal`, `edu`, `escolas`, `premios`, `geo pi`, `mun`, `graph`, `govbr`, `anomalies`, `weather`, `macro`, `commodities`) |
 | Terminal & OSINT | Snapshot automático (`data/piaui-live.json` via `scripts/sync_osint.mjs`), IBGE Notícias, feeds RSS e curadoria local de 50 notícias |
 | Fontes & método | Portais institucionais, checklist de governança e exportação em CSV e **Dossiê JSON completo** |
 
@@ -84,7 +84,7 @@ data/piaui-live.json               Snapshot OSINT atualizado periodicamente via 
 scripts/sync_osint.mjs             Coletor zero-backend Node 22 para APIs públicas e RSS direto
 .github/workflows/osint-sync.yml   Workflow agendado (a cada 6h) para atualizar data/piaui-live.json
 .github/workflows/checks.yml       Verificações automáticas (Python unittest + Node JSDOM)
-tests/                             8 testes estruturais (Python) + 13 testes de interação/v2 (JSDOM)
+tests/                             8 testes estruturais (Python) + 15 testes de interação/v2 (JSDOM)
 ```
 
 ## Como contribuir

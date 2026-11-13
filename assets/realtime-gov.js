@@ -43,6 +43,11 @@
       icbr: { total: null, agro: null, metal: null, energia: null },
       quotes: {}
     },
+    education: {
+      status: 'local',
+      ibgeNoticias: [],
+      rssSeduc: []
+    },
     snapshotNews: []
   };
 
@@ -100,6 +105,11 @@
         ...state.commodities,
         icbr: { ...state.commodities.icbr },
         quotes: { ...state.commodities.quotes }
+      },
+      education: {
+        ...state.education,
+        ibgeNoticias: [...state.education.ibgeNoticias],
+        rssSeduc: [...state.education.rssSeduc]
       }
     };
   }
@@ -195,6 +205,13 @@
             generatedAt: snap.generatedAt || null,
             icbr: { ...state.commodities.icbr, ...(snap.sources.commodities.icbr || {}) },
             quotes: { ...state.commodities.quotes, ...(snap.sources.commodities.quotes || {}) }
+          };
+        }
+        if (snap.sources.education) {
+          state.education = {
+            ...state.education,
+            ...snap.sources.education,
+            ibgeNoticias: Array.isArray(snap.sources.education.ibgeNoticias) ? snap.sources.education.ibgeNoticias : []
           };
         }
         if (Array.isArray(snap.news)) {
@@ -346,6 +363,42 @@
         }
         if (commOk) {
           state.commodities.status = 'ok';
+        }
+      }),
+
+      // 6. Monitoramento Educacional ao Vivo (IBGE Notícias Educação + RSS SEDUC-PI)
+      Promise.allSettled([
+        fetchJsonSafe('https://servicodados.ibge.gov.br/api/v3/noticias/?busca=educacao&qtd=5'),
+        fetchJsonSafe('https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fwww.seduc.pi.gov.br%2Ffeed%2F')
+      ]).then(results => {
+        const [ibgeEdu, seducRss] = results;
+        let eduOk = false;
+        if (ibgeEdu.status === 'fulfilled' && ibgeEdu.value && Array.isArray(ibgeEdu.value.items)) {
+          state.education.ibgeNoticias = ibgeEdu.value.items
+            .filter(item => typeof item.link === 'string' && /^https:\/\//.test(item.link))
+            .slice(0, 5)
+            .map(item => ({
+              title: item.titulo,
+              date: item.data_publicacao,
+              url: item.link
+            }));
+          eduOk = true;
+        }
+        if (seducRss.status === 'fulfilled' && seducRss.value && seducRss.value.status === 'ok' && Array.isArray(seducRss.value.items)) {
+          state.education.rssSeduc = seducRss.value.items
+            .filter(item => typeof item.link === 'string' && /^https:\/\/www\.seduc\.pi\.gov\.br\//.test(item.link))
+            .slice(0, 6)
+            .map(item => ({
+              title: item.title,
+              date: (item.pubDate || '').slice(0, 10),
+              url: item.link,
+              source: 'SEDUC-PI (Ao Vivo)',
+              category: 'Educação'
+            }));
+          eduOk = true;
+        }
+        if (eduOk) {
+          state.education.status = 'ok';
         }
       })
     ];

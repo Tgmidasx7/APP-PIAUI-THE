@@ -415,7 +415,9 @@
     chartIDEB: ['Notas oficiais do IDEB 2023 (INEP) por etapa de ensino (Anos Iniciais, Anos Finais e Ensino Médio) comparando Piauí, Brasil e média do Nordeste.', 'https://www.gov.br/inep/pt-br/areas-de-atuacao/pesquisas-estatisticas-e-indicadores/ideb'],
     chartPosicaoEM: ['Ranking estadual do Piauí no IDEB Ensino Médio em 2021 e 2023 (escala invertida: 4ª posição em 2023 representa melhor colocação no Brasil e liderança no Nordeste).', 'https://www.gov.br/inep/pt-br/areas-de-atuacao/pesquisas-estatisticas-e-indicadores/ideb'],
     chartGeoCorredores: ['Índices sintéticos ilustrativos (0–100) construídos a partir da síntese de ativos e gargalos logísticos de cada corredor geoeconômico do Piauí.', 'https://www.ibge.gov.br/cidades-e-estados/pi.html'],
-    chartEcoVetores: ['Comparativo qualitativo-estrutural (0–100) entre o peso de cada motor econômico no Piauí e sua exposição direta a petróleo/diesel, dólar e clima.', 'https://www.bcb.gov.br/']
+    chartEcoVetores: ['Comparativo qualitativo-estrutural (0–100) entre o peso de cada motor econômico no Piauí e sua exposição direta a petróleo/diesel, dólar e clima.', 'https://www.bcb.gov.br/'],
+    chartEduMatriculasRede: ['Comparativo oficial preliminar do Censo Escolar 2026 (MEC/INEP) em milhares de matrículas presenciais da rede pública (estadual + municipal): Piauí (698,7 mil) vs Teresina (126,7 mil).', 'https://www.gov.br/inep/pt-br/areas-de-atuacao/pesquisas-estatisticas-e-indicadores/censo-escolar'],
+    chartEduZonasAlunos: ['Somatório auditado das matrículas e docentes das 27 unidades escolares reais catalogadas por zona administrativa de Teresina e polos do interior (Censo Escolar INEP 2024–2025).', 'https://qedu.org.br/uf/22-piaui']
   };
 
   function setupClock() {
@@ -880,6 +882,386 @@
 
     document.addEventListener('piaui:realtime-update', renderCommodities);
     renderCommodities();
+
+    // 9. Módulo Educacional — Escolas por Zona, Raio-X INEP, Premiações, Simulador e Feeds Educacionais ao Vivo
+    const schools = Array.isArray(ontology.schoolsCatalog) ? ontology.schoolsCatalog : [];
+    const zoneTabs = $('#eduZoneTabs');
+    const schoolsGrid = $('#eduSchoolsGrid');
+    const schoolDetail = $('#eduSchoolDetail');
+    const schoolSearch = $('#eduSchoolSearch');
+    const networkFilter = $('#eduNetworkFilter');
+    const stageFilter = $('#eduStageFilter');
+
+    if (zoneTabs && schoolsGrid && schoolDetail && schools.length) {
+      let activeZone = 'Todas';
+      let selectedInep = schools[0].inep;
+
+      const zoneCounts = new Map([['Todas', schools.length]]);
+      schools.forEach(s => zoneCounts.set(s.zone, (zoneCounts.get(s.zone) || 0) + 1));
+
+      const zoneOptions = [
+        { id: 'Todas', label: `Todas (${schools.length})` },
+        ...(ontology.educationZones || []).map(z => ({ id: z.id, label: `${z.id} (${zoneCounts.get(z.id) || 0})` }))
+      ];
+
+      const renderZoneTabs = () => {
+        zoneTabs.replaceChildren();
+        zoneOptions.forEach(opt => {
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'edu-zone-btn';
+          btn.textContent = opt.label;
+          btn.setAttribute('aria-pressed', String(activeZone === opt.id));
+          btn.addEventListener('click', () => {
+            activeZone = opt.id;
+            renderZoneTabs();
+            renderSchools();
+          });
+          zoneTabs.append(btn);
+        });
+      };
+
+      const renderSchoolDetail = school => {
+        schoolDetail.replaceChildren();
+        if (!school) {
+          const empty = document.createElement('p');
+          empty.className = 'v2-sub';
+          empty.textContent = 'Nenhuma escola corresponde aos filtros atuais.';
+          schoolDetail.append(empty);
+          return;
+        }
+        const badge = document.createElement('span');
+        badge.className = 'cross-tag';
+        badge.textContent = `INEP ${school.inep} · ${school.network.toUpperCase()} · ZONA ${school.zone.toUpperCase()}`;
+
+        const title = document.createElement('h4');
+        title.textContent = school.name;
+
+        const loc = document.createElement('p');
+        loc.className = 'v2-sub';
+        loc.textContent = `${school.neighborhood} — ${school.municipality}/PI · ${school.gre}`;
+
+        const ratio = school.students && school.teachers
+          ? `${(school.students / school.teachers).toFixed(1).replace('.', ',')} alunos/doc.`
+          : '—';
+
+        const grid = document.createElement('div');
+        grid.className = 'edu-detail-grid';
+        [
+          ['Matrículas', school.students != null ? school.students.toLocaleString('pt-BR') : 'Não inf.'],
+          ['Docentes', school.teachers != null ? school.teachers.toLocaleString('pt-BR') : 'Não inf.'],
+          ['Razão Alunos/Doc.', ratio],
+          ['IDEB 2023 (EF)', school.idebEf != null ? school.idebEf.toFixed(1).replace('.', ',') : '—'],
+          ['IDEB 2023 (EM)', school.idebEm != null ? school.idebEm.toFixed(1).replace('.', ',') : '—'],
+          ['Referência Base', school.period]
+        ].forEach(([lbl, val]) => {
+          const cell = document.createElement('div');
+          cell.className = 'edu-detail-cell';
+          const sp = document.createElement('span'); sp.textContent = lbl;
+          const st = document.createElement('strong'); st.textContent = val;
+          cell.append(sp, st);
+          grid.append(cell);
+        });
+
+        const stagesP = document.createElement('p');
+        stagesP.className = 'commodity-impact';
+        stagesP.textContent = `Etapas & Oferta: ${school.stages.join(' · ')} — ${school.courses}.`;
+
+        const awardP = document.createElement('p');
+        awardP.className = 'commodity-impact';
+        awardP.style.marginTop = '.45rem';
+        awardP.textContent = `Destaques & Indicadores: ${school.award}.`;
+
+        const link = document.createElement('a');
+        link.className = 'edu-detail-link';
+        link.href = `https://qedu.org.br/escola/${encodeURIComponent(school.inep)}`;
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+        link.textContent = `Abrir Boletim Oficial no QEdu (INEP ${school.inep}) ↗`;
+
+        schoolDetail.append(badge, title, loc, grid, stagesP, awardP, link);
+      };
+
+      const renderSchools = () => {
+        const q = normalize((schoolSearch?.value || '').trim());
+        const net = networkFilter ? networkFilter.value : '';
+        const st = stageFilter ? stageFilter.value : '';
+
+        const filtered = schools.filter(s => {
+          if (activeZone !== 'Todas' && s.zone !== activeZone) return false;
+          if (net && s.network !== net) return false;
+          if (st === 'tecnico' && !s.stages.some(x => /t[ée]cnico/i.test(x))) return false;
+          if (st === 'ideb' && s.idebEf == null && s.idebEm == null) return false;
+          if (st === 'eja' && !s.stages.some(x => /eja/i.test(x))) return false;
+          if (q) {
+            const hay = normalize(`${s.name} ${s.inep} ${s.neighborhood} ${s.municipality} ${s.zone} ${s.courses} ${s.award} ${s.network}`);
+            if (!hay.includes(q)) return false;
+          }
+          return true;
+        });
+
+        let sumStudents = 0, sumTeachers = 0, idebValues = [];
+        filtered.forEach(s => {
+          if (typeof s.students === 'number') sumStudents += s.students;
+          if (typeof s.teachers === 'number') sumTeachers += s.teachers;
+          if (typeof s.idebEm === 'number') idebValues.push(s.idebEm);
+          else if (typeof s.idebEf === 'number') idebValues.push(s.idebEf);
+        });
+        const avgIdeb = idebValues.length
+          ? (idebValues.reduce((a, b) => a + b, 0) / idebValues.length).toFixed(2).replace('.', ',')
+          : '—';
+
+        if ($('#eduSumCount')) $('#eduSumCount').textContent = `${filtered.length} de ${schools.length}`;
+        if ($('#eduSumStudents')) $('#eduSumStudents').textContent = sumStudents.toLocaleString('pt-BR');
+        if ($('#eduSumTeachers')) $('#eduSumTeachers').textContent = sumTeachers.toLocaleString('pt-BR');
+        if ($('#eduSumIdeb')) $('#eduSumIdeb').textContent = avgIdeb === '—' ? '—' : `${avgIdeb} (${idebValues.length} esc.)`;
+        if ($('#eduCatalogCount')) $('#eduCatalogCount').textContent = `${filtered.length} escolas exibidas`;
+
+        if (filtered.length && !filtered.some(s => s.inep === selectedInep)) {
+          selectedInep = filtered[0].inep;
+        }
+
+        schoolsGrid.replaceChildren();
+        if (!filtered.length) {
+          const p = document.createElement('p');
+          p.className = 'v2-sub';
+          p.textContent = 'Nenhuma unidade escolar encontrada para esta combinação de filtros.';
+          schoolsGrid.append(p);
+          renderSchoolDetail(null);
+          return;
+        }
+
+        filtered.forEach(s => {
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'school-card';
+          btn.setAttribute('aria-pressed', String(s.inep === selectedInep));
+
+          const top = document.createElement('div');
+          top.className = 'school-card-top';
+          const badge = document.createElement('span');
+          badge.className = 'school-badge';
+          badge.dataset.net = s.network;
+          badge.textContent = `${s.network} · ${s.zone}`;
+          const inep = document.createElement('span');
+          inep.className = 'school-inep';
+          inep.textContent = `INEP ${s.inep}`;
+          top.append(badge, inep);
+
+          const h = document.createElement('h4');
+          h.textContent = s.name;
+          const loc = document.createElement('div');
+          loc.className = 'school-loc';
+          loc.textContent = `${s.neighborhood} · ${s.municipality}/PI`;
+
+          const metrics = document.createElement('div');
+          metrics.className = 'school-metrics';
+          const mItems = [
+            s.students != null ? `${s.students.toLocaleString('pt-BR')} matr.` : 'Matr. s/inf.',
+            s.teachers != null ? `${s.teachers} doc.` : 'Doc. s/inf.'
+          ];
+          if (s.idebEm != null) mItems.push(`IDEB EM ${s.idebEm.toFixed(1).replace('.', ',')}`);
+          else if (s.idebEf != null) mItems.push(`IDEB EF ${s.idebEf.toFixed(1).replace('.', ',')}`);
+          metrics.textContent = mItems.join(' · ');
+
+          btn.append(top, h, loc, metrics);
+          btn.addEventListener('click', () => {
+            selectedInep = s.inep;
+            renderSchools();
+          });
+          schoolsGrid.append(btn);
+        });
+
+        renderSchoolDetail(filtered.find(s => s.inep === selectedInep) || filtered[0]);
+      };
+
+      if (schoolSearch) schoolSearch.addEventListener('input', renderSchools);
+      if (networkFilter) networkFilter.addEventListener('change', renderSchools);
+      if (stageFilter) stageFilter.addEventListener('change', renderSchools);
+      renderZoneTabs();
+      renderSchools();
+    }
+
+    // Hall de Premiações Educacionais
+    const awardsGrid = $('#eduAwardsGrid');
+    if (awardsGrid && Array.isArray(ontology.educationAwards)) {
+      awardsGrid.replaceChildren();
+      ontology.educationAwards.forEach(aw => {
+        const card = document.createElement('article');
+        card.className = 'award-card';
+        const badge = document.createElement('span');
+        badge.className = 'award-badge';
+        badge.textContent = aw.badge;
+        const h = document.createElement('h4');
+        h.textContent = aw.title;
+        const scope = document.createElement('span');
+        scope.className = 'award-scope';
+        scope.textContent = aw.scope;
+        const p = document.createElement('p');
+        p.textContent = aw.detail;
+        card.append(badge, h, scope, p);
+        awardsGrid.append(card);
+      });
+    }
+
+    // Simulador Tempo Integral × EPT
+    const eduSimInt = $('#eduSimIntegral');
+    const eduSimEpt = $('#eduSimEpt');
+    const updateEduSim = () => {
+      if (!eduSimInt || !eduSimEpt) return;
+      const pctInt = Number(eduSimInt.value);
+      const pctEpt = Number(eduSimEpt.value);
+      if ($('#eduSimIntVal')) $('#eduSimIntVal').textContent = `${pctInt}%`;
+      if ($('#eduSimEptVal')) $('#eduSimEptVal').textContent = `${pctEpt}%`;
+      const estIntStudents = Math.round((pctInt / 100) * 84474);
+      const estEptStudents = Math.round((pctEpt / 60) * 61420);
+      if ($('#eduSimIntStudents')) $('#eduSimIntStudents').textContent = `${estIntStudents.toLocaleString('pt-BR')} alunos`;
+      if ($('#eduSimEptStudents')) $('#eduSimEptStudents').textContent = `${estEptStudents.toLocaleString('pt-BR')} jovens`;
+      if ($('#eduSimReading') && $('#eduSimSummary') && $('#eduSimBadge')) {
+        if (pctInt >= 95 && pctEpt >= 60) {
+          $('#eduSimReading').textContent = 'Padrão Piauí Liderança';
+          $('#eduSimBadge').dataset.risk = 'ok';
+          $('#eduSimBadge').textContent = 'ALTA RETENÇÃO & EPT';
+          $('#eduSimSummary').textContent = `${pctInt}% integral com ${pctEpt}% EPT maximiza retenção e conexão com TI, Saúde, Agro 4.0 e H₂ verde.`;
+        } else if (pctInt < 50) {
+          $('#eduSimReading').textContent = 'Cenário Retrocesso (pré-2023)';
+          $('#eduSimBadge').dataset.risk = 'critical';
+          $('#eduSimBadge').textContent = 'RISCO DE EVASÃO';
+          $('#eduSimSummary').textContent = 'Abaixo de 50% integral amplia vulnerabilidade à evasão juvenil (como ocorria antes da virada 2022→2025).';
+        } else {
+          $('#eduSimReading').textContent = 'Transição Intermediária';
+          $('#eduSimBadge').dataset.risk = 'alert';
+          $('#eduSimBadge').textContent = 'EXPANSÃO EM CURSO';
+          $('#eduSimSummary').textContent = `Cobertura intermediária (${pctInt}% integral · ${pctEpt}% EPT) exige ampliação de infraestrutura climatizada e bolsas.`;
+        }
+      }
+    };
+    if (eduSimInt && eduSimEpt) {
+      [eduSimInt, eduSimEpt].forEach(el => el.addEventListener('input', updateEduSim));
+      updateEduSim();
+    }
+
+    // Monitoramento Ambiental + Notícias Educacionais ao Vivo (SEDUC-PI, IBGE Educação, Snapshot & Curadoria)
+    const eduNewsList = $('#eduNewsList');
+    const eduNewsSearch = $('#eduNewsSearch');
+    const eduNewsSourceFilter = $('#eduNewsSourceFilter');
+    const eduNewsRefreshBtn = $('#eduNewsRefreshBtn');
+    const eduRegex = /\b(educa[çc][aã]o|escola[rs]?|ceti|semec|seduc|ideb|enem|saeb|obmep|tme[²2]|alfabetiz\w*|professor\w*|estudant\w*|aluno\w*|ifpi|uespi|ufpi|seduckathon|tempo integral|ensino m[ée]dio|ensino fundamental|censo escolar|matr[íi]cula[s]?)\b/i;
+
+    const renderEduRealtime = () => {
+      const rt = window.PiauiRealtime ? window.PiauiRealtime.getState() : null;
+
+      // Clima Escolar ao vivo
+      const climCard = $('#eduLiveClimateCard');
+      const climVal = $('#eduLiveClimateVal');
+      const climSub = $('#eduLiveClimateSub');
+      const liveBadge = $('#eduLiveBadge');
+      if (rt && rt.weather && rt.weather.teresina && rt.weather.teresina.tempC != null && climVal && climSub) {
+        const t = rt.weather.teresina;
+        const temp = Number(t.tempC);
+        const uv = t.uv != null ? Number(t.uv) : null;
+        climVal.textContent = `Teresina ${temp.toFixed(1)}°C · UV ${uv != null ? uv.toFixed(1) : '—'}`;
+        if (temp >= 35 || (uv != null && uv >= 8)) {
+          if (climCard) climCard.dataset.alert = 'high';
+          climSub.textContent = 'Alerta térmico escolar: priorizar salas climatizadas, hidratação e evitar sol direto nas quadras entre 10h–16h.';
+        } else {
+          if (climCard) climCard.dataset.alert = 'normal';
+          climSub.textContent = `Conforto operacional moderado (umid. ${t.humidity ?? '—'}%); rotina regular nas redes SEMEC/SEDUC.`;
+        }
+      }
+
+      // Consolidação de Notícias Educacionais (SEDUC ao vivo + IBGE Educação + Snapshot OSINT + Curadoria)
+      const rssSeduc = rt && rt.education && Array.isArray(rt.education.rssSeduc)
+        ? rt.education.rssSeduc.map(n => ({ ...n, originType: 'live' }))
+        : [];
+      const ibgeEdu = rt && rt.education && Array.isArray(rt.education.ibgeNoticias)
+        ? rt.education.ibgeNoticias.map(n => ({ date: String(n.date || '').slice(0, 10) || 'Recente', title: n.title, url: n.url, source: 'Agência IBGE (Ao Vivo)', category: 'Educação', originType: 'live' }))
+        : [];
+      const snapEdu = rt && Array.isArray(rt.snapshotNews)
+        ? rt.snapshotNews.filter(n => n.category === 'Educação' || eduRegex.test(n.title || '')).map(n => ({ ...n, originType: 'live' }))
+        : [];
+      const curatedEdu = (window.PIAUI_NEWS || [])
+        .filter(n => n.category === 'Educação' || eduRegex.test(n.title || ''))
+        .concat(Array.isArray(ontology.educationNewsArchive) ? ontology.educationNewsArchive : [])
+        .map(n => ({ ...n, originType: 'curated' }));
+
+      const seen = new Map();
+      [...rssSeduc, ...ibgeEdu, ...snapEdu, ...curatedEdu].forEach(item => {
+        if (item && typeof item.url === 'string' && /^https:\/\//.test(item.url) && !seen.has(item.url)) {
+          seen.set(item.url, item);
+        }
+      });
+      const allEduNews = [...seen.values()].sort((a, b) => String(b.date || '').localeCompare(String(a.date || '')));
+
+      const liveCount = rssSeduc.length + ibgeEdu.length + snapEdu.length;
+      if ($('#eduLiveNewsVal')) {
+        $('#eduLiveNewsVal').textContent = liveCount > 0 ? `${liveCount} ao vivo · ${allEduNews.length} total` : `${allEduNews.length} registros curados`;
+      }
+      if ($('#eduLiveNewsSub') && allEduNews[0]) {
+        $('#eduLiveNewsSub').textContent = `Mais recente: "${allEduNews[0].title}" (${allEduNews[0].source}).`;
+      }
+      if (liveBadge) {
+        liveBadge.dataset.state = (rt && rt.status === 'online') || liveCount > 0 ? 'online' : 'baseline';
+        liveBadge.textContent = (rt && rt.modeLabel) || 'BASE LOCAL + CURADORIA';
+      }
+
+      if (eduNewsList) {
+        const nq = normalize((eduNewsSearch?.value || '').trim());
+        const srcF = eduNewsSourceFilter ? eduNewsSourceFilter.value : '';
+        const list = allEduNews.filter(item => {
+          if (srcF && item.originType !== srcF) return false;
+          if (nq && !normalize(`${item.title} ${item.source} ${item.date}`).includes(nq)) return false;
+          return true;
+        });
+
+        if ($('#eduNewsCounter')) $('#eduNewsCounter').textContent = `${list.length} notícias`;
+        if ($('#eduNewsStatus')) {
+          $('#eduNewsStatus').textContent = liveCount > 0
+            ? `Feeds ao vivo ativos (${rssSeduc.length} SEDUC-PI · ${ibgeEdu.length} IBGE Educação · ${snapEdu.length} OSINT) combinados à curadoria verificada.`
+            : 'Exibindo curadoria oficial verificada de Educação (clique em "Atualizar Educação" ou conecte à rede para puxar SEDUC-PI / IBGE ao vivo).';
+        }
+
+        eduNewsList.replaceChildren();
+        if (!list.length) {
+          const empty = document.createElement('p');
+          empty.className = 'v2-sub';
+          empty.textContent = 'Nenhuma notícia educacional encontrada nesta seleção.';
+          eduNewsList.append(empty);
+          return;
+        }
+        list.slice(0, 18).forEach(item => {
+          const row = document.createElement('article');
+          row.className = 'edu-news-row';
+          const wrap = document.createElement('div');
+          const link = document.createElement('a');
+          link.href = item.url;
+          link.target = '_blank';
+          link.rel = 'noopener noreferrer';
+          link.textContent = item.title;
+          const meta = document.createElement('small');
+          meta.textContent = `${item.date || 'Recente'} · ${item.source} · ${item.originType === 'live' ? 'AO VIVO / OSINT' : 'ARQUIVO VERIFICADO'}`;
+          wrap.append(link, meta);
+          const arrow = document.createElement('span');
+          arrow.className = 'news-arrow';
+          arrow.setAttribute('aria-hidden', 'true');
+          arrow.textContent = '↗';
+          row.append(wrap, arrow);
+          eduNewsList.append(row);
+        });
+      }
+    };
+
+    if (eduNewsSearch) eduNewsSearch.addEventListener('input', renderEduRealtime);
+    if (eduNewsSourceFilter) eduNewsSourceFilter.addEventListener('change', renderEduRealtime);
+    if (eduNewsRefreshBtn) {
+      eduNewsRefreshBtn.addEventListener('click', () => {
+        if (window.PiauiRealtime && typeof window.PiauiRealtime.syncAll === 'function') {
+          window.PiauiRealtime.syncAll();
+        }
+      });
+    }
+    document.addEventListener('piaui:realtime-update', renderEduRealtime);
+    renderEduRealtime();
   }
 
   window.initDashboard = function () {

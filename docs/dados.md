@@ -19,9 +19,11 @@ A aba **Fontes & método** exibe dinamicamente a matriz completa de indicadores 
 3. Executar `npm test` (suítes Python `unittest` e Node `JSDOM`) antes de abrir pull request para `main`.
 4. Deixar a coleta dinâmica de clima, BCB SGS, IBGE e feeds sob responsabilidade de `assets/realtime-gov.js` e `.github/workflows/osint-sync.yml`, sem credenciais privadas no repositório.
 
-## Curadoria de notícias e módulo SPIA
+## Curadoria de notícias, Educação e módulo SPIA
 
 A seleção inicial de `assets/news.js` reúne 50 publicações com links, datas, fontes e categorias. Na execução v2, o Terminal combina automaticamente o snapshot `data/piaui-live.json`, notícias oficiais da Agência IBGE e consulta de feeds RSS, mantendo a curadoria local disponível offline.
+
+No módulo **Educacional**, os dados quantitativos por escola (27 unidades catalogadas com código INEP em `assets/ontology.js`, divididas por zonas de Teresina e polos do interior) seguem estritamente divulgações anuais/bienais do **Censo Escolar INEP (2024–2026)** e do **IDEB 2023**, sem geração artificial de contagens ao vivo. Já a camada dinâmica em tempo real consulta notícias da **SEDUC-PI (RSS)**, **Agência IBGE Educação**, o snapshot OSINT (`data/piaui-live.json`) e o monitoramento climático escolar (Open-Meteo).
 
 A aba **SPIA Piauí** utiliza 30 vídeos públicos identificados pelo local verdadeiro, e o painel **Eye of God** integra mapa GIS real (WGS84), grafo ontológico e telemetria Gov-BR com câmeras e biometria ilustrativas sem acesso a sistemas policiais.
 

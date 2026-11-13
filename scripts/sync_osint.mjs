@@ -55,7 +55,13 @@ function decodeXmlEntities(text) {
     .trim();
 }
 
-function parseRssItems(xml, sourceName, expectedHost) {
+const EDU_KEYWORDS_RE = /\b(educa[çc][aã]o|escola[rs]?|ceti|semec|seduc|ideb|enem|saeb|obmep|tme[²2]|alfabetiz\w*|professor\w*|estudant\w*|aluno\w*|ifpi|uespi|ufpi|seduckathon|tempo integral|ensino m[ée]dio|ensino fundamental|censo escolar|merenda|matr[íi]cula[s]?)\b/i;
+
+function classifyNewsCategory(title, defaultCategory = 'Atualidades') {
+  return EDU_KEYWORDS_RE.test(title) ? 'Educação' : defaultCategory;
+}
+
+function parseRssItems(xml, sourceName, expectedHost, defaultCategory = 'Atualidades') {
   const items = [];
   const itemMatches = xml.match(/<item\b[\s\S]*?<\/item>/gi) || [];
   for (const block of itemMatches.slice(0, 25)) {
@@ -76,7 +82,7 @@ function parseRssItems(xml, sourceName, expectedHost) {
           title,
           url: url.href,
           source: sourceName,
-          category: 'Atualidades',
+          category: classifyNewsCategory(title, defaultCategory),
           feed: true
         });
       }
@@ -97,6 +103,7 @@ async function main() {
       bcb: { ...previous.sources.bcb },
       siconfi: { ...previous.sources.siconfi },
       commodities: previous.sources.commodities ? { ...previous.sources.commodities } : { status: 'awaiting_live_sync', icbr: {}, quotes: {} },
+      education: previous.sources.education ? { ...previous.sources.education } : { status: 'awaiting_live_sync', ibgeNoticias: [] },
       weather: { ...previous.sources.weather }
     },
     news: []
@@ -233,23 +240,46 @@ async function main() {
     snapshot.sources.siconfi.status = `fallback (${err.message})`;
   }
 
-  // 5. RSS direto de g1 Piauí e Governo do Piauí (sem rss2json)
+  // 6. IBGE Educação Notícias + RSS direto de SEDUC-PI, g1 Piauí e Governo do Piauí (sem rss2json)
+  try {
+    const eduIbge = await fetchJson('https://servicodados.ibge.gov.br/api/v3/noticias/?busca=educacao&qtd=6', 10000);
+    if (eduIbge && Array.isArray(eduIbge.items)) {
+      snapshot.sources.education = {
+        status: 'ok',
+        ibgeNoticias: eduIbge.items
+          .filter(item => typeof item.link === 'string' && /^https:\/\//.test(item.link))
+          .slice(0, 6)
+          .map(item => ({
+            title: item.titulo,
+            date: item.data_publicacao,
+            url: item.link
+          }))
+      };
+    }
+  } catch (err) {
+    snapshot.sources.education = {
+      ...(snapshot.sources.education || {}),
+      status: `fallback (${err.message})`
+    };
+  }
+
   const rssTargets = [
-    { name: 'g1 Piauí', url: 'https://g1.globo.com/rss/g1/pi/piaui/', host: 'g1.globo.com' },
-    { name: 'Governo do Piauí', url: 'https://www.pi.gov.br/feed/', host: 'www.pi.gov.br' }
+    { name: 'SEDUC-PI', url: 'https://www.seduc.pi.gov.br/feed/', host: 'www.seduc.pi.gov.br', defaultCategory: 'Educação' },
+    { name: 'g1 Piauí', url: 'https://g1.globo.com/rss/g1/pi/piaui/', host: 'g1.globo.com', defaultCategory: 'Atualidades' },
+    { name: 'Governo do Piauí', url: 'https://www.pi.gov.br/feed/', host: 'www.pi.gov.br', defaultCategory: 'Atualidades' }
   ];
   const collectedNews = new Map();
   for (const src of rssTargets) {
     try {
       const xml = await fetchText(src.url);
-      for (const item of parseRssItems(xml, src.name, src.host)) {
+      for (const item of parseRssItems(xml, src.name, src.host, src.defaultCategory)) {
         if (!collectedNews.has(item.url)) collectedNews.set(item.url, item);
       }
     } catch (_) {
       // Mantém fontes que responderam
     }
   }
-  const freshNews = [...collectedNews.values()].sort((a, b) => b.date.localeCompare(a.date)).slice(0, 40);
+  const freshNews = [...collectedNews.values()].sort((a, b) => b.date.localeCompare(a.date)).slice(0, 50);
   snapshot.news = freshNews.length ? freshNews : (Array.isArray(previous.news) ? previous.news : []);
 
   await fs.writeFile(outFile, JSON.stringify(snapshot, null, 2) + '\n', 'utf8');

@@ -66,8 +66,9 @@ function createApp({ chart = true, hash = '', timerSpy = null, canvasMock = fals
   return dom;
 }
 
-test('abre o painel e permite navegar pelas abas com teclado', () => {
-  const dom = createApp(); const { document, KeyboardEvent } = dom.window;
+test('abre o painel e permite navegar pelas abas com teclado', t => {
+  const dom = createApp(); t.after(() => dom.window.close());
+  const { document, KeyboardEvent } = dom.window;
   assert.ok(document.getElementById('mainApp'));
   assert.equal(document.getElementById('loadingScreen'), null);
   const overview = document.getElementById('btn-overview');
@@ -75,11 +76,11 @@ test('abre o painel e permite navegar pelas abas com teclado', () => {
   assert.equal(document.getElementById('btn-geo').getAttribute('aria-selected'), 'true');
   assert.ok(document.getElementById('tab-geo').classList.contains('active'));
   assert.equal(dom.window.location.hash, '#geo');
-  dom.window.close();
 });
 
-test('busca sem acentos e favoritos persistem ao reiniciar', () => {
-  const dom = createApp(); const { document, Event } = dom.window;
+test('busca sem acentos e favoritos persistem ao reiniciar', t => {
+  const dom = createApp();
+  const { document, Event } = dom.window;
   const search = document.getElementById('dashboardSearch');
   search.value = 'populacao'; search.dispatchEvent(new Event('input', { bubbles: true }));
   assert.match(document.getElementById('searchResults').textContent, /População/);
@@ -93,6 +94,7 @@ test('busca sem acentos e favoritos persistem ao reiniciar', () => {
   dom.window.close();
   // Simula carregamento de outra página com os favoritos já presentes.
   const reload = new JSDOM(html, { url: 'https://example.test/', runScripts: 'outside-only', pretendToBeVisual: true });
+  t.after(() => reload.window.close());
   reload.window.matchMedia = () => ({ matches: false });
   reload.window.HTMLElement.prototype.scrollIntoView = function () {};
   reload.window.localStorage.setItem('pi-analytics-favorites-v1', saved);
@@ -100,27 +102,26 @@ test('busca sem acentos e favoritos persistem ao reiniciar', () => {
   reload.window.eval(dashboard);
   reload.window.document.dispatchEvent(new reload.window.Event('DOMContentLoaded'));
   assert.equal(reload.window.document.querySelector('#tab-overview .favorite-toggle').getAttribute('aria-pressed'), 'true');
-  reload.window.close();
 });
 
-test('gráficos oferecem tabelas e a falha da biblioteca não bloqueia o relógio', () => {
-  const dom = createApp({ chart: false }); const { document } = dom.window;
-  assert.equal(document.querySelectorAll('.chart-data').length, 14);
-  assert.equal(document.querySelectorAll('.chart-fallback').length, 14);
+test('gráficos oferecem tabelas e a falha da biblioteca não bloqueia o relógio', t => {
+  const dom = createApp({ chart: false }); t.after(() => dom.window.close());
+  const { document } = dom.window;
+  assert.equal(document.querySelectorAll('.chart-data').length, 19);
+  assert.equal(document.querySelectorAll('.chart-fallback').length, 19);
   assert.match(document.getElementById('clockTime').textContent, /^\d\d:\d\d:\d\d$/);
   assert.ok(document.querySelector('.chart-data[open] table tbody tr'));
   document.getElementById('btn-eco').click();
   assert.ok(document.getElementById('tab-eco').classList.contains('active'));
-  dom.window.close();
 });
 
-test('endereço com hash abre a aba correta e os controles de método funcionam', () => {
-  const dom = createApp({ hash: '#edu' }); const { document } = dom.window;
+test('endereço com hash abre a aba correta e os controles de método funcionam', t => {
+  const dom = createApp({ hash: '#edu' }); t.after(() => dom.window.close());
+  const { document } = dom.window;
   assert.equal(document.getElementById('btn-edu').getAttribute('aria-selected'), 'true');
   document.querySelector('[data-open-tab="fontes"]').click();
   assert.equal(document.getElementById('btn-fontes').getAttribute('aria-selected'), 'true');
   assert.ok(document.querySelectorAll('#tab-fontes .source-card').length >= 5);
-  dom.window.close();
 });
 
 
@@ -162,7 +163,7 @@ test('notícias têm links, filtro, navegação, pausa e janela móvel', t => {
   assert.match(document.getElementById('terminalBox').textContent, /Nenhuma notícia/);
   search.value = 'teresina'; search.dispatchEvent(new Event('input'));
   assert.ok(document.querySelectorAll('.news-item').length > 0);
-  assert.equal(document.querySelectorAll('.chart-context').length, 14);
+  assert.equal(document.querySelectorAll('.chart-context').length, 19);
 });
 
 
@@ -200,7 +201,7 @@ test('aba Eye of God funciona isolada sem afetar as demais abas', t => {
   const dom = createApp({ hash: '#eye-of-god', canvasMock: true }); t.after(() => dom.window.close());
   const { document, KeyboardEvent } = dom.window;
 
-  assert.equal(document.querySelectorAll('.tab-btn').length, 12);
+  assert.equal(document.querySelectorAll('.tab-btn').length, 14);
   assert.equal(document.getElementById('btn-eye-of-god').getAttribute('aria-selected'), 'true');
   assert.ok(document.getElementById('tab-eye-of-god').classList.contains('active'));
   assert.equal(document.querySelectorAll('#eog-cctv-grid .eog-cam-cell').length, 6);
@@ -275,7 +276,7 @@ test('aba Eye of God funciona isolada sem afetar as demais abas', t => {
 
   // Não polui os cartões de KPI nem a busca principal
   assert.equal(document.querySelectorAll('#tab-eye-of-god .kpi-card').length, 0);
-  assert.equal(document.querySelectorAll('.tab-content .kpi-card').length, 26);
+  assert.equal(document.querySelectorAll('.tab-content .kpi-card').length, 34);
   document.getElementById('btn-overview').click();
   assert.ok(document.getElementById('tab-overview').classList.contains('active'));
 });
@@ -490,8 +491,8 @@ test('aba Educacional exibe zonas, 27 escolas INEP, premiações, simulador, not
   const { document, Event, KeyboardEvent } = window;
   await new Promise(resolve => setTimeout(resolve, 35));
 
-  // Preserva invariante de 26 kpi-card no painel e 4 em Educacional
-  assert.equal(document.querySelectorAll('.tab-content .kpi-card').length, 26);
+  // Preserva invariante de 34 kpi-card no painel (incluindo Segurança e EdTech) e 4 em Educacional
+  assert.equal(document.querySelectorAll('.tab-content .kpi-card').length, 34);
   assert.equal(document.querySelectorAll('#tab-edu .kpi-card').length, 4);
 
   // Catálogo inicial com 27 escolas reais + 6 premiações
@@ -551,6 +552,100 @@ test('aba Educacional exibe zonas, 27 escolas INEP, premiações, simulador, not
   assert.match(document.getElementById('eog-terminal-body').textContent, /TME² 2025/);
   runCmd('edu');
   assert.match(document.getElementById('eog-terminal-body').textContent, /829\.549 matr/);
+});
+
+test('abas Segurança Pública, EdTech & IA e expansão geral das abas renderizam todos os novos painéis', t => {
+  const dom = createApp({ hash: '#seguranca', canvasMock: true }); t.after(() => dom.window.close());
+  const { document, Event, KeyboardEvent } = dom.window;
+
+  // 12 Territórios de Desenvolvimento, Energia, 12 Cidades, IDHM, SWOT Cruzada
+  assert.equal(document.querySelectorAll('#geoTerritoriesGrid .mun-card').length, 12);
+  assert.equal(document.querySelectorAll('#geoEnergyGrid .award-card').length, 6);
+  assert.equal(document.querySelectorAll('#demoCitiesBody tr').length, 12);
+  assert.equal(document.querySelectorAll('#idhTopBody tr').length, 6);
+  assert.equal(document.querySelectorAll('#swotCrossList .cross-card').length, 4);
+
+  // Aba Segurança Pública
+  assert.equal(document.getElementById('btn-seguranca').getAttribute('aria-selected'), 'true');
+  assert.equal(document.querySelectorAll('#segurancaHighlights .edu-stat-box').length, 4);
+  assert.equal(document.querySelectorAll('#segurancaTableBody tr').length, 6);
+  assert.equal(document.querySelectorAll('#segurancaPillarsGrid .cross-card').length, 4);
+
+  // Aba EdTech & IA + Simulador
+  document.getElementById('btn-edtech').click();
+  assert.equal(document.getElementById('btn-edtech').getAttribute('aria-selected'), 'true');
+  assert.equal(document.querySelectorAll('#edtechCardsGrid .award-card').length, 6);
+  const edRate = document.getElementById('edtechSimRate');
+  edRate.value = '20';
+  edRate.dispatchEvent(new Event('input', { bubbles: true }));
+  assert.equal(document.getElementById('edtechSimBadge').textContent, 'ACELERAÇÃO TECH');
+
+  // Comandos Eye of God CLI: seguranca e edtech
+  const eogIn = document.getElementById('eog-terminal-input');
+  eogIn.value = 'seguranca';
+  eogIn.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true }));
+  assert.match(document.getElementById('eog-terminal-body').textContent, /SSP-PI/);
+  eogIn.value = 'edtech';
+  eogIn.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true }));
+  assert.match(document.getElementById('eog-terminal-body').textContent, /UNESCO/);
+});
+
+test('edição paralela Teresina Capital (/teresina/) funciona com 14 abas, 5 zonas IBGE, 24 escolas e simulador fiscal', async t => {
+  const theHtml = fs.readFileSync(path.join(root, 'teresina/index.html'), 'utf8');
+  const teresinaApp = fs.readFileSync(path.join(root, 'assets/teresina-app.js'), 'utf8');
+  const dom = new JSDOM(theHtml, { url: 'https://example.test/teresina/', runScripts: 'outside-only', pretendToBeVisual: true });
+  t.after(() => dom.window.close());
+  const { window } = dom;
+  window.matchMedia = () => ({ matches: false, addListener() {}, removeListener() {} });
+  window.HTMLCanvasElement.prototype.getContext = () => null;
+  window.Chart = class {
+    static defaults = { font: {} };
+    constructor(canvas, config) { this.canvas = canvas; this.config = config; }
+    resize() {}
+  };
+  window.fetch = async url => {
+    if (url.includes('open-meteo')) return { ok: true, json: async () => [{ current: { temperature_2m: 34.8, relative_humidity_2m: 39, wind_speed_10m: 11 } }] };
+    if (url.includes('id_ente=2211001')) return { ok: true, json: async () => ({ items: [{ conta: 'Receitas', valor: 5397000000 }] }) };
+    return { ok: false, status: 404 };
+  };
+
+  window.eval(ontology);
+  window.eval(realtimeGov);
+  window.eval(cameras);
+  window.eval(news);
+  window.eval(eyeOfGod);
+  window.eval(teresinaApp);
+  window.document.dispatchEvent(new window.Event('DOMContentLoaded'));
+  await new Promise(resolve => setTimeout(resolve, 25));
+
+  const { document, Event } = window;
+  assert.equal(document.querySelectorAll('#tabNav .tab-btn').length, 14);
+  assert.equal(document.querySelectorAll('#theZonesGrid .mun-card').length, 5);
+  assert.equal(document.querySelectorAll('#theNeighborhoodsBody tr').length, 5);
+  assert.equal(document.querySelectorAll('#theSecTableBody tr').length, 6);
+  assert.equal(document.querySelectorAll('#theEdtechGrid .award-card').length, 6);
+  assert.equal(document.querySelectorAll('#theSwotGrid .swot-card').length, 4);
+  assert.equal(document.querySelectorAll('#theCamerasGrid .spia-card').length, 30);
+
+  // Explorador de 24 escolas de Teresina filtrável por zona Sul
+  assert.equal(document.querySelectorAll('#theSchoolsGrid .edu-school-card').length, 24);
+  const zoneSel = document.getElementById('theSchoolsZone');
+  zoneSel.value = 'Sul';
+  zoneSel.dispatchEvent(new Event('change', { bubbles: true }));
+  assert.equal(document.querySelectorAll('#theSchoolsGrid .edu-school-card').length, 5);
+
+  // Simulador Fiscal Municipal LRF Teresina
+  const folha = document.getElementById('theSimFolha');
+  folha.value = '14';
+  folha.dispatchEvent(new Event('input', { bubbles: true }));
+  assert.equal(document.getElementById('theSimBadge').dataset.risk, 'critical');
+
+  // Eye of God dentro da edição Teresina
+  document.getElementById('btn-eye-of-god').click();
+  assert.ok(document.getElementById('tab-eye-of-god').classList.contains('active'));
+  assert.ok(document.querySelector('#eyeOfGodRoot #eog-hud-shell'));
+  const eogLink = document.querySelector('#eyeOfGodRoot .eog-link-btn');
+  assert.equal(eogLink.getAttribute('href'), '../eyeofgod/');
 });
 
 

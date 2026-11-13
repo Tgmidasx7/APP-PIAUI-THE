@@ -417,7 +417,12 @@
     chartGeoCorredores: ['Índices sintéticos ilustrativos (0–100) construídos a partir da síntese de ativos e gargalos logísticos de cada corredor geoeconômico do Piauí.', 'https://www.ibge.gov.br/cidades-e-estados/pi.html'],
     chartEcoVetores: ['Comparativo qualitativo-estrutural (0–100) entre o peso de cada motor econômico no Piauí e sua exposição direta a petróleo/diesel, dólar e clima.', 'https://www.bcb.gov.br/'],
     chartEduMatriculasRede: ['Comparativo oficial preliminar do Censo Escolar 2026 (MEC/INEP) em milhares de matrículas presenciais da rede pública (estadual + municipal): Piauí (698,7 mil) vs Teresina (126,7 mil).', 'https://www.gov.br/inep/pt-br/areas-de-atuacao/pesquisas-estatisticas-e-indicadores/censo-escolar'],
-    chartEduZonasAlunos: ['Somatório auditado das matrículas e docentes das 27 unidades escolares reais catalogadas por zona administrativa de Teresina e polos do interior (Censo Escolar INEP 2024–2025).', 'https://qedu.org.br/uf/22-piaui']
+    chartEduZonasAlunos: ['Somatório auditado das matrículas e docentes das 27 unidades escolares reais catalogadas por zona administrativa de Teresina e polos do interior (Censo Escolar INEP 2024–2025).', 'https://qedu.org.br/uf/22-piaui'],
+    chartDemoPiramide: ['Distribuição proporcional da população piauiense por grandes grupos etários (Censo IBGE 2022: 0–14 anos 20,85%, 15–64 anos 68,49%, 65+ anos 10,66%).', 'https://www.ibge.gov.br/cidades-e-estados/pi.html'],
+    chartEcoCaged: ['Saldo líquido oficial de empregos formais com carteira assinada gerados em 2025 por grande grupamento econômico no Piauí (Novo Caged / MTE).', 'https://www.gov.br/secom/pt-br/assuntos/noticias-regionalizadas/numeros-do-novo-caged-em-2025/caged-em-2025/piaui-gerou-mais-de-21-mil-empregos-com-carteira-assinada-em-2025'],
+    chartSegurancaQueda: ['Comparativo oficial DataSSP / SSP-PI (jan–mai de 2022, 2025 e 2026) em Teresina; valores patrimoniais divididos por 100 para escala comparável aos CVLIs e homicídios.', 'https://www.ssp.pi.gov.br/'],
+    chartEdtechPilares: ['Índices ilustrativos de alcance/maturidade (0–100) das 6 iniciativas estruturantes EdTech e de infraestrutura soberana de IA no Piauí.', 'https://seduc.pi.gov.br/'],
+    chartIdhmMunicipios: ['Desagregação oficial das dimensões Renda, Longevidade e Educação do IDHM nos quatro principais municípios do Piauí (PNUD / IPEA / FJP).', 'https://www.undp.org/pt/brazil']
   };
 
   function setupClock() {
@@ -1262,6 +1267,186 @@
     }
     document.addEventListener('piaui:realtime-update', renderEduRealtime);
     renderEduRealtime();
+
+    // 10. Expansão Geral das Abas: 12 Territórios, Renovável, Cidades Demo, IDHM, SWOT Cruzada, Segurança PI & EdTech IA
+    const tdGrid = $('#geoTerritoriesGrid');
+    if (tdGrid && Array.isArray(ontology.territories12)) {
+      tdGrid.replaceChildren();
+      ontology.territories12.forEach(t => {
+        const card = document.createElement('article');
+        card.className = 'mun-card';
+        const st = document.createElement('strong'); st.textContent = `${t.id} · ${t.name}`;
+        const sp = document.createElement('span'); sp.textContent = `Polos: ${t.pole} (${t.macro})`;
+        const sm = document.createElement('small'); sm.textContent = t.focus;
+        card.append(st, sp, sm);
+        tdGrid.append(card);
+      });
+    }
+
+    const energyGrid = $('#geoEnergyGrid');
+    if (energyGrid && ontology.energyRenewables && Array.isArray(ontology.energyRenewables.highlights)) {
+      energyGrid.replaceChildren();
+      ontology.energyRenewables.highlights.forEach(item => {
+        const card = document.createElement('article');
+        card.className = 'award-card';
+        const b = document.createElement('span'); b.className = 'award-badge'; b.textContent = item.type.toUpperCase();
+        const h = document.createElement('h4'); h.textContent = item.place;
+        const p = document.createElement('p'); p.textContent = item.capacity;
+        card.append(b, h, p);
+        energyGrid.append(card);
+      });
+    }
+
+    const demoCitiesBody = $('#demoCitiesBody');
+    if (demoCitiesBody && ontology.demographicsBreakdown && Array.isArray(ontology.demographicsBreakdown.topCities2022)) {
+      demoCitiesBody.replaceChildren();
+      ontology.demographicsBreakdown.topCities2022.forEach(c => {
+        const tr = document.createElement('tr');
+        const note = c.growthPct >= 20 ? 'Forte expansão fronteira / metropolitana' : c.growthPct >= 10 ? 'Polo regional em ascensão' : 'Consolidação urbana tradicional';
+        [
+          c.name,
+          c.pop2022.toLocaleString('pt-BR'),
+          `+${c.growthPct}%`,
+          note
+        ].forEach(val => {
+          const td = document.createElement('td'); td.textContent = val; tr.append(td);
+        });
+        demoCitiesBody.append(tr);
+      });
+    }
+
+    const idhTopBody = $('#idhTopBody');
+    if (idhTopBody && Array.isArray(ontology.idhMunicipalTop)) {
+      idhTopBody.replaceChildren();
+      ontology.idhMunicipalTop.forEach(m => {
+        const tr = document.createElement('tr');
+        const fmtScore = v => v != null ? v.toFixed(3).replace('.', ',') : '—';
+        [
+          `${m.rank}º`,
+          m.name,
+          fmtScore(m.idhm),
+          fmtScore(m.income),
+          fmtScore(m.longevity),
+          fmtScore(m.education),
+          m.tier
+        ].forEach(val => {
+          const td = document.createElement('td'); td.textContent = val; tr.append(td);
+        });
+        idhTopBody.append(tr);
+      });
+    }
+
+    const swotCross = $('#swotCrossList');
+    if (swotCross && Array.isArray(ontology.swotCrossMatrix)) {
+      swotCross.replaceChildren();
+      ontology.swotCrossMatrix.forEach(item => {
+        const card = document.createElement('article');
+        card.className = 'cross-card';
+        const tag = document.createElement('span'); tag.className = 'cross-tag'; tag.textContent = item.strategy.split('·')[0].trim();
+        const h = document.createElement('h4'); h.textContent = item.strategy;
+        const p = document.createElement('p'); p.textContent = item.action;
+        card.append(tag, h, p);
+        swotCross.append(card);
+      });
+    }
+
+    // Aba Segurança Pública PI & Teresina
+    const secHighlights = $('#segurancaHighlights');
+    if (secHighlights && ontology.publicSecurity && Array.isArray(ontology.publicSecurity.highlightsPI)) {
+      secHighlights.replaceChildren();
+      ontology.publicSecurity.highlightsPI.forEach(item => {
+        const box = document.createElement('div');
+        box.className = 'edu-stat-box';
+        const sp = document.createElement('span'); sp.textContent = item.label;
+        const st = document.createElement('strong'); st.textContent = item.value;
+        const sm = document.createElement('small'); sm.textContent = item.delta;
+        box.append(sp, st, sm);
+        secHighlights.append(box);
+      });
+    }
+
+    const secTable = $('#segurancaTableBody');
+    if (secTable && ontology.publicSecurity && Array.isArray(ontology.publicSecurity.teresinaSeries)) {
+      secTable.replaceChildren();
+      ontology.publicSecurity.teresinaSeries.forEach(row => {
+        const tr = document.createElement('tr');
+        [
+          row.metric,
+          row.y2022 != null ? row.y2022.toLocaleString('pt-BR') : '—',
+          row.y2025 != null ? row.y2025.toLocaleString('pt-BR') : '—',
+          row.y2026 != null ? row.y2026.toLocaleString('pt-BR') : '—',
+          row.dropVs2022Pct != null ? `${row.dropVs2022Pct.toFixed(2).replace('.', ',')}%` : '—',
+          row.dropVs2025Pct != null ? `${row.dropVs2025Pct.toFixed(2).replace('.', ',')}%` : '—'
+        ].forEach(val => {
+          const td = document.createElement('td'); td.textContent = val; tr.append(td);
+        });
+        secTable.append(tr);
+      });
+    }
+
+    const secPillars = $('#segurancaPillarsGrid');
+    if (secPillars && ontology.publicSecurity && Array.isArray(ontology.publicSecurity.pillars)) {
+      secPillars.replaceChildren();
+      ontology.publicSecurity.pillars.forEach(p => {
+        const card = document.createElement('article');
+        card.className = 'cross-card';
+        const tag = document.createElement('span'); tag.className = 'cross-tag'; tag.textContent = p.tag;
+        const h = document.createElement('h4'); h.textContent = p.title;
+        const desc = document.createElement('p'); desc.textContent = p.detail;
+        card.append(tag, h, desc);
+        secPillars.append(card);
+      });
+    }
+
+    // Aba EdTech & IA + Simulador
+    const edtechGrid = $('#edtechCardsGrid');
+    if (edtechGrid && ontology.edtechEcosystem && Array.isArray(ontology.edtechEcosystem.initiatives)) {
+      edtechGrid.replaceChildren();
+      ontology.edtechEcosystem.initiatives.forEach(item => {
+        const card = document.createElement('article');
+        card.className = 'award-card';
+        const b = document.createElement('span'); b.className = 'award-badge'; b.textContent = item.badge;
+        const h = document.createElement('h4'); h.textContent = item.title;
+        const sc = document.createElement('span'); sc.className = 'award-scope'; sc.textContent = `${item.scope} · Índice ${item.impactScore}/100`;
+        const p = document.createElement('p'); p.textContent = item.detail;
+        card.append(b, h, sc, p);
+        edtechGrid.append(card);
+      });
+    }
+
+    const edBase = $('#edtechSimBase');
+    const edRate = $('#edtechSimRate');
+    const updateEdtechSim = () => {
+      if (!edBase || !edRate) return;
+      const base = Number(edBase.value);
+      const rate = Number(edRate.value);
+      const talents = Math.round((base * rate) / 100);
+      if ($('#edtechSimBaseVal')) $('#edtechSimBaseVal').textContent = base.toLocaleString('pt-BR');
+      if ($('#edtechSimRateVal')) $('#edtechSimRateVal').textContent = `${rate}%`;
+      if ($('#edtechSimTalents')) $('#edtechSimTalents').textContent = `${talents.toLocaleString('pt-BR')} jovens`;
+      if ($('#edtechSimBadge') && $('#edtechSimImpact') && $('#edtechSimText')) {
+        if (rate >= 18) {
+          $('#edtechSimBadge').dataset.risk = 'ok';
+          $('#edtechSimBadge').textContent = 'ACELERAÇÃO TECH';
+          $('#edtechSimImpact').textContent = 'Escala Regional Exportadora';
+          $('#edtechSimText').textContent = `Com ${talents.toLocaleString('pt-BR')} jovens migrando para TI/IA, o Piauí supre demanda da ZPE Parnaíba, PIT e serviços digitais nacionais.`;
+        } else if (rate <= 6) {
+          $('#edtechSimBadge').dataset.risk = 'critical';
+          $('#edtechSimBadge').textContent = 'BAIXA CONVERSÃO';
+          $('#edtechSimImpact').textContent = 'Gargalo de Absorção';
+          $('#edtechSimText').textContent = 'Taxa baixa exige bolsas de permanência, integração com EPT e expansão de polos como PIT e parques empresariais.';
+        } else {
+          $('#edtechSimBadge').dataset.risk = 'ok';
+          $('#edtechSimBadge').textContent = 'PIPELINE ATIVO';
+          $('#edtechSimImpact').textContent = 'Hub ZPE / Teresina';
+          $('#edtechSimText').textContent = `Pipeline consistente alimentando ${talents.toLocaleString('pt-BR')} talentos em programação, dados e IA no estado.`;
+        }
+      }
+    };
+    if (edBase && edRate) {
+      [edBase, edRate].forEach(el => el.addEventListener('input', updateEdtechSim));
+      updateEdtechSim();
+    }
   }
 
   window.initDashboard = function () {

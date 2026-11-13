@@ -727,6 +727,43 @@ kbd { border:1px solid #49615c; color:#a2bcb2; border-radius:3px; padding:2px 6p
   color: #8fa3b0;
 }
 
+/* SWITCHER DE VERSÕES (PIAUÍ ESTADUAL ⇄ TERESINA CAPITAL ⇄ EYE OF GOD) */
+.edition-switcher {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: .6rem;
+  margin: 1rem auto 1.25rem;
+}
+.edition-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  padding: .48rem .95rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(15, 22, 31, 0.9);
+  color: #cbd5e1;
+  font: 600 .74rem var(--font-mono);
+  text-decoration: none;
+  transition: all .18s ease;
+}
+.edition-pill.active {
+  border-color: var(--green);
+  background: rgba(0, 255, 65, 0.14);
+  color: #86efac;
+}
+.edition-pill.link {
+  border-color: rgba(0, 240, 255, 0.35);
+  color: #67e8f9;
+}
+.edition-pill.link:hover {
+  background: rgba(0, 240, 255, 0.16);
+  border-color: var(--cyan);
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
 @media (max-width: 1020px) {
   .edu-stat-strip, .edu-live-strip, .edu-zone-summary { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .edu-workspace { grid-template-columns: 1fr; }

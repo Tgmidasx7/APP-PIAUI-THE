@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-13T23:25:52.323Z",
+  "generatedAt": "2026-11-14T05:50:32.886Z",
   "mode": "osint-github-actions",
   "sources": {
     "ibge": {
@@ -49,53 +49,53 @@
         }
       },
       "quotes": {
-        "wti": {
-          "symbol": "CL=F",
-          "price": 88.92,
-          "unit": "USD/barril",
-          "changePct": 2.38,
-          "currency": "USD",
-          "marketTime": "2026-11-13T22:00:00.000Z"
-        },
-        "soja": {
-          "symbol": "ZS=F",
-          "price": 1232.75,
-          "unit": "USc/bushel",
-          "changePct": 4.27,
-          "currency": "USX",
-          "marketTime": "2026-11-13T19:19:58.000Z"
-        },
-        "ouro": {
-          "symbol": "GC=F",
-          "price": 3887.6,
-          "unit": "USD/oz",
-          "changePct": -5.51,
-          "currency": "USD",
-          "marketTime": "2026-11-13T21:59:59.000Z"
-        },
-        "gas_natural": {
-          "symbol": "NG=F",
-          "price": 3.24,
-          "unit": "USD/MMBtu",
-          "changePct": 0.75,
-          "currency": "USD",
-          "marketTime": "2026-11-13T21:59:58.000Z"
-        },
         "milho": {
           "symbol": "ZC=F",
-          "price": 446,
+          "price": 445.5,
           "unit": "USc/bushel",
-          "changePct": 1.54,
+          "changePct": 1.42,
           "currency": "USX",
           "marketTime": "2026-11-13T19:19:59.000Z"
         },
         "brent": {
           "symbol": "BZ=F",
-          "price": 96.08,
+          "price": 95.84,
           "unit": "USD/barril",
-          "changePct": 3.79,
+          "changePct": 3.53,
           "currency": "USD",
           "marketTime": "2026-11-13T21:59:30.000Z"
+        },
+        "gas_natural": {
+          "symbol": "NG=F",
+          "price": 3.23,
+          "unit": "USD/MMBtu",
+          "changePct": 0.37,
+          "currency": "USD",
+          "marketTime": "2026-11-13T21:59:58.000Z"
+        },
+        "wti": {
+          "symbol": "CL=F",
+          "price": 88.56,
+          "unit": "USD/barril",
+          "changePct": 1.97,
+          "currency": "USD",
+          "marketTime": "2026-11-13T22:00:00.000Z"
+        },
+        "ouro": {
+          "symbol": "GC=F",
+          "price": 3886.3,
+          "unit": "USD/oz",
+          "changePct": -5.55,
+          "currency": "USD",
+          "marketTime": "2026-11-13T21:59:59.000Z"
+        },
+        "soja": {
+          "symbol": "ZS=F",
+          "price": 1231.5,
+          "unit": "USc/bushel",
+          "changePct": 4.17,
+          "currency": "USX",
+          "marketTime": "2026-11-13T19:19:58.000Z"
         }
       }
     },
@@ -110,7 +110,7 @@
         "uv": 0,
         "windKmh": 2.6,
         "time": "2026-11-13T20:15",
-        "status": "ok"
+        "status": "fallback (fetch failed)"
       },
       "parnaiba": {
         "tempC": 27.3,
@@ -127,6 +127,14 @@
     }
   },
   "news": [
+    {
+      "date": "2026-11-14",
+      "title": "Previsão do tempo hoje para Teresina (PI): sol com muitas nuvens; pancadas de chuva à tarde e à noite",
+      "url": "https://g1.globo.com/pi/piaui/previsao-do-tempo/noticia/2026/11/14/previsao-do-tempo-hoje-para-teresina-pi-sol-com-muitas-nuvens-pancadas-de-chuva-a-tarde-e-a-noite.ghtml",
+      "source": "g1 Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
     {
       "date": "2026-11-13",
       "title": "Maternidade do Promorar terá leitos obstétricos transferidos em Teresina",
@@ -315,14 +323,6 @@
       "date": "2026-11-13",
       "title": "Homem é condenado a 20 anos de prisão por matar pescador com 24 facadas no litoral do PI",
       "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/13/homem-condenado-facadas.ghtml",
-      "source": "g1 Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-13",
-      "title": "Trecho da Avenida Gil Martins será interditado para obras de drenagem em Teresina",
-      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/13/avenida-gil-martins-teresina.ghtml",
       "source": "g1 Piauí",
       "category": "Atualidades",
       "feed": true

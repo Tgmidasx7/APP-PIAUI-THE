@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-14T05:50:32.886Z",
+  "generatedAt": "2026-11-14T13:18:25.081Z",
   "mode": "osint-github-actions",
   "sources": {
     "ibge": {
@@ -49,6 +49,22 @@
         }
       },
       "quotes": {
+        "wti": {
+          "symbol": "CL=F",
+          "price": 88.56,
+          "unit": "USD/barril",
+          "changePct": 1.97,
+          "currency": "USD",
+          "marketTime": "2026-11-13T22:00:00.000Z"
+        },
+        "soja": {
+          "symbol": "ZS=F",
+          "price": 1231.5,
+          "unit": "USc/bushel",
+          "changePct": 4.17,
+          "currency": "USX",
+          "marketTime": "2026-11-13T19:19:58.000Z"
+        },
         "milho": {
           "symbol": "ZC=F",
           "price": 445.5,
@@ -73,14 +89,6 @@
           "currency": "USD",
           "marketTime": "2026-11-13T21:59:58.000Z"
         },
-        "wti": {
-          "symbol": "CL=F",
-          "price": 88.56,
-          "unit": "USD/barril",
-          "changePct": 1.97,
-          "currency": "USD",
-          "marketTime": "2026-11-13T22:00:00.000Z"
-        },
         "ouro": {
           "symbol": "GC=F",
           "price": 3886.3,
@@ -88,14 +96,6 @@
           "changePct": -5.55,
           "currency": "USD",
           "marketTime": "2026-11-13T21:59:59.000Z"
-        },
-        "soja": {
-          "symbol": "ZS=F",
-          "price": 1231.5,
-          "unit": "USc/bushel",
-          "changePct": 4.17,
-          "currency": "USX",
-          "marketTime": "2026-11-13T19:19:58.000Z"
         }
       }
     },
@@ -105,34 +105,114 @@
     },
     "weather": {
       "teresina": {
-        "tempC": 33.7,
-        "humidity": 29,
-        "uv": 0,
-        "windKmh": 2.6,
-        "time": "2026-11-13T20:15",
-        "status": "fallback (fetch failed)"
+        "tempC": 35.2,
+        "humidity": 37,
+        "uv": 8.2,
+        "windKmh": 4.2,
+        "time": "2026-11-14T10:15",
+        "status": "ok"
       },
       "parnaiba": {
-        "tempC": 27.3,
-        "uv": 0
+        "tempC": 31.3,
+        "uv": 7.35
       },
       "picos": {
-        "tempC": 31.7,
-        "uv": 0
+        "tempC": 34.4,
+        "uv": 8.3
       },
       "bomJesus": {
-        "tempC": 28.8,
-        "uv": 0
+        "tempC": 33.2,
+        "uv": 6.05
       }
     }
   },
   "news": [
     {
       "date": "2026-11-14",
+      "title": "Jornalista Durvalino Leal morre aos 62 anos; atuava no TCE-PI",
+      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/14/jornalista-durvalino-leal.ghtml",
+      "source": "g1 Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-14",
+      "title": "Sorvete de leite de cabra com carne de bode? Conheça receita que virou atração no interior do PI",
+      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/14/sorvete-de-leite-de-cabra-com-carne-de-bode.ghtml",
+      "source": "g1 Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-14",
+      "title": "Dia da Alfabetização: Aos 54 anos, homem volta à escola para realizar o sonho de ler a Bíblia sozinho e se formar",
+      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/14/dia-nacional-da-alfabetizacao.ghtml",
+      "source": "g1 Piauí",
+      "category": "Educação",
+      "feed": true
+    },
+    {
+      "date": "2026-11-14",
       "title": "Previsão do tempo hoje para Teresina (PI): sol com muitas nuvens; pancadas de chuva à tarde e à noite",
       "url": "https://g1.globo.com/pi/piaui/previsao-do-tempo/noticia/2026/11/14/previsao-do-tempo-hoje-para-teresina-pi-sol-com-muitas-nuvens-pancadas-de-chuva-a-tarde-e-a-noite.ghtml",
       "source": "g1 Piauí",
       "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-14",
+      "title": "Maior exportador de mel do país, Piauí investe no fortalecimento da apicultura e vai distribuir mais de 20 mil colmeias até 2028",
+      "url": "https://www.pi.gov.br/maior-exportador-de-mel-do-pais-piaui-investe-no-fortalecimento-da-apicultura-e-vai-distribuir-mais-de-20-mil-colmeias-ate-2028/",
+      "source": "Governo do Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-14",
+      "title": "Encontros territoriais para construção do Plano Estadual de Educação começam nesta terça (17) em Bom Jesus",
+      "url": "https://www.pi.gov.br/encontros-territoriais-para-construcao-do-plano-estadual-de-educacao-comecam-nesta-terca-17-em-bom-jesus/",
+      "source": "Governo do Piauí",
+      "category": "Educação",
+      "feed": true
+    },
+    {
+      "date": "2026-11-14",
+      "title": "Feira Piauí Criativo ocorre neste domingo (15) e fortalece o artesanato e a economia piauiense",
+      "url": "https://www.pi.gov.br/feira-piaui-criativo-ocorre-neste-domingo-15-e-fortalece-o-artesanato-e-a-economia-piauiense/",
+      "source": "Governo do Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-14",
+      "title": "Residência Artística Corpos Dizeres une dança contemporânea e referências culturais do Piauí em novas criações coreográficas",
+      "url": "https://www.pi.gov.br/residencia-artistica-corpos-dizeres-une-danca-contemporanea-e-referencias-culturais-do-piaui-em-novas-criacoes-coreograficas/",
+      "source": "Governo do Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-14",
+      "title": "Campus Party Piauí 3 traz debates sobre tecnologia e inovação nos dias 21 e 22 de novembro",
+      "url": "https://www.pi.gov.br/campus-party-piaui-3-traz-debates-sobre-tecnologia-e-inovacao-nos-dias-21-e-22-de-novembro/",
+      "source": "Governo do Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-14",
+      "title": "Obra do Centro Comercial da Vila, em Oeiras, alcança 75% de execução com investimento do Governo do Piauí",
+      "url": "https://www.pi.gov.br/obra-do-centro-comercial-da-vila-em-oeiras-alcanca-75-de-execucao-com-investimento-do-governo-do-piaui/",
+      "source": "Governo do Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-14",
+      "title": "Piauí amplia alfabetização infantil de 52% para 77% e alcança 100 mil matrículas na educação de jovens e adultos",
+      "url": "https://www.pi.gov.br/piaui-amplia-alfabetizacao-infantil-de-52-para-77-e-alcanca-100-mil-matriculas-na-educacao-de-jovens-e-adultos/",
+      "source": "Governo do Piauí",
+      "category": "Educação",
       "feed": true
     },
     {
@@ -305,30 +385,6 @@
     },
     {
       "date": "2026-11-13",
-      "title": "Onça-parda, veado e pica-pau: câmera de monitoramento flagra espécies da fauna silvestre no Sudeste do Piauí",
-      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/13/camera-flagra-especies.ghtml",
-      "source": "g1 Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-13",
-      "title": "Suspeita de crime eleitoral leva PF a apreender celular em cidade do PI",
-      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/13/celular-pf-piaui.ghtml",
-      "source": "g1 Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-13",
-      "title": "Homem é condenado a 20 anos de prisão por matar pescador com 24 facadas no litoral do PI",
-      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/13/homem-condenado-facadas.ghtml",
-      "source": "g1 Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-13",
       "title": "Piauí encerra participação no Web Summit Lisboa com conexões internacionais e oportunidades de negócios para startups",
       "url": "https://www.pi.gov.br/piaui-encerra-participacao-no-web-summit-lisboa-com-conexoes-internacionais-e-oportunidades-de-negocios-para-startups/",
       "source": "Governo do Piauí",
@@ -347,62 +403,6 @@
       "date": "2026-11-13",
       "title": "Badespi registra recorde em outubro com R$ 8,6 milhões em créditos liberados para empreendedores do Piauí",
       "url": "https://www.pi.gov.br/badespi-registra-recorde-em-outubro-com-r-86-milhoes-em-creditos-liberados-para-empreendedores-do-piaui/",
-      "source": "Governo do Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-13",
-      "title": "Estudantes de Teresina ganham destaque nacional com projeto que reduz o desperdício de água",
-      "url": "https://www.pi.gov.br/estudantes-de-teresina-ganham-destaque-nacional-com-projeto-que-reduz-o-desperdicio-de-agua/",
-      "source": "Governo do Piauí",
-      "category": "Educação",
-      "feed": true
-    },
-    {
-      "date": "2026-11-13",
-      "title": "Nova Maternidade realiza programação especial pelo Dia Mundial da Prematuridade nos dias 16 e 17 de novembro",
-      "url": "https://www.pi.gov.br/nova-maternidade-realiza-programacao-especial-pelo-dia-mundial-da-prematuridade-nos-dias-16-e-17-de-novembro/",
-      "source": "Governo do Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-13",
-      "title": "Piauí conquista a 5ª posição entre os estados com maior crescimento acumulado do PIB, diz IBGE",
-      "url": "https://www.pi.gov.br/piaui-conquista-a-5a-posicao-entre-os-estados-com-maior-crescimento-acumulado-do-pib-diz-ibge/",
-      "source": "Governo do Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-13",
-      "title": "Carretinha da Saúde entrega óculos e transforma a rotina de crianças em Teresina",
-      "url": "https://www.pi.gov.br/carretinha-da-saude-entrega-oculos-e-transforma-a-rotina-de-criancas-em-teresina/",
-      "source": "Governo do Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-13",
-      "title": "Ouvidoria-Geral do Estado leva atendimento à população durante ação da Justiça Itinerante",
-      "url": "https://www.pi.gov.br/ouvidoria-geral-do-estado-leva-atendimento-a-populacao-durante-acao-da-justica-itinerante/",
-      "source": "Governo do Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-13",
-      "title": "Semarh avança na recuperação do Rio Gurguéia e prepara projeto para solucionar assoreamento",
-      "url": "https://www.pi.gov.br/semarh-avanca-na-recuperacao-do-rio-gurgueia-e-prepara-projeto-para-solucionar-assoreamento/",
-      "source": "Governo do Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-13",
-      "title": "Teresina está entre as cidades brasileiras que mais avançaram no combate ao desperdício de água e recebe reconhecimento nacional",
-      "url": "https://www.pi.gov.br/teresina-esta-entre-as-cidades-brasileiras-que-mais-avancaram-no-combate-ao-desperdicio-de-agua-e-recebe-reconhecimento-nacional/",
       "source": "Governo do Piauí",
       "category": "Atualidades",
       "feed": true

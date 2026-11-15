@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-15T05:51:54.732Z",
+  "generatedAt": "2026-11-15T13:45:42.072Z",
   "mode": "osint-github-actions",
   "sources": {
     "ibge": {
@@ -49,22 +49,6 @@
         }
       },
       "quotes": {
-        "gas_natural": {
-          "symbol": "NG=F",
-          "price": 3.23,
-          "unit": "USD/MMBtu",
-          "changePct": -2,
-          "currency": "USD",
-          "marketTime": "2026-11-13T21:59:58.000Z"
-        },
-        "ouro": {
-          "symbol": "GC=F",
-          "price": 3886.3,
-          "unit": "USD/oz",
-          "changePct": -3.57,
-          "currency": "USD",
-          "marketTime": "2026-11-13T21:59:59.000Z"
-        },
         "wti": {
           "symbol": "CL=F",
           "price": 88.56,
@@ -81,13 +65,13 @@
           "currency": "USD",
           "marketTime": "2026-11-13T21:59:30.000Z"
         },
-        "soja": {
-          "symbol": "ZS=F",
-          "price": 1231.5,
-          "unit": "USc/bushel",
-          "changePct": 0.57,
-          "currency": "USX",
-          "marketTime": "2026-11-13T19:19:58.000Z"
+        "ouro": {
+          "symbol": "GC=F",
+          "price": 3886.3,
+          "unit": "USD/oz",
+          "changePct": -3.57,
+          "currency": "USD",
+          "marketTime": "2026-11-13T21:59:59.000Z"
         },
         "milho": {
           "symbol": "ZC=F",
@@ -96,6 +80,22 @@
           "changePct": -0.78,
           "currency": "USX",
           "marketTime": "2026-11-13T19:19:59.000Z"
+        },
+        "gas_natural": {
+          "symbol": "NG=F",
+          "price": 3.23,
+          "unit": "USD/MMBtu",
+          "changePct": -2,
+          "currency": "USD",
+          "marketTime": "2026-11-13T21:59:58.000Z"
+        },
+        "soja": {
+          "symbol": "ZS=F",
+          "price": 1231.5,
+          "unit": "USc/bushel",
+          "changePct": 0.57,
+          "currency": "USX",
+          "marketTime": "2026-11-13T19:19:58.000Z"
         }
       }
     },
@@ -105,28 +105,52 @@
     },
     "weather": {
       "teresina": {
-        "tempC": 27.3,
-        "humidity": 71,
-        "uv": 0,
-        "windKmh": 8.5,
-        "time": "2026-11-15T02:45",
+        "tempC": 29.4,
+        "humidity": 66,
+        "uv": 5.5,
+        "windKmh": 4.2,
+        "time": "2026-11-15T10:45",
         "status": "ok"
       },
       "parnaiba": {
-        "tempC": 26.6,
-        "uv": 0
+        "tempC": 31.1,
+        "uv": 7.85
       },
       "picos": {
-        "tempC": 24.9,
-        "uv": 0
+        "tempC": 29.8,
+        "uv": 5.95
       },
       "bomJesus": {
-        "tempC": 22.9,
-        "uv": 0
+        "tempC": 29.8,
+        "uv": 0.75
       }
     }
   },
   "news": [
+    {
+      "date": "2026-11-15",
+      "title": "Bar é interditado após flagrante de som alto e apreensão de pistola, munições, celulares, e drogas em Teresina",
+      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/15/bar-som-alto-celulares-drogas-teresina.ghtml",
+      "source": "g1 Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-15",
+      "title": "Cheesecake de morango: aprenda receita destaque no Clube Rural",
+      "url": "https://g1.globo.com/pi/piaui/cluberural/noticia/2026/11/15/cheesecake-de-morango-clube-rural.ghtml",
+      "source": "g1 Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-15",
+      "title": "Escritor Raphael Montes comenta uso de 'O Jantar Secreto' em redação do Enem de estudante do PI",
+      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/15/escritor-comenta-redacao-enem.ghtml",
+      "source": "g1 Piauí",
+      "category": "Educação",
+      "feed": true
+    },
     {
       "date": "2026-11-15",
       "title": "De pterossauros a preguiça-gigante: Piauí tem fósseis de até 290 milhões de anos; conheça os principais",
@@ -141,6 +165,54 @@
       "url": "https://g1.globo.com/pi/piaui/previsao-do-tempo/noticia/2026/11/15/previsao-do-tempo-hoje-para-teresina-pi-sol-com-algumas-nuvens-chove-rapido-durante-o-dia-e-a-noite.ghtml",
       "source": "g1 Piauí",
       "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-15",
+      "title": "FestLuso traz espetáculos do Brasil, África e Portugal para Teresina e Floriano de 23 a 29 de novembro",
+      "url": "https://www.pi.gov.br/festluso-traz-espetaculos-do-brasil-africa-e-portugal-para-teresina-e-floriano-de-23-a-29-de-novembro/",
+      "source": "Governo do Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-15",
+      "title": "Piauí estrutura plano de ações para enfrentar efeitos do El Niño e reduzir riscos de desastres climáticos",
+      "url": "https://www.pi.gov.br/piaui-estrutura-plano-de-acoes-para-enfrentar-efeitos-do-el-nino-e-reduzir-riscos-de-desastres-climaticos/",
+      "source": "Governo do Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-15",
+      "title": "Egresso da Uespi concilia trabalho e estudos e garante vaga no Mestrado em Física da USP",
+      "url": "https://www.pi.gov.br/egresso-da-uespi-concilia-trabalho-e-estudos-e-garante-vaga-no-mestrado-em-fisica-da-usp/",
+      "source": "Governo do Piauí",
+      "category": "Educação",
+      "feed": true
+    },
+    {
+      "date": "2026-11-15",
+      "title": "Transnordestina alcança 84% de execução da primeira fase e avança no Piauí",
+      "url": "https://www.pi.gov.br/transnordestina-alcanca-84-de-execucao-da-primeira-fase-e-avanca-no-piaui/",
+      "source": "Governo do Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-15",
+      "title": "Economia criativa movimenta negócios e gera renda com apoio do Governo do Piauí",
+      "url": "https://www.pi.gov.br/economia-criativa-movimenta-negocios-e-gera-renda-com-apoio-do-governo-do-piaui/",
+      "source": "Governo do Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-15",
+      "title": "Formação na Escola do Mar leva jovem a conquistar emprego no setor portuário do Piauí",
+      "url": "https://www.pi.gov.br/formacao-na-escola-do-mar-leva-jovem-a-conquistar-emprego-no-setor-portuario-do-piaui/",
+      "source": "Governo do Piauí",
+      "category": "Educação",
       "feed": true
     },
     {
@@ -264,38 +336,6 @@
       "feed": true
     },
     {
-      "date": "2026-11-14",
-      "title": "Residência Artística Corpos Dizeres une dança contemporânea e referências culturais do Piauí em novas criações coreográficas",
-      "url": "https://www.pi.gov.br/residencia-artistica-corpos-dizeres-une-danca-contemporanea-e-referencias-culturais-do-piaui-em-novas-criacoes-coreograficas/",
-      "source": "Governo do Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-14",
-      "title": "Campus Party Piauí 3 traz debates sobre tecnologia e inovação nos dias 21 e 22 de novembro",
-      "url": "https://www.pi.gov.br/campus-party-piaui-3-traz-debates-sobre-tecnologia-e-inovacao-nos-dias-21-e-22-de-novembro/",
-      "source": "Governo do Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-14",
-      "title": "Obra do Centro Comercial da Vila, em Oeiras, alcança 75% de execução com investimento do Governo do Piauí",
-      "url": "https://www.pi.gov.br/obra-do-centro-comercial-da-vila-em-oeiras-alcanca-75-de-execucao-com-investimento-do-governo-do-piaui/",
-      "source": "Governo do Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-14",
-      "title": "Piauí amplia alfabetização infantil de 52% para 77% e alcança 100 mil matrículas na educação de jovens e adultos",
-      "url": "https://www.pi.gov.br/piaui-amplia-alfabetizacao-infantil-de-52-para-77-e-alcanca-100-mil-matriculas-na-educacao-de-jovens-e-adultos/",
-      "source": "Governo do Piauí",
-      "category": "Educação",
-      "feed": true
-    },
-    {
       "date": "2026-11-13",
       "title": "Maternidade do Promorar terá leitos obstétricos transferidos em Teresina",
       "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/13/maternidade-do-promorar-em-teresina.ghtml",
@@ -364,46 +404,6 @@
       "title": "Dono de clínica terapêutica é preso em flagrante por suspeita de cárcere privado no PI; quartos tinham trancas externas",
       "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/13/homem-preso-pi.ghtml",
       "source": "g1 Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-13",
-      "title": "Homem é condenado a 20 anos por estuprar e tentar matar ex-namorada no PI",
-      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/13/homem-condenado-por-estuprar-e-tentar-matar-ex.ghtml",
-      "source": "g1 Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-13",
-      "title": "Piracema começa neste domingo (15) no Piauí; fiscalização será reforçada e multas podem chegar a R$ 100 mil",
-      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/13/piracema-comeco.ghtml",
-      "source": "g1 Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-13",
-      "title": "Condenado por estuprar ex após prometer pagar pensão da filha é preso em Teresina",
-      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/13/condenado-por-estuprar-ex-preso-teresina.ghtml",
-      "source": "g1 Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-13",
-      "title": "Piauí encerra participação no Web Summit Lisboa com conexões internacionais e oportunidades de negócios para startups",
-      "url": "https://www.pi.gov.br/piaui-encerra-participacao-no-web-summit-lisboa-com-conexoes-internacionais-e-oportunidades-de-negocios-para-startups/",
-      "source": "Governo do Piauí",
-      "category": "EdTech",
-      "feed": true
-    },
-    {
-      "date": "2026-11-13",
-      "title": "Governo do Piauí e Banco Mundial avaliam avanços do Projeto Pilares II",
-      "url": "https://www.pi.gov.br/governo-do-piaui-e-banco-mundial-avaliam-avancos-do-projeto-pilares-ii/",
-      "source": "Governo do Piauí",
       "category": "Atualidades",
       "feed": true
     },

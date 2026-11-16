@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-16T05:51:03.805Z",
+  "generatedAt": "2026-11-16T15:24:12.472Z",
   "mode": "osint-github-actions",
   "sources": {
     "ibge": {
@@ -49,53 +49,53 @@
         }
       },
       "quotes": {
-        "wti": {
-          "symbol": "CL=F",
-          "price": 88.36,
+        "milho": {
+          "symbol": "ZC=F",
+          "price": 445,
+          "unit": "USc/bushel",
+          "changePct": -0.67,
+          "currency": "USX",
+          "marketTime": "2026-11-16T15:14:21.000Z"
+        },
+        "brent": {
+          "symbol": "BZ=F",
+          "price": 93.35,
           "unit": "USD/barril",
-          "changePct": 2.11,
+          "changePct": 0.64,
           "currency": "USD",
-          "marketTime": "2026-11-16T05:41:11.000Z"
+          "marketTime": "2026-11-16T15:14:16.000Z"
         },
         "soja": {
           "symbol": "ZS=F",
-          "price": 1227.5,
+          "price": 1225.25,
           "unit": "USc/bushel",
-          "changePct": -0.12,
+          "changePct": -0.31,
           "currency": "USX",
-          "marketTime": "2026-11-16T05:41:03.000Z"
+          "marketTime": "2026-11-16T15:14:21.000Z"
+        },
+        "ouro": {
+          "symbol": "GC=F",
+          "price": 3876.9,
+          "unit": "USD/oz",
+          "changePct": -3.09,
+          "currency": "USD",
+          "marketTime": "2026-11-16T15:14:22.000Z"
+        },
+        "wti": {
+          "symbol": "CL=F",
+          "price": 86.71,
+          "unit": "USD/barril",
+          "changePct": 0.21,
+          "currency": "USD",
+          "marketTime": "2026-11-16T15:14:23.000Z"
         },
         "gas_natural": {
           "symbol": "NG=F",
           "price": 3.15,
           "unit": "USD/MMBtu",
-          "changePct": -1.99,
+          "changePct": -2.02,
           "currency": "USD",
-          "marketTime": "2026-11-16T05:40:58.000Z"
-        },
-        "ouro": {
-          "symbol": "GC=F",
-          "price": 3870,
-          "unit": "USD/oz",
-          "changePct": -3.26,
-          "currency": "USD",
-          "marketTime": "2026-11-16T05:41:13.000Z"
-        },
-        "milho": {
-          "symbol": "ZC=F",
-          "price": 444.75,
-          "unit": "USc/bushel",
-          "changePct": -0.73,
-          "currency": "USX",
-          "marketTime": "2026-11-16T05:37:44.000Z"
-        },
-        "brent": {
-          "symbol": "BZ=F",
-          "price": 95.48,
-          "unit": "USD/barril",
-          "changePct": 2.93,
-          "currency": "USD",
-          "marketTime": "2026-11-16T05:39:58.000Z"
+          "marketTime": "2026-11-16T15:14:23.000Z"
         }
       }
     },
@@ -105,28 +105,108 @@
     },
     "weather": {
       "teresina": {
-        "tempC": 24.8,
-        "humidity": 83,
-        "uv": 0,
-        "windKmh": 1.9,
-        "time": "2026-11-16T02:45",
+        "tempC": 34.2,
+        "humidity": 44,
+        "uv": 1.45,
+        "windKmh": 5.5,
+        "time": "2026-11-16T12:15",
         "status": "ok"
       },
       "parnaiba": {
-        "tempC": 25.7,
-        "uv": 0
+        "tempC": 31.1,
+        "uv": 8.85
       },
       "picos": {
-        "tempC": 23,
-        "uv": 0
+        "tempC": 28.8,
+        "uv": 0.8
       },
       "bomJesus": {
-        "tempC": 22,
-        "uv": 0
+        "tempC": 23.7,
+        "uv": 2.2
       }
     }
   },
   "news": [
+    {
+      "date": "2026-11-16",
+      "title": "Dono de trailer de lanches morto no Pará é sepultado em cidade do Piauí; família pede justiça",
+      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/16/morto-para-piaui.ghtml",
+      "source": "g1 Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-16",
+      "title": "Rafael Fonteles anuncia nomeação de 2,5 mil aprovados em concursos no Piauí",
+      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/16/rafael-fonteles-anuncia-nomeacao-aprovados-concursos.ghtml",
+      "source": "g1 Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-16",
+      "title": "Morre 4ª vítima de acidente grave que deixou casal e filho de 7 anos mortos em Timon",
+      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/16/morre-4a-vitima-de-acidente-em-timon.ghtml",
+      "source": "g1 Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-16",
+      "title": "Cidades do Piauí estão sob alerta para tempestade até quarta-feira (16); veja previsão",
+      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/16/cidades-piaui-alerta-tempestade-previsao.ghtml",
+      "source": "g1 Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-16",
+      "title": "Sine oferece mais de 200 vagas de emprego em três cidades do Piauí nesta segunda-feira (16); veja",
+      "url": "https://g1.globo.com/pi/piaui/trabalho-e-carreira/noticia/2026/11/16/sine-vagas-emprego-teresina-picos-floriano.ghtml",
+      "source": "g1 Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-16",
+      "title": "Motociclista morre após perder controle da moto e colidir com poste em Teresina",
+      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/16/motociclista-morre-teresina.ghtml",
+      "source": "g1 Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-16",
+      "title": "Acidente entre carro e caminhão deixa idoso morto na BR-343",
+      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/16/acidente-carro-caminhao-br-343.ghtml",
+      "source": "g1 Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-16",
+      "title": "Dois homens são mortos a tiros em diferentes regiões de Teresina; DHPP investiga casos",
+      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/16/homens-mortos-teresina.ghtml",
+      "source": "g1 Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-16",
+      "title": "Filha de médico e técnica de enfermagem que tenta vaga em medicina já havia iniciado outro curso: 'espero que consiga se encontrar'",
+      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/16/filha-medico-enem.ghtml",
+      "source": "g1 Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-16",
+      "title": "Mais duas árvores têm risco de queda em praça onde tronco se partiu ao meio no PI, diz prefeitura",
+      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/16/arvores-praca.ghtml",
+      "source": "g1 Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
     {
       "date": "2026-11-16",
       "title": "Previsão do tempo hoje para Teresina (PI): céu nublado com possibilidade de garoa de manhã; à tarde o sol aparece, pancadas de chuva à tarde e à noite",
@@ -249,22 +329,6 @@
     },
     {
       "date": "2026-11-15",
-      "title": "De pterossauros a preguiça-gigante: Piauí tem fósseis de até 290 milhões de anos; conheça os principais",
-      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/15/piaui-fosseis-milhoes-de-anos.ghtml",
-      "source": "g1 Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-15",
-      "title": "Previsão do tempo hoje para Teresina (PI): sol com algumas nuvens; chove rápido durante o dia e à noite",
-      "url": "https://g1.globo.com/pi/piaui/previsao-do-tempo/noticia/2026/11/15/previsao-do-tempo-hoje-para-teresina-pi-sol-com-algumas-nuvens-chove-rapido-durante-o-dia-e-a-noite.ghtml",
-      "source": "g1 Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-15",
       "title": "Seduc beneficia mais de 25 mil estudantes com transporte gratuito até os locais de aplicação do Enem nos dois dias de provas",
       "url": "https://www.pi.gov.br/seduc-beneficia-mais-de-25-mil-estudantes-com-transporte-gratuito-ate-os-locais-de-aplicacao-do-enem-nos-dois-dias-de-provas/",
       "source": "Governo do Piauí",
@@ -317,70 +381,6 @@
       "url": "https://www.pi.gov.br/formacao-na-escola-do-mar-leva-jovem-a-conquistar-emprego-no-setor-portuario-do-piaui/",
       "source": "Governo do Piauí",
       "category": "Educação",
-      "feed": true
-    },
-    {
-      "date": "2026-11-14",
-      "title": "Trabalhador morre após sofrer descarga elétrica ao encostar em fio de alta tensão no Piauí",
-      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/14/trabalhador-morre-descarga-eletrica.ghtml",
-      "source": "g1 Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-14",
-      "title": "Dupla suspeita de arrombar carros é presa no PI; um dos homens tem mais de 15 procedimentos pelo crime",
-      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/14/dupla-suspeita-arrombar-carros-presa.ghtml",
-      "source": "g1 Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-14",
-      "title": "Caldo de cana ganha versão de sorvete e vira alternativa para enfrentar calor do B-R-O-Bró no PI",
-      "url": "https://g1.globo.com/pi/piaui/piaui-de-riquezas/noticia/2026/11/14/caldo-de-cana-sorvete.ghtml",
-      "source": "g1 Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-14",
-      "title": "Acima de 810 pontos: Veja os 10 cursos com maiores notas de corte do Sisu no PI",
-      "url": "https://g1.globo.com/pi/piaui/ingresso-universitario/noticia/2026/11/14/maiores-notas-de-corte-do-sisu-2026.ghtml",
-      "source": "g1 Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-14",
-      "title": "Quem são os beneficiados pelo Prato Cheio 2026? Veja a história de cinco instituições do Piauí",
-      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/14/beneficiados-prato-cheio.ghtml",
-      "source": "g1 Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-14",
-      "title": "Motorista de hospital é morto a tiros no PI após vender propriedade; dois suspeitos são presos",
-      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/14/assassinado-casa-piaui.ghtml",
-      "source": "g1 Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-14",
-      "title": "Enem 2026: transporte público será gratuito em Teresina neste domingo (15)",
-      "url": "https://g1.globo.com/pi/piaui/ingresso-universitario/noticia/2026/11/14/enem-2026-onibus-teresina.ghtml",
-      "source": "g1 Piauí",
-      "category": "Educação",
-      "feed": true
-    },
-    {
-      "date": "2026-11-14",
-      "title": "Jornalista Durvalino Leal morre aos 62 anos; atuava no TCE-PI",
-      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/14/jornalista-durvalino-leal.ghtml",
-      "source": "g1 Piauí",
-      "category": "Atualidades",
       "feed": true
     },
     {

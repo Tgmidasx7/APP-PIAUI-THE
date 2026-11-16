@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-15T22:40:16.528Z",
+  "generatedAt": "2026-11-16T05:51:03.805Z",
   "mode": "osint-github-actions",
   "sources": {
     "ibge": {
@@ -49,53 +49,53 @@
         }
       },
       "quotes": {
-        "ouro": {
-          "symbol": "GC=F",
-          "price": 3886.3,
-          "unit": "USD/oz",
-          "changePct": -3.57,
-          "currency": "USD",
-          "marketTime": "2026-11-13T21:59:59.000Z"
-        },
         "wti": {
           "symbol": "CL=F",
-          "price": 88.56,
+          "price": 88.36,
           "unit": "USD/barril",
-          "changePct": 2.93,
+          "changePct": 2.11,
           "currency": "USD",
-          "marketTime": "2026-11-13T22:00:00.000Z"
-        },
-        "gas_natural": {
-          "symbol": "NG=F",
-          "price": 3.23,
-          "unit": "USD/MMBtu",
-          "changePct": -2,
-          "currency": "USD",
-          "marketTime": "2026-11-13T21:59:58.000Z"
-        },
-        "brent": {
-          "symbol": "BZ=F",
-          "price": 95.84,
-          "unit": "USD/barril",
-          "changePct": 4.75,
-          "currency": "USD",
-          "marketTime": "2026-11-13T21:59:30.000Z"
-        },
-        "milho": {
-          "symbol": "ZC=F",
-          "price": 445.5,
-          "unit": "USc/bushel",
-          "changePct": -0.78,
-          "currency": "USX",
-          "marketTime": "2026-11-13T19:19:59.000Z"
+          "marketTime": "2026-11-16T05:41:11.000Z"
         },
         "soja": {
           "symbol": "ZS=F",
-          "price": 1231.5,
+          "price": 1227.5,
           "unit": "USc/bushel",
-          "changePct": 0.57,
+          "changePct": -0.12,
           "currency": "USX",
-          "marketTime": "2026-11-13T19:19:58.000Z"
+          "marketTime": "2026-11-16T05:41:03.000Z"
+        },
+        "gas_natural": {
+          "symbol": "NG=F",
+          "price": 3.15,
+          "unit": "USD/MMBtu",
+          "changePct": -1.99,
+          "currency": "USD",
+          "marketTime": "2026-11-16T05:40:58.000Z"
+        },
+        "ouro": {
+          "symbol": "GC=F",
+          "price": 3870,
+          "unit": "USD/oz",
+          "changePct": -3.26,
+          "currency": "USD",
+          "marketTime": "2026-11-16T05:41:13.000Z"
+        },
+        "milho": {
+          "symbol": "ZC=F",
+          "price": 444.75,
+          "unit": "USc/bushel",
+          "changePct": -0.73,
+          "currency": "USX",
+          "marketTime": "2026-11-16T05:37:44.000Z"
+        },
+        "brent": {
+          "symbol": "BZ=F",
+          "price": 95.48,
+          "unit": "USD/barril",
+          "changePct": 2.93,
+          "currency": "USD",
+          "marketTime": "2026-11-16T05:39:58.000Z"
         }
       }
     },
@@ -105,28 +105,44 @@
     },
     "weather": {
       "teresina": {
-        "tempC": 26.8,
-        "humidity": 84,
+        "tempC": 24.8,
+        "humidity": 83,
         "uv": 0,
-        "windKmh": 6.1,
-        "time": "2026-11-15T19:30",
+        "windKmh": 1.9,
+        "time": "2026-11-16T02:45",
         "status": "ok"
       },
       "parnaiba": {
-        "tempC": 27.5,
+        "tempC": 25.7,
         "uv": 0
       },
       "picos": {
-        "tempC": 24.3,
+        "tempC": 23,
         "uv": 0
       },
       "bomJesus": {
-        "tempC": 24.5,
+        "tempC": 22,
         "uv": 0
       }
     }
   },
   "news": [
+    {
+      "date": "2026-11-16",
+      "title": "Previsão do tempo hoje para Teresina (PI): céu nublado com possibilidade de garoa de manhã; à tarde o sol aparece, pancadas de chuva à tarde e à noite",
+      "url": "https://g1.globo.com/pi/piaui/previsao-do-tempo/noticia/2026/11/16/previsao-do-tempo-hoje-para-teresina-pi-ceu-nublado-com-possibilidade-de-garoa-de-manha-a-tarde-o-sol-aparece-pancadas-de-chuva-a-tarde-e-a-noite.ghtml",
+      "source": "g1 Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-15",
+      "title": "Vídeo mostra momento em que árvore se parte ao meio e cai em praça no PI",
+      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/15/video-arvore-cai.ghtml",
+      "source": "g1 Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
     {
       "date": "2026-11-15",
       "title": "Estudante autista viaja para fazer o Enem e busca ser o 1º da família na universidade: 'Sei que as dificuldades são muitas'",
@@ -249,6 +265,14 @@
     },
     {
       "date": "2026-11-15",
+      "title": "Seduc beneficia mais de 25 mil estudantes com transporte gratuito até os locais de aplicação do Enem nos dois dias de provas",
+      "url": "https://www.pi.gov.br/seduc-beneficia-mais-de-25-mil-estudantes-com-transporte-gratuito-ate-os-locais-de-aplicacao-do-enem-nos-dois-dias-de-provas/",
+      "source": "Governo do Piauí",
+      "category": "Educação",
+      "feed": true
+    },
+    {
+      "date": "2026-11-15",
       "title": "Dia E: Seduc oferece apoio e incentivo aos alunos da rede estadual no segundo dia do Enem 2026",
       "url": "https://www.pi.gov.br/dia-e-seduc-oferece-apoio-e-incentivo-aos-alunos-da-rede-estadual-no-segundo-dia-do-enem-2026/",
       "source": "Governo do Piauí",
@@ -361,22 +385,6 @@
     },
     {
       "date": "2026-11-14",
-      "title": "Sorvete de leite de cabra com carne de bode? Conheça receita que virou atração no interior do PI",
-      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/14/sorvete-de-leite-de-cabra-com-carne-de-bode.ghtml",
-      "source": "g1 Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-14",
-      "title": "Dia da Alfabetização: Aos 54 anos, homem volta à escola para realizar o sonho de ler a Bíblia sozinho e se formar",
-      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/14/dia-nacional-da-alfabetizacao.ghtml",
-      "source": "g1 Piauí",
-      "category": "Educação",
-      "feed": true
-    },
-    {
-      "date": "2026-11-14",
       "title": "Semarh se coloca à disposição para colaborar na identificação das causas da mortandade de peixes no Rio Poti",
       "url": "https://www.pi.gov.br/semarh-se-coloca-a-disposicao-para-colaborar-na-identificacao-das-causas-da-mortandade-de-peixes-no-rio-poti/",
       "source": "Governo do Piauí",
@@ -397,14 +405,6 @@
       "url": "https://www.pi.gov.br/encontros-territoriais-para-construcao-do-plano-estadual-de-educacao-comecam-nesta-terca-17-em-bom-jesus/",
       "source": "Governo do Piauí",
       "category": "Educação",
-      "feed": true
-    },
-    {
-      "date": "2026-11-14",
-      "title": "Feira Piauí Criativo ocorre neste domingo (15) e fortalece o artesanato e a economia piauiense",
-      "url": "https://www.pi.gov.br/feira-piaui-criativo-ocorre-neste-domingo-15-e-fortalece-o-artesanato-e-a-economia-piauiense/",
-      "source": "Governo do Piauí",
-      "category": "Atualidades",
       "feed": true
     },
     {

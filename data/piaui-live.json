@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-17T01:47:27.417Z",
+  "generatedAt": "2026-11-17T15:46:40.051Z",
   "mode": "osint-github-actions",
   "sources": {
     "ibge": {
@@ -49,53 +49,53 @@
         }
       },
       "quotes": {
-        "brent": {
-          "symbol": "BZ=F",
-          "price": 91.79,
-          "unit": "USD/barril",
-          "changePct": -1.05,
-          "currency": "USD",
-          "marketTime": "2026-11-17T01:36:55.000Z"
-        },
         "wti": {
           "symbol": "CL=F",
-          "price": 85.17,
+          "price": 86.39,
           "unit": "USD/barril",
-          "changePct": -1.57,
+          "changePct": -2.65,
           "currency": "USD",
-          "marketTime": "2026-11-17T01:37:04.000Z"
+          "marketTime": "2026-11-17T15:36:41.000Z"
         },
-        "milho": {
-          "symbol": "ZC=F",
-          "price": 448.75,
+        "soja": {
+          "symbol": "ZS=F",
+          "price": 1235.5,
           "unit": "USc/bushel",
-          "changePct": 0.17,
+          "changePct": 0.69,
           "currency": "USX",
-          "marketTime": "2026-11-17T01:36:25.000Z"
+          "marketTime": "2026-11-17T15:36:32.000Z"
+        },
+        "brent": {
+          "symbol": "BZ=F",
+          "price": 93.03,
+          "unit": "USD/barril",
+          "changePct": -2.91,
+          "currency": "USD",
+          "marketTime": "2026-11-17T15:36:41.000Z"
         },
         "gas_natural": {
           "symbol": "NG=F",
           "price": 3.1,
           "unit": "USD/MMBtu",
-          "changePct": -3.42,
+          "changePct": -7.04,
           "currency": "USD",
-          "marketTime": "2026-11-17T01:37:11.000Z"
+          "marketTime": "2026-11-17T15:36:40.000Z"
         },
-        "soja": {
-          "symbol": "ZS=F",
-          "price": 1228.25,
+        "milho": {
+          "symbol": "ZC=F",
+          "price": 450,
           "unit": "USc/bushel",
-          "changePct": -0.06,
+          "changePct": 1.69,
           "currency": "USX",
-          "marketTime": "2026-11-17T01:37:03.000Z"
+          "marketTime": "2026-11-17T15:36:37.000Z"
         },
         "ouro": {
           "symbol": "GC=F",
-          "price": 3855.9,
+          "price": 3877.4,
           "unit": "USD/oz",
-          "changePct": -3.61,
+          "changePct": -0.2,
           "currency": "USD",
-          "marketTime": "2026-11-17T01:37:28.000Z"
+          "marketTime": "2026-11-17T15:36:41.000Z"
         }
       }
     },
@@ -105,32 +105,216 @@
     },
     "weather": {
       "teresina": {
-        "tempC": 25,
-        "humidity": 90,
-        "uv": 0,
-        "windKmh": 1.8,
-        "time": "2026-11-16T22:45",
+        "tempC": 36.9,
+        "humidity": 36,
+        "uv": 6.05,
+        "windKmh": 3.2,
+        "time": "2026-11-17T12:45",
         "status": "ok"
       },
       "parnaiba": {
-        "tempC": 26.7,
-        "uv": 0
+        "tempC": 32.3,
+        "uv": 5.05
       },
       "picos": {
-        "tempC": 23.8,
-        "uv": 0
+        "tempC": 33.3,
+        "uv": 8.7
       },
       "bomJesus": {
-        "tempC": 22.6,
-        "uv": 0
+        "tempC": 31.7,
+        "uv": 5.75
       }
     }
   },
   "news": [
     {
       "date": "2026-11-17",
-      "title": "Em evento China-Brasil, Rafael Fonteles destaca força da parceria comercial e investimentos no Piauí",
-      "url": "https://www.pi.gov.br/em-evento-china-brasil-rafael-fonteles-destaca-forca-da-parceria-comercial-e-investimentos-no-piaui/",
+      "title": "Governo do PI prevê orçamento de R$ 32 bilhões para 2027 e quase R$ 10 bilhões para educação e investimentos",
+      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/17/governo-pi-orcamento-2027.ghtml",
+      "source": "g1 Piauí",
+      "category": "Educação",
+      "feed": true
+    },
+    {
+      "date": "2026-11-17",
+      "title": "Mais de 120 municípios do Piauí estão sob alerta de tempestade nesta terça-feira (17); veja a lista",
+      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/17/municipios-piaui-alerta-tempestade.ghtml",
+      "source": "g1 Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-17",
+      "title": "Fotos mostram volta do verde ao sertão do PI em menos de 15 dias após o início das chuvas",
+      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/17/verde-pi-chuvas.ghtml",
+      "source": "g1 Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-17",
+      "title": "Incêndio atinge casa em Teresina, e vizinhos ajudam a retirar moradoras",
+      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/17/incendio-atinge-casa-em-teresina.ghtml",
+      "source": "g1 Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-17",
+      "title": "Motociclista morre após ser atropelado e arrastado por motorista sem CNH no litoral do PI",
+      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/17/motociclista-morre-acidente-carro-parnaiba.ghtml",
+      "source": "g1 Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-17",
+      "title": "Justiça suspende processo contra motorista acusado de matar casal atropelado em Teresina; entenda",
+      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/17/justica-suspende-processo.ghtml",
+      "source": "g1 Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-17",
+      "title": "Piauí tem maior avanço do Brasil em ranking de inovação e sobe 11 posições em cinco anos",
+      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/17/piaui-avanco-inovacao.ghtml",
+      "source": "g1 Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-17",
+      "title": "Quem era o entregador de 22 anos que foi vítima de latrocínio em Teresina",
+      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/17/quem-entregador-vitima-latrocinio-teresina.ghtml",
+      "source": "g1 Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-17",
+      "title": "Vídeo: homem é resgatado após cair em poço de 18 metros de altura no PI",
+      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/17/video-homem-resgatado-poco.ghtml",
+      "source": "g1 Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-17",
+      "title": "Mulher é encontrada morta em olho d'água no Piauí; polícia suspeita de afogamento",
+      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/17/mulher-morta-piaui.ghtml",
+      "source": "g1 Piauí",
+      "category": "Segurança",
+      "feed": true
+    },
+    {
+      "date": "2026-11-17",
+      "title": "Entregador de 22 anos é morto e tem moto roubada durante crime em Teresina",
+      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/17/jovem-morto-moto-roubada.ghtml",
+      "source": "g1 Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-17",
+      "title": "Vidraceiro é preso suspeito de receber pagamentos e não concluir serviços no PI; ao menos 13 clientes denunciaram",
+      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/17/vidraceiro-preso.ghtml",
+      "source": "g1 Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-17",
+      "title": "FestLuso terá teatro, dança e shows gratuitos em Teresina e Floriano; veja programação",
+      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/17/festluso-em-teresina-e-floriano-programacao.ghtml",
+      "source": "g1 Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-17",
+      "title": "Previsão do tempo hoje para Teresina (PI): sol com muitas nuvens; pancadas de chuva à tarde e à noite",
+      "url": "https://g1.globo.com/pi/piaui/previsao-do-tempo/noticia/2026/11/17/previsao-do-tempo-hoje-para-teresina-pi-sol-com-muitas-nuvens-pancadas-de-chuva-a-tarde-e-a-noite.ghtml",
+      "source": "g1 Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-17",
+      "title": "Sead entrega 20 boxes do Mercado Rodoviário Sul após reforma completa do espaço",
+      "url": "https://www.pi.gov.br/sead-entrega-20-boxes-do-mercado-rodoviario-sul-apos-reforma-completa-do-espaco/",
+      "source": "Governo do Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-17",
+      "title": "Festa da Beleza Negra celebra ancestralidade e resistência da cultura afro-brasileira no Piauí nesta quinta (19)",
+      "url": "https://www.pi.gov.br/festa-da-beleza-negra-celebra-ancestralidade-e-resistencia-da-cultura-afro-brasileira-no-piaui-nesta-quinta-19/",
+      "source": "Governo do Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-17",
+      "title": "PIT prorroga até 22 de novembro as inscrições para seleção de professores horistas e altera prova didática para o formato online",
+      "url": "https://www.pi.gov.br/pit-prorroga-ate-22-de-novembro-as-inscricoes-para-selecao-de-professores-horistas-e-altera-prova-didatica-para-o-formato-online/",
+      "source": "Governo do Piauí",
+      "category": "Educação",
+      "feed": true
+    },
+    {
+      "date": "2026-11-17",
+      "title": "Empresas piauienses contabilizam centenas de oportunidades de negócios durante evento em Lisboa e conquistam mercado internacional",
+      "url": "https://www.pi.gov.br/empresas-piauienses-contabilizam-centenas-de-oportunidades-de-negocios-durante-evento-em-lisboa-e-conquistam-mercado-internacional/",
+      "source": "Governo do Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-17",
+      "title": "Semarh realiza oficina para elaborar Plano de Manejo da Área de Proteção Ambiental (APA) do Vale dos Buritis e Carnaubais",
+      "url": "https://www.pi.gov.br/semarh-realiza-oficina-para-elaborar-plano-de-manejo-da-area-de-protecao-ambiental-apa-do-vale-dos-buritis-e-carnaubais/",
+      "source": "Governo do Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-17",
+      "title": "Semarh busca novas tecnologias para ampliar o monitoramento ambiental no Piauí",
+      "url": "https://www.pi.gov.br/semarh-busca-novas-tecnologias-para-ampliar-o-monitoramento-ambiental-no-piaui/",
+      "source": "Governo do Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-17",
+      "title": "Uespi promove Semana da Matemática com debates sobre inteligência artificial e novas tecnologias de ensino",
+      "url": "https://www.pi.gov.br/uespi-promove-semana-da-matematica-com-debates-sobre-inteligencia-artificial-e-novas-tecnologias-de-ensino/",
+      "source": "Governo do Piauí",
+      "category": "EdTech",
+      "feed": true
+    },
+    {
+      "date": "2026-11-17",
+      "title": "Seduc realiza III Seminário de Educação para as Relações Étnico-Raciais com entrega do Selo Antirracista Esperança Garcia",
+      "url": "https://www.pi.gov.br/seduc-pi-realiza-iii-seminario-de-educacao-para-as-relacoes-etnico-raciais-com-entrega-do-selo-antirracista-esperanca-garcia/",
+      "source": "Governo do Piauí",
+      "category": "Educação",
+      "feed": true
+    },
+    {
+      "date": "2026-11-17",
+      "title": "Casa Legal realiza entrega itinerante de registros de imóveis em três bairros de Teresina até quinta (19)",
+      "url": "https://www.pi.gov.br/casa-legal-realiza-entrega-itinerante-de-registros-de-imoveis-em-tres-bairros-de-teresina-ate-quinta-19/",
+      "source": "Governo do Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-17",
+      "title": "Com apoio da Secepi, Piauí disputa Copa Rainha Marta Nordeste 2026 entre os dias 23 e 29 deste mês em Aracaju (SE)",
+      "url": "https://www.pi.gov.br/com-apoio-da-secepi-piaui-disputa-copa-rainha-marta-nordeste-2026-entre-os-dias-23-e-29-deste-mes-em-aracaju-se/",
       "source": "Governo do Piauí",
       "category": "Atualidades",
       "feed": true
@@ -220,190 +404,6 @@
       "title": "Homem condenado a 29 anos por estupro de duas irmãs em Teresina é preso no MA",
       "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/16/homem-condenado-estupro-irmas.ghtml",
       "source": "g1 Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-16",
-      "title": "Prefeito de Teresina relaciona aguapés e morte de peixes à poluição no Rio Poti; concessionária afirma cumprir normas ambientais",
-      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/16/prefeito-rio-poti.ghtml",
-      "source": "g1 Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-16",
-      "title": "Incêndio atinge casa enquanto mulher e criança dormiam em Teresina",
-      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/16/incendio-casa-teresina.ghtml",
-      "source": "g1 Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-16",
-      "title": "Enem será reaplicado em cidade do PI após faltar energia elétrica durante prova",
-      "url": "https://g1.globo.com/pi/piaui/ingresso-universitario/noticia/2026/11/16/enem-falta-energia-eletrica-durante-prova.ghtml",
-      "source": "g1 Piauí",
-      "category": "Educação",
-      "feed": true
-    },
-    {
-      "date": "2026-11-16",
-      "title": "Jovem suspeito de matar adolescente durante 'roleta russa' é preso em Teresina",
-      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/16/suspeito-matar-adolescente-altos.ghtml",
-      "source": "g1 Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-16",
-      "title": "Dono de trailer de lanches morto no Pará é sepultado em cidade do Piauí; família pede justiça",
-      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/16/morto-para-piaui.ghtml",
-      "source": "g1 Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-16",
-      "title": "Rafael Fonteles anuncia nomeação de 2,5 mil aprovados em concursos no Piauí",
-      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/16/rafael-fonteles-anuncia-nomeacao-aprovados-concursos.ghtml",
-      "source": "g1 Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-16",
-      "title": "Morre 4ª vítima de acidente grave que deixou casal e filho de 7 anos mortos em Timon",
-      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/16/morre-4a-vitima-de-acidente-em-timon.ghtml",
-      "source": "g1 Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-16",
-      "title": "Cidades do Piauí estão sob alerta para tempestade até quarta-feira (18); veja previsão",
-      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/16/cidades-piaui-alerta-tempestade-previsao.ghtml",
-      "source": "g1 Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-16",
-      "title": "Sine oferece mais de 200 vagas de emprego em três cidades do Piauí nesta segunda-feira (16); veja",
-      "url": "https://g1.globo.com/pi/piaui/trabalho-e-carreira/noticia/2026/11/16/sine-vagas-emprego-teresina-picos-floriano.ghtml",
-      "source": "g1 Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-16",
-      "title": "Motociclista morre após perder controle da moto e colidir com poste em Teresina",
-      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/16/motociclista-morre-teresina.ghtml",
-      "source": "g1 Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-16",
-      "title": "Acidente entre carro e caminhão deixa idoso morto na BR-343",
-      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/16/acidente-carro-caminhao-br-343.ghtml",
-      "source": "g1 Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-16",
-      "title": "Dois homens são mortos a tiros em diferentes regiões de Teresina; DHPP investiga casos",
-      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/16/homens-mortos-teresina.ghtml",
-      "source": "g1 Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-16",
-      "title": "Filha de médico e técnica de enfermagem que tenta vaga em medicina já havia iniciado outro curso: 'espero que consiga se encontrar'",
-      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/16/filha-medico-enem.ghtml",
-      "source": "g1 Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-16",
-      "title": "Mais duas árvores têm risco de queda em praça onde tronco se partiu ao meio no PI, diz prefeitura",
-      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/16/arvores-praca.ghtml",
-      "source": "g1 Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-16",
-      "title": "Seduc realiza formação sobre uso da inteligência artificial no ensino de espanhol",
-      "url": "https://www.pi.gov.br/seduc-realiza-formacao-sobre-uso-da-inteligencia-artificial-no-ensino-de-espanhol/",
-      "source": "Governo do Piauí",
-      "category": "EdTech",
-      "feed": true
-    },
-    {
-      "date": "2026-11-16",
-      "title": "112 escolas estaduais atingem meta do Ideb e mais de 7 mil profissionais receberão 14º salário no Piauí",
-      "url": "https://www.pi.gov.br/112-escolas-estaduais-atingem-meta-do-ideb-e-mais-de-7-mil-profissionais-receberao-14o-salario-no-piaui/",
-      "source": "Governo do Piauí",
-      "category": "Educação",
-      "feed": true
-    },
-    {
-      "date": "2026-11-16",
-      "title": "Concursos das Polícias Civil e Militar vão reforçar efetivo do Piauí com 700 novos profissionais",
-      "url": "https://www.pi.gov.br/concursos-das-policias-civil-e-militar-vao-reforcar-efetivo-do-piaui-com-700-novos-profissionais/",
-      "source": "Governo do Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-16",
-      "title": "Rafael Fonteles anuncia nomeação de 2,5 mil aprovados em concursos da Saúde e Educação para janeiro",
-      "url": "https://www.pi.gov.br/rafael-fonteles-anuncia-nomeacao-de-25-mil-aprovados-em-concursos-da-saude-e-educacao-para-janeiro/",
-      "source": "Governo do Piauí",
-      "category": "Educação",
-      "feed": true
-    },
-    {
-      "date": "2026-11-16",
-      "title": "SSP-PI promove curso de enfrentamento à violência contra a mulher para profissionais de nove estados do Nordeste",
-      "url": "https://www.pi.gov.br/ssp-pi-promove-curso-de-enfrentamento-a-violencia-contra-a-mulher-para-profissionais-de-nove-estados-do-nordeste/",
-      "source": "Governo do Piauí",
-      "category": "Segurança",
-      "feed": true
-    },
-    {
-      "date": "2026-11-16",
-      "title": "Piauí estrutura plano de ações para enfrentar efeitos do El Niño e reduzir riscos de desastres climáticos",
-      "url": "https://www.pi.gov.br/piaui-estrutura-plano-de-acoes-para-enfrentar-efeitos-do-el-nino-e-reduzir-riscos-de-desastres-climaticos/",
-      "source": "Governo do Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-15",
-      "title": "Seduc beneficia mais de 25 mil estudantes com transporte gratuito até os locais de aplicação do Enem nos dois dias de provas",
-      "url": "https://www.pi.gov.br/seduc-beneficia-mais-de-25-mil-estudantes-com-transporte-gratuito-ate-os-locais-de-aplicacao-do-enem-nos-dois-dias-de-provas/",
-      "source": "Governo do Piauí",
-      "category": "Educação",
-      "feed": true
-    },
-    {
-      "date": "2026-11-15",
-      "title": "Dia E: Seduc oferece apoio e incentivo aos alunos da rede estadual no segundo dia do Enem 2026",
-      "url": "https://www.pi.gov.br/dia-e-seduc-oferece-apoio-e-incentivo-aos-alunos-da-rede-estadual-no-segundo-dia-do-enem-2026/",
-      "source": "Governo do Piauí",
-      "category": "Educação",
-      "feed": true
-    },
-    {
-      "date": "2026-11-15",
-      "title": "FestLuso traz espetáculos do Brasil, África e Portugal para Teresina e Floriano de 23 a 29 de novembro",
-      "url": "https://www.pi.gov.br/festluso-traz-espetaculos-do-brasil-africa-e-portugal-para-teresina-e-floriano-de-23-a-29-de-novembro/",
-      "source": "Governo do Piauí",
       "category": "Atualidades",
       "feed": true
     },

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-18T00:49:36.642Z",
+  "generatedAt": "2026-11-18T15:26:38.220Z",
   "mode": "osint-github-actions",
   "sources": {
     "ibge": {
@@ -20,7 +20,7 @@
         "data": "17/11/2026",
         "valor": "5.7851"
       },
-      "status": "ok"
+      "status": "fallback (HTTP 304 for https://api.bcb.gov.br/dados/serie/bcdata.sgs.432/dados/ultimos/1?formato=json)"
     },
     "siconfi": {
       "status": "ok",
@@ -49,53 +49,53 @@
         }
       },
       "quotes": {
-        "soja": {
-          "symbol": "ZS=F",
-          "price": 1225.5,
-          "unit": "USc/bushel",
-          "changePct": -0.12,
-          "currency": "USX",
-          "marketTime": "2026-11-17T19:19:59.000Z"
-        },
         "wti": {
           "symbol": "CL=F",
-          "price": 85.6,
+          "price": 83.44,
           "unit": "USD/barril",
-          "changePct": -3.54,
+          "changePct": -5.78,
           "currency": "USD",
-          "marketTime": "2026-11-18T00:38:26.000Z"
+          "marketTime": "2026-11-18T15:13:51.000Z"
         },
-        "brent": {
-          "symbol": "BZ=F",
-          "price": 93.18,
-          "unit": "USD/barril",
-          "changePct": -2.76,
-          "currency": "USD",
-          "marketTime": "2026-11-18T00:39:13.000Z"
-        },
-        "milho": {
-          "symbol": "ZC=F",
-          "price": 446.75,
+        "soja": {
+          "symbol": "ZS=F",
+          "price": 1219.25,
           "unit": "USc/bushel",
-          "changePct": 0.96,
+          "changePct": -1.91,
           "currency": "USX",
-          "marketTime": "2026-11-17T19:19:58.000Z"
-        },
-        "ouro": {
-          "symbol": "GC=F",
-          "price": 3831,
-          "unit": "USD/oz",
-          "changePct": -1.4,
-          "currency": "USD",
-          "marketTime": "2026-11-18T00:39:36.000Z"
+          "marketTime": "2026-11-18T15:13:49.000Z"
         },
         "gas_natural": {
           "symbol": "NG=F",
-          "price": 3.19,
+          "price": 3.26,
           "unit": "USD/MMBtu",
-          "changePct": -4.4,
+          "changePct": 0.96,
           "currency": "USD",
-          "marketTime": "2026-11-18T00:39:24.000Z"
+          "marketTime": "2026-11-18T15:13:44.000Z"
+        },
+        "brent": {
+          "symbol": "BZ=F",
+          "price": 89.49,
+          "unit": "USD/barril",
+          "changePct": -6.63,
+          "currency": "USD",
+          "marketTime": "2026-11-18T15:13:41.000Z"
+        },
+        "milho": {
+          "symbol": "ZC=F",
+          "price": 442.25,
+          "unit": "USc/bushel",
+          "changePct": -0.73,
+          "currency": "USX",
+          "marketTime": "2026-11-18T15:13:50.000Z"
+        },
+        "ouro": {
+          "symbol": "GC=F",
+          "price": 3758.8,
+          "unit": "USD/oz",
+          "changePct": -3.28,
+          "currency": "USD",
+          "marketTime": "2026-11-18T15:13:51.000Z"
         }
       }
     },
@@ -105,28 +105,228 @@
     },
     "weather": {
       "teresina": {
-        "tempC": 28.6,
-        "humidity": 64,
-        "uv": 0,
-        "windKmh": 7.9,
-        "time": "2026-11-17T21:45",
+        "tempC": 37.3,
+        "humidity": 36,
+        "uv": 9.2,
+        "windKmh": 6.7,
+        "time": "2026-11-18T12:15",
         "status": "ok"
       },
       "parnaiba": {
-        "tempC": 27.9,
-        "uv": 0
+        "tempC": 31.7,
+        "uv": 8.7
       },
       "picos": {
-        "tempC": 25.8,
-        "uv": 0
+        "tempC": 34.1,
+        "uv": 4.8
       },
       "bomJesus": {
-        "tempC": 22.6,
-        "uv": 0
+        "tempC": 30.7,
+        "uv": 3.4
       }
     }
   },
   "news": [
+    {
+      "date": "2026-11-18",
+      "title": "SSP-PI deflagra operação contra organização criminosa investigada por tráfico de drogas e lavagem de dinheiro em quatro estados",
+      "url": "https://www.ssp.pi.gov.br/ssp-pi-deflagra-operacao-contra-organizacao-criminosa-investigada-por-trafico-de-drogas-e-lavagem-de-dinheiro-em-quatro-estados/",
+      "source": "SSP-PI",
+      "category": "Segurança",
+      "feed": true
+    },
+    {
+      "date": "2026-11-18",
+      "title": "Vídeo: Filho do vice-governador eleito do PI recebe bênção do papa Leão XIV uma semana antes de completar 1 ano",
+      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/18/video-filho-vice-governador-eleito-pi-bencao-papa.ghtml",
+      "source": "g1 Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-18",
+      "title": "Suspeito de matar entregador em assalto teria lavado roupas usadas no crime e procurado familiares, segundo delegado",
+      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/18/suspeito-entregador-teresina.ghtml",
+      "source": "g1 Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-18",
+      "title": "CRM cobra explicações da FMS e vistoria Maternidade do Promorar após anúncio de transferência de leitos obstétricos em Teresina",
+      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/18/crm-explicacoes-fms-vistoria-maternidade-promorar-teresina.ghtml",
+      "source": "g1 Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-18",
+      "title": "Aluno de escola que suspendeu aulas após casos de catapora no PI faz exame para Mpox",
+      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/18/aluno-catapora-pi.ghtml",
+      "source": "g1 Piauí",
+      "category": "Educação",
+      "feed": true
+    },
+    {
+      "date": "2026-11-18",
+      "title": "Grupo investigado por usar idosos para sacar benefícios do INSS de forma fraudulenta é alvo da PF",
+      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/18/grupo-suspeito-beneficios.ghtml",
+      "source": "g1 Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-18",
+      "title": "IBGE: pretos e pardos têm piores indicadores de trabalho e menor representação política no PI",
+      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/18/ibge-pretos-pardos.ghtml",
+      "source": "g1 Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-18",
+      "title": "Corpo com os pés amarrados é encontrado em cova rasa em área de mata no litoral do Piauí",
+      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/18/corpo-encontrado-cajueiro-da-praia.ghtml",
+      "source": "g1 Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-18",
+      "title": "Mega-Sena concurso 3087: 21 apostas do Piauí acertam a quadra; veja cidades e valores",
+      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/18/mega-sena-resultado-concurso-3087.ghtml",
+      "source": "g1 Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-18",
+      "title": "Alerta de tempestade no Piauí: previsão de chuva forte, ventos de até 60 km/h e granizo em mais de 140 cidades",
+      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/18/alerta-tempestade-piaui.ghtml",
+      "source": "g1 Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-18",
+      "title": "Terras raras: Rafael Fonteles anuncia autorização de investimento de R$ 13 milhões para confirmar potencial de exploração mineral",
+      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/18/governo-do-piaui-pesquisa.ghtml",
+      "source": "g1 Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-18",
+      "title": "Vídeo mostra colisão entre caminhões que deixou três pessoas presas às ferragens no PI",
+      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/18/pessoas-presas-ferragens-colisao.ghtml",
+      "source": "g1 Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-18",
+      "title": "Investigados por tráfico de drogas e lavagem de dinheiro são alvos de operação no PI, MA, SP e GO; mais de 110 suspeitos no PI",
+      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/18/operacao-trafico-pi.ghtml",
+      "source": "g1 Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-18",
+      "title": "Suspeito de matar entregador de 22 anos durante assalto é preso em Teresina",
+      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/18/suspeito-de-matar-entregador-preso.ghtml",
+      "source": "g1 Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-18",
+      "title": "Previsão do tempo hoje para Teresina (PI): sol com muitas nuvens; pancadas de chuva à tarde e à noite",
+      "url": "https://g1.globo.com/pi/piaui/previsao-do-tempo/noticia/2026/11/18/previsao-do-tempo-hoje-para-teresina-pi-sol-com-muitas-nuvens-pancadas-de-chuva-a-tarde-e-a-noite.ghtml",
+      "source": "g1 Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-18",
+      "title": "Secretário da Administração do Piauí lidera missão na China com foco no intercâmbio de tecnologia e inovação na gestão pública",
+      "url": "https://www.pi.gov.br/secretario-da-administracao-do-piaui-lidera-missao-na-china-com-foco-no-intercambio-de-tecnologia-e-inovacao-na-gestao-publica/",
+      "source": "Governo do Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-18",
+      "title": "Piauí é o único estado fora da Amazônia Legal convidado para encontro nacional sobre combate a incêndios florestais",
+      "url": "https://www.pi.gov.br/piaui-e-o-unico-estado-fora-da-amazonia-legal-convidado-para-encontro-nacional-sobre-combate-a-incendios-florestais/",
+      "source": "Governo do Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-18",
+      "title": "Piauí apresenta em Brasília ferramenta que monitora equipes eMulti e auxilia municípios na melhoria dos atendimentos da saúde",
+      "url": "https://www.pi.gov.br/piaui-apresenta-em-brasilia-ferramenta-que-monitora-equipes-emulti-e-auxilia-municipios-na-melhoria-dos-atendimentos-da-saude/",
+      "source": "Governo do Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-18",
+      "title": "Sine divulga novas oportunidades de emprego em Teresina, Floriano, Picos e Piripiri",
+      "url": "https://www.pi.gov.br/sine-divulga-novas-oportunidades-de-emprego-em-teresina-floriano-picos-e-piripiri/",
+      "source": "Governo do Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-18",
+      "title": "Estudantes de escolas públicas visitam Fazenda Escola da Uespi e conhecem atividades de pesquisas e práticas agrícolas",
+      "url": "https://www.pi.gov.br/estudantes-de-escolas-publicas-visitam-fazenda-escola-da-uespi-e-conhecem-atividades-de-pesquisas-e-praticas-agricolas/",
+      "source": "Governo do Piauí",
+      "category": "Educação",
+      "feed": true
+    },
+    {
+      "date": "2026-11-18",
+      "title": "Polícia Militar do Piauí realiza solenidade com promoção de 700 policiais, desfiles e homenagens nesta quinta (19)",
+      "url": "https://www.pi.gov.br/policia-militar-do-piaui-realiza-solenidade-com-promocao-de-700-policiais-desfiles-e-homenagens-nesta-quinta-19/",
+      "source": "Governo do Piauí",
+      "category": "Segurança",
+      "feed": true
+    },
+    {
+      "date": "2026-11-18",
+      "title": "Piauí dobra número de internos do sistema prisional inscritos no Enem PPL em quatro anos e registra recorde em 2026",
+      "url": "https://www.pi.gov.br/piaui-dobra-numero-de-internos-do-sistema-prisional-inscritos-no-enem-ppl-em-quatro-anos-e-registra-recorde-em-2026/",
+      "source": "Governo do Piauí",
+      "category": "Educação",
+      "feed": true
+    },
+    {
+      "date": "2026-11-18",
+      "title": "Sesapi orienta medidas de prevenção e investiga casos suspeitos de catapora em escola de Lagoa do Piauí",
+      "url": "https://www.pi.gov.br/sesapi-orienta-medidas-de-prevencao-e-investiga-casos-suspeitos-de-catapora-em-escola-de-lagoa-do-piaui/",
+      "source": "Governo do Piauí",
+      "category": "Educação",
+      "feed": true
+    },
+    {
+      "date": "2026-11-18",
+      "title": "Seduc-PI promove primeiro Encontro Territorial do Plano Estadual de Educação 2026–2036 em Bom Jesus",
+      "url": "https://www.pi.gov.br/seduc-pi-promove-primeiro-encontro-territorial-do-plano-estadual-de-educacao-2026-2036-em-bom-jesus/",
+      "source": "Governo do Piauí",
+      "category": "Educação",
+      "feed": true
+    },
+    {
+      "date": "2026-11-18",
+      "title": "Sefaz-PI e Uespi articulam parcerias para desenvolver pesquisas e aprimorar gestão dos recursos públicos",
+      "url": "https://www.pi.gov.br/sefaz-pi-e-uespi-articulam-parcerias-para-desenvolver-pesquisas-e-aprimorar-gestao-dos-recursos-publicos/",
+      "source": "Governo do Piauí",
+      "category": "Educação",
+      "feed": true
+    },
     {
       "date": "2026-11-17",
       "title": "Suspeitos de matar mulher por engano são apreendidos no PI; alvo seria companheira de membro de facção",
@@ -145,7 +345,7 @@
     },
     {
       "date": "2026-11-17",
-      "title": "Aulas são suspensas após casos de catapora em escola de Lagoa do Piauí",
+      "title": "Aulas são suspensas após casos de catapora em escola de cidade no Piauí",
       "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/17/casos-de-catapora-lagoa-do-piaui.ghtml",
       "source": "g1 Piauí",
       "category": "Educação",
@@ -212,198 +412,6 @@
       "title": "Vídeo mostra momento em que detentos fogem durante trabalho externo em penitenciária no Piauí",
       "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/17/video-fuga-penitenciaria-pi.ghtml",
       "source": "g1 Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-17",
-      "title": "Dois detentos fogem durante trabalho externo em penitenciária no Piauí",
-      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/17/detentos-penitenciaria.ghtml",
-      "source": "g1 Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-17",
-      "title": "'Impossível não sentir indignação', diz irmã de vítima após suspensão de processo por atropelamento em Teresina",
-      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/17/irma-vitima-suspensao-processo-atropelamento-teresina.ghtml",
-      "source": "g1 Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-17",
-      "title": "Governo do PI prevê orçamento de R$ 32 bilhões para 2027 e quase R$ 10 bilhões para educação e investimentos",
-      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/17/governo-pi-orcamento-2027.ghtml",
-      "source": "g1 Piauí",
-      "category": "Educação",
-      "feed": true
-    },
-    {
-      "date": "2026-11-17",
-      "title": "Mais de 120 municípios do Piauí estão sob alerta de tempestade nesta terça-feira (17); veja a lista",
-      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/17/municipios-piaui-alerta-tempestade.ghtml",
-      "source": "g1 Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-17",
-      "title": "Fotos mostram volta do verde ao sertão do PI em menos de 15 dias após o início das chuvas",
-      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/17/verde-pi-chuvas.ghtml",
-      "source": "g1 Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-17",
-      "title": "Incêndio atinge casa em Teresina, e vizinhos ajudam a retirar moradoras",
-      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/17/incendio-atinge-casa-em-teresina.ghtml",
-      "source": "g1 Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-17",
-      "title": "Motociclista morre após ser atropelado e arrastado por motorista sem CNH no litoral do PI",
-      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/17/motociclista-morre-acidente-carro-parnaiba.ghtml",
-      "source": "g1 Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-17",
-      "title": "Justiça suspende processo contra motorista acusado de matar casal atropelado em Teresina; entenda",
-      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/17/justica-suspende-processo.ghtml",
-      "source": "g1 Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-17",
-      "title": "Piauí tem maior avanço do Brasil em ranking de inovação e sobe 11 posições em cinco anos",
-      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/17/piaui-avanco-inovacao.ghtml",
-      "source": "g1 Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-17",
-      "title": "Quem era o entregador de 22 anos que foi vítima de latrocínio em Teresina",
-      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/17/quem-entregador-vitima-latrocinio-teresina.ghtml",
-      "source": "g1 Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-17",
-      "title": "Vídeo: homem é resgatado após cair em poço de 18 metros de altura no PI",
-      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/17/video-homem-resgatado-poco.ghtml",
-      "source": "g1 Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-17",
-      "title": "Mulher é encontrada morta em olho d'água no Piauí; polícia suspeita de afogamento",
-      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/17/mulher-morta-piaui.ghtml",
-      "source": "g1 Piauí",
-      "category": "Segurança",
-      "feed": true
-    },
-    {
-      "date": "2026-11-17",
-      "title": "Entregador de 22 anos é morto e tem moto roubada durante crime em Teresina",
-      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/17/jovem-morto-moto-roubada.ghtml",
-      "source": "g1 Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-17",
-      "title": "Vidraceiro é preso suspeito de receber pagamentos e não concluir serviços no PI; ao menos 13 clientes denunciaram",
-      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/17/vidraceiro-preso.ghtml",
-      "source": "g1 Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-17",
-      "title": "Piauí terá investimento de R$ 13 milhões para ampliar pesquisas sobre potencial mineral em 44 municípios",
-      "url": "https://www.pi.gov.br/piaui-tera-investimento-de-r-13-milhoes-para-ampliar-pesquisas-sobre-potencial-mineral-em-44-municipios/",
-      "source": "Governo do Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-17",
-      "title": "Literatura piauiense inspira primeira feira literária de escola estadual em Teresina",
-      "url": "https://www.pi.gov.br/literatura-piauiense-inspira-primeira-feira-literaria-de-escola-estadual-em-teresina/",
-      "source": "Governo do Piauí",
-      "category": "Educação",
-      "feed": true
-    },
-    {
-      "date": "2026-11-17",
-      "title": "Seduc divulga locais e horários da prova para a Turma ITA/IME 2027",
-      "url": "https://www.pi.gov.br/seduc-divulga-locais-e-horarios-da-prova-para-a-turma-ita-ime-2027/",
-      "source": "Governo do Piauí",
-      "category": "Educação",
-      "feed": true
-    },
-    {
-      "date": "2026-11-17",
-      "title": "Sada prepara entrega de calcário para 12 municípios piauienses",
-      "url": "https://www.pi.gov.br/sada-prepara-entrega-de-calcario-para-12-municipios-piauienses/",
-      "source": "Governo do Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-17",
-      "title": "Seduc divulga lista dos 100 classificados para a etapa final da Olimpíada de Língua Estrangeira",
-      "url": "https://www.pi.gov.br/seduc-divulga-lista-dos-100-classificados-para-a-etapa-final-da-olimpiada-de-lingua-estrangeira/",
-      "source": "Governo do Piauí",
-      "category": "Educação",
-      "feed": true
-    },
-    {
-      "date": "2026-11-17",
-      "title": "Governo conclui 97 km de asfalto na PI-391 e melhora mobilidade no sul do Piauí",
-      "url": "https://www.pi.gov.br/governo-conclui-97-km-de-asfalto-na-pi-391-e-melhora-mobilidade-no-sul-do-piaui/",
-      "source": "Governo do Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-17",
-      "title": "Governo apresenta Projeto de Lei Orçamentária na Alepi com novas regras fiscais e R$ 5,08 bilhões para investimentos",
-      "url": "https://www.pi.gov.br/governo-apresenta-projeto-de-lei-orcamentaria-na-alepi-com-novas-regras-fiscais-e-r-508-bilhoes-para-investimentos/",
-      "source": "Governo do Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-17",
-      "title": "Mais de 20 pessoas recebem certificação em curso gratuito de alimentação saudável em Bom Jesus",
-      "url": "https://www.pi.gov.br/mais-de-20-pessoas-recebem-certificacao-em-curso-gratuito-de-alimentacao-saudavel-em-bom-jesus/",
-      "source": "Governo do Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-17",
-      "title": "História da medicina piauiense é tema de livro organizado por professor da Uespi",
-      "url": "https://www.pi.gov.br/historia-da-medicina-piauiense-e-tema-de-livro-organizado-por-professor-da-uespi/",
-      "source": "Governo do Piauí",
-      "category": "Educação",
-      "feed": true
-    },
-    {
-      "date": "2026-11-17",
-      "title": "Do diagnóstico ao tratamento: como funciona a assistência pelo SUS no Piauí aos homens com câncer de próstata",
-      "url": "https://www.pi.gov.br/do-diagnostico-ao-tratamento-como-funciona-a-assistencia-pelo-sus-no-piaui-aos-homens-com-cancer-de-prostata/",
-      "source": "Governo do Piauí",
       "category": "Atualidades",
       "feed": true
     },
@@ -475,14 +483,6 @@
       "date": "2026-11-04",
       "title": "SSP-PI deflagra operação contra o tráfico de drogas e cumpre 10 mandados de busca em José de Freitas",
       "url": "https://www.ssp.pi.gov.br/ssp-pi-deflagra-operacao-contra-o-trafico-de-drogas-e-cumpre-10-mandados-de-busca-em-jose-de-freitas/",
-      "source": "SSP-PI",
-      "category": "Segurança",
-      "feed": true
-    },
-    {
-      "date": "2026-11-03",
-      "title": "Piauí alcança marca de quatro municípios com 100% da população com a Carteira de Identidade Nacional",
-      "url": "https://www.ssp.pi.gov.br/piaui-alcanca-marca-de-quatro-municipios-com-100-da-populacao-com-a-carteira-de-identidade-nacional/",
       "source": "SSP-PI",
       "category": "Segurança",
       "feed": true

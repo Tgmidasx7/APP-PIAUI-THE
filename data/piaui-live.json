@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-19T00:07:11.947Z",
+  "generatedAt": "2026-11-19T15:32:38.626Z",
   "mode": "osint-github-actions",
   "sources": {
     "ibge": {
@@ -49,53 +49,53 @@
         }
       },
       "quotes": {
-        "gas_natural": {
-          "symbol": "NG=F",
-          "price": 3.39,
-          "unit": "USD/MMBtu",
-          "changePct": 4.86,
+        "brent": {
+          "symbol": "BZ=F",
+          "price": 90.1,
+          "unit": "USD/barril",
+          "changePct": -2.53,
           "currency": "USD",
-          "marketTime": "2026-11-18T23:56:42.000Z"
-        },
-        "ouro": {
-          "symbol": "GC=F",
-          "price": 3740.4,
-          "unit": "USD/oz",
-          "changePct": -3.75,
-          "currency": "USD",
-          "marketTime": "2026-11-18T23:57:11.000Z"
-        },
-        "milho": {
-          "symbol": "ZC=F",
-          "price": 448.25,
-          "unit": "USc/bushel",
-          "changePct": 0.62,
-          "currency": "USX",
-          "marketTime": "2026-11-18T19:19:59.000Z"
+          "marketTime": "2026-11-19T15:22:39.000Z"
         },
         "wti": {
           "symbol": "CL=F",
-          "price": 82,
+          "price": 83.35,
           "unit": "USD/barril",
-          "changePct": -7.41,
+          "changePct": -2.76,
           "currency": "USD",
-          "marketTime": "2026-11-18T23:55:57.000Z"
+          "marketTime": "2026-11-19T15:22:40.000Z"
+        },
+        "ouro": {
+          "symbol": "GC=F",
+          "price": 3698.9,
+          "unit": "USD/oz",
+          "changePct": -4,
+          "currency": "USD",
+          "marketTime": "2026-11-19T15:22:38.000Z"
         },
         "soja": {
           "symbol": "ZS=F",
-          "price": 1216,
+          "price": 1221,
           "unit": "USc/bushel",
-          "changePct": -2.17,
+          "changePct": -0.65,
           "currency": "USX",
-          "marketTime": "2026-11-18T19:19:58.000Z"
+          "marketTime": "2026-11-19T15:22:27.000Z"
         },
-        "brent": {
-          "symbol": "BZ=F",
-          "price": 88.73,
-          "unit": "USD/barril",
-          "changePct": -7.42,
+        "milho": {
+          "symbol": "ZC=F",
+          "price": 455.5,
+          "unit": "USc/bushel",
+          "changePct": 1.5,
+          "currency": "USX",
+          "marketTime": "2026-11-19T15:22:32.000Z"
+        },
+        "gas_natural": {
+          "symbol": "NG=F",
+          "price": 3.34,
+          "unit": "USD/MMBtu",
+          "changePct": 6.89,
           "currency": "USD",
-          "marketTime": "2026-11-18T23:54:01.000Z"
+          "marketTime": "2026-11-19T15:22:31.000Z"
         }
       }
     },
@@ -105,28 +105,188 @@
     },
     "weather": {
       "teresina": {
-        "tempC": 29.1,
-        "humidity": 71,
-        "uv": 0,
-        "windKmh": 7.6,
-        "time": "2026-11-18T21:00",
+        "tempC": 37.8,
+        "humidity": 34,
+        "uv": 8.85,
+        "windKmh": 3.8,
+        "time": "2026-11-19T12:30",
         "status": "ok"
       },
       "parnaiba": {
-        "tempC": 27.7,
-        "uv": 0
+        "tempC": 32.2,
+        "uv": 8.55
       },
       "picos": {
-        "tempC": 26.2,
-        "uv": 0
+        "tempC": 35.6,
+        "uv": 8.9
       },
       "bomJesus": {
-        "tempC": 24.1,
-        "uv": 0
+        "tempC": 31.7,
+        "uv": 9.1
       }
     }
   },
   "news": [
+    {
+      "date": "2026-11-19",
+      "title": "SSP-PI cumpre mandado de prisão contra investigado por tentativa de feminicídio e estupro",
+      "url": "https://www.ssp.pi.gov.br/ssp-pi-cumpre-mandado-de-prisao-contra-investigado-por-tentativa-de-feminicidio-e-estupro/",
+      "source": "SSP-PI",
+      "category": "Segurança",
+      "feed": true
+    },
+    {
+      "date": "2026-11-19",
+      "title": "Fim da escala 6x1: sindicatos e empresas fazem 10 pedidos de mediação ao MPT no PI",
+      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/19/pedidos-mediacao-mpt.ghtml",
+      "source": "g1 Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-19",
+      "title": "Alerta de tempestade no Piauí: previsão de chuva forte, ventos de até 60 km/h e granizo em mais de 190 cidades",
+      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/19/alerta-de-tempestade-no-piaui.ghtml",
+      "source": "g1 Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-19",
+      "title": "Denúncias de atraso na entrega de mercadorias levam a ação contra loja em Teresina; mulher espera geladeira há 2 meses",
+      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/19/denuncias-atraso-entrega-mercadorias-lojas-teresina.ghtml",
+      "source": "g1 Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-19",
+      "title": "Jovem é presa suspeita de dar 22 facadas na própria mãe no Sul do Piauí",
+      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/19/jovem-facadas-mae.ghtml",
+      "source": "g1 Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-19",
+      "title": "Nova rota aérea conecta Parnaíba e Teresina a Belo Horizonte com dois voos semanais",
+      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/19/nova-rota-aerea-parnaiba-teresina-belo-horizonte-voos.ghtml",
+      "source": "g1 Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-19",
+      "title": "Homem é encontrado amarrado em imóvel no PI; PM suspeita de 'tribunal do crime'",
+      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/19/homem-encontrado-amarrado.ghtml",
+      "source": "g1 Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-19",
+      "title": "Motociclista de 19 anos morre após atingir carreta na BR-316, no Centro-Norte do PI",
+      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/19/motociclista-morre-acidente-carreta-br-316.ghtml",
+      "source": "g1 Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-19",
+      "title": "Tribunal alerta para golpe que usa identidade de juizado para obter dados de vítimas no Piauí",
+      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/19/tribunal-golpe-piaui.ghtml",
+      "source": "g1 Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-19",
+      "title": "Mulher manda mensagem à PM escondida após ser ameaçada e estuprada pelo companheiro no PI; homem foi preso",
+      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/19/mulher-ameacada-estuprada-homem-preso.ghtml",
+      "source": "g1 Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-19",
+      "title": "Jovem de 22 anos cria negócio de moda sustentável a partir de retalhos descartados no PI",
+      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/19/jovem-negocio-moda-sustentavel-retalhos.ghtml",
+      "source": "g1 Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-19",
+      "title": "Previsão do tempo hoje para Teresina (PI): sol com muitas nuvens; pancadas de chuva à tarde e à noite",
+      "url": "https://g1.globo.com/pi/piaui/previsao-do-tempo/noticia/2026/11/19/previsao-do-tempo-hoje-para-teresina-pi-sol-com-muitas-nuvens-pancadas-de-chuva-a-tarde-e-a-noite.ghtml",
+      "source": "g1 Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-19",
+      "title": "Piauí terá feriado e fim de semana de chuva, trovoadas e temperaturas de até 40°C",
+      "url": "https://www.pi.gov.br/piaui-tera-feriado-e-fim-de-semana-de-chuva-trovoadas-e-temperaturas-de-ate-40c/",
+      "source": "Governo do Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-19",
+      "title": "Etipi apresenta plataforma que amplia acesso à assistência técnica e facilita venda da produção da agricultura familiar no Piauí",
+      "url": "https://www.pi.gov.br/etipi-apresenta-plataforma-que-amplia-acesso-a-assistencia-tecnica-e-facilita-venda-da-producao-da-agricultura-familiar-no-piaui/",
+      "source": "Governo do Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-19",
+      "title": "Com promoção de 700 policiais militares, Governo do Estado reforça valorização do efetivo da segurança pública do Piauí",
+      "url": "https://www.pi.gov.br/com-promocao-de-700-policiais-militares-governo-do-estado-reforca-valorizacao-do-efetivo-da-seguranca-publica-do-piaui/",
+      "source": "Governo do Piauí",
+      "category": "Segurança",
+      "feed": true
+    },
+    {
+      "date": "2026-11-19",
+      "title": "Metrô de Teresina terá circulação suspensa nesta sexta (20), feriado da Consciência Negra",
+      "url": "https://www.pi.gov.br/metro-de-teresina-tera-circulacao-suspensa-nesta-sexta-20-feriado-da-consciencia-negra/",
+      "source": "Governo do Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-19",
+      "title": "HGV realiza captação de múltiplos órgãos e viabiliza quatro transplantes simultâneos",
+      "url": "https://www.pi.gov.br/hgv-realiza-captacao-de-multiplos-orgaos-e-viabiliza-quatro-transplantes-simultaneos/",
+      "source": "Governo do Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-19",
+      "title": "SSP-PI prende investigado por tentativa de feminicídio e estupro após descumprimento de medidas em Teresina",
+      "url": "https://www.pi.gov.br/ssp-pi-prende-investigado-por-tentativa-de-feminicidio-e-estupro-apos-descumprimento-de-medidas-em-teresina/",
+      "source": "Governo do Piauí",
+      "category": "Segurança",
+      "feed": true
+    },
+    {
+      "date": "2026-11-19",
+      "title": "Selo Esperança Garcia reconhece 100 iniciativas de combate ao racismo nas escolas do Piauí",
+      "url": "https://www.pi.gov.br/selo-esperanca-garcia-reconhece-100-iniciativas-de-combate-ao-racismo-nas-escolas-do-piaui/",
+      "source": "Governo do Piauí",
+      "category": "Educação",
+      "feed": true
+    },
+    {
+      "date": "2026-11-18",
+      "title": "Piauí já emitiu cerca de 2 mil Carteiras de Identidade Nacional para recém-nascidos na Maternidade Dona Evangelina Rosa",
+      "url": "https://www.ssp.pi.gov.br/piaui-ja-emitiu-cerca-de-2-mil-carteiras-de-identidade-nacional-para-recem-nascidos-na-maternidade-dona-evangelina-rosa/",
+      "source": "SSP-PI",
+      "category": "Segurança",
+      "feed": true
+    },
     {
       "date": "2026-11-18",
       "title": "SSP-PI deflagra operação contra organização criminosa investigada por tráfico de drogas e lavagem de dinheiro em quatro estados",
@@ -249,70 +409,6 @@
     },
     {
       "date": "2026-11-18",
-      "title": "Corpo com os pés amarrados é encontrado em cova rasa em área de mata no litoral do Piauí",
-      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/18/corpo-encontrado-cajueiro-da-praia.ghtml",
-      "source": "g1 Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-18",
-      "title": "Mega-Sena concurso 3087: 21 apostas do Piauí acertam a quadra; veja cidades e valores",
-      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/18/mega-sena-resultado-concurso-3087.ghtml",
-      "source": "g1 Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-18",
-      "title": "Alerta de tempestade no Piauí: previsão de chuva forte, ventos de até 60 km/h e granizo em mais de 140 cidades",
-      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/18/alerta-tempestade-piaui.ghtml",
-      "source": "g1 Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-18",
-      "title": "Terras raras: Rafael Fonteles anuncia autorização de investimento de R$ 13 milhões para confirmar potencial de exploração mineral",
-      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/18/governo-do-piaui-pesquisa.ghtml",
-      "source": "g1 Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-18",
-      "title": "Vídeo mostra colisão entre caminhões que deixou três pessoas presas às ferragens no PI",
-      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/18/pessoas-presas-ferragens-colisao.ghtml",
-      "source": "g1 Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-18",
-      "title": "Investigados por tráfico de drogas e lavagem de dinheiro são alvos de operação no PI, MA, SP e GO; mais de 70 presos no PI",
-      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/18/operacao-trafico-pi.ghtml",
-      "source": "g1 Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-18",
-      "title": "Suspeito de matar entregador de 22 anos durante assalto é preso em Teresina",
-      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/18/suspeito-de-matar-entregador-preso.ghtml",
-      "source": "g1 Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-18",
-      "title": "Previsão do tempo hoje para Teresina (PI): sol com muitas nuvens; pancadas de chuva à tarde e à noite",
-      "url": "https://g1.globo.com/pi/piaui/previsao-do-tempo/noticia/2026/11/18/previsao-do-tempo-hoje-para-teresina-pi-sol-com-muitas-nuvens-pancadas-de-chuva-a-tarde-e-a-noite.ghtml",
-      "source": "g1 Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-18",
       "title": "Nova rota da Azul conecta Parnaíba e Teresina a Belo Horizonte com voos duas vezes por semana",
       "url": "https://www.pi.gov.br/nova-rota-da-azul-conecta-parnaiba-e-teresina-a-belo-horizonte-com-voos-duas-vezes-por-semana/",
       "source": "Governo do Piauí",
@@ -321,7 +417,7 @@
     },
     {
       "date": "2026-11-18",
-      "title": "Seduc abre chamada pública para aquisição de alimentos da Agricultura Familiar em 2027",
+      "title": "Seduc abre chamada pública para aquisição de alimentos da agricultura familiar em 2027",
       "url": "https://www.pi.gov.br/seduc-abre-chamada-publica-para-aquisicao-de-alimentos-da-agricultura-familiar-em-2027/",
       "source": "Governo do Piauí",
       "category": "Educação",
@@ -333,86 +429,6 @@
       "url": "https://www.pi.gov.br/seplan-piaui-realiza-webinar-sobre-analise-de-custo-beneficio-de-politicas-publicas/",
       "source": "Governo do Piauí",
       "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-18",
-      "title": "Piauí conquista duas medalhas no primeiro dia das Paralimpíadas Escolares em São Paulo",
-      "url": "https://www.pi.gov.br/piaui-conquista-duas-medalhas-no-primeiro-dia-das-paralimpiadas-escolares-em-sao-paulo/",
-      "source": "Governo do Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-18",
-      "title": "Governo do Piauí conclui novo acesso à Praia da Pedra do Sal, em Parnaíba",
-      "url": "https://www.pi.gov.br/governo-do-piaui-conclui-novo-acesso-a-praia-da-pedra-do-sal-em-parnaiba/",
-      "source": "Governo do Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-18",
-      "title": "Sesapi intensifica ações de prevenção à dengue nos 224 municípios do Piauí",
-      "url": "https://www.pi.gov.br/sesapi-intensifica-acoes-de-prevencao-a-dengue-nos-224-municipios-do-piaui/",
-      "source": "Governo do Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-18",
-      "title": "Experiência do Piauí com detecção precoce do câncer é apresentada em evento nacional",
-      "url": "https://www.pi.gov.br/experiencia-do-piaui-com-deteccao-precoce-do-cancer-e-apresentada-em-evento-nacional/",
-      "source": "Governo do Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-18",
-      "title": "Troca de experiências entre estudantes e agricultores familiares fortalece produção rural em Sussuapara",
-      "url": "https://www.pi.gov.br/troca-de-experiencias-entre-estudantes-e-agricultores-familiares-fortalece-producao-rural-em-sussuapara/",
-      "source": "Governo do Piauí",
-      "category": "Educação",
-      "feed": true
-    },
-    {
-      "date": "2026-11-18",
-      "title": "Seminário Estadual de Avaliação fortalece os serviços socioassistenciais da Primeira Infância no Piauí",
-      "url": "https://www.pi.gov.br/seminario-estadual-de-avaliacao-fortalece-os-servicos-socioassistenciais-da-primeira-infancia-no-piaui/",
-      "source": "Governo do Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-18",
-      "title": "Estudantes de Zootecnia da Uespi apresentam pesquisas em evento internacional no Recife",
-      "url": "https://www.pi.gov.br/estudantes-de-zootecnia-da-uespi-apresentam-pesquisas-em-evento-internacional-no-recife/",
-      "source": "Governo do Piauí",
-      "category": "Educação",
-      "feed": true
-    },
-    {
-      "date": "2026-11-17",
-      "title": "Suspeitos de matar mulher por engano são apreendidos no PI; alvo seria companheira de membro de facção",
-      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/17/suspeitos-de-matar-mulher-por-engano.ghtml",
-      "source": "g1 Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-17",
-      "title": "Adolescente de 12 anos desaparecida há cinco dias é encontrada; suspeito de estupro é preso",
-      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/17/adolescente-encontrada-suspeito-preso.ghtml",
-      "source": "g1 Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-17",
-      "title": "Aulas são suspensas após casos de catapora em escola de cidade no Piauí",
-      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/17/casos-de-catapora-lagoa-do-piaui.ghtml",
-      "source": "g1 Piauí",
-      "category": "Educação",
       "feed": true
     },
     {
@@ -467,22 +483,6 @@
       "date": "2026-11-05",
       "title": "SSP-PI deflagra operação contra organização criminosa envolvida em crimes violentos na zona sudeste de Teresina",
       "url": "https://www.ssp.pi.gov.br/ssp-pi-deflagra-operacao-contra-organizacao-criminosa-envolvida-em-crimes-violentos-na-zona-sudeste-de-teresina/",
-      "source": "SSP-PI",
-      "category": "Segurança",
-      "feed": true
-    },
-    {
-      "date": "2026-11-05",
-      "title": "SSP-PI prende em Teresina homem investigado por estupro de vulnerável em Goiás",
-      "url": "https://www.ssp.pi.gov.br/ssp-pi-prende-em-teresina-homem-investigado-por-estupro-de-vulneravel-em-goias/",
-      "source": "SSP-PI",
-      "category": "Segurança",
-      "feed": true
-    },
-    {
-      "date": "2026-11-04",
-      "title": "SSP-PI deflagra operação contra o tráfico de drogas e cumpre 10 mandados de busca em José de Freitas",
-      "url": "https://www.ssp.pi.gov.br/ssp-pi-deflagra-operacao-contra-o-trafico-de-drogas-e-cumpre-10-mandados-de-busca-em-jose-de-freitas/",
       "source": "SSP-PI",
       "category": "Segurança",
       "feed": true

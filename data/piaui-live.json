@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-19T15:32:38.626Z",
+  "generatedAt": "2026-11-20T00:29:31.334Z",
   "mode": "osint-github-actions",
   "sources": {
     "ibge": {
@@ -17,8 +17,8 @@
         "valor": "0.14"
       },
       "usdBrl": {
-        "data": "18/11/2026",
-        "valor": "5.8102"
+        "data": "19/11/2026",
+        "valor": "5.8889"
       },
       "status": "ok"
     },
@@ -51,51 +51,51 @@
       "quotes": {
         "brent": {
           "symbol": "BZ=F",
-          "price": 90.1,
-          "unit": "USD/barril",
-          "changePct": -2.53,
-          "currency": "USD",
-          "marketTime": "2026-11-19T15:22:39.000Z"
-        },
-        "wti": {
-          "symbol": "CL=F",
-          "price": 83.35,
+          "price": 89.89,
           "unit": "USD/barril",
           "changePct": -2.76,
           "currency": "USD",
-          "marketTime": "2026-11-19T15:22:40.000Z"
-        },
-        "ouro": {
-          "symbol": "GC=F",
-          "price": 3698.9,
-          "unit": "USD/oz",
-          "changePct": -4,
-          "currency": "USD",
-          "marketTime": "2026-11-19T15:22:38.000Z"
-        },
-        "soja": {
-          "symbol": "ZS=F",
-          "price": 1221,
-          "unit": "USc/bushel",
-          "changePct": -0.65,
-          "currency": "USX",
-          "marketTime": "2026-11-19T15:22:27.000Z"
-        },
-        "milho": {
-          "symbol": "ZC=F",
-          "price": 455.5,
-          "unit": "USc/bushel",
-          "changePct": 1.5,
-          "currency": "USX",
-          "marketTime": "2026-11-19T15:22:32.000Z"
+          "marketTime": "2026-11-20T00:17:40.000Z"
         },
         "gas_natural": {
           "symbol": "NG=F",
-          "price": 3.34,
+          "price": 3.25,
           "unit": "USD/MMBtu",
-          "changePct": 6.89,
+          "changePct": 3.94,
           "currency": "USD",
-          "marketTime": "2026-11-19T15:22:31.000Z"
+          "marketTime": "2026-11-20T00:17:21.000Z"
+        },
+        "wti": {
+          "symbol": "CL=F",
+          "price": 82.96,
+          "unit": "USD/barril",
+          "changePct": -3.22,
+          "currency": "USD",
+          "marketTime": "2026-11-20T00:19:11.000Z"
+        },
+        "ouro": {
+          "symbol": "GC=F",
+          "price": 3625.1,
+          "unit": "USD/oz",
+          "changePct": -5.91,
+          "currency": "USD",
+          "marketTime": "2026-11-20T00:19:31.000Z"
+        },
+        "soja": {
+          "symbol": "ZS=F",
+          "price": 1207.25,
+          "unit": "USc/bushel",
+          "changePct": -1.77,
+          "currency": "USX",
+          "marketTime": "2026-11-19T19:19:59.000Z"
+        },
+        "milho": {
+          "symbol": "ZC=F",
+          "price": 452.75,
+          "unit": "USc/bushel",
+          "changePct": 0.89,
+          "currency": "USX",
+          "marketTime": "2026-11-19T19:19:56.000Z"
         }
       }
     },
@@ -105,34 +105,138 @@
     },
     "weather": {
       "teresina": {
-        "tempC": 37.8,
-        "humidity": 34,
-        "uv": 8.85,
-        "windKmh": 3.8,
-        "time": "2026-11-19T12:30",
+        "tempC": 33.4,
+        "humidity": 44,
+        "uv": 0,
+        "windKmh": 10.3,
+        "time": "2026-11-19T21:15",
         "status": "ok"
       },
       "parnaiba": {
-        "tempC": 32.2,
-        "uv": 8.55
+        "tempC": 27.8,
+        "uv": 0
       },
       "picos": {
-        "tempC": 35.6,
-        "uv": 8.9
+        "tempC": 30.7,
+        "uv": 0
       },
       "bomJesus": {
-        "tempC": 31.7,
-        "uv": 9.1
+        "tempC": 24.2,
+        "uv": 0
       }
     }
   },
   "news": [
     {
       "date": "2026-11-19",
+      "title": "SSP-PI recupera dois veículos procurados no Maranhão e Ceará e prende suspeito com auxílio do SPiA",
+      "url": "https://www.ssp.pi.gov.br/ssp-pi-recupera-dois-veiculos-procurados-no-maranhao-e-ceara-e-prende-suspeito-com-auxilio-do-spia/",
+      "source": "SSP-PI",
+      "category": "Segurança",
+      "feed": true
+    },
+    {
+      "date": "2026-11-19",
       "title": "SSP-PI cumpre mandado de prisão contra investigado por tentativa de feminicídio e estupro",
       "url": "https://www.ssp.pi.gov.br/ssp-pi-cumpre-mandado-de-prisao-contra-investigado-por-tentativa-de-feminicidio-e-estupro/",
       "source": "SSP-PI",
       "category": "Segurança",
+      "feed": true
+    },
+    {
+      "date": "2026-11-19",
+      "title": "VÍDEO: Criminoso rouba cordão de cliente e atira contra segurança de posto de combustível em Teresina",
+      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/19/criminoso-rouba-cordao.ghtml",
+      "source": "g1 Piauí",
+      "category": "Segurança",
+      "feed": true
+    },
+    {
+      "date": "2026-11-19",
+      "title": "\"Não foi a primeira vez\", diz médico piauiense que desceu de ambulância e correu entre carros para salvar paciente em PE",
+      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/19/medico-piauiense-correu.ghtml",
+      "source": "g1 Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-19",
+      "title": "Vacina contra mpox está disponível para grupos prioritários no Piauí; veja quem pode receber",
+      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/19/vacina-mpox-disponivel-piaui.ghtml",
+      "source": "g1 Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-19",
+      "title": "Ponte da Primavera será interditada para instalação de iluminação de Natal em Teresina",
+      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/19/ponte-da-primavera-interditada.ghtml",
+      "source": "g1 Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-19",
+      "title": "Rafael Fonteles anuncia permanência de mais três secretários no governo; veja quais",
+      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/19/fonteles-permanencia-secretarios-governo.ghtml",
+      "source": "g1 Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-19",
+      "title": "Chuva, trovoadas e calor: veja a previsão para o feriadão no Piauí",
+      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/19/chuva-previsao-feriadao-piaui.ghtml",
+      "source": "g1 Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-19",
+      "title": "Cachorro perde as patas após ser atropelado por trem em Teresina",
+      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/19/cachorro-atropelado-em-teresina.ghtml",
+      "source": "g1 Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-19",
+      "title": "Homem de 39 anos é preso suspeito de estuprar e tentar matar ex em Teresina",
+      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/19/homem-preso-teresina.ghtml",
+      "source": "g1 Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-19",
+      "title": "Médico piauiense desce de ambulância e corre entre carros para salvar paciente em PE",
+      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/19/medico-piauiense-corre.ghtml",
+      "source": "g1 Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-19",
+      "title": "Mulher que mandou mensagem à PM após ser ameaçada e estuprada pelo companheiro correu para acordar o filho com a chegada dos policiais",
+      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/19/mulher-acorda-filho-chegada-pm.ghtml",
+      "source": "g1 Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-19",
+      "title": "Homem é preso em São Luís suspeito de aplicar golpes na venda de veículos de luxo",
+      "url": "https://g1.globo.com/ma/maranhao/noticia/2026/11/19/homem-e-preso-em-sao-luis-suspeito-de-aplicar-golpes-na-venda-de-veiculos-de-luxo.ghtml",
+      "source": "g1 Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-19",
+      "title": "Motociclista morre em acidente com caminhão na BR-343, no Norte do Piauí",
+      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/19/motociclista-morre-acidente-caminhao-br-343.ghtml",
+      "source": "g1 Piauí",
+      "category": "Atualidades",
       "feed": true
     },
     {
@@ -153,7 +257,7 @@
     },
     {
       "date": "2026-11-19",
-      "title": "Denúncias de atraso na entrega de mercadorias levam a ação contra loja em Teresina; mulher espera geladeira há 2 meses",
+      "title": "Loja é interditada após denúncias de atraso na entrega de mercadorias em Teresina; mulher espera geladeira há 2 meses",
       "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/19/denuncias-atraso-entrega-mercadorias-lojas-teresina.ghtml",
       "source": "g1 Piauí",
       "category": "Atualidades",
@@ -161,7 +265,7 @@
     },
     {
       "date": "2026-11-19",
-      "title": "Jovem é presa suspeita de dar 22 facadas na própria mãe no Sul do Piauí",
+      "title": "Jovem é autuada por tentar matar a mãe com 22 facadas no PI, diz delegado",
       "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/19/jovem-facadas-mae.ghtml",
       "source": "g1 Piauí",
       "category": "Atualidades",
@@ -225,58 +329,82 @@
     },
     {
       "date": "2026-11-19",
-      "title": "Piauí terá feriado e fim de semana de chuva, trovoadas e temperaturas de até 40°C",
-      "url": "https://www.pi.gov.br/piaui-tera-feriado-e-fim-de-semana-de-chuva-trovoadas-e-temperaturas-de-ate-40c/",
+      "title": "Ninho de Carcará busca atrair investimentos a startups piauienses durante a Campus Party Piauí 2026",
+      "url": "https://www.pi.gov.br/a-2a-edicao-do-ninho-de-carcara-busca-atrair-investimentos-a-startups-piauienses-durante-a-campus-party-piaui-2026/",
+      "source": "Governo do Piauí",
+      "category": "EdTech",
+      "feed": true
+    },
+    {
+      "date": "2026-11-19",
+      "title": "Governo do Piauí investe R$ 6,6 milhões em obras de abastecimento de água em Capitão Gervásio e Coronel José Dias",
+      "url": "https://www.pi.gov.br/governo-do-piaui-investe-r-66-milhoes-em-obras-de-abastecimento-de-agua-em-capitao-gervasio-e-coronel-jose-dias/",
       "source": "Governo do Piauí",
       "category": "Atualidades",
       "feed": true
     },
     {
       "date": "2026-11-19",
-      "title": "Etipi apresenta plataforma que amplia acesso à assistência técnica e facilita venda da produção da agricultura familiar no Piauí",
-      "url": "https://www.pi.gov.br/etipi-apresenta-plataforma-que-amplia-acesso-a-assistencia-tecnica-e-facilita-venda-da-producao-da-agricultura-familiar-no-piaui/",
-      "source": "Governo do Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-19",
-      "title": "Com promoção de 700 policiais militares, Governo do Estado reforça valorização do efetivo da segurança pública do Piauí",
-      "url": "https://www.pi.gov.br/com-promocao-de-700-policiais-militares-governo-do-estado-reforca-valorizacao-do-efetivo-da-seguranca-publica-do-piaui/",
-      "source": "Governo do Piauí",
-      "category": "Segurança",
-      "feed": true
-    },
-    {
-      "date": "2026-11-19",
-      "title": "Metrô de Teresina terá circulação suspensa nesta sexta (20), feriado da Consciência Negra",
-      "url": "https://www.pi.gov.br/metro-de-teresina-tera-circulacao-suspensa-nesta-sexta-20-feriado-da-consciencia-negra/",
-      "source": "Governo do Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-19",
-      "title": "HGV realiza captação de múltiplos órgãos e viabiliza quatro transplantes simultâneos",
-      "url": "https://www.pi.gov.br/hgv-realiza-captacao-de-multiplos-orgaos-e-viabiliza-quatro-transplantes-simultaneos/",
-      "source": "Governo do Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-19",
-      "title": "SSP-PI prende investigado por tentativa de feminicídio e estupro após descumprimento de medidas em Teresina",
-      "url": "https://www.pi.gov.br/ssp-pi-prende-investigado-por-tentativa-de-feminicidio-e-estupro-apos-descumprimento-de-medidas-em-teresina/",
-      "source": "Governo do Piauí",
-      "category": "Segurança",
-      "feed": true
-    },
-    {
-      "date": "2026-11-19",
-      "title": "Selo Esperança Garcia reconhece 100 iniciativas de combate ao racismo nas escolas do Piauí",
-      "url": "https://www.pi.gov.br/selo-esperanca-garcia-reconhece-100-iniciativas-de-combate-ao-racismo-nas-escolas-do-piaui/",
+      "title": "Plano Estadual de Educação é tema de encontro em São Raimundo Nonato",
+      "url": "https://www.pi.gov.br/plano-estadual-de-educacao-e-tema-de-encontro-em-sao-raimundo-nonato/",
       "source": "Governo do Piauí",
       "category": "Educação",
+      "feed": true
+    },
+    {
+      "date": "2026-11-19",
+      "title": "Protocolo da Seduc-PI orienta gestores no enfrentamento ao racismo nas escolas estaduais",
+      "url": "https://www.pi.gov.br/protocolo-da-seduc-pi-orienta-gestores-no-enfrentamento-ao-racismo-nas-escolas-estaduais/",
+      "source": "Governo do Piauí",
+      "category": "Educação",
+      "feed": true
+    },
+    {
+      "date": "2026-11-19",
+      "title": "Entrega de 150 cisternas garante água para 100% das famílias rurais de Paquetá do Piauí",
+      "url": "https://www.pi.gov.br/entrega-de-150-cisternas-garante-agua-para-100-das-familias-rurais-de-paqueta-do-piaui/",
+      "source": "Governo do Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-19",
+      "title": "Educação antirracista fortalece ações de respeito, identidade e valorização da diversidade nas escolas da Rede Estadual",
+      "url": "https://www.pi.gov.br/educacao-antirracista-fortalece-acoes-de-respeito-identidade-e-valorizacao-da-diversidade-nas-escolas-da-rede-estadual/",
+      "source": "Governo do Piauí",
+      "category": "Educação",
+      "feed": true
+    },
+    {
+      "date": "2026-11-19",
+      "title": "Uespi inaugura novos laboratórios de Zootecnia e Tecnologia Animal em Teresina",
+      "url": "https://www.pi.gov.br/uespi-inaugura-novos-laboratorios-de-zootecnia-e-tecnologia-animal-em-teresina/",
+      "source": "Governo do Piauí",
+      "category": "Educação",
+      "feed": true
+    },
+    {
+      "date": "2026-11-19",
+      "title": "Secretaria do Turismo realiza oficinas para elaborar o Plano Estadual de Turismo do Piauí",
+      "url": "https://www.pi.gov.br/secretaria-do-turismo-realiza-oficinas-para-elaborar-o-plano-estadual-de-turismo-do-piaui/",
+      "source": "Governo do Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-19",
+      "title": "Piauí e Maranhão assinam acordo de cooperação para revitalização da Bacia do Parnaíba",
+      "url": "https://www.pi.gov.br/piaui-e-maranhao-assinam-acordo-de-cooperacao-para-revitalizacao-da-bacia-do-parnaiba/",
+      "source": "Governo do Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-19",
+      "title": "SSP-PI participa de fiscalização que interdita duas unidades comerciais no Centro de Teresina",
+      "url": "https://www.pi.gov.br/ssp-pi-participa-de-fiscalizacao-que-interdita-duas-unidades-comerciais-no-centro-de-teresina/",
+      "source": "Governo do Piauí",
+      "category": "Segurança",
       "feed": true
     },
     {
@@ -308,126 +436,6 @@
       "title": "Mais de 850 aprovados seguem sem CNH no PI por falta de toxicológico",
       "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/18/aprovados-cnh-exame-toxicologico.ghtml",
       "source": "g1 Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-18",
-      "title": "Homem é preso suspeito de tentar matar ex-companheira e ex dela com golpes de facão no PI",
-      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/18/homem-preso-suspeito.ghtml",
-      "source": "g1 Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-18",
-      "title": "VÍDEO: Idoso cai em esgoto após ser empurrado durante briga de trânsito em Teresina",
-      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/18/video-idoso-cai-esgoto-briga-transito.ghtml",
-      "source": "g1 Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-18",
-      "title": "Rafael Fonteles explica como conseguiu confirmar vitória de Lula com menos de 2% das urnas apuradas",
-      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/18/rafael-fonteles-vitoria-lula.ghtml",
-      "source": "g1 Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-18",
-      "title": "Homem de 53 anos morre após ficar preso às ferragens em colisão entre caminhões no Piauí",
-      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/18/colisao-caminhoes.ghtml",
-      "source": "g1 Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-18",
-      "title": "Advogado suspeito de repassar informações sobre delações a facção é preso no PI",
-      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/18/advogado-informacoes-faccao-preso.ghtml",
-      "source": "g1 Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-18",
-      "title": "Suspeito de matar ex-companheira no RN e forjar suicídio da vítima é preso no Piauí",
-      "url": "https://g1.globo.com/rn/rio-grande-do-norte/noticia/2026/11/18/suspeito-de-matar-ex-companheira-no-rn-e-forjar-suicidio-da-vitima-e-preso-no-piaui.ghtml",
-      "source": "g1 Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-18",
-      "title": "Vídeo: Filho do vice-governador eleito do PI recebe bênção do papa Leão XIV uma semana antes de completar 1 ano",
-      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/18/video-filho-vice-governador-eleito-pi-bencao-papa.ghtml",
-      "source": "g1 Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-18",
-      "title": "Suspeito de matar entregador em assalto teria lavado roupas usadas no crime e procurado familiares, segundo delegado",
-      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/18/suspeito-entregador-teresina.ghtml",
-      "source": "g1 Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-18",
-      "title": "CRM cobra explicações da FMS e vistoria Maternidade do Promorar após anúncio de transferência de leitos obstétricos em Teresina",
-      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/18/crm-explicacoes-fms-vistoria-maternidade-promorar-teresina.ghtml",
-      "source": "g1 Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-18",
-      "title": "Aluno de escola que suspendeu aulas após casos de catapora no PI faz exame para Mpox",
-      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/18/aluno-catapora-pi.ghtml",
-      "source": "g1 Piauí",
-      "category": "Educação",
-      "feed": true
-    },
-    {
-      "date": "2026-11-18",
-      "title": "Grupo investigado por usar idosos para sacar benefícios do INSS de forma fraudulenta é alvo da PF",
-      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/18/grupo-suspeito-beneficios.ghtml",
-      "source": "g1 Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-18",
-      "title": "IBGE: pretos e pardos têm piores indicadores de trabalho e menor representação política no PI",
-      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/18/ibge-pretos-pardos.ghtml",
-      "source": "g1 Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-18",
-      "title": "Nova rota da Azul conecta Parnaíba e Teresina a Belo Horizonte com voos duas vezes por semana",
-      "url": "https://www.pi.gov.br/nova-rota-da-azul-conecta-parnaiba-e-teresina-a-belo-horizonte-com-voos-duas-vezes-por-semana/",
-      "source": "Governo do Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-18",
-      "title": "Seduc abre chamada pública para aquisição de alimentos da agricultura familiar em 2027",
-      "url": "https://www.pi.gov.br/seduc-abre-chamada-publica-para-aquisicao-de-alimentos-da-agricultura-familiar-em-2027/",
-      "source": "Governo do Piauí",
-      "category": "Educação",
-      "feed": true
-    },
-    {
-      "date": "2026-11-18",
-      "title": "Seplan realiza webinar com técnicos de nove estados sobre análise de custo-benefício de políticas públicas",
-      "url": "https://www.pi.gov.br/seplan-piaui-realiza-webinar-sobre-analise-de-custo-beneficio-de-politicas-publicas/",
-      "source": "Governo do Piauí",
       "category": "Atualidades",
       "feed": true
     },
@@ -475,14 +483,6 @@
       "date": "2026-11-05",
       "title": "SSP-PI lança aplicativo Vigilante Seguro para agilizar atendimento policial em situações de risco",
       "url": "https://www.ssp.pi.gov.br/ssp-pi-lanca-aplicativo-vigilante-seguro-para-agilizar-atendimento-policial-em-situacoes-de-risco/",
-      "source": "SSP-PI",
-      "category": "Segurança",
-      "feed": true
-    },
-    {
-      "date": "2026-11-05",
-      "title": "SSP-PI deflagra operação contra organização criminosa envolvida em crimes violentos na zona sudeste de Teresina",
-      "url": "https://www.ssp.pi.gov.br/ssp-pi-deflagra-operacao-contra-organizacao-criminosa-envolvida-em-crimes-violentos-na-zona-sudeste-de-teresina/",
       "source": "SSP-PI",
       "category": "Segurança",
       "feed": true

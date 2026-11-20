@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-20T15:12:03.614Z",
+  "generatedAt": "2026-11-20T23:52:49.262Z",
   "mode": "osint-github-actions",
   "sources": {
     "ibge": {
@@ -20,7 +20,7 @@
         "data": "19/11/2026",
         "valor": "5.8889"
       },
-      "status": "ok"
+      "status": "fallback (HTTP 304 for https://api.bcb.gov.br/dados/serie/bcdata.sgs.432/dados/ultimos/1?formato=json)"
     },
     "siconfi": {
       "status": "ok",
@@ -49,53 +49,53 @@
         }
       },
       "quotes": {
-        "brent": {
-          "symbol": "BZ=F",
-          "price": 88.41,
+        "wti": {
+          "symbol": "CL=F",
+          "price": 83.62,
           "unit": "USD/barril",
-          "changePct": -4.36,
+          "changePct": -2.45,
           "currency": "USD",
-          "marketTime": "2026-11-20T15:02:01.000Z"
+          "marketTime": "2026-11-20T21:59:59.000Z"
         },
         "milho": {
           "symbol": "ZC=F",
-          "price": 449.75,
+          "price": 448.75,
           "unit": "USc/bushel",
-          "changePct": 0.22,
+          "changePct": 0,
           "currency": "USX",
-          "marketTime": "2026-11-20T15:02:02.000Z"
-        },
-        "wti": {
-          "symbol": "CL=F",
-          "price": 81.69,
-          "unit": "USD/barril",
-          "changePct": -4.7,
-          "currency": "USD",
-          "marketTime": "2026-11-20T15:02:02.000Z"
+          "marketTime": "2026-11-20T19:19:59.000Z"
         },
         "soja": {
           "symbol": "ZS=F",
-          "price": 1217.25,
+          "price": 1220.5,
           "unit": "USc/bushel",
-          "changePct": -0.96,
+          "changePct": -0.69,
           "currency": "USX",
-          "marketTime": "2026-11-20T15:02:04.000Z"
-        },
-        "ouro": {
-          "symbol": "GC=F",
-          "price": 3577.1,
-          "unit": "USD/oz",
-          "changePct": -7.16,
-          "currency": "USD",
-          "marketTime": "2026-11-20T15:02:04.000Z"
+          "marketTime": "2026-11-20T19:19:59.000Z"
         },
         "gas_natural": {
           "symbol": "NG=F",
-          "price": 3.64,
+          "price": 3.79,
           "unit": "USD/MMBtu",
-          "changePct": 16.56,
+          "changePct": 21.43,
           "currency": "USD",
-          "marketTime": "2026-11-20T15:02:01.000Z"
+          "marketTime": "2026-11-20T21:59:59.000Z"
+        },
+        "brent": {
+          "symbol": "BZ=F",
+          "price": 89.87,
+          "unit": "USD/barril",
+          "changePct": -2.78,
+          "currency": "USD",
+          "marketTime": "2026-11-20T21:59:18.000Z"
+        },
+        "ouro": {
+          "symbol": "GC=F",
+          "price": 3539,
+          "unit": "USD/oz",
+          "changePct": -8.15,
+          "currency": "USD",
+          "marketTime": "2026-11-20T21:59:57.000Z"
         }
       }
     },
@@ -105,31 +105,95 @@
     },
     "weather": {
       "teresina": {
-        "tempC": 37.4,
-        "humidity": 31,
-        "uv": 9.05,
-        "windKmh": 4,
-        "time": "2026-11-20T12:00",
+        "tempC": 34.3,
+        "humidity": 40,
+        "uv": 0,
+        "windKmh": 3.4,
+        "time": "2026-11-20T20:45",
         "status": "ok"
       },
       "parnaiba": {
-        "tempC": 32,
-        "uv": 8.8
+        "tempC": 27.6,
+        "uv": 0
       },
       "picos": {
-        "tempC": 36.9,
-        "uv": 9.25
+        "tempC": 32,
+        "uv": 0
       },
       "bomJesus": {
-        "tempC": 33.5,
-        "uv": 9.15
+        "tempC": 25.2,
+        "uv": 0
       }
     }
   },
   "news": [
     {
       "date": "2026-11-20",
-      "title": "Suspeito de chefiar esquema de golpes que movimentou mais de R$ 600 mi no PI é solto, segundo defesa",
+      "title": "Operação integrada recupera 308 veículos no Piauí durante ação de combate a fraudes veiculares",
+      "url": "https://www.ssp.pi.gov.br/operacao-integrada-recupera-308-veiculos-no-piaui-durante-acao-de-combate-a-fraudes-veiculares/",
+      "source": "SSP-PI",
+      "category": "Segurança",
+      "feed": true
+    },
+    {
+      "date": "2026-11-20",
+      "title": "Estações de tratamento de esgoto de Teresina lançam poluentes acima do permitido no Rio Poti, aponta relatório",
+      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/20/poluentes-rio-poti.ghtml",
+      "source": "g1 Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-20",
+      "title": "Jovem suspeita de tentar matar a mãe com 22 facadas no PI será internada em hospital psiquiátrico; crime pode ter ocorrido durante surto",
+      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/20/jovem-internada-pi.ghtml",
+      "source": "g1 Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-20",
+      "title": "Mais de 300 veículos com registros de crime são recuperados em operação no PI; homem é preso",
+      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/20/veiculos-recuperados-pi.ghtml",
+      "source": "g1 Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-20",
+      "title": "Prato Cheio 2026: veja como cinco instituições do Piauí serão fortalecidas pela campanha",
+      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/20/beneficiados-prato-cheio-2026.ghtml",
+      "source": "g1 Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-20",
+      "title": "Idoso de 80 anos é esfaqueado durante possível tentativa de assalto em cemitério no PI",
+      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/20/idoso-esfaqueado-pi.ghtml",
+      "source": "g1 Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-20",
+      "title": "Kennedy Barros é reconduzido à presidência do TCE-PI para biênio 2027-2028; veja composição da Mesa Diretora",
+      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/20/presidencia-tce-pi.ghtml",
+      "source": "g1 Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-20",
+      "title": "Mototaxista é indiciado por morte de colega de profissão em cidade do PI; vítima foi atingida por facadas",
+      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/20/mototaxista-morte-colega.ghtml",
+      "source": "g1 Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-20",
+      "title": "Suspeito de chefiar esquema de golpes que movimentou mais de R$ 600 mi no PI tem prisão revogada, segundo defesa",
       "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/20/suspeito-esquema-golpes.ghtml",
       "source": "g1 Piauí",
       "category": "Atualidades",
@@ -161,7 +225,7 @@
     },
     {
       "date": "2026-11-20",
-      "title": "Previsão do tempo hoje para Teresina (PI): sol com muitas nuvens durante o dia e períodos de céu nublado; noite com muitas nuvens",
+      "title": "Previsão do tempo hoje para Teresina (PI): sol com muitas nuvens; pancadas de chuva à tarde e à noite",
       "url": "https://g1.globo.com/pi/piaui/previsao-do-tempo/noticia/2026/11/20/previsao-do-tempo-hoje-para-teresina-pi-sol-com-muitas-nuvens-pancadas-de-chuva-a-tarde-e-a-noite.ghtml",
       "source": "g1 Piauí",
       "category": "Atualidades",
@@ -172,6 +236,22 @@
       "title": "Afroteca criada por pedagoga incentiva autoestima de crianças negras no PI: 'se sentem representadas'",
       "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/20/afroteca-itinerante-criancas-negras-piaui.ghtml",
       "source": "g1 Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-20",
+      "title": "Operação integrada recupera 308 veículos no Piauí durante ação de combate a fraudes veiculares",
+      "url": "https://www.pi.gov.br/operacao-integrada-recupera-308-veiculos-no-piaui-durante-acao-de-combate-a-fraudes-veiculares/",
+      "source": "Governo do Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-20",
+      "title": "Hemopi promove encontro inédito de doadores com sangue raro no Piauí",
+      "url": "https://www.pi.gov.br/hemopi-promove-encontro-inedito-de-doadores-com-sangue-raro-no-piaui/",
+      "source": "Governo do Piauí",
       "category": "Atualidades",
       "feed": true
     },
@@ -240,11 +320,11 @@
       "feed": true
     },
     {
-      "date": "2026-11-20",
-      "title": "Piauí avança na promoção da igualdade racial com políticas públicas e garantia de direitos para a população negra",
-      "url": "https://www.pi.gov.br/piaui-avanca-na-promocao-da-igualdade-racial-com-politicas-publicas-e-garantia-de-direitos-para-a-populacao-negra-2/",
-      "source": "Governo do Piauí",
-      "category": "Atualidades",
+      "date": "2026-11-19",
+      "title": "SSP-PI participa de fiscalização que interdita duas unidades comerciais no Centro de Teresina",
+      "url": "https://www.ssp.pi.gov.br/ssp-pi-participa-de-fiscalizacao-que-interdita-duas-unidades-comerciais-no-centro-de-teresina/",
+      "source": "SSP-PI",
+      "category": "Segurança",
       "feed": true
     },
     {
@@ -360,70 +440,6 @@
       "feed": true
     },
     {
-      "date": "2026-11-19",
-      "title": "Fim da escala 6x1: sindicatos e empresas fazem 10 pedidos de mediação ao MPT no PI",
-      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/19/pedidos-mediacao-mpt.ghtml",
-      "source": "g1 Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-19",
-      "title": "Alerta de tempestade no Piauí: previsão de chuva forte, ventos de até 60 km/h e granizo em mais de 190 cidades",
-      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/19/alerta-de-tempestade-no-piaui.ghtml",
-      "source": "g1 Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-19",
-      "title": "Loja é interditada após denúncias de atraso na entrega de mercadorias em Teresina; mulher espera geladeira há 2 meses",
-      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/19/denuncias-atraso-entrega-mercadorias-lojas-teresina.ghtml",
-      "source": "g1 Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-19",
-      "title": "Jovem é autuada por tentar matar a mãe com 22 facadas no PI, diz delegado",
-      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/19/jovem-facadas-mae.ghtml",
-      "source": "g1 Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-19",
-      "title": "Nova rota aérea conecta Parnaíba e Teresina a Belo Horizonte com dois voos semanais",
-      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/19/nova-rota-aerea-parnaiba-teresina-belo-horizonte-voos.ghtml",
-      "source": "g1 Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-19",
-      "title": "Homem é encontrado amarrado em imóvel no PI; PM suspeita de 'tribunal do crime'",
-      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/19/homem-encontrado-amarrado.ghtml",
-      "source": "g1 Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-19",
-      "title": "Motociclista de 19 anos morre após atingir carreta na BR-316, no Centro-Norte do PI",
-      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/19/motociclista-morre-acidente-carreta-br-316.ghtml",
-      "source": "g1 Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-19",
-      "title": "Ninho de Carcará busca atrair investimentos a startups piauienses durante a Campus Party Piauí 2026",
-      "url": "https://www.pi.gov.br/a-2a-edicao-do-ninho-de-carcara-busca-atrair-investimentos-a-startups-piauienses-durante-a-campus-party-piaui-2026/",
-      "source": "Governo do Piauí",
-      "category": "EdTech",
-      "feed": true
-    },
-    {
       "date": "2026-11-18",
       "title": "Piauí já emitiu cerca de 2 mil Carteiras de Identidade Nacional para recém-nascidos na Maternidade Dona Evangelina Rosa",
       "url": "https://www.ssp.pi.gov.br/piaui-ja-emitiu-cerca-de-2-mil-carteiras-de-identidade-nacional-para-recem-nascidos-na-maternidade-dona-evangelina-rosa/",
@@ -467,22 +483,6 @@
       "date": "2026-11-09",
       "title": "SSP prende investigado por violência doméstica após histórico de agressões e ameaças de morte em Teresina",
       "url": "https://www.ssp.pi.gov.br/ssp-prende-investigado-por-violencia-domestica-apos-historico-de-agressoes-e-ameacas-de-morte-em-teresina/",
-      "source": "SSP-PI",
-      "category": "Segurança",
-      "feed": true
-    },
-    {
-      "date": "2026-11-06",
-      "title": "SSP-PI deflagra operação contra investigados por homicídios e atuação de “tribunais do crime” na Zona Leste de Teresina",
-      "url": "https://www.ssp.pi.gov.br/ssp-pi-deflagra-operacao-contra-investigados-por-homicidios-e-atuacao-de-tribunais-do-crime-na-zona-leste-de-teresina/",
-      "source": "SSP-PI",
-      "category": "Segurança",
-      "feed": true
-    },
-    {
-      "date": "2026-11-05",
-      "title": "SSP-PI lança aplicativo Vigilante Seguro para agilizar atendimento policial em situações de risco",
-      "url": "https://www.ssp.pi.gov.br/ssp-pi-lanca-aplicativo-vigilante-seguro-para-agilizar-atendimento-policial-em-situacoes-de-risco/",
       "source": "SSP-PI",
       "category": "Segurança",
       "feed": true

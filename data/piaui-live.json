@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-21T06:36:42.824Z",
+  "generatedAt": "2026-11-21T18:57:40.590Z",
   "mode": "osint-github-actions",
   "sources": {
     "ibge": {
@@ -49,37 +49,13 @@
         }
       },
       "quotes": {
-        "gas_natural": {
-          "symbol": "NG=F",
-          "price": 3.75,
-          "unit": "USD/MMBtu",
-          "changePct": 20.05,
+        "brent": {
+          "symbol": "BZ=F",
+          "price": 89.95,
+          "unit": "USD/barril",
+          "changePct": -2.69,
           "currency": "USD",
-          "marketTime": "2026-11-20T21:59:59.000Z"
-        },
-        "soja": {
-          "symbol": "ZS=F",
-          "price": 1220.75,
-          "unit": "USc/bushel",
-          "changePct": -0.67,
-          "currency": "USX",
-          "marketTime": "2026-11-20T19:19:59.000Z"
-        },
-        "milho": {
-          "symbol": "ZC=F",
-          "price": 448.75,
-          "unit": "USc/bushel",
-          "changePct": 0,
-          "currency": "USX",
-          "marketTime": "2026-11-20T19:19:59.000Z"
-        },
-        "ouro": {
-          "symbol": "GC=F",
-          "price": 3515.4,
-          "unit": "USD/oz",
-          "changePct": -8.76,
-          "currency": "USD",
-          "marketTime": "2026-11-20T21:59:57.000Z"
+          "marketTime": "2026-11-20T21:59:18.000Z"
         },
         "wti": {
           "symbol": "CL=F",
@@ -89,13 +65,37 @@
           "currency": "USD",
           "marketTime": "2026-11-20T21:59:59.000Z"
         },
-        "brent": {
-          "symbol": "BZ=F",
-          "price": 89.95,
-          "unit": "USD/barril",
-          "changePct": -2.69,
+        "ouro": {
+          "symbol": "GC=F",
+          "price": 3515.4,
+          "unit": "USD/oz",
+          "changePct": -8.76,
           "currency": "USD",
-          "marketTime": "2026-11-20T21:59:18.000Z"
+          "marketTime": "2026-11-20T21:59:57.000Z"
+        },
+        "soja": {
+          "symbol": "ZS=F",
+          "price": 1220.75,
+          "unit": "USc/bushel",
+          "changePct": -0.67,
+          "currency": "USX",
+          "marketTime": "2026-11-20T19:19:59.000Z"
+        },
+        "gas_natural": {
+          "symbol": "NG=F",
+          "price": 3.75,
+          "unit": "USD/MMBtu",
+          "changePct": 20.05,
+          "currency": "USD",
+          "marketTime": "2026-11-20T21:59:59.000Z"
+        },
+        "milho": {
+          "symbol": "ZC=F",
+          "price": 448.75,
+          "unit": "USc/bushel",
+          "changePct": 0,
+          "currency": "USX",
+          "marketTime": "2026-11-20T19:19:59.000Z"
         }
       }
     },
@@ -105,31 +105,71 @@
     },
     "weather": {
       "teresina": {
-        "tempC": 34.3,
-        "humidity": 40,
-        "uv": 0,
-        "windKmh": 3.4,
-        "time": "2026-11-20T20:45",
-        "status": "fallback (fetch failed)"
+        "tempC": 38.4,
+        "humidity": 25,
+        "uv": 3.2,
+        "windKmh": 10.9,
+        "time": "2026-11-21T15:45",
+        "status": "ok"
       },
       "parnaiba": {
-        "tempC": 27.6,
-        "uv": 0
+        "tempC": 30.4,
+        "uv": 2.9
       },
       "picos": {
-        "tempC": 32,
-        "uv": 0
+        "tempC": 37.8,
+        "uv": 3.15
       },
       "bomJesus": {
-        "tempC": 25.2,
-        "uv": 0
+        "tempC": 31,
+        "uv": 3.45
       }
     }
   },
   "news": [
     {
       "date": "2026-11-21",
-      "title": "Previsão do tempo hoje para Teresina (PI): sol com algumas nuvens durante o dia; à noite o céu fica com muitas nuvens, mas não chove",
+      "title": "Menina de 9 anos faz sinal de socorro à polícia e ajuda a prender pai suspeito de agredir a mãe no PI",
+      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/21/menina-sinal-de-socorro-pai-suspeito.ghtml",
+      "source": "g1 Piauí",
+      "category": "Segurança",
+      "feed": true
+    },
+    {
+      "date": "2026-11-21",
+      "title": "Homem é preso suspeito de abusar criança de 7 anos em cidade do Piauí; mãe denunciou caso",
+      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/21/homem-preso-suspeito-piaui.ghtml",
+      "source": "g1 Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-21",
+      "title": "Adolescente que criou startup para desenvolver tecnologia de cultivo de alimentos em missões a Marte já ouviu que ideia era \"irrealista\"",
+      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/21/adolescente-startup-pi.ghtml",
+      "source": "g1 Piauí",
+      "category": "EdTech",
+      "feed": true
+    },
+    {
+      "date": "2026-11-21",
+      "title": "Alerta de tempestade no Piauí: previsão de chuva forte, ventos e granizo em mais de 60 cidades; veja lista",
+      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/21/alerta-piaui-cidades.ghtml",
+      "source": "g1 Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-21",
+      "title": "Abrigo com mais de 300 animais enfrenta gasto mensal de R$ 100 mil em Teresina; conheça cães e gatos disponíveis para adoção",
+      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/21/abrigo-de-animais-apipa-teresina.ghtml",
+      "source": "g1 Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-21",
+      "title": "Previsão do tempo hoje para Teresina (PI): sol com muitas nuvens durante o dia e períodos de céu nublado; noite com muitas nuvens",
       "url": "https://g1.globo.com/pi/piaui/previsao-do-tempo/noticia/2026/11/21/previsao-do-tempo-hoje-para-teresina-pi-sol-com-algumas-nuvens-durante-o-dia-a-noite-o-ceu-fica-com-muitas-nuvens-mas-nao-chove.ghtml",
       "source": "g1 Piauí",
       "category": "Atualidades",
@@ -141,6 +181,86 @@
       "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/21/adolescente-cultivo-de-alimentos-espaco.ghtml",
       "source": "g1 Piauí",
       "category": "EdTech",
+      "feed": true
+    },
+    {
+      "date": "2026-11-21",
+      "title": "Piauí encerra primeiro bloco das Paralimpíadas Escolares com seis medalhas no atletismo",
+      "url": "https://www.pi.gov.br/piaui-encerra-primeiro-bloco-das-paralimpiadas-escolares-com-seis-medalhas-no-atletismo/",
+      "source": "Governo do Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-21",
+      "title": "Potencial tecnológico do Piauí é destaque na Campus Party 2026",
+      "url": "https://www.pi.gov.br/potencial-tecnologico-do-piaui-e-destaque-na-campus-party-2026/",
+      "source": "Governo do Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-21",
+      "title": "Campus Party Weekend reúne 15 mil pessoas no Piauí e destaca avanços do Estado em inteligência artificial, educação e inclusão digital",
+      "url": "https://www.pi.gov.br/campus-party-weekend-reune-15-mil-pessoas-no-piaui-e-destaca-avancos-do-estado-em-inteligencia-artificial-educacao-e-inclusao-digital/",
+      "source": "Governo do Piauí",
+      "category": "EdTech",
+      "feed": true
+    },
+    {
+      "date": "2026-11-21",
+      "title": "Seleção piauiense estreia na Copa Rainha Marta Nordeste na terça-feira (24)",
+      "url": "https://www.pi.gov.br/selecao-piauiense-estreia-na-copa-rainha-marta-nordeste-na-terca-feira-24/",
+      "source": "Governo do Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-21",
+      "title": "Com investimento de mais de R$ 1 milhão, Curimatá vai ganhar novo Terminal Rodoviário",
+      "url": "https://www.pi.gov.br/com-investimento-de-mais-de-r-1-milhao-curimata-vai-ganhar-novo-terminal-rodoviario/",
+      "source": "Governo do Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-21",
+      "title": "Programa Defesa Civil na Escola forma nova turma de estudantes na próxima terça-feira (24)",
+      "url": "https://www.pi.gov.br/programa-defesa-civil-na-escola-forma-nova-turma-de-estudantes-na-proxima-terca-feira-24/",
+      "source": "Governo do Piauí",
+      "category": "Educação",
+      "feed": true
+    },
+    {
+      "date": "2026-11-21",
+      "title": "Parnaíba recebe festival gratuito de arte para crianças e jovens de 24 a 29 de novembro",
+      "url": "https://www.pi.gov.br/parnaiba-recebe-festival-gratuito-de-arte-para-criancas-e-jovens-de-24-a-29-de-novembro/",
+      "source": "Governo do Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-21",
+      "title": "Novo poço em Itainópolis vai ampliar oferta de água no Morro de Fátima",
+      "url": "https://www.pi.gov.br/novo-poco-em-itainopolis-vai-ampliar-oferta-de-agua-no-morro-de-fatima/",
+      "source": "Governo do Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-21",
+      "title": "Arte, esporte e cidadania integram atividades do CSU do Parque Piauí",
+      "url": "https://www.pi.gov.br/arte-esporte-e-cidadania-integram-atividades-do-csu-do-parque-piaui/",
+      "source": "Governo do Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-21",
+      "title": "Piauí ultrapassa 4 milhões de mudas distribuídas e reforça ações de recuperação ambiental nos 224 municípios",
+      "url": "https://www.pi.gov.br/piaui-ultrapassa-4-milhoes-de-mudas-distribuidas-e-reforca-acoes-de-recuperacao-ambiental-nos-224-municipios/",
+      "source": "Governo do Piauí",
+      "category": "Atualidades",
       "feed": true
     },
     {
@@ -177,7 +297,7 @@
     },
     {
       "date": "2026-11-20",
-      "title": "Prato Cheio 2026: veja como cinco instituições do Piauí serão fortalecidas pela campanha",
+      "title": "De capoeira a acolhimento de mulheres: Veja histórias de quatro instituições do Prato Cheio",
       "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/20/beneficiados-prato-cheio-2026.ghtml",
       "source": "g1 Piauí",
       "category": "Atualidades",
@@ -256,86 +376,6 @@
       "feed": true
     },
     {
-      "date": "2026-11-20",
-      "title": "Operação integrada recupera 308 veículos no Piauí durante ação de combate a fraudes veiculares",
-      "url": "https://www.pi.gov.br/operacao-integrada-recupera-308-veiculos-no-piaui-durante-acao-de-combate-a-fraudes-veiculares/",
-      "source": "Governo do Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-20",
-      "title": "Hemopi promove encontro inédito de doadores com sangue raro no Piauí",
-      "url": "https://www.pi.gov.br/hemopi-promove-encontro-inedito-de-doadores-com-sangue-raro-no-piaui/",
-      "source": "Governo do Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-20",
-      "title": "Piauí chega a cinco medalhas nas Paralimpíadas Escolares Brasileiras, em São Paulo",
-      "url": "https://www.pi.gov.br/piaui-chega-a-cinco-medalhas-nas-paralimpiadas-escolares-brasileiras-em-sao-paulo/",
-      "source": "Governo do Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-20",
-      "title": "Piauí soma 55 títulos coletivos e fortalece direitos de quase 4 mil famílias quilombolas",
-      "url": "https://www.pi.gov.br/piaui-soma-55-titulos-coletivos-e-fortalece-direitos-de-quase-4-mil-familias-quilombolas/",
-      "source": "Governo do Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-20",
-      "title": "Consciência Negra: Piauí celebra ancestralidade, resistência e valorização da cultura afro-piauiense",
-      "url": "https://www.pi.gov.br/consciencia-negra-piaui-celebra-ancestralidade-resistencia-e-valorizacao-da-cultura-afro-piauiense/",
-      "source": "Governo do Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-20",
-      "title": "Piauí Esportivo realiza grande final nesta sexta-feira (20), no Centro Esportivo Almeidão em Teresina",
-      "url": "https://www.pi.gov.br/piaui-esportivo-realiza-grande-final-nesta-sexta-feira-20-no-centro-esportivo-almeidao-em-teresina/",
-      "source": "Governo do Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-20",
-      "title": "Cozinha Ancestral une combate à fome, agricultura familiar e valorização das raízes afro-brasileiras no Piauí",
-      "url": "https://www.pi.gov.br/cozinha-ancestral-une-combate-a-fome-agricultura-familiar-e-valorizacao-das-raizes-afro-brasileiras-no-piaui/",
-      "source": "Governo do Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-20",
-      "title": "Empreender, estudar e conquistar: políticas públicas ampliam oportunidades para a população negra no Piauí",
-      "url": "https://www.pi.gov.br/empreender-estudar-e-conquistar-politicas-publicas-ampliam-oportunidades-para-a-populacao-negra-no-piaui/",
-      "source": "Governo do Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-20",
-      "title": "Governo do Estado já executou mais de 50% de obra da adutora que levará água a Capitão Gervásio Oliveira",
-      "url": "https://www.pi.gov.br/governo-do-estado-ja-executou-mais-de-50-da-obra-da-adutora-que-levara-agua-a-capitao-gervasio-oliveira/",
-      "source": "Governo do Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-20",
-      "title": "Mpox: veja quem pode se imunizar e onde encontrar a vacina no Piauí",
-      "url": "https://www.pi.gov.br/mpox-veja-quem-pode-se-imunizar-e-onde-encontrar-a-vacina-no-piaui/",
-      "source": "Governo do Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
       "date": "2026-11-19",
       "title": "SSP-PI participa de fiscalização que interdita duas unidades comerciais no Centro de Teresina",
       "url": "https://www.ssp.pi.gov.br/ssp-pi-participa-de-fiscalizacao-que-interdita-duas-unidades-comerciais-no-centro-de-teresina/",
@@ -395,46 +435,6 @@
       "date": "2026-11-19",
       "title": "Rafael Fonteles anuncia permanência de mais três secretários no governo; veja quais",
       "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/19/fonteles-permanencia-secretarios-governo.ghtml",
-      "source": "g1 Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-19",
-      "title": "Chuva, trovoadas e calor: veja a previsão para o feriadão no Piauí",
-      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/19/chuva-previsao-feriadao-piaui.ghtml",
-      "source": "g1 Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-19",
-      "title": "Cachorro perde as patas após ser atropelado por trem em Teresina",
-      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/19/cachorro-atropelado-em-teresina.ghtml",
-      "source": "g1 Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-19",
-      "title": "Homem de 39 anos é preso suspeito de estuprar e tentar matar ex em Teresina",
-      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/19/homem-preso-teresina.ghtml",
-      "source": "g1 Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-19",
-      "title": "Médico piauiense desce de ambulância e corre entre carros para salvar paciente em PE",
-      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/19/medico-piauiense-corre.ghtml",
-      "source": "g1 Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-19",
-      "title": "Mulher que mandou mensagem à PM após ser ameaçada e estuprada pelo companheiro correu para acordar o filho com a chegada dos policiais",
-      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/19/mulher-acorda-filho-chegada-pm.ghtml",
       "source": "g1 Piauí",
       "category": "Atualidades",
       "feed": true

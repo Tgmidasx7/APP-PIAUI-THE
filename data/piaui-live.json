@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-20T23:52:49.262Z",
+  "generatedAt": "2026-11-21T06:36:42.824Z",
   "mode": "osint-github-actions",
   "sources": {
     "ibge": {
@@ -20,7 +20,7 @@
         "data": "19/11/2026",
         "valor": "5.8889"
       },
-      "status": "fallback (HTTP 304 for https://api.bcb.gov.br/dados/serie/bcdata.sgs.432/dados/ultimos/1?formato=json)"
+      "status": "ok"
     },
     "siconfi": {
       "status": "ok",
@@ -49,13 +49,21 @@
         }
       },
       "quotes": {
-        "wti": {
-          "symbol": "CL=F",
-          "price": 83.62,
-          "unit": "USD/barril",
-          "changePct": -2.45,
+        "gas_natural": {
+          "symbol": "NG=F",
+          "price": 3.75,
+          "unit": "USD/MMBtu",
+          "changePct": 20.05,
           "currency": "USD",
           "marketTime": "2026-11-20T21:59:59.000Z"
+        },
+        "soja": {
+          "symbol": "ZS=F",
+          "price": 1220.75,
+          "unit": "USc/bushel",
+          "changePct": -0.67,
+          "currency": "USX",
+          "marketTime": "2026-11-20T19:19:59.000Z"
         },
         "milho": {
           "symbol": "ZC=F",
@@ -65,37 +73,29 @@
           "currency": "USX",
           "marketTime": "2026-11-20T19:19:59.000Z"
         },
-        "soja": {
-          "symbol": "ZS=F",
-          "price": 1220.5,
-          "unit": "USc/bushel",
-          "changePct": -0.69,
-          "currency": "USX",
-          "marketTime": "2026-11-20T19:19:59.000Z"
+        "ouro": {
+          "symbol": "GC=F",
+          "price": 3515.4,
+          "unit": "USD/oz",
+          "changePct": -8.76,
+          "currency": "USD",
+          "marketTime": "2026-11-20T21:59:57.000Z"
         },
-        "gas_natural": {
-          "symbol": "NG=F",
-          "price": 3.79,
-          "unit": "USD/MMBtu",
-          "changePct": 21.43,
+        "wti": {
+          "symbol": "CL=F",
+          "price": 83.41,
+          "unit": "USD/barril",
+          "changePct": -2.69,
           "currency": "USD",
           "marketTime": "2026-11-20T21:59:59.000Z"
         },
         "brent": {
           "symbol": "BZ=F",
-          "price": 89.87,
+          "price": 89.95,
           "unit": "USD/barril",
-          "changePct": -2.78,
+          "changePct": -2.69,
           "currency": "USD",
           "marketTime": "2026-11-20T21:59:18.000Z"
-        },
-        "ouro": {
-          "symbol": "GC=F",
-          "price": 3539,
-          "unit": "USD/oz",
-          "changePct": -8.15,
-          "currency": "USD",
-          "marketTime": "2026-11-20T21:59:57.000Z"
         }
       }
     },
@@ -110,7 +110,7 @@
         "uv": 0,
         "windKmh": 3.4,
         "time": "2026-11-20T20:45",
-        "status": "ok"
+        "status": "fallback (fetch failed)"
       },
       "parnaiba": {
         "tempC": 27.6,
@@ -127,6 +127,22 @@
     }
   },
   "news": [
+    {
+      "date": "2026-11-21",
+      "title": "Previsão do tempo hoje para Teresina (PI): sol com algumas nuvens durante o dia; à noite o céu fica com muitas nuvens, mas não chove",
+      "url": "https://g1.globo.com/pi/piaui/previsao-do-tempo/noticia/2026/11/21/previsao-do-tempo-hoje-para-teresina-pi-sol-com-algumas-nuvens-durante-o-dia-a-noite-o-ceu-fica-com-muitas-nuvens-mas-nao-chove.ghtml",
+      "source": "g1 Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-21",
+      "title": "Adolescente de 17 anos cria startup para desenvolver tecnologia de cultivo de alimentos em missões a Marte",
+      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/21/adolescente-cultivo-de-alimentos-espaco.ghtml",
+      "source": "g1 Piauí",
+      "category": "EdTech",
+      "feed": true
+    },
     {
       "date": "2026-11-20",
       "title": "Operação integrada recupera 308 veículos no Piauí durante ação de combate a fraudes veiculares",
@@ -419,22 +435,6 @@
       "date": "2026-11-19",
       "title": "Mulher que mandou mensagem à PM após ser ameaçada e estuprada pelo companheiro correu para acordar o filho com a chegada dos policiais",
       "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/19/mulher-acorda-filho-chegada-pm.ghtml",
-      "source": "g1 Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-19",
-      "title": "Homem é preso em São Luís suspeito de aplicar golpes na venda de veículos de luxo",
-      "url": "https://g1.globo.com/ma/maranhao/noticia/2026/11/19/homem-e-preso-em-sao-luis-suspeito-de-aplicar-golpes-na-venda-de-veiculos-de-luxo.ghtml",
-      "source": "g1 Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-19",
-      "title": "Motociclista morre em acidente com caminhão na BR-343, no Norte do Piauí",
-      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/19/motociclista-morre-acidente-caminhao-br-343.ghtml",
       "source": "g1 Piauí",
       "category": "Atualidades",
       "feed": true

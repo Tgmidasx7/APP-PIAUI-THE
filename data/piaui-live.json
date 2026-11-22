@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-21T18:57:40.590Z",
+  "generatedAt": "2026-11-22T06:04:37.003Z",
   "mode": "osint-github-actions",
   "sources": {
     "ibge": {
@@ -49,27 +49,11 @@
         }
       },
       "quotes": {
-        "brent": {
-          "symbol": "BZ=F",
-          "price": 89.95,
-          "unit": "USD/barril",
-          "changePct": -2.69,
-          "currency": "USD",
-          "marketTime": "2026-11-20T21:59:18.000Z"
-        },
-        "wti": {
-          "symbol": "CL=F",
-          "price": 83.41,
-          "unit": "USD/barril",
-          "changePct": -2.69,
-          "currency": "USD",
-          "marketTime": "2026-11-20T21:59:59.000Z"
-        },
         "ouro": {
           "symbol": "GC=F",
           "price": 3515.4,
           "unit": "USD/oz",
-          "changePct": -8.76,
+          "changePct": -9.03,
           "currency": "USD",
           "marketTime": "2026-11-20T21:59:57.000Z"
         },
@@ -77,7 +61,7 @@
           "symbol": "ZS=F",
           "price": 1220.75,
           "unit": "USc/bushel",
-          "changePct": -0.67,
+          "changePct": -0.39,
           "currency": "USX",
           "marketTime": "2026-11-20T19:19:59.000Z"
         },
@@ -85,7 +69,23 @@
           "symbol": "NG=F",
           "price": 3.75,
           "unit": "USD/MMBtu",
-          "changePct": 20.05,
+          "changePct": 16.83,
+          "currency": "USD",
+          "marketTime": "2026-11-20T21:59:59.000Z"
+        },
+        "brent": {
+          "symbol": "BZ=F",
+          "price": 89.95,
+          "unit": "USD/barril",
+          "changePct": -3.42,
+          "currency": "USD",
+          "marketTime": "2026-11-20T21:59:18.000Z"
+        },
+        "wti": {
+          "symbol": "CL=F",
+          "price": 83.41,
+          "unit": "USD/barril",
+          "changePct": -3.02,
           "currency": "USD",
           "marketTime": "2026-11-20T21:59:59.000Z"
         },
@@ -93,7 +93,7 @@
           "symbol": "ZC=F",
           "price": 448.75,
           "unit": "USc/bushel",
-          "changePct": 0,
+          "changePct": 0.45,
           "currency": "USX",
           "marketTime": "2026-11-20T19:19:59.000Z"
         }
@@ -105,28 +105,76 @@
     },
     "weather": {
       "teresina": {
-        "tempC": 38.4,
-        "humidity": 25,
-        "uv": 3.2,
-        "windKmh": 10.9,
-        "time": "2026-11-21T15:45",
+        "tempC": 27.6,
+        "humidity": 70,
+        "uv": 0,
+        "windKmh": 7.9,
+        "time": "2026-11-22T03:00",
         "status": "ok"
       },
       "parnaiba": {
-        "tempC": 30.4,
-        "uv": 2.9
+        "tempC": 26.4,
+        "uv": 0
       },
       "picos": {
-        "tempC": 37.8,
-        "uv": 3.15
+        "tempC": 28.5,
+        "uv": 0
       },
       "bomJesus": {
-        "tempC": 31,
-        "uv": 3.45
+        "tempC": 22.3,
+        "uv": 0
       }
     }
   },
   "news": [
+    {
+      "date": "2026-11-22",
+      "title": "Previsão do tempo hoje para Teresina (PI): sol com muitas nuvens durante o dia e períodos de céu nublado; noite com muitas nuvens",
+      "url": "https://g1.globo.com/pi/piaui/previsao-do-tempo/noticia/2026/11/22/previsao-do-tempo-hoje-para-teresina-pi-sol-com-muitas-nuvens-durante-o-dia-e-periodos-de-ceu-nublado-noite-com-muitas-nuvens.ghtml",
+      "source": "g1 Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-21",
+      "title": "Irmão de vereador morre após perder controle de moto e bater contra carnaúba no interior do PI",
+      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/21/motociclista-morre-acidente.ghtml",
+      "source": "g1 Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-21",
+      "title": "Família denuncia espera de 20h por parto após morte de recém-nascido e diz que corpo ficou em caixa no PI",
+      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/21/morte-de-recem-nascido-hospital-piaui.ghtml",
+      "source": "g1 Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-21",
+      "title": "VÍDEO: Motociclistas são arremessados e ficam gravemente feridos após batida em Teresina",
+      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/21/video-motociclistas-batida-em-teresina.ghtml",
+      "source": "g1 Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-21",
+      "title": "Alerta de tempestade com risco de granizo no Piauí é estendido até segunda (23) em 22 cidades",
+      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/21/alerta-de-tempestade-no-piaui-segunda-23.ghtml",
+      "source": "g1 Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-21",
+      "title": "Condenados a 22 anos de prisão por matar homem que dormia em rede estão foragidos no PI",
+      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/21/condenados-prisao-matar-homem.ghtml",
+      "source": "g1 Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
     {
       "date": "2026-11-21",
       "title": "Menina de 9 anos faz sinal de socorro à polícia e ajuda a prender pai suspeito de agredir a mãe no PI",
@@ -368,14 +416,6 @@
       "feed": true
     },
     {
-      "date": "2026-11-20",
-      "title": "Afroteca criada por pedagoga incentiva autoestima de crianças negras no PI: 'se sentem representadas'",
-      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/20/afroteca-itinerante-criancas-negras-piaui.ghtml",
-      "source": "g1 Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
       "date": "2026-11-19",
       "title": "SSP-PI participa de fiscalização que interdita duas unidades comerciais no Centro de Teresina",
       "url": "https://www.ssp.pi.gov.br/ssp-pi-participa-de-fiscalizacao-que-interdita-duas-unidades-comerciais-no-centro-de-teresina/",
@@ -397,46 +437,6 @@
       "url": "https://www.ssp.pi.gov.br/ssp-pi-cumpre-mandado-de-prisao-contra-investigado-por-tentativa-de-feminicidio-e-estupro/",
       "source": "SSP-PI",
       "category": "Segurança",
-      "feed": true
-    },
-    {
-      "date": "2026-11-19",
-      "title": "VÍDEO: Criminoso rouba cordão de cliente e atira contra segurança de posto de combustível em Teresina",
-      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/19/criminoso-rouba-cordao.ghtml",
-      "source": "g1 Piauí",
-      "category": "Segurança",
-      "feed": true
-    },
-    {
-      "date": "2026-11-19",
-      "title": "\"Não foi a primeira vez\", diz médico piauiense que desceu de ambulância e correu entre carros para salvar paciente em PE",
-      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/19/medico-piauiense-correu.ghtml",
-      "source": "g1 Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-19",
-      "title": "Vacina contra mpox está disponível para grupos prioritários no Piauí; veja quem pode receber",
-      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/19/vacina-mpox-disponivel-piaui.ghtml",
-      "source": "g1 Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-19",
-      "title": "Ponte da Primavera será interditada para instalação de iluminação de Natal em Teresina",
-      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/19/ponte-da-primavera-interditada.ghtml",
-      "source": "g1 Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-19",
-      "title": "Rafael Fonteles anuncia permanência de mais três secretários no governo; veja quais",
-      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/19/fonteles-permanencia-secretarios-governo.ghtml",
-      "source": "g1 Piauí",
-      "category": "Atualidades",
       "feed": true
     },
     {

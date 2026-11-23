@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-22T19:18:49.643Z",
+  "generatedAt": "2026-11-23T06:57:19.921Z",
   "mode": "osint-github-actions",
   "sources": {
     "ibge": {
@@ -49,53 +49,53 @@
         }
       },
       "quotes": {
-        "wti": {
-          "symbol": "CL=F",
-          "price": 83.41,
-          "unit": "USD/barril",
-          "changePct": -3.02,
+        "ouro": {
+          "symbol": "GC=F",
+          "price": 3625.1,
+          "unit": "USD/oz",
+          "changePct": -3.12,
           "currency": "USD",
-          "marketTime": "2026-11-20T21:59:59.000Z"
-        },
-        "milho": {
-          "symbol": "ZC=F",
-          "price": 448.75,
-          "unit": "USc/bushel",
-          "changePct": 0.45,
-          "currency": "USX",
-          "marketTime": "2026-11-20T19:19:59.000Z"
+          "marketTime": "2026-11-23T06:47:18.000Z"
         },
         "soja": {
           "symbol": "ZS=F",
-          "price": 1220.75,
+          "price": 1227.5,
           "unit": "USc/bushel",
-          "changePct": -0.39,
+          "changePct": 0.88,
           "currency": "USX",
-          "marketTime": "2026-11-20T19:19:59.000Z"
-        },
-        "brent": {
-          "symbol": "BZ=F",
-          "price": 89.95,
-          "unit": "USD/barril",
-          "changePct": -3.42,
-          "currency": "USD",
-          "marketTime": "2026-11-20T21:59:18.000Z"
-        },
-        "ouro": {
-          "symbol": "GC=F",
-          "price": 3515.4,
-          "unit": "USD/oz",
-          "changePct": -9.03,
-          "currency": "USD",
-          "marketTime": "2026-11-20T21:59:57.000Z"
+          "marketTime": "2026-11-23T06:46:20.000Z"
         },
         "gas_natural": {
           "symbol": "NG=F",
-          "price": 3.75,
+          "price": 3.56,
           "unit": "USD/MMBtu",
-          "changePct": 16.83,
+          "changePct": 5.6,
           "currency": "USD",
-          "marketTime": "2026-11-20T21:59:59.000Z"
+          "marketTime": "2026-11-23T06:47:20.000Z"
+        },
+        "milho": {
+          "symbol": "ZC=F",
+          "price": 450.5,
+          "unit": "USc/bushel",
+          "changePct": 3.44,
+          "currency": "USX",
+          "marketTime": "2026-11-23T06:47:13.000Z"
+        },
+        "brent": {
+          "symbol": "BZ=F",
+          "price": 89.79,
+          "unit": "USD/barril",
+          "changePct": -2.35,
+          "currency": "USD",
+          "marketTime": "2026-11-23T06:46:58.000Z"
+        },
+        "wti": {
+          "symbol": "CL=F",
+          "price": 83.28,
+          "unit": "USD/barril",
+          "changePct": 0.02,
+          "currency": "USD",
+          "marketTime": "2026-11-23T06:47:02.000Z"
         }
       }
     },
@@ -105,28 +105,52 @@
     },
     "weather": {
       "teresina": {
-        "tempC": 38,
-        "humidity": 27,
-        "uv": 1.55,
-        "windKmh": 7.1,
-        "time": "2026-11-22T16:15",
+        "tempC": 27.1,
+        "humidity": 70,
+        "uv": 0,
+        "windKmh": 7,
+        "time": "2026-11-23T03:45",
         "status": "ok"
       },
       "parnaiba": {
-        "tempC": 30.2,
-        "uv": 1.8
+        "tempC": 26.3,
+        "uv": 0
       },
       "picos": {
-        "tempC": 37.6,
-        "uv": 2
+        "tempC": 27,
+        "uv": 0
       },
       "bomJesus": {
-        "tempC": 29.7,
-        "uv": 2.5
+        "tempC": 22.5,
+        "uv": 0
       }
     }
   },
   "news": [
+    {
+      "date": "2026-11-23",
+      "title": "Previsão do tempo hoje para Teresina (PI): sol com muitas nuvens durante o dia e períodos de céu nublado; noite com muitas nuvens",
+      "url": "https://g1.globo.com/pi/piaui/previsao-do-tempo/noticia/2026/11/23/previsao-do-tempo-hoje-para-teresina-pi-sol-com-muitas-nuvens-durante-o-dia-e-periodos-de-ceu-nublado-noite-com-muitas-nuvens.ghtml",
+      "source": "g1 Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-22",
+      "title": "Jornalista morre após sofrer convulsões e parada cardíaca depois de cair de bicicleta durante prova no PI",
+      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/22/jornalista-morre-pi.ghtml",
+      "source": "g1 Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-22",
+      "title": "Incêndio destrói Santuário Cova da Tia no PI; espaço fica no terceiro território quilombola mais populoso do país",
+      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/22/incendio-destroi-santuario.ghtml",
+      "source": "g1 Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
     {
       "date": "2026-11-22",
       "title": "Cadela é resgatada com órgãos expostos após ferimento na barriga no PI; animal corre risco de vida",
@@ -196,6 +220,14 @@
       "title": "Previsão do tempo hoje para Teresina (PI): sol com muitas nuvens durante o dia e períodos de céu nublado; noite com muitas nuvens",
       "url": "https://g1.globo.com/pi/piaui/previsao-do-tempo/noticia/2026/11/22/previsao-do-tempo-hoje-para-teresina-pi-sol-com-muitas-nuvens-durante-o-dia-e-periodos-de-ceu-nublado-noite-com-muitas-nuvens.ghtml",
       "source": "g1 Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-22",
+      "title": "Do Piauí para o Brasil: palestra na Campus Party 2026 evidencia potencial tecnológico do estado",
+      "url": "https://www.pi.gov.br/do-piaui-para-o-brasil-palestra-na-campus-party-2026-evidencia-potencial-tecnologico-do-estado/",
+      "source": "Governo do Piauí",
       "category": "Atualidades",
       "feed": true
     },
@@ -368,14 +400,6 @@
       "feed": true
     },
     {
-      "date": "2026-11-21",
-      "title": "Potencial tecnológico do Piauí é destaque na Campus Party 2026",
-      "url": "https://www.pi.gov.br/potencial-tecnologico-do-piaui-e-destaque-na-campus-party-2026/",
-      "source": "Governo do Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
       "date": "2026-11-20",
       "title": "Operação integrada recupera 308 veículos no Piauí durante ação de combate a fraudes veiculares",
       "url": "https://www.ssp.pi.gov.br/operacao-integrada-recupera-308-veiculos-no-piaui-durante-acao-de-combate-a-fraudes-veiculares/",
@@ -387,30 +411,6 @@
       "date": "2026-11-20",
       "title": "Estações de tratamento de esgoto de Teresina lançam poluentes acima do permitido no Rio Poti, aponta relatório",
       "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/20/poluentes-rio-poti.ghtml",
-      "source": "g1 Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-20",
-      "title": "Jovem suspeita de tentar matar a mãe com 22 facadas no PI será internada em hospital psiquiátrico; crime pode ter ocorrido durante surto",
-      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/20/jovem-internada-pi.ghtml",
-      "source": "g1 Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-20",
-      "title": "Mais de 300 veículos com registros de crime são recuperados em operação no PI; homem é preso",
-      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/20/veiculos-recuperados-pi.ghtml",
-      "source": "g1 Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-20",
-      "title": "De capoeira a acolhimento de mulheres: Veja histórias de quatro instituições do Prato Cheio",
-      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/20/beneficiados-prato-cheio-2026.ghtml",
       "source": "g1 Piauí",
       "category": "Atualidades",
       "feed": true

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-24T22:12:04.308Z",
+  "generatedAt": "2026-11-25T07:55:57.055Z",
   "mode": "osint-github-actions",
   "sources": {
     "ibge": {
@@ -49,53 +49,53 @@
         }
       },
       "quotes": {
-        "soja": {
-          "symbol": "ZS=F",
-          "price": 1232.25,
-          "unit": "USc/bushel",
-          "changePct": 2.05,
-          "currency": "USX",
-          "marketTime": "2026-11-24T19:19:58.000Z"
-        },
-        "ouro": {
-          "symbol": "GC=F",
-          "price": 3555.1,
-          "unit": "USD/oz",
-          "changePct": -3.54,
-          "currency": "USD",
-          "marketTime": "2026-11-24T21:59:57.000Z"
-        },
         "wti": {
           "symbol": "CL=F",
-          "price": 81.69,
+          "price": 80.42,
           "unit": "USD/barril",
-          "changePct": -1.83,
+          "changePct": -4.24,
           "currency": "USD",
-          "marketTime": "2026-11-24T21:59:55.000Z"
-        },
-        "gas_natural": {
-          "symbol": "NG=F",
-          "price": 3.67,
-          "unit": "USD/MMBtu",
-          "changePct": 12.3,
-          "currency": "USD",
-          "marketTime": "2026-11-24T21:59:46.000Z"
+          "marketTime": "2026-11-25T07:45:56.000Z"
         },
         "brent": {
           "symbol": "BZ=F",
-          "price": 88.5,
+          "price": 87.24,
           "unit": "USD/barril",
-          "changePct": -3.78,
+          "changePct": -5.76,
           "currency": "USD",
-          "marketTime": "2026-11-24T21:59:17.000Z"
+          "marketTime": "2026-11-25T07:45:51.000Z"
+        },
+        "gas_natural": {
+          "symbol": "NG=F",
+          "price": 3.63,
+          "unit": "USD/MMBtu",
+          "changePct": 6.42,
+          "currency": "USD",
+          "marketTime": "2026-11-25T07:45:56.000Z"
         },
         "milho": {
           "symbol": "ZC=F",
-          "price": 450.25,
+          "price": 448,
           "unit": "USc/bushel",
-          "changePct": 2.56,
+          "changePct": 3.11,
           "currency": "USX",
-          "marketTime": "2026-11-24T19:19:56.000Z"
+          "marketTime": "2026-11-25T07:45:56.000Z"
+        },
+        "ouro": {
+          "symbol": "GC=F",
+          "price": 3523.7,
+          "unit": "USD/oz",
+          "changePct": 0.24,
+          "currency": "USD",
+          "marketTime": "2026-11-25T07:45:58.000Z"
+        },
+        "soja": {
+          "symbol": "ZS=F",
+          "price": 1221.5,
+          "unit": "USc/bushel",
+          "changePct": 0.06,
+          "currency": "USX",
+          "marketTime": "2026-11-25T07:45:11.000Z"
         }
       }
     },
@@ -105,31 +105,55 @@
     },
     "weather": {
       "teresina": {
-        "tempC": 36.6,
-        "humidity": 29,
+        "tempC": 27.3,
+        "humidity": 72,
         "uv": 0,
-        "windKmh": 2.3,
-        "time": "2026-11-24T19:00",
+        "windKmh": 5.7,
+        "time": "2026-11-25T04:45",
         "status": "ok"
       },
       "parnaiba": {
-        "tempC": 28.5,
+        "tempC": 26.6,
         "uv": 0
       },
       "picos": {
-        "tempC": 34.9,
+        "tempC": 27.2,
         "uv": 0
       },
       "bomJesus": {
-        "tempC": 29.7,
+        "tempC": 23,
         "uv": 0
       }
     }
   },
   "news": [
     {
+      "date": "2026-11-25",
+      "title": "Previsão do tempo hoje para Teresina (PI): sol e muitas nuvens à tarde; à noite o céu ainda fica com muita nebulosidade, mas não chove",
+      "url": "https://g1.globo.com/pi/piaui/previsao-do-tempo/noticia/2026/11/25/previsao-do-tempo-hoje-para-teresina-pi-sol-e-muitas-nuvens-a-tarde-a-noite-o-ceu-ainda-fica-com-muita-nebulosidade-mas-nao-chove.ghtml",
+      "source": "g1 Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-25",
+      "title": "IBGE: Inscrições para concurso com 1,2 mil vagas temporárias no PI terminam nesta quarta (25)",
+      "url": "https://g1.globo.com/pi/piaui/trabalho-e-carreira/concursos/noticia/2026/11/25/ibge-inscricoes-para-concurso-piaui.ghtml",
+      "source": "g1 Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
       "date": "2026-11-24",
-      "title": "Após localizar mais de 200 porções de drogas, cadela policial ganha saco de bolinhas como recompensa no PI",
+      "title": "Correção: Prisão de influenciador investigado por esquema de jogos de azar",
+      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/24/correcao-prisao-de-influenciador.ghtml",
+      "source": "g1 Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-24",
+      "title": "Após ajudar a achar mais de 200 porções de drogas, cadela policial ganha saco de bolinhas como recompensa no PI",
       "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/24/drogas-cadela-policial-bolinhas.ghtml",
       "source": "g1 Piauí",
       "category": "Atualidades",
@@ -137,7 +161,7 @@
     },
     {
       "date": "2026-11-24",
-      "title": "Influenciador é preso suspeito de divulgar jogos ilegais no PI; investigação aponta movimentação de R$ 2,7 milhões",
+      "title": "Influenciador é alvo de operação contra divulgação de jogos de azar e movimentação de R$ 2,7 milhões no PI",
       "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/24/influenciador-preso-pi.ghtml",
       "source": "g1 Piauí",
       "category": "Atualidades",
@@ -305,26 +329,18 @@
     },
     {
       "date": "2026-11-24",
-      "title": "UFPI oferece curso de energia solar com 110 bolsas de R$ 300 para mulheres",
-      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/24/ufpi-curso-de-energia-solar-para-mulheres.ghtml",
-      "source": "g1 Piauí",
+      "title": "Do Piauí para o Mundo: estudantes da rede estadual vivem semana de imersão científica na sede do IMPA, no RJ",
+      "url": "https://www.pi.gov.br/do-piaui-para-o-mundo-estudantes-da-rede-estadual-vivem-semana-de-imersao-cientifica-na-sede-do-impa-no-rj/",
+      "source": "Governo do Piauí",
       "category": "Educação",
       "feed": true
     },
     {
       "date": "2026-11-24",
-      "title": "Previsão do tempo hoje para Teresina (PI): sol com algumas nuvens; não chove",
-      "url": "https://g1.globo.com/pi/piaui/previsao-do-tempo/noticia/2026/11/24/previsao-do-tempo-hoje-para-teresina-pi-ceu-nublado-com-possibilidade-de-garoa-o-dia-todo-a-noite-as-nuvens-diminuem-devagar.ghtml",
-      "source": "g1 Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-24",
-      "title": "Inscrições para 396 vagas em concursos no PI terminam nesta semana; salários de até R$ 16,2 mil",
-      "url": "https://g1.globo.com/pi/piaui/trabalho-e-carreira/concursos/noticia/2026/11/24/inscricoes-concursos-no-piaui.ghtml",
-      "source": "g1 Piauí",
-      "category": "Atualidades",
+      "title": "PIT divulga resultado preliminar do processo seletivo simplificado de professores",
+      "url": "https://www.pi.gov.br/pit-divulga-resultado-preliminar-do-processo-seletivo-simplificado-de-professores/",
+      "source": "Governo do Piauí",
+      "category": "Educação",
       "feed": true
     },
     {
@@ -387,22 +403,6 @@
       "date": "2026-11-24",
       "title": "Governo do Piauí propõe extinção de 1.200 cargos e funções de confiança, além da reorganização administrativa",
       "url": "https://www.pi.gov.br/governo-do-piaui-propoe-extincao-de-1-200-cargos-e-funcoes-de-confianca-alem-da-reorganizacao-administrativa/",
-      "source": "Governo do Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-24",
-      "title": "Semarh participa de oficina nacional sobre fiscalização dos recursos hídricos",
-      "url": "https://www.pi.gov.br/semarh-participa-de-oficina-nacional-sobre-fiscalizacao-dos-recursos-hidricos/",
-      "source": "Governo do Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-24",
-      "title": "Atleta piauiense Yasmin Vitória conquista dois pódios no Parnaíba Open de Jiu-Jitsu 2026",
-      "url": "https://www.pi.gov.br/atleta-piauiense-yasmin-vitoria-conquista-dois-podios-no-parnaiba-open-de-jiu-jitsu-2026/",
       "source": "Governo do Piauí",
       "category": "Atualidades",
       "feed": true

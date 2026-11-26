@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-25T21:28:20.385Z",
+  "generatedAt": "2026-11-26T07:47:34.905Z",
   "mode": "osint-github-actions",
   "sources": {
     "ibge": {
@@ -49,13 +49,13 @@
         }
       },
       "quotes": {
-        "ouro": {
-          "symbol": "GC=F",
-          "price": 3599.8,
-          "unit": "USD/oz",
-          "changePct": 2.4,
+        "gas_natural": {
+          "symbol": "NG=F",
+          "price": 3.64,
+          "unit": "USD/MMBtu",
+          "changePct": 6.6,
           "currency": "USD",
-          "marketTime": "2026-11-25T21:18:19.000Z"
+          "marketTime": "2026-11-26T07:37:00.000Z"
         },
         "milho": {
           "symbol": "ZC=F",
@@ -67,11 +67,27 @@
         },
         "brent": {
           "symbol": "BZ=F",
-          "price": 90.74,
+          "price": 90.47,
           "unit": "USD/barril",
-          "changePct": -1.98,
+          "changePct": -2.27,
           "currency": "USD",
-          "marketTime": "2026-11-25T21:16:01.000Z"
+          "marketTime": "2026-11-26T07:36:50.000Z"
+        },
+        "ouro": {
+          "symbol": "GC=F",
+          "price": 3601.2,
+          "unit": "USD/oz",
+          "changePct": 2.44,
+          "currency": "USD",
+          "marketTime": "2026-11-26T07:37:28.000Z"
+        },
+        "wti": {
+          "symbol": "CL=F",
+          "price": 83.75,
+          "unit": "USD/barril",
+          "changePct": -0.27,
+          "currency": "USD",
+          "marketTime": "2026-11-26T07:37:10.000Z"
         },
         "soja": {
           "symbol": "ZS=F",
@@ -80,22 +96,6 @@
           "changePct": 1.84,
           "currency": "USX",
           "marketTime": "2026-11-25T19:19:55.000Z"
-        },
-        "gas_natural": {
-          "symbol": "NG=F",
-          "price": 3.68,
-          "unit": "USD/MMBtu",
-          "changePct": 7.89,
-          "currency": "USD",
-          "marketTime": "2026-11-25T21:18:12.000Z"
-        },
-        "wti": {
-          "symbol": "CL=F",
-          "price": 84.16,
-          "unit": "USD/barril",
-          "changePct": 0.21,
-          "currency": "USD",
-          "marketTime": "2026-11-25T21:18:19.000Z"
         }
       }
     },
@@ -105,28 +105,44 @@
     },
     "weather": {
       "teresina": {
-        "tempC": 37.1,
-        "humidity": 29,
+        "tempC": 27.7,
+        "humidity": 69,
         "uv": 0,
-        "windKmh": 3.1,
-        "time": "2026-11-25T18:15",
+        "windKmh": 4.2,
+        "time": "2026-11-26T04:45",
         "status": "ok"
       },
       "parnaiba": {
-        "tempC": 28.5,
+        "tempC": 26.1,
         "uv": 0
       },
       "picos": {
-        "tempC": 35.2,
+        "tempC": 27.2,
         "uv": 0
       },
       "bomJesus": {
-        "tempC": 31.9,
+        "tempC": 22.5,
         "uv": 0
       }
     }
   },
   "news": [
+    {
+      "date": "2026-11-26",
+      "title": "Alunos criam microfone com recicláveis em escola no PI e chamam atenção nas redes; vídeo",
+      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/26/microfone-com-reciclaveis-escola-video.ghtml",
+      "source": "g1 Piauí",
+      "category": "Educação",
+      "feed": true
+    },
+    {
+      "date": "2026-11-26",
+      "title": "Previsão do tempo hoje para Teresina (PI): sol com algumas nuvens; não chove",
+      "url": "https://g1.globo.com/pi/piaui/previsao-do-tempo/noticia/2026/11/26/previsao-do-tempo-hoje-para-teresina-pi-sol-com-algumas-nuvens-nao-chove.ghtml",
+      "source": "g1 Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
     {
       "date": "2026-11-25",
       "title": "SSP-PI realiza restituição de 69 celulares recuperados durante ações policiais nesta quinta-feira (26)",
@@ -141,6 +157,30 @@
       "url": "https://www.ssp.pi.gov.br/ssp-pi-deflagra-operacao-egide-contra-organizacao-criminosa-e-prende-sete-pessoas-em-teresina/",
       "source": "SSP-PI",
       "category": "Segurança",
+      "feed": true
+    },
+    {
+      "date": "2026-11-25",
+      "title": "Homem é assassinado dentro de casa em Teresina",
+      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/25/homem-morto-teresina.ghtml",
+      "source": "g1 Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-25",
+      "title": "Homem é condenado a 14 anos por matar adolescente com tiros no rosto e não é localizado para prisão",
+      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/25/homem-condenado.ghtml",
+      "source": "g1 Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-25",
+      "title": "Projeto prevê extinção de 1,2 mil cargos e funções de confiança no Governo do Piauí",
+      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/25/extincao-de-cargos.ghtml",
+      "source": "g1 Piauí",
+      "category": "Atualidades",
       "feed": true
     },
     {
@@ -305,22 +345,6 @@
     },
     {
       "date": "2026-11-25",
-      "title": "Previsão do tempo hoje para Teresina (PI): sol com algumas nuvens durante o dia; à noite o céu fica com muitas nuvens, mas não chove",
-      "url": "https://g1.globo.com/pi/piaui/previsao-do-tempo/noticia/2026/11/25/previsao-do-tempo-hoje-para-teresina-pi-sol-e-muitas-nuvens-a-tarde-a-noite-o-ceu-ainda-fica-com-muita-nebulosidade-mas-nao-chove.ghtml",
-      "source": "g1 Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-25",
-      "title": "IBGE: Inscrições para concurso com 1,2 mil vagas temporárias no PI terminam nesta quarta (25)",
-      "url": "https://g1.globo.com/pi/piaui/trabalho-e-carreira/concursos/noticia/2026/11/25/ibge-inscricoes-para-concurso-piaui.ghtml",
-      "source": "g1 Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-25",
       "title": "Primeira rota de cabotagem entre o Piauí e o sul do Brasil será apresentada nesta quinta (26), em Itajaí",
       "url": "https://www.pi.gov.br/primeira-rota-de-cabotagem-entre-o-piaui-e-o-sul-do-brasil-sera-apresentada-nesta-quinta-26-em-itajai/",
       "source": "Governo do Piauí",
@@ -329,16 +353,8 @@
     },
     {
       "date": "2026-11-25",
-      "title": "Prêmio B-R-O Bró reconhece iniciativas que impulsionam a inovação no Piauí",
-      "url": "https://www.pi.gov.br/premio-b-r-o-bro-reconhece-iniciativas-que-impulsionam-a-inovacao-no-piaui/",
-      "source": "Governo do Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-25",
-      "title": "Pesquisadora da UnB destaca potencial da Uespi para transformar pesquisas em soluções para a sociedade",
-      "url": "https://www.pi.gov.br/pesquisadora-da-unb-destaca-potencial-da-uespi-para-transformar-pesquisas-em-solucoes-para-a-sociedade/",
+      "title": "Pesquisas científicas e lançamentos de livros marcam segundo dia do Conepex da Uespi",
+      "url": "https://www.pi.gov.br/pesquisas-cientificas-e-lancamentos-de-livros-marcam-segundo-dia-do-conepex-da-uespi/",
       "source": "Governo do Piauí",
       "category": "Educação",
       "feed": true
@@ -369,6 +385,22 @@
     },
     {
       "date": "2026-11-25",
+      "title": "Pesquisadora da UnB destaca potencial da Uespi para transformar pesquisas em soluções para a sociedade",
+      "url": "https://www.pi.gov.br/pesquisadora-da-unb-destaca-potencial-da-uespi-para-transformar-pesquisas-em-solucoes-para-a-sociedade/",
+      "source": "Governo do Piauí",
+      "category": "Educação",
+      "feed": true
+    },
+    {
+      "date": "2026-11-25",
+      "title": "Prêmio B-R-O Bró reconhece iniciativas que impulsionam a inovação no Piauí",
+      "url": "https://www.pi.gov.br/premio-b-r-o-bro-reconhece-iniciativas-que-impulsionam-a-inovacao-no-piaui/",
+      "source": "Governo do Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-25",
       "title": "Abertura do II Conepex destaca o papel do ensino, pesquisa e extensão no desenvolvimento do Piauí",
       "url": "https://www.pi.gov.br/abertura-do-ii-conepex-destaca-o-papel-do-ensino-pesquisa-e-extensao-no-desenvolvimento-do-piaui/",
       "source": "Governo do Piauí",
@@ -388,38 +420,6 @@
       "title": "Hugo Napoleão e Água Branca recebem atividades que valorizam e garantem os direitos da pessoa idosa",
       "url": "https://www.pi.gov.br/hugo-napoleao-e-agua-branca-recebem-atividades-que-valorizam-e-garantem-os-direitos-da-pessoa-idosa/",
       "source": "Governo do Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-25",
-      "title": "Congresso Internacional Freemind reúne especialistas em Teresina para debater dependências químicas e comportamentais",
-      "url": "https://www.pi.gov.br/congresso-internacional-freemind-reune-especialistas-em-teresina-para-debater-dependencias-quimicas-e-comportamentais/",
-      "source": "Governo do Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-24",
-      "title": "Correção: Prisão de influenciador investigado por esquema de jogos de azar",
-      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/24/correcao-prisao-de-influenciador.ghtml",
-      "source": "g1 Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-24",
-      "title": "Após ajudar a achar mais de 200 porções de drogas, cadela policial ganha saco de bolinhas como recompensa no PI",
-      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/24/drogas-cadela-policial-bolinhas.ghtml",
-      "source": "g1 Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-24",
-      "title": "Influenciador é alvo de operação contra divulgação de jogos de azar e movimentação de R$ 2,7 milhões no PI",
-      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/24/influenciador-preso-pi.ghtml",
-      "source": "g1 Piauí",
       "category": "Atualidades",
       "feed": true
     },

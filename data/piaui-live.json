@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-26T21:14:50.869Z",
+  "generatedAt": "2026-11-27T07:46:57.595Z",
   "mode": "osint-github-actions",
   "sources": {
     "ibge": {
@@ -51,35 +51,11 @@
       "quotes": {
         "wti": {
           "symbol": "CL=F",
-          "price": 84.91,
+          "price": 86.13,
           "unit": "USD/barril",
-          "changePct": 1.11,
+          "changePct": 2.56,
           "currency": "USD",
-          "marketTime": "2026-11-26T19:29:50.000Z"
-        },
-        "soja": {
-          "symbol": "ZS=F",
-          "price": 1243.25,
-          "unit": "USc/bushel",
-          "changePct": 1.84,
-          "currency": "USX",
-          "marketTime": "2026-11-25T19:19:55.000Z"
-        },
-        "brent": {
-          "symbol": "BZ=F",
-          "price": 91.73,
-          "unit": "USD/barril",
-          "changePct": -0.91,
-          "currency": "USD",
-          "marketTime": "2026-11-26T19:29:29.000Z"
-        },
-        "gas_natural": {
-          "symbol": "NG=F",
-          "price": 3.6,
-          "unit": "USD/MMBtu",
-          "changePct": 5.51,
-          "currency": "USD",
-          "marketTime": "2026-11-26T19:29:57.000Z"
+          "marketTime": "2026-11-27T07:37:02.000Z"
         },
         "milho": {
           "symbol": "ZC=F",
@@ -91,11 +67,35 @@
         },
         "ouro": {
           "symbol": "GC=F",
-          "price": 3593.4,
+          "price": 3688.8,
           "unit": "USD/oz",
-          "changePct": 2.22,
+          "changePct": 4.93,
           "currency": "USD",
-          "marketTime": "2026-11-26T19:29:59.000Z"
+          "marketTime": "2026-11-27T07:37:08.000Z"
+        },
+        "brent": {
+          "symbol": "BZ=F",
+          "price": 92.39,
+          "unit": "USD/barril",
+          "changePct": -0.19,
+          "currency": "USD",
+          "marketTime": "2026-11-27T07:35:46.000Z"
+        },
+        "soja": {
+          "symbol": "ZS=F",
+          "price": 1243.25,
+          "unit": "USc/bushel",
+          "changePct": 1.84,
+          "currency": "USX",
+          "marketTime": "2026-11-25T19:19:55.000Z"
+        },
+        "gas_natural": {
+          "symbol": "NG=F",
+          "price": 3.6,
+          "unit": "USD/MMBtu",
+          "changePct": 5.51,
+          "currency": "USD",
+          "marketTime": "2026-11-27T07:36:42.000Z"
         }
       }
     },
@@ -110,7 +110,7 @@
         "uv": 0,
         "windKmh": 0.9,
         "time": "2026-11-26T18:00",
-        "status": "ok"
+        "status": "fallback (fetch failed)"
       },
       "parnaiba": {
         "tempC": 28.6,
@@ -128,6 +128,30 @@
   },
   "news": [
     {
+      "date": "2026-11-27",
+      "title": "'Achei que fosse leite empedrado': fotógrafa de 30 anos descobre câncer de mama durante amamentação no PI",
+      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/27/fotografa-cancer-de-mama.ghtml",
+      "source": "g1 Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-27",
+      "title": "Previsão do tempo hoje para Teresina (PI): dia de sol com aumento de nuvens a partir da tarde; não chove",
+      "url": "https://g1.globo.com/pi/piaui/previsao-do-tempo/noticia/2026/11/27/previsao-do-tempo-hoje-para-teresina-pi-dia-de-sol-com-aumento-de-nuvens-a-partir-da-tarde-nao-chove.ghtml",
+      "source": "g1 Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-27",
+      "title": "TRE-PI aprova com ressalvas contas de campanha de Rafael Fonteles; relatora apontou R$ 511 mil em irregularidades",
+      "url": "https://g1.globo.com/pi/piaui/eleicoes/2026/noticia/2026/11/26/contas-de-campanha-rafael-fonteles.ghtml",
+      "source": "g1 Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
       "date": "2026-11-26",
       "title": "SSP-PI prende homem condenado por estupro de vulnerável no Centro de Teresina",
       "url": "https://www.ssp.pi.gov.br/ssp-pi-prende-homem-condenado-por-estupro-de-vulneravel-no-centro-de-teresina/",
@@ -141,6 +165,46 @@
       "url": "https://www.ssp.pi.gov.br/ssp-pi-disponibiliza-painel-digital-com-orientacoes-para-compras-seguras-na-black-friday/",
       "source": "SSP-PI",
       "category": "Segurança",
+      "feed": true
+    },
+    {
+      "date": "2026-11-26",
+      "title": "Estudo da UFPI revela consumo de açúcar antes de 1 ano em 97,5% dos bebês avaliados",
+      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/26/estudo-ufpi-consumo-acucar-bebes.ghtml",
+      "source": "g1 Piauí",
+      "category": "Educação",
+      "feed": true
+    },
+    {
+      "date": "2026-11-26",
+      "title": "'Faço o bem porque é uma vontade minha': Idosa percorre mais de 230 km para doar alimentos ao Prato Cheio no PI",
+      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/26/doacoes-alimentos-prato-cheio.ghtml",
+      "source": "g1 Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-26",
+      "title": "Rio Poti recebe esgoto sem tratamento em 18 pontos de Teresina, aponta levantamento",
+      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/26/rio-poti-recebe-esgoto.ghtml",
+      "source": "g1 Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-26",
+      "title": "Queda de energia afeta abastecimento e deixa bairros sem água em Teresina",
+      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/26/bairros-sem-agua.ghtml",
+      "source": "g1 Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-26",
+      "title": "Mpox: Piauí chega a quatro casos confirmados em 2026, aponta Ministério da Saúde",
+      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/26/mpox-piaui-casos-confirmados.ghtml",
+      "source": "g1 Piauí",
+      "category": "Atualidades",
       "feed": true
     },
     {
@@ -281,18 +345,10 @@
     },
     {
       "date": "2026-11-26",
-      "title": "Alunos criam microfone com recicláveis em escola no PI e chamam atenção nas redes; vídeo",
-      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/26/microfone-com-reciclaveis-escola-video.ghtml",
-      "source": "g1 Piauí",
+      "title": "Lançamentos de livros destacam produção científica da Uespi durante congresso",
+      "url": "https://www.pi.gov.br/lancamentos-de-livros-destacam-producao-cientifica-da-uespi-durante-congresso/",
+      "source": "Governo do Piauí",
       "category": "Educação",
-      "feed": true
-    },
-    {
-      "date": "2026-11-26",
-      "title": "Previsão do tempo hoje para Teresina (PI): sol o dia todo sem nuvens no céu; noite de tempo aberto ainda sem nuvens",
-      "url": "https://g1.globo.com/pi/piaui/previsao-do-tempo/noticia/2026/11/26/previsao-do-tempo-hoje-para-teresina-pi-sol-com-algumas-nuvens-nao-chove.ghtml",
-      "source": "g1 Piauí",
-      "category": "Atualidades",
       "feed": true
     },
     {
@@ -368,14 +424,6 @@
       "feed": true
     },
     {
-      "date": "2026-11-26",
-      "title": "Hemopi destaca a importância da diversidade sanguínea em encontro de doadores com fenótipos raros",
-      "url": "https://www.pi.gov.br/hemopi-destaca-a-importancia-da-diversidade-sanguinea-em-encontro-de-doadores-com-fenotipos-raros/",
-      "source": "Governo do Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
       "date": "2026-11-25",
       "title": "SSP-PI realiza restituição de 69 celulares recuperados durante ações policiais nesta quinta-feira (26)",
       "url": "https://www.ssp.pi.gov.br/ssp-pi-realiza-restituicao-de-69-celulares-recuperados-durante-acoes-policiais-nesta-quinta-feira-26/",
@@ -389,54 +437,6 @@
       "url": "https://www.ssp.pi.gov.br/ssp-pi-deflagra-operacao-egide-contra-organizacao-criminosa-e-prende-sete-pessoas-em-teresina/",
       "source": "SSP-PI",
       "category": "Segurança",
-      "feed": true
-    },
-    {
-      "date": "2026-11-25",
-      "title": "Homem de 52 anos é perseguido e morto a tiros dentro de casa em Teresina",
-      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/25/homem-morto-teresina.ghtml",
-      "source": "g1 Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-25",
-      "title": "Homem é condenado a 14 anos por matar adolescente com tiro no rosto e não é localizado para prisão",
-      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/25/homem-condenado.ghtml",
-      "source": "g1 Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-25",
-      "title": "Projeto prevê extinção de 1,2 mil cargos e funções de confiança no Governo do Piauí",
-      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/25/extincao-de-cargos.ghtml",
-      "source": "g1 Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-25",
-      "title": "Empresário alvo de revista em avião diz que entregou documentos sobre a origem dos R$ 850 mil apreendidos pela PF",
-      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/25/empresario-revista-pf.ghtml",
-      "source": "g1 Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-25",
-      "title": "Acordo entre prefeitura e MP confirma fim dos partos na Maternidade do Promorar, em Teresina",
-      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/25/maternidade-promorar-teresina.ghtml",
-      "source": "g1 Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-25",
-      "title": "Black Friday: Painel ajuda consumidores a comparar preços de 150 produtos no PI",
-      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/25/black-friday-painel-procon-piaui.ghtml",
-      "source": "g1 Piauí",
-      "category": "Atualidades",
       "feed": true
     },
     {

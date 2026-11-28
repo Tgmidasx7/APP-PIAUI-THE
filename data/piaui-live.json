@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-27T20:57:17.418Z",
+  "generatedAt": "2026-11-28T07:15:17.114Z",
   "mode": "osint-github-actions",
   "sources": {
     "ibge": {
@@ -17,10 +17,10 @@
         "valor": "0.14"
       },
       "usdBrl": {
-        "data": "26/11/2026",
-        "valor": "5.7446"
+        "data": "27/11/2026",
+        "valor": "5.5430"
       },
-      "status": "fallback (fetch failed)"
+      "status": "ok"
     },
     "siconfi": {
       "status": "ok",
@@ -57,11 +57,11 @@
           "currency": "USD",
           "marketTime": "2026-11-27T19:44:59.000Z"
         },
-        "brent": {
-          "symbol": "BZ=F",
-          "price": 90.84,
-          "unit": "USD/barril",
-          "changePct": 1.64,
+        "ouro": {
+          "symbol": "GC=F",
+          "price": 3668.5,
+          "unit": "USD/oz",
+          "changePct": 0.47,
           "currency": "USD",
           "marketTime": "2026-11-27T19:44:58.000Z"
         },
@@ -73,14 +73,6 @@
           "currency": "USX",
           "marketTime": "2026-11-27T18:04:58.000Z"
         },
-        "ouro": {
-          "symbol": "GC=F",
-          "price": 3668.5,
-          "unit": "USD/oz",
-          "changePct": 0.47,
-          "currency": "USD",
-          "marketTime": "2026-11-27T19:44:58.000Z"
-        },
         "gas_natural": {
           "symbol": "NG=F",
           "price": 3.49,
@@ -88,6 +80,14 @@
           "changePct": 9.64,
           "currency": "USD",
           "marketTime": "2026-11-27T19:44:59.000Z"
+        },
+        "brent": {
+          "symbol": "BZ=F",
+          "price": 90.84,
+          "unit": "USD/barril",
+          "changePct": 1.64,
+          "currency": "USD",
+          "marketTime": "2026-11-27T19:44:58.000Z"
         },
         "soja": {
           "symbol": "ZS=F",
@@ -105,28 +105,36 @@
     },
     "weather": {
       "teresina": {
-        "tempC": 37.1,
-        "humidity": 28,
-        "uv": 0.1,
-        "windKmh": 3.9,
-        "time": "2026-11-27T17:45",
+        "tempC": 26.6,
+        "humidity": 74,
+        "uv": 0,
+        "windKmh": 6.9,
+        "time": "2026-11-28T04:15",
         "status": "ok"
       },
       "parnaiba": {
-        "tempC": 28.2,
-        "uv": 0.05
+        "tempC": 26.9,
+        "uv": 0
       },
       "picos": {
-        "tempC": 35.2,
-        "uv": 0.05
+        "tempC": 28.1,
+        "uv": 0
       },
       "bomJesus": {
-        "tempC": 33.5,
-        "uv": 0.2
+        "tempC": 22.5,
+        "uv": 0
       }
     }
   },
   "news": [
+    {
+      "date": "2026-11-28",
+      "title": "Previsão do tempo hoje para Teresina (PI): sol com muitas nuvens durante o dia e períodos de céu nublado; noite com muitas nuvens",
+      "url": "https://g1.globo.com/pi/piaui/previsao-do-tempo/noticia/2026/11/28/previsao-do-tempo-hoje-para-teresina-pi-sol-com-muitas-nuvens-durante-o-dia-e-periodos-de-ceu-nublado-noite-com-muitas-nuvens.ghtml",
+      "source": "g1 Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
     {
       "date": "2026-11-27",
       "title": "SSP-PI prende investigado por descumprimento de medida protetiva na zona Norte de Teresina",
@@ -141,6 +149,22 @@
       "url": "https://www.ssp.pi.gov.br/ssp-pi-deflagra-operacao-cartao-fantasma-contra-esquema-de-compras-com-cartoes-clonados/",
       "source": "SSP-PI",
       "category": "Segurança",
+      "feed": true
+    },
+    {
+      "date": "2026-11-27",
+      "title": "'Quero justiça', diz sobrinha de passageiro que morreu 21 dias após acidente com ônibus em Teresina",
+      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/27/passageiro-acidente-onibus-em-teresina.ghtml",
+      "source": "g1 Piauí",
+      "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-27",
+      "title": "Homem fica ferido ao tentar conter incêndio em apartamento em Teresina",
+      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/27/homem-ferido-teresina.ghtml",
+      "source": "g1 Piauí",
+      "category": "Atualidades",
       "feed": true
     },
     {
@@ -321,30 +345,6 @@
     },
     {
       "date": "2026-11-27",
-      "title": "Homem é morto a tiros em avenida de Teresina; vítima tinha passagem por tráfico",
-      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/27/homem-morto-teresina.ghtml",
-      "source": "g1 Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-27",
-      "title": "'Achei que fosse leite empedrado': fotógrafa de 30 anos descobre câncer de mama durante amamentação no PI",
-      "url": "https://g1.globo.com/pi/piaui/noticia/2026/11/27/fotografa-cancer-de-mama.ghtml",
-      "source": "g1 Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-27",
-      "title": "Previsão do tempo hoje para Teresina (PI): sol com muitas nuvens durante o dia e períodos de céu nublado; noite com muitas nuvens",
-      "url": "https://g1.globo.com/pi/piaui/previsao-do-tempo/noticia/2026/11/27/previsao-do-tempo-hoje-para-teresina-pi-dia-de-sol-com-aumento-de-nuvens-a-partir-da-tarde-nao-chove.ghtml",
-      "source": "g1 Piauí",
-      "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-27",
       "title": "Ouro para o Piauí: estudante da rede estadual é tricampeã brasileira de karatê",
       "url": "https://www.pi.gov.br/ouro-para-o-piaui-estudante-da-rede-estadual-e-tricampea-brasileira-de-karate/",
       "source": "Governo do Piauí",
@@ -373,14 +373,6 @@
       "url": "https://www.pi.gov.br/aluna-da-rede-estadual-conquista-medalha-de-ouro-na-olimpiada-nacional-de-ciencias/",
       "source": "Governo do Piauí",
       "category": "Atualidades",
-      "feed": true
-    },
-    {
-      "date": "2026-11-27",
-      "title": "Do Piauí para o Mundo leva 30 estudantes e três professores para experiência educacional nos Estados Unidos",
-      "url": "https://www.pi.gov.br/do-piaui-para-o-mundo-leva-30-estudantes-e-tres-professores-para-experiencia-educacional-nos-estados-unidos/",
-      "source": "Governo do Piauí",
-      "category": "Educação",
       "feed": true
     },
     {
@@ -421,6 +413,14 @@
       "url": "https://www.pi.gov.br/sesapi-participa-de-simposio-sobre-mortalidade-materna-no-piaui/",
       "source": "Governo do Piauí",
       "category": "Atualidades",
+      "feed": true
+    },
+    {
+      "date": "2026-11-27",
+      "title": "Do Piauí para o Mundo leva 30 estudantes e três professores para experiência educacional nos Estados Unidos",
+      "url": "https://www.pi.gov.br/do-piaui-para-o-mundo-leva-30-estudantes-e-tres-professores-para-experiencia-educacional-nos-estados-unidos/",
+      "source": "Governo do Piauí",
+      "category": "Educação",
       "feed": true
     },
     {
